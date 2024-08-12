@@ -1,16 +1,20 @@
 package network
 
-import "fmt"
+import (
+	"fmt"
+	"net"
+)
 
 // RouteInfo - Describe a single route
 type RouteInfo struct {
 	Interface string
-	Network   string
-	Gateway   string
-	Netmask   string
+	Network   net.IPNet
+	Gateway   net.IP
+	Netmask   net.IPMask
 }
 
 // ToString - Return the route to string (interface network gateway mask)
 func (route *RouteInfo) ToString() string {
-	return fmt.Sprintf("%s %s %s %s", route.Interface, route.Network, route.Gateway, route.Netmask)
+	return fmt.Sprintf("%s %s %s %s",
+		route.Interface, route.Network.String(), route.Gateway.String(), route.Netmask.String())
 }
