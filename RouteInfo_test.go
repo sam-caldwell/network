@@ -7,7 +7,7 @@ import (
 
 func TestRouteInfo(t *testing.T) {
 	t.Run("verify struct", func(t *testing.T) {
-		network, _ := StringToIPNet("0.0.0.0/0")
+		network := StringToIP("0.0.0.0")
 		gateway := StringToIP("192.168.13.14")
 		subnetMask, _ := StringToIPMask("255.255.255.0")
 		_ = RouteInfo{
@@ -19,7 +19,7 @@ func TestRouteInfo(t *testing.T) {
 	})
 	t.Run("verify ToString() method", func(t *testing.T) {
 		interface0 := "interface0"
-		network, _ := StringToIPNet("0.0.0.0/0")
+		network := StringToIP("0.0.0.0")
 		gateway := StringToIP("192.168.13.14")
 		subnetMask, _ := StringToIPMask("255.255.255.0")
 		route := RouteInfo{

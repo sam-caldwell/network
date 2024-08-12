@@ -8,7 +8,7 @@ import (
 // RouteInfo - Describe a single route
 type RouteInfo struct {
 	Interface string
-	Network   net.IPNet
+	Network   net.IP
 	Gateway   net.IP
 	Netmask   net.IPMask
 }
