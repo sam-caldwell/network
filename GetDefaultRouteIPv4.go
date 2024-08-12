@@ -39,15 +39,22 @@ func GetDefaultRouteIPv4() (*RouteInfo, error) {
 
 	for _, line := range strings.Split(string(raw), "\n") {
 		fields := strings.Fields(line)
-		if len(fields) < 11 {
-			continue // Ignore invalid lines
+		if fields[0] == "Iface" || len(fields) < 11 {
+			continue
 		}
 		if destination := hexToIPv4(fields[1]); destination == defaultGateway {
+			network := StringToIP(destination)
+			netMask, err := StringToIPMask(hexToIPv4(fields[1]))
+			if err != nil {
+				return nil, err
+			}
+			gateway := StringToIP(hexToIPv4(fields[2]))
+
 			return &RouteInfo{
-				Network:   destination,
+				Network:   network,
 				Interface: fields[0],
-				Gateway:   hexToIPv4(fields[2]),
-				Netmask:   hexToIPv4(fields[7]),
+				Gateway:   gateway,
+				Netmask:   netMask,
 			}, nil
 		}
 	}

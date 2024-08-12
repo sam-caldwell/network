@@ -45,11 +45,18 @@ func GetDefaultRouteIPv6() (*RouteInfo, error) {
 		}
 		// Check for the default route in IPv6 (all zeros for the destination)
 		if destination := hexToIPv6(fields[0]); destination == defaultGateway {
+			network := StringToIP(destination)
+			netMask, err := StringToIPMask(hexToIPv6(fields[1]))
+			if err != nil {
+				return nil, err
+			}
+			gateway := StringToIP(hexToIPv6(fields[4]))
+
 			return &RouteInfo{
-				Network:   destination,
-				Interface: fields[9],            // Interface name
-				Gateway:   hexToIPv6(fields[4]), // Gateway address
-				Netmask:   fields[1],            // Prefix length for IPv6, not the netmask
+				Network:   network,
+				Interface: fields[9], // Interface name
+				Gateway:   gateway,   // Gateway address
+				Netmask:   netMask,   // Prefix length for IPv6, not the netmask
 			}, nil
 		}
 	}
