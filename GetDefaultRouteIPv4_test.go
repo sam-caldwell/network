@@ -1,3 +1,5 @@
+//go:build !darwin && linux && !windows
+
 package network
 
 import (
@@ -7,7 +9,7 @@ import (
 func TestGetDefaultRouteIPv4(t *testing.T) {
 
 	//Fetch route info from the command line
-	expected, err := getExpectedDefaultRoute()
+	expected, err := getExpectedDefaultRoute(false)
 	if err != nil {
 		t.Fatalf("failed to fetch route info from command\n"+
 			"error: %v", err)

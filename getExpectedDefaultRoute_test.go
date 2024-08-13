@@ -1,9 +1,11 @@
+//go:build !darwin && linux && !windows
+
 package network
 
 import "testing"
 
 func TestGetExpectedRouteInfo(t *testing.T) {
-	expected, err := getExpectedDefaultRoute()
+	expected, err := getExpectedDefaultRoute(false)
 	if err != nil {
 		t.Error(err)
 	}
