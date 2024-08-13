@@ -31,7 +31,8 @@ func GetDefaultRouteIPv6() (*RouteInfo, error) {
 	 */
 	const (
 		routeFile      = "/proc/net/ipv6_route"
-		defaultGateway = "::"
+		defaultGateway = "::/0"
+		flagsUG        = "00000009"
 	)
 	raw, err := os.ReadFile(routeFile)
 	if err != nil {
@@ -40,15 +41,20 @@ func GetDefaultRouteIPv6() (*RouteInfo, error) {
 
 	for _, line := range strings.Split(string(raw), "\n") {
 		fields := strings.Fields(line)
+
 		if len(fields) < 10 {
 			continue // Ignore invalid lines
 		}
-		// Check for the default route in IPv6 (all zeros for the destination)
-		if destination := hexToIPv6(fields[0]); destination == defaultGateway {
-			network := StringToIP(destination)
-			netMask, err := StringToIPMask(hexToIPv6(fields[1]))
+
+		destination := fmt.Sprintf("%s/0", hexToIPv6(fields[0]))
+		flags := fields[6]
+
+		if flags == flagsUG && destination == defaultGateway {
+			fmt.Printf("GetDefaultRouteIPv6() Flags: %9s destination: %s\n", flags, destination)
+			network := StringToIP(fields[1])
+			netMask, err := StringToIPv6Mask(destination)
 			if err != nil {
-				return nil, err
+				return nil, fmt.Errorf("error converting '%s' to IPv6 Mask: %v", destination, err)
 			}
 			gateway := StringToIP(hexToIPv6(fields[4]))
 

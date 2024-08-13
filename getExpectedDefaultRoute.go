@@ -4,7 +4,6 @@ package network
 
 import (
 	"fmt"
-	"log"
 	"os/exec"
 	"strings"
 )
@@ -34,10 +33,10 @@ func getExpectedDefaultRoute(useV6 bool) (*RouteInfo, error) {
 		for _, line := range strings.Split(string(output), "\n") {
 			fields := strings.Fields(line)
 			if strings.HasPrefix(line, "[::]") && fields[2] == "UG" {
-				log.Printf("Line: %v", line)
+				destination := fields[0]
 				network := StringToIP(fields[0])
 				gateway := StringToIP(fields[1])
-				mask, err := StringToIPMask(fields[0])
+				mask, err := StringToIPv6Mask(destination)
 				if err != nil {
 					return nil, err
 				}

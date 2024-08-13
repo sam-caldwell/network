@@ -21,7 +21,7 @@ func TestHexToIPv6(t *testing.T) {
 		{"fe800000000000001fa804cd82105e87", "fe80::1fa8:4cd:8210:5e87", false},
 		{"invalid hex string", "", true},
 	}
-	for _, test := range tests {
+	for testNo, test := range tests {
 		t.Run(test.hexStr, func(t *testing.T) {
 			defer func() {
 				if r := recover(); r != nil && !test.expectErr {
@@ -31,19 +31,24 @@ func TestHexToIPv6(t *testing.T) {
 			result := hexToIPv6(test.hexStr)
 
 			if !test.expectErr {
-				expectedIP := net.ParseIP(test.expected).To16()
-				if expectedIP == nil {
-					t.Fatalf("invalid nil test data: %v", expectedIP)
+				//No error
+				actualIP := net.ParseIP(test.expected).To16()
+				if actualIP == nil {
+					t.Fatalf("invalid nil. test data(%d):\n"+
+						"  actual: %v\n"+
+						"expected: %v", testNo, actualIP, test.expected)
 				}
 				resultIP := net.ParseIP(result).To16()
 				if resultIP == nil {
-					t.Fatalf("invalid nil test data: %v", resultIP)
+					t.Fatalf("invalid nil test data(%d):\n"+
+						"  actual: %v\n"+
+						"expected: %v", testNo, actualIP, test.expected)
 				}
-				if !expectedIP.Equal(resultIP) {
+				if !actualIP.Equal(resultIP) {
 					t.Errorf("hexToIPv6(%q) mismatch\n"+
 						"  actual:   %s\n"+
 						"  expected: %s",
-						test.hexStr, resultIP.String(), expectedIP.String())
+						test.hexStr, resultIP.String(), actualIP.String())
 				}
 			} else if result != "" {
 				t.Errorf("hexToIPv6(%q) = %v; want error", test.hexStr, result)
