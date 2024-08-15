@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestGetDefaultRouteInfo(t *testing.T) {
+func TestRouteInfo_GetDefault(t *testing.T) {
 	t.Skip("disabled")
 	t.Run("Test routes", func(t *testing.T) {
 		var expectedV4 *RouteInfo

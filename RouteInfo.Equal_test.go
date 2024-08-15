@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestRouteInfoEqual(t *testing.T) {
+func TestRouteInfo_Equal(t *testing.T) {
 
 	t.Run("test Route==nil expect inequality", func(t *testing.T) {
 		var lhs RouteInfo
