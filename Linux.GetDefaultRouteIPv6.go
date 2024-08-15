@@ -54,7 +54,6 @@ func GetDefaultRouteIPv6() (*RouteInfo, error) {
 		flags := fields[6]
 
 		if flags == flagsUG && destination == defaultGateway {
-			fmt.Printf("GetDefaultRouteIPv6() Flags: %9s destination: %s\n", flags, destination)
 			network := StringToIP(fields[1])
 			netMask, err := StringToIPv6Mask(destination)
 			if err != nil {
