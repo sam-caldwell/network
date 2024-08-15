@@ -17,14 +17,16 @@ func createIpRouteMessage(useV6 bool, buffer *bytes.Buffer) (err error) {
 		v6Len = net.IPv6len * 8 // Length in bits
 	)
 
+	var family uint8 = unix.AF_INET
 	var destinationLength uint8 = v4Len
 
 	if useV6 {
 		destinationLength = v6Len
+		family = unix.AF_INET6
 	}
 
 	routeMessage := unix.RtMsg{
-		Family:   unix.AF_INET,
+		Family:   family,
 		Dst_len:  destinationLength, // Length in bits
 		Src_len:  0,
 		Tos:      0,
