@@ -1,7 +1,6 @@
 package network
 
 import (
-	"github.com/sam-caldwell/monorepo/go/misc/words"
 	"log"
 	"regexp"
 	"strings"
@@ -26,7 +25,7 @@ func IsValidFqdn(s string) bool {
 		return false
 	}
 
-	if (labels[0] == words.Hyphen) || (labels[len(labels)-1] == words.Hyphen) {
+	if (labels[0] == "-") || (labels[len(labels)-1] == "-") {
 		return false
 	}
 

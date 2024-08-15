@@ -1,4 +1,4 @@
-//go:build !darwin && linux && !windows
+//go:build linux
 
 package network
 
