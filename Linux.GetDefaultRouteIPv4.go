@@ -60,5 +60,7 @@ func GetDefaultRouteIPv4() (*RouteInfo, error) {
 			}, nil
 		}
 	}
+
 	return nil, fmt.Errorf("no default IPv4 route found")
+
 }

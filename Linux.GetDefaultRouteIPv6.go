@@ -36,7 +36,9 @@ func GetDefaultRouteIPv6() (*RouteInfo, error) {
 		defaultGateway = "::/0"
 		flagsUG        = "00000009"
 	)
+
 	raw, err := os.ReadFile(routeFile)
+
 	if err != nil {
 		return nil, err
 	}
@@ -68,5 +70,7 @@ func GetDefaultRouteIPv6() (*RouteInfo, error) {
 			}, nil
 		}
 	}
+
 	return nil, fmt.Errorf("no default IPv6 route found")
+
 }
