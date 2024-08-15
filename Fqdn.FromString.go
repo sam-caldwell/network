@@ -8,7 +8,7 @@ func (o *Fqdn) FromString(v *string) (err error) {
 	if IsValidAddress(*v) {
 		*o = Fqdn(*v)
 	} else {
-		err = fmt.Errorf("FQDN cannot be empty")
+		err = fmt.Errorf("FQDN must be valid")
 	}
 	return err
 }
