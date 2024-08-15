@@ -36,16 +36,18 @@ func getExpectedDefaultRoute(useV6 bool) (*RouteInfo, error) {
 				destination := fields[0]
 				network := StringToIP(fields[0])
 				gateway := StringToIP(fields[1])
+				netInterface := fields[len(fields)-1]
 				mask, err := StringToIPv6Mask(destination)
 				if err != nil {
 					return nil, err
 				}
-				return &RouteInfo{
+				route := &RouteInfo{
 					Network:   network,
-					Interface: fields[len(fields)-1], //It's the last field
+					Interface: netInterface, //It's the last field
 					Gateway:   gateway,
 					Netmask:   mask,
-				}, nil
+				}
+				return route, nil
 			}
 		}
 	} else {
@@ -60,13 +62,14 @@ func getExpectedDefaultRoute(useV6 bool) (*RouteInfo, error) {
 				}
 				network := StringToIP(fields[0])
 				gateway := StringToIP(fields[1])
+				netInterface := fields[len(fields)-1]
 				mask, err := StringToIPMask(fields[2])
 				if err != nil {
 					return nil, err
 				}
 				return &RouteInfo{
 					Network:   network,
-					Interface: fields[len(fields)-1], //It's the last field
+					Interface: netInterface, //It's the last field
 					Gateway:   gateway,
 					Netmask:   mask,
 				}, nil

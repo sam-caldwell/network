@@ -1,5 +1,3 @@
-//go:build !darwin && linux && !windows
-
 package network
 
 import (
@@ -7,7 +5,6 @@ import (
 )
 
 func TestGetDefaultRouteInfo(t *testing.T) {
-	t.Skip("disabled")
 	t.Run("Test routes", func(t *testing.T) {
 		var expectedV4 *RouteInfo
 		var expectedV6 *RouteInfo
@@ -20,7 +17,7 @@ func TestGetDefaultRouteInfo(t *testing.T) {
 				"expectedV4: %v\n"+
 				"       err: %v", expectedV4, err)
 		}
-		if expectedV6, err := getExpectedDefaultRoute(true); err != nil {
+		if expectedV6, err = getExpectedDefaultRoute(true); err != nil {
 			t.Fatalf("getExpectedDefaultRoute():\n"+
 				"expectedV6: %v\n"+
 				"       err: %v", expectedV6, err)
@@ -32,10 +29,14 @@ func TestGetDefaultRouteInfo(t *testing.T) {
 				" error: %v", route4, route6, err)
 		}
 		if route4 != nil && !route4.Equal(expectedV4) {
-			t.Fatalf("expectedV4: %v, actual: %v", expectedV4, route4)
+			t.Fatalf("getExpectedDefaultRoute()\n"+
+				"expectedV4: %v,\n"+
+				"    actual: %v", expectedV4, route4)
 		}
 		if route6 != nil && !route6.Equal(expectedV6) {
-			t.Fatalf("expected: %v, actual: %v", expectedV6, route6)
+			t.Fatalf("getExpectedDefaultRoute()\n"+
+				"expected: %v,\n"+
+				"  actual: %v", expectedV6, route6)
 		}
 	})
 }
