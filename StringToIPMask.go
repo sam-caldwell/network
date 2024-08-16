@@ -28,7 +28,7 @@ func StringToIPMask(maskStr string) (net.IPMask, error) {
 		if mask == nil {
 			return nil, fmt.Errorf("invalid IPv4 address: %s", maskStr)
 		}
-		return maskToIPMask(mask), nil
+		return MaskToIPMask(mask), nil
 	}
 
 	// IPv6 address handling
