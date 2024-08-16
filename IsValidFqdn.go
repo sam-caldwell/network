@@ -1,7 +1,6 @@
 package network
 
 import (
-	"log"
 	"regexp"
 	"strings"
 )
@@ -12,7 +11,6 @@ import (
 func IsValidFqdn(s string) bool {
 	// Ensure the length of the string is within the allowed range
 	if len(s) < 1 || len(s) > 255 {
-		log.Printf("Failed1")
 		return false
 	}
 
@@ -21,7 +19,6 @@ func IsValidFqdn(s string) bool {
 
 	// Ensure the first and last labels meet the length requirements
 	if len(labels[0]) < 1 || len(labels[len(labels)-1]) < 2 || len(labels[len(labels)-1]) > 63 {
-		log.Printf("Failed3 on %s", labels)
 		return false
 	}
 
@@ -36,7 +33,6 @@ func IsValidFqdn(s string) bool {
 	for _, label := range labels {
 		label = strings.TrimSuffix(label, ".")
 		if !validLabel.MatchString(label) {
-			log.Printf("Failed4 on %s", label)
 			return false
 		}
 		if strings.Contains(label, "--") || strings.Contains(label, "..") {
