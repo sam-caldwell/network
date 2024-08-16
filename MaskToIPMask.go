@@ -2,8 +2,8 @@ package network
 
 import "net"
 
-// maskToIPMask converts a 4-byte IP address mask to a net.IPMask and calculates prefix length.
-func maskToIPMask(mask net.IP) net.IPMask {
+// MaskToIPMask - convert a 4-byte IP address mask to a net.IPMask and calculates prefix length.
+func MaskToIPMask(mask net.IP) net.IPMask {
 	maskBytes := mask.To4()
 	if maskBytes == nil {
 		return nil

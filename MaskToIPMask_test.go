@@ -23,7 +23,7 @@ func TestMaskToIPMask(t *testing.T) {
 			if ip == nil {
 				t.Fatalf("failed to parse IP address: %s", test.maskStr)
 			}
-			result := maskToIPMask(ip)
+			result := MaskToIPMask(ip)
 			if !CompareIPMask(result, test.expected) {
 				t.Errorf("maskToIPMask(%q) = %v; want %v", test.maskStr, result, test.expected)
 			}
