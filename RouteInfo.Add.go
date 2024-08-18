@@ -1,6 +1,8 @@
 package network
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Add - Determine if RouteInfo is IPv4 or IPv6 and add the appropriate route to the host's route table
 //
@@ -9,11 +11,10 @@ import "fmt"
 func (route *RouteInfo) Add() error {
 
 	if route.Network.To4() != nil {
-
 		return route.addIPv4Route()
 
 	} else if route.Network.To16() != nil {
-
+		//log.Println("create v6 route")
 		return route.addIPv6Route()
 
 	}

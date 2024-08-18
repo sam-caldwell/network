@@ -5,6 +5,7 @@ package network
 import (
 	"fmt"
 	"golang.org/x/sys/unix"
+	"log"
 	"unsafe"
 )
 
@@ -16,19 +17,30 @@ func handleAckResponse(socketFileDescriptor int) (err error) {
 	ack := make([]byte, 4096)
 
 	if n, _, err := unix.Recvfrom(socketFileDescriptor, ack, 0); err != nil || n < unix.SizeofNlMsghdr {
-		return fmt.Errorf("recvfrom error: %v", err)
+		log.Printf("unix.Recvfrom() returned %v\n", err)
+		return fmt.Errorf("recvfrom error (%d): %v", n, err)
 	}
 
-	nlmsg = (*unix.NlMsghdr)(unsafe.Pointer(&ack[0]))
-	if nlmsg.Type == unix.NLMSG_ERROR {
+	log.Println("handleAckResponse() unix.Recvfrom() returned")
+
+	if nlmsg = (*unix.NlMsghdr)(unsafe.Pointer(&ack[0])); nlmsg.Type == unix.NLMSG_ERROR {
 		// Extract the netlink error message
 		nlmsgErr := (*unix.NlMsgerr)(unsafe.Pointer(&ack[unix.SizeofNlMsghdr]))
 		if nlmsgErr.Error == 0 {
-			// This is actually an acknowledgment of success
-			return nil
+			return nil // This is actually an acknowledgment of success
 		}
-		return fmt.Errorf("netlink error: %v (error code: %d)", nlmsg, nlmsgErr.Error)
+		return fmt.Errorf("\nfinal state:\n"+
+			"netlink error:{\n"+
+			"   len  : '%d',\n"+
+			"   type : '%d',\n"+
+			"   flags: '%d',\n"+
+			"   seq  : '%d',\n"+
+			"   pid' : '%d',\n"+
+			"   code : '%d'\n"+
+			"}\n",
+			nlmsg.Len, nlmsg.Type, nlmsg.Flags, nlmsg.Seq, nlmsg.Pid, nlmsgErr.Error)
 	}
+	log.Println("handleAckResponse() unix.NlMsghdr returned with no error")
 
 	return nil
 }
