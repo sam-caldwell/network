@@ -16,8 +16,10 @@ import (
 //
 // See https://man7.org/linux/man-pages/man7/rtnetlink.7.html
 func (route *RouteInfo) addIPv4Route() (err error) {
-	var socketFd int
-	var messageBuffer bytes.Buffer
+	var (
+		socketFd      int
+		messageBuffer bytes.Buffer
+	)
 
 	// Create a socket
 	if socketFd, err = unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW, unix.NETLINK_ROUTE); err != nil {
@@ -57,10 +59,11 @@ func (route *RouteInfo) addIPv4Route() (err error) {
 		Dst_len:  uint8(net.IPv4len * 8), // Length in bits
 		Src_len:  0,
 		Tos:      0,
-		Table:    unix.RT_TABLE_MAIN,
-		Protocol: unix.RTPROT_BOOT,
-		Scope:    unix.RT_SCOPE_UNIVERSE,
-		Type:     unix.RTN_UNICAST,
+		Table:    unix.RT_TABLE_MAIN,     //254
+		Protocol: unix.RTPROT_BOOT,       //0x3
+		Scope:    unix.RT_SCOPE_UNIVERSE, //0x00
+		Type:     unix.RTN_UNICAST,       //0x01
+		Flags:    0,
 	}
 	if err = binary.Write(&messageBuffer, binary.LittleEndian, rt); err != nil {
 		return err
@@ -112,9 +115,7 @@ func (route *RouteInfo) addIPv4Route() (err error) {
 		return fmt.Errorf("received message too short")
 	}
 
-	nlmsg := (*unix.NlMsghdr)(unsafe.Pointer(&ack[0]))
-
-	if nlmsg.Type == unix.NLMSG_ERROR {
+	if nlmsg := (*unix.NlMsghdr)(unsafe.Pointer(&ack[0])); nlmsg.Type == unix.NLMSG_ERROR {
 		// Extract the netlink error details
 		errorMsg := fmt.Sprintf("netlink error\n"+
 			"details:\n"+
@@ -134,12 +135,8 @@ func (route *RouteInfo) addIPv4Route() (err error) {
 			errorDetails := ack[unix.SizeofNlMsghdr:n]
 			fmt.Printf("Error details: % x\n", errorDetails)
 		}
-
 		return fmt.Errorf(errorMsg)
 	}
-
-	// Additional handling if required
-	// e.g., check for successful response
 
 	return nil
 }

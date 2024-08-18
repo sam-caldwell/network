@@ -38,14 +38,12 @@ func GetDefaultRouteIPv6() (*RouteInfo, error) {
 	)
 
 	raw, err := os.ReadFile(routeFile)
-
 	if err != nil {
 		return nil, err
 	}
 
 	for _, line := range strings.Split(string(raw), "\n") {
 		fields := strings.Fields(line)
-
 		if len(fields) < 10 {
 			continue // Ignore invalid lines
 		}

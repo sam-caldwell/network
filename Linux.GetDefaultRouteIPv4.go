@@ -30,10 +30,12 @@ func GetDefaultRouteIPv4() (*RouteInfo, error) {
 			 *   192.168.49.0    0.0.0.0         255.255.255.0   U     0      0        0 br-c7bddc1f0590
 		 	 *   192.168.122.0   0.0.0.0         255.255.255.0   U     0      0        0 virbr0
 	*/
+
 	const (
 		routeFile      = "/proc/net/route"
 		defaultGateway = "0.0.0.0"
 	)
+
 	raw, err := os.ReadFile(routeFile)
 	if err != nil {
 		return nil, err
@@ -44,6 +46,7 @@ func GetDefaultRouteIPv4() (*RouteInfo, error) {
 		if fields[0] == "Iface" || len(fields) < 11 {
 			continue
 		}
+
 		if destination := hexToIPv4(fields[1]); destination == defaultGateway {
 			network := StringToIP(destination)
 			netMask, err := StringToIPMask(hexToIPv4(fields[1]))
