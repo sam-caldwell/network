@@ -5,7 +5,6 @@ package network
 import (
 	"fmt"
 	"golang.org/x/sys/unix"
-	"log"
 	"unsafe"
 )
 
@@ -17,11 +16,8 @@ func handleAckResponse(socketFileDescriptor int) (err error) {
 	ack := make([]byte, 4096)
 
 	if n, _, err := unix.Recvfrom(socketFileDescriptor, ack, 0); err != nil || n < unix.SizeofNlMsghdr {
-		log.Printf("unix.Recvfrom() returned %v\n", err)
 		return fmt.Errorf("recvfrom error (%d): %v", n, err)
 	}
-
-	log.Println("handleAckResponse() unix.Recvfrom() returned")
 
 	if nlmsg = (*unix.NlMsghdr)(unsafe.Pointer(&ack[0])); nlmsg.Type == unix.NLMSG_ERROR {
 		// Extract the netlink error message
@@ -40,7 +36,6 @@ func handleAckResponse(socketFileDescriptor int) (err error) {
 			"}\n",
 			nlmsg.Len, nlmsg.Type, nlmsg.Flags, nlmsg.Seq, nlmsg.Pid, nlmsgErr.Error)
 	}
-	log.Println("handleAckResponse() unix.NlMsghdr returned with no error")
 
 	return nil
 }
