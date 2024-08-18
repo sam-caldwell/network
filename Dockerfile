@@ -15,3 +15,5 @@ ENV PATH=$PATH:/usr/local/go/bin:$GOPATH
 RUN go version
 
 WORKDIR /opt
+
+CMD [ "/usr/local/go/bin/go", "run", "examples/addRoute/main.go" ]

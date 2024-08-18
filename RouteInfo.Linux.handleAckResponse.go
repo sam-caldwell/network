@@ -25,8 +25,7 @@ func handleAckResponse(socketFileDescriptor int) (err error) {
 		if nlmsgErr.Error == 0 {
 			return nil // This is actually an acknowledgment of success
 		}
-		return fmt.Errorf("\nfinal state:\n"+
-			"netlink error:{\n"+
+		return fmt.Errorf("\nnetlink error:{\n"+
 			"   len  : '%d',\n"+
 			"   type : '%d',\n"+
 			"   flags: '%d',\n"+
