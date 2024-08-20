@@ -14,7 +14,7 @@ func RunContainer(imageName, testName string) error {
 		"run",
 		"--cap-add=CAP_NET_ADMIN",
 		"--cap-add=CAP_SYS_ADMIN",
-		//"--cap-add=CAP_DAC_OVERRIDE",
+		"--cap-add=CAP_DAC_OVERRIDE",
 		"-v", GetCurrentWorkingDirectory() + ":/opt",
 		imageName,
 		"/usr/local/go/bin/go", "run", fmt.Sprintf("examples/%s/main.go", testName),
