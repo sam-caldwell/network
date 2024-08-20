@@ -57,7 +57,7 @@ func deleteInterface(iface string) error {
 }
 
 func main() {
-	log.Println("addRoute starting")
+	log.Println("TestAddIpV4Route starting")
 
 	func() {
 		//Test the happy path
