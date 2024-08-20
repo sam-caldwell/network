@@ -7,8 +7,9 @@ import (
 
 // BuildTestContainer - Build the docker container used to test our solution.
 func BuildTestContainer(imageName string) error {
-	log.Printf("Current Directory: %s", GetCurrentWorkingDirectory())
-
+	if err := GoToRootDirectory("network", 4); err != nil {
+		return err
+	}
 	output, err := exec.Command("docker", "build", "-f", "test/Dockerfile", "--tag", imageName, ".").
 		CombinedOutput()
 
