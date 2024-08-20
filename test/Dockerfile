@@ -3,7 +3,7 @@ FROM ubuntu:latest AS base
 # Update and install necessary packages
 RUN apt-get update --fix-missing -y \
     && apt-get upgrade -y \
-    && apt-get install -y net-tools iproute2 wget
+    && apt-get install -y net-tools iproute2
 
 # Install Go 1.23
 WORKDIR /usr/local/
@@ -15,5 +15,3 @@ ENV PATH=$PATH:/usr/local/go/bin:$GOPATH
 RUN go version
 
 WORKDIR /opt
-
-CMD [ "/usr/local/go/bin/go", "run", "examples/addRoute/main.go" ]
