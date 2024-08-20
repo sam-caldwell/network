@@ -13,12 +13,12 @@ func (ns *Handle) Equal(other Handle) bool {
 	if *ns == other {
 		return true
 	}
-	var s1, s2 unix.Stat_t
-	if err := unix.Fstat(int(*ns), &s1); err != nil {
+	var a, b unix.Stat_t
+	if err := unix.Fstat(int(*ns), &a); err != nil {
 		return false
 	}
-	if err := unix.Fstat(int(other), &s2); err != nil {
+	if err := unix.Fstat(int(other), &b); err != nil {
 		return false
 	}
-	return (s1.Dev == s2.Dev) && (s1.Ino == s2.Ino)
+	return (a.Dev == b.Dev) && (a.Ino == b.Ino)
 }

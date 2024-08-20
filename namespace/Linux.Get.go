@@ -2,9 +2,12 @@
 
 package namespace
 
-import "os"
+import (
+	"golang.org/x/sys/unix"
+	"os"
+)
 
-// Get gets a handle to the current threads network namespace.
+// Get - return a handle to the current thread's network namespace.
 func Get() (Handle, error) {
 	return GetFromThread(os.Getpid(), unix.Gettid())
 }

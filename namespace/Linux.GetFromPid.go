@@ -4,7 +4,7 @@ package namespace
 
 import "fmt"
 
-// GetFromPid gets a handle to the network namespace of a given pid.
+// GetFromPid - return the network namespace handle for the given pid.
 func GetFromPid(pid int) (Handle, error) {
 	return GetFromPath(fmt.Sprintf("/proc/%d/ns/net", pid))
 }

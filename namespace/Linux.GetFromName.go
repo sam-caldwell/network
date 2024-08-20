@@ -4,8 +4,10 @@ package namespace
 
 import "path/filepath"
 
-// GetFromName gets a handle to a named network namespace such as one
-// created by `ip netns add`.
+// GetFromName - return a handle to the named network namespace.
+//
+// Testing Note: `ip netns add` will create a namespace which we can fetch
+// for testing.
 func GetFromName(name string) (Handle, error) {
 	return GetFromPath(filepath.Join(bindMountPath, name))
 }
