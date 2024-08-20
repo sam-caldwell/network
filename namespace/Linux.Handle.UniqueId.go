@@ -1,3 +1,5 @@
+//go:build linux
+
 package namespace
 
 import (
@@ -6,8 +8,7 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// UniqueId returns a string which uniquely identifies the namespace
-// associated with the network handle.
+// UniqueId return string uniquely identifying the associated namespace
 func (ns *Handle) UniqueId() string {
 	if *ns == -1 {
 		return "NS(none)"

@@ -1,3 +1,5 @@
+//go:build linux
+
 package namespace
 
 // Handle - handle to a network namespace. It can be cast directly

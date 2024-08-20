@@ -1,3 +1,5 @@
+//go:build linux
+
 package namespace
 
 // None - return an empty (-1: closed) namespace handle.
