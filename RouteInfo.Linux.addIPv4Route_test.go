@@ -3,9 +3,8 @@
 package network
 
 import (
-	"os"
+	"github.com/sam-caldwell/network/test"
 	"os/exec"
-	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -25,14 +24,9 @@ func TestAddIPv4Route(t *testing.T) {
 	})
 
 	t.Run("Run containerized test", func(t *testing.T) {
-		GetCurrentDirectory := func() string {
-			dir, _ := os.Getwd()
-			absPath, _ := filepath.Abs(dir)
-			return absPath
-		}
 		var output []byte
 		var err error
-		dir := GetCurrentDirectory()
+		dir := test.GetCurrentWorkingDirectory()
 		commandStr := []string{
 			"run", "--cap-add=NET_ADMIN", "-v", dir + ":/opt", "network-test:latest",
 		}
