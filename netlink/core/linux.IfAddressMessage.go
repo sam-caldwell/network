@@ -26,9 +26,12 @@ import (
 //		Scope     uint8
 //		Index     uint32
 //	}
+//
+// Note:
+//
+//	We have some stricter types in this package (e.g. IfFamily) to help
+//	developers quickly identify relevant constants without having to resort
+//	to Linux man pages.
 type IfAddressMessage struct {
 	unix.IfAddrmsg
 }
-
-// SizeofIfAddrmsg     = 0x8 // bytes as derived from unix.SizeofIfAddrmsg
-const SizeofIfAddrmsg = unix.SizeofIfAddrmsg
