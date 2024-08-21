@@ -2,8 +2,12 @@
 
 package core
 
-import "unsafe"
-
-func DeserializeBridgeVlanInfo(b []byte) *BridgeVlanInfo {
-	return (*BridgeVlanInfo)(unsafe.Pointer(&b[0:SizeofBridgeVlanInfo][0]))
+// Deserialize - Deserialize byte slice into BridgeVlanInfo
+func (bridge *BridgeVlanInfo) Deserialize(b []byte) (err error) {
+	result, err := DeserializeBridgeVlanInfo(b)
+	if err != nil {
+		return err
+	}
+	*bridge = *result
+	return nil
 }
