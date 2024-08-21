@@ -27,7 +27,9 @@ func NewWithName(name string) (Handle, error) {
 
 	f, err := os.OpenFile(namedPath, os.O_CREATE|os.O_EXCL, 0o444)
 	if err != nil {
-		_ = newNamespace.Close()
+		if cerr := newNamespace.Close(); cerr != nil {
+			return None(), fmt.Errorf("error creating namespace: (err:%v, closing err: %v)", err, cerr)
+		}
 		return None(), err
 	}
 	_ = f.Close()
