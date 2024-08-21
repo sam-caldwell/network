@@ -3,8 +3,7 @@ package core
 // Deserialize - deserialize the interface address message
 func (msg *IfAddressMessage) Deserialize(b []byte) (err error) {
 	var result *IfAddressMessage
-	result, err = DeserializeIfAddressMessage(b)
-	if err != nil {
+	if result, err = DeserializeIfAddressMessage(b); err != nil {
 		return err
 	}
 	*msg = *result
