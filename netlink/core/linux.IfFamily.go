@@ -4,7 +4,8 @@ import "golang.org/x/sys/unix"
 
 // IfFamily - interface family used in IfAddressMessage (unix.IfAddrmsg/ifaddrmsg)
 //
-// See https://man7.org/linux/man-pages/man7/rtnetlink.7.html.
+//		 See https://man7.org/linux/man-pages/man7/rtnetlink.7.html and
+//	     https://students.mimuw.edu.pl/SO/Linux/Kod/include/linux/socket.h.html
 //
 // "ifa_family is the address family type (currently AfInet or AfInet6)"
 type IfFamily uint8
