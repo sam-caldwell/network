@@ -4,24 +4,24 @@ package core
 
 import (
 	"errors"
+	"golang.org/x/sys/unix"
 )
 
 // DeserializeIfAddressMessage - deserialize the interface address message
 func DeserializeIfAddressMessage(b []byte) (result *IfAddressMessage, err error) {
-	if len(b) < 4 {
-		return nil, errors.New("message too short")
+	if len(b) < SizeOfIfAddressMessage {
+		return nil, errors.New("IfAddressMessage too short")
 	}
-	result = &IfAddressMessage{}
-
-	b = []byte{
-		result.Family,
-		result.Prefixlen,
-		result.Flags,
-		result.Scope,
+	result = &IfAddressMessage{
+		unix.IfAddrmsg{
+			Family:    b[0],
+			Prefixlen: b[1],
+			Flags:     b[2],
+			Scope:     b[3],
+		},
 	}
 
-	native := NativeEndian()
-	native.PutUint32(b[4:8], result.Index)
+	nativeEndian.PutUint32(b[4:8], result.Index)
 
 	return result, nil
 }

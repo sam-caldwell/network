@@ -16,8 +16,3 @@ func init() {
 		nativeEndian = binary.LittleEndian
 	}
 }
-
-// NativeEndian returns the native endianness of the system.
-func NativeEndian() binary.ByteOrder {
-	return nativeEndian
-}
