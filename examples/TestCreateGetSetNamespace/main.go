@@ -23,6 +23,10 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if originalNamespace.Equal(newNamespace) {
+		log.Fatal("New ns failed")
+	}
+
 	createdNamespace, err := namespace.GetFromName(createdNamespaceName)
 	if err != nil {
 		log.Fatal(err)
@@ -32,7 +36,26 @@ func main() {
 		log.Fatal("created namespace is equal to new namespace")
 	}
 
-	if originalNamespace.Equal(newNamespace) {
-		log.Fatal("New ns failed")
+	newNamespace, err = namespace.NewWithName("newer")
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	if createdNamespace.Equal(newNamespace) {
+		log.Fatal("created namespace is equal to new namespace")
+	}
+
+	if err := namespace.Set(originalNamespace); err != nil {
+		log.Fatal("failed to set original namespace")
+	}
+
+	expectedNamespace, err := namespace.Get()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if !originalNamespace.Equal(expectedNamespace) {
+		log.Fatal("created namespace is equal to new namespace")
+	}
+
 }

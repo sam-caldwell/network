@@ -24,5 +24,4 @@ func main() {
 	if originalNamespace.Equal(newNamespace) {
 		log.Fatal("New ns failed")
 	}
-
 }
