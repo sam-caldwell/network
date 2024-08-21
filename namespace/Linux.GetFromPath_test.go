@@ -39,12 +39,21 @@ func TestGetFromPath(t *testing.T) {
 		}
 		// Now call GetFromPath
 		handle, err = GetFromPath(tmpFile)
-		if err == nil {
+		if err != nil {
 			t.Fatalf("Expected no error when opening a valid path. Got: %v", err)
 		}
 		if handle == -1 {
 			t.Fatalf("Expected handle to not be -1. Got: %v", handle)
 		}
 	})
-
+	t.Run("test with invalid path", func(t *testing.T) {
+		invalidPath := "/non/existent/path"
+		handle, err := GetFromPath(invalidPath)
+		if err == nil {
+			t.Fatalf("Expected an error when opening a invalid path. Got: %v", handle)
+		}
+		if handle != -1 {
+			t.Fatalf("Expected handle to be -1. Got: %v", handle)
+		}
+	})
 }
