@@ -6,7 +6,6 @@ import (
 )
 
 func TestGetFromName(t *testing.T) {
-	t.Skip("Disabled for debugging")
 	const testDockerImage = "network-test:latest"
 
 	t.Run("build container", func(t *testing.T) {

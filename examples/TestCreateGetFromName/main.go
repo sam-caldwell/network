@@ -11,7 +11,7 @@ func main() {
 	const namespaceName = "namespaceNew"
 
 	var err error
-	var originalNamespace, newNamespace, ns namespace.Handle
+	var originalNamespace, newNamespace, reloadedNamespace namespace.Handle
 
 	log.Println("starting TestCreateGetFromName")
 
@@ -33,15 +33,16 @@ func main() {
 		log.Fatalf("New ns failed.  original: %d, new: %d", originalNamespace, newNamespace)
 	}
 
-	log.Printf("GetFromName()")
-	if ns, err = namespace.GetFromName(namespaceName); err != nil {
+	log.Printf("GetFromName(namespaceName)")
+	if reloadedNamespace, err = namespace.GetFromName(namespaceName); err != nil {
 		log.Fatalf("GetFromName() failed with error: %v", err)
 	} else {
 		log.Printf("GetFromName() returned no error")
-		if ns.Equal(newNamespace) {
-			log.Fatalf("Get failed to get the newNamespace\n"+
-				"     ns: %d\n"+
-				"  newns: %d", ns, newNamespace)
+		if !reloadedNamespace.Equal(newNamespace) {
+			log.Fatalf("newNamespace is not the same as reloadedNamespace\n"+
+				"reloadedNamespace: %d\n"+
+				"     newNamespace: %d",
+				reloadedNamespace, newNamespace)
 		}
 	}
 }
