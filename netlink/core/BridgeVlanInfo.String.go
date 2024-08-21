@@ -6,6 +6,8 @@ import (
 	"fmt"
 )
 
-func (b *BridgeVlanInfo) String() string {
-	return fmt.Sprintf("%+v", *b)
+// String - Return string value of BridgeVlanInfo
+// ToDo: Should we format this a bit better?
+func (bridge *BridgeVlanInfo) String() string {
+	return fmt.Sprintf("%+v", *bridge)
 }
