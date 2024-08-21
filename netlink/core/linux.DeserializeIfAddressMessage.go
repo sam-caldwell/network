@@ -1,14 +1,25 @@
 package core
 
 import (
-	"unsafe"
-
-	"golang.org/x/sys/unix"
+	"errors"
 )
 
 // DeserializeIfAddressMessage - deserialize the interface address message
-func DeserializeIfAddressMessage(b []byte) *IfAddressMessage {
+func DeserializeIfAddressMessage(b []byte) (result *IfAddressMessage, err error) {
+	if len(b) < 4 {
+		return nil, errors.New("message too short")
+	}
+	result = &IfAddressMessage{}
 
-	return (*IfAddressMessage)(unsafe.Pointer(&b[0:unix.SizeofIfAddrmsg][0]))
+	b = []byte{
+		result.Family,
+		result.Prefixlen,
+		result.Flags,
+		result.Scope,
+	}
 
+	native := NativeEndian()
+	native.PutUint32(b[4:8], result.Index)
+
+	return result, nil
 }
