@@ -3,7 +3,7 @@ FROM ubuntu:latest AS base
 # Update and install necessary packages
 RUN apt-get update --fix-missing -y \
     && apt-get upgrade -y \
-    && apt-get install -y net-tools iproute2
+    && apt-get install -y ca-certificates net-tools iproute2
 
 # Install Go 1.23
 WORKDIR /usr/local/
