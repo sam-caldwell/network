@@ -9,8 +9,7 @@ RUN apt-get update --fix-missing -y \
 WORKDIR /usr/local/
 COPY ./bin/go1.23.0.linux-amd64.tar.gz /usr/local/
 RUN tar -xvzf go1.23.0.linux-amd64.tar.gz
-ENV GOPATH=/opt/
-ENV PATH=$PATH:/usr/local/go/bin:$GOPATH
+ENV PATH=$PATH:/usr/local/go/bin
 
 RUN go version
 
