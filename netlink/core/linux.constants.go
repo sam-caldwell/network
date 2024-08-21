@@ -6,6 +6,6 @@ const (
 	// SizeofIfAddrmsg     = 0x8 // bytes as derived from unix.SizeofIfAddrmsg
 	SizeofIfAddrmsg = unix.SizeofIfAddrmsg
 
-	// SizeofIfaCacheinfo = 0x16 // bytes as derived from unix.SizeofIfaCacheinfo
-	SizeofIfaCacheinfo = unix.SizeofIfaCacheinfo
+	// SizeOfIfaCacheinfo = 0x16 // bytes as derived from unix.SizeofIfaCacheinfo
+	SizeOfIfaCacheinfo = unix.SizeofIfaCacheinfo
 )
