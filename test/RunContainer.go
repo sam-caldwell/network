@@ -9,9 +9,11 @@ import (
 
 // RunContainer - Run a given test program inside a docker container
 func RunContainer(imageName, testName string) error {
+	defer DeleteContainer(testName)
 	const command = "docker"
 	args := []string{
 		"run",
+		"--name", testName,
 		"--cap-drop=ALL",
 		"--cap-add=CAP_NET_ADMIN",
 		"--cap-add=CAP_SYS_ADMIN",
