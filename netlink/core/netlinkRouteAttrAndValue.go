@@ -2,13 +2,18 @@ package core
 
 import (
 	"golang.org/x/sys/unix"
-	"unsafe"
 )
 
-func netlinkRouteAttrAndValue(b []byte) (*unix.RtAttr, []byte, int, error) {
-	a := (*unix.RtAttr)(unsafe.Pointer(&b[0]))
-	if int(a.Len) < unix.SizeofRtAttr || int(a.Len) > len(b) {
+func netlinkRouteAttrAndValue(b []byte) (*RtAttr, []byte, int, error) {
+
+	var attr RtAttr
+	if err := attr.Deserialize(b); err != nil {
+		return nil, nil, 0, err
+	}
+	if int(attr.Len()) < unix.SizeofRtAttr || int(attr.Len()) > len(b) {
 		return nil, nil, 0, unix.EINVAL
 	}
-	return a, b[unix.SizeofRtAttr:], rtaAlignOf(int(a.Len)), nil
+
+	return &attr, b[unix.SizeofRtAttr:], rtaAlignOf(int(attr.Len())), nil
+
 }
