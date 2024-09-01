@@ -5,6 +5,7 @@ import (
 	"unsafe"
 )
 
+// nativeEndian - implementation of nativeEndian
 var nativeEndian binary.ByteOrder
 
 // initialize the nativeEndian variable at startup
