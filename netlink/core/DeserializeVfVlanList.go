@@ -4,7 +4,6 @@ package core
 
 import (
 	"fmt"
-	"syscall"
 )
 
 // DeserializeVfVlanList - Given []byte deserialize to a list of VfVlanInfo objects by reference.
@@ -13,7 +12,7 @@ func DeserializeVfVlanList(b []byte) ([]*VfVlanInfo, error) {
 	var (
 		err            error
 		vfVlanInfoList []*VfVlanInfo
-		attrs          []syscall.NetlinkRouteAttr
+		attrs          []NetlinkRouteAttr
 	)
 
 	if attrs, err = ParseRouteAttr(b); err != nil {
@@ -21,7 +20,7 @@ func DeserializeVfVlanList(b []byte) ([]*VfVlanInfo, error) {
 	}
 
 	for _, element := range attrs {
-		if element.Attr.Type == IFLA_VF_VLAN_INFO {
+		if element.Attr.Type == IflaVfVlanInfo {
 			vfVlanInfoList = append(vfVlanInfoList, DeserializeVfVlanInfo(element.Value))
 		}
 	}
