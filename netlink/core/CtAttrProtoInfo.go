@@ -9,17 +9,17 @@ type CtAttrProtoInfo uint8
 const (
 	// CtaProtoinfoUnspec - CTA_PROTOINFO_UNSPEC - indicate that no specific protocol information is provided or
 	// applicable in the connection tracking system.
-	CtaProtoinfoUnspec = 0
+	CtaProtoinfoUnspec CtAttrProtoInfo = 0
 
 	// CtaProtoinfoTcp - CTA_PROTOINFO_TCP - specify that the protocol-specific information pertains to a TCP
 	// connection within the connection tracking system.
-	CtaProtoinfoTcp = 1
+	CtaProtoinfoTcp CtAttrProtoInfo = 1
 
 	// CtaProtoinfoDccp - CTA_PROTOINFO_DCCP - indicate that the protocol-specific information pertains to a
 	// DCCP (Datagram Congestion Control Protocol)
-	CtaProtoinfoDccp = 2
+	CtaProtoinfoDccp CtAttrProtoInfo = 2
 
 	// CtaProtoinfoSctp - CTA_PROTOINFO_SCTP -  indicate that the protocol-specific information pertains to an
 	// SCTP (Stream Control Transmission Protocol) connection within the connection tracking system.
-	CtaProtoinfoSctp = 3
+	CtaProtoinfoSctp CtAttrProtoInfo = 3
 )

@@ -11,13 +11,13 @@ const (
 
 	// CtaProtoNum - CTA_PROTO_NUM - specify the layer 4 protocol number (e.g., TCP, UDP, ICMP) for a tracked
 	// connection within the connection tracking system.
-	CtaProtoNum = 1
+	CtaProtoNum CtAttrL4Proto = 1
 
 	// CtaProtoSrcPort - CTA_PROTO_SRC_PORT - represents the source port number of a layer 4 protocol (such as TCP
 	// or UDP) for a tracked connection within the connection tracking system.
-	CtaProtoSrcPort = 2
+	CtaProtoSrcPort CtAttrL4Proto = 2
 
 	// CtaProtoDstPort - CTA_PROTO_DST_PORT - represents the destination port number of a layer 4 protocol (such as
 	// TCP or UDP) for a tracked connection within the connection tracking system.
-	CtaProtoDstPort = 3
+	CtaProtoDstPort CtAttrL4Proto = 3
 )
