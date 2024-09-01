@@ -2,5 +2,5 @@ package core
 
 // Len - return the length of the VfVlan struct
 func (msg *VfVlan) Len() int {
-	return int(SizeofVfVlan)
+	return SizeofVfVlan
 }
