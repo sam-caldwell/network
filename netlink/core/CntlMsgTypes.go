@@ -1,5 +1,3 @@
-//go:build linux
-
 package core
 
 // CntlMsgTypes - All the following constants are coming from:
