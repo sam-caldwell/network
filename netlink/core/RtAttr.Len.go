@@ -5,20 +5,20 @@ import (
 )
 
 // Len - return the byte length in memory of the RtAttr object and its children
-func (a *RtAttr) Len() int {
+func (attr *RtAttr) Len() int {
 
-	if len(a.children) == 0 {
-		return unix.SizeofRtAttr + len(a.Data)
+	if len(attr.children) == 0 {
+		return unix.SizeofRtAttr + len(attr.Data)
 	}
 
 	l := 0
 
-	for _, child := range a.children {
+	for _, child := range attr.children {
 		l += rtaAlignOf(child.Len())
 	}
 
 	l += unix.SizeofRtAttr
 
-	return rtaAlignOf(l + len(a.Data))
+	return rtaAlignOf(l + len(attr.Data))
 
 }

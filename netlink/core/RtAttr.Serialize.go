@@ -1,19 +1,19 @@
 package core
 
 // Serialize - serialize the RtAttr into a byte array and iterate through its children.
-func (a *RtAttr) Serialize() []byte {
+func (attr *RtAttr) Serialize() []byte {
 
-	length := a.Len()
+	length := attr.Len()
 	buf := make([]byte, rtaAlignOf(length))
 	next := 4
 
-	if a.Data != nil {
-		copy(buf[next:], a.Data)
-		next += rtaAlignOf(len(a.Data))
+	if attr.Data != nil {
+		copy(buf[next:], attr.Data)
+		next += rtaAlignOf(len(attr.Data))
 	}
 
-	if len(a.children) > 0 {
-		for _, child := range a.children {
+	if len(attr.children) > 0 {
+		for _, child := range attr.children {
 			childBuf := child.Serialize()
 			copy(buf[next:], childBuf)
 			next += rtaAlignOf(len(childBuf))
@@ -24,7 +24,7 @@ func (a *RtAttr) Serialize() []byte {
 		nativeEndian.PutUint16(buf[0:2], l)
 	}
 
-	nativeEndian.PutUint16(buf[2:4], a.Type)
+	nativeEndian.PutUint16(buf[2:4], attr.Type)
 	return buf
 
 }

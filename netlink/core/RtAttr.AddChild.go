@@ -1,6 +1,6 @@
 package core
 
 // AddChild adds an existing NetlinkRequestData as a child.
-func (a *RtAttr) AddChild(attr NetlinkRequestData) {
-	a.children = append(a.children, attr)
+func (attr *RtAttr) AddChild(attr NetlinkRequestData) {
+	attr.children = append(attr.children, attr)
 }
