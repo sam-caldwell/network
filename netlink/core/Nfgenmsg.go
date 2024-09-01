@@ -2,15 +2,16 @@
 
 package core
 
-// Nfgenmsg - General form of address family dependent message.
+// Nfgenmsg - nfgenmsg - General form of address family dependent message.
 //
-//	struct nfgenmsg {
-//		__u8  nfgen_family;		/* AF_xxx */
-//		__u8  version;		/* nfnetlink version */
-//		__be16    res_id;		/* resource id */
-//	};
+// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink.h
 type Nfgenmsg struct {
+	/* Address Family (e.g., AF_INET for IPv4, AF_INET6 for IPv6) */
 	NfgenFamily uint8
-	Version     uint8
-	ResId       uint16 // big endian
+
+	/* Netfilter netlink message version */
+	Version uint8
+
+	/* Resource identifier (stored in big endian byte order) */
+	ResId uint16
 }
