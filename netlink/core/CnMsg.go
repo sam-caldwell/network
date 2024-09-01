@@ -6,5 +6,5 @@ type CnMsg struct {
 	Seq    uint32 // Sequence number to track the order of messages.
 	Ack    uint32 // Acknowledgment number to confirm the receipt or manage synchronization.
 	Length uint16 // Length of the payload that follows the CnMsg header.
-	Flags  uint16 // Flags for message properties, such as indicating a multi-part message.
+	Flags  uint16 // Flags for message properties, such as indicating a multipart message.
 }
