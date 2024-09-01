@@ -6,7 +6,7 @@ import (
 
 // ConvertUin64ToBigEndian - Flip bit order of little endian uint64 to big endian
 func ConvertUin64ToBigEndian(i uint64) uint64 {
-	if NativeEndian() == binary.BigEndian {
+	if nativeEndian == binary.BigEndian {
 		return i
 	}
 	return (i&0xff00000000000000)>>56 |
