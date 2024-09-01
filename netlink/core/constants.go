@@ -2,67 +2,34 @@
 
 package core
 
-import "golang.org/x/sys/unix"
+import (
+	"unsafe"
+)
 
 const (
 	// SizeOfIfAddressMessage     = 0x8 // bytes as derived from unix.SizeOfIfAddressMessage
-	SizeOfIfAddressMessage = unix.SizeofIfAddrmsg
+	SizeOfIfAddressMessage = unsafe.Sizeof(IfAddressMessage{})
 
-	// SizeOfIfaCacheinfo = 0x16 // bytes as derived from unix.SizeofIfaCacheinfo
-	SizeOfIfaCacheinfo = unix.SizeofIfaCacheinfo
+	// SizeOfIfaCacheinfo - 0x16 // bytes as derived from unix.SizeofIfaCacheinfo
+	SizeOfIfaCacheinfo = unsafe.Sizeof(IfaCacheInfo{})
+
+	//SizeofIfInfoMsg -  0x16 // bytes as derived from unix.SizeofIfInfomsg
+	SizeofIfInfoMsg = unsafe.Sizeof(IfInfoMsg{})
+
+	// SizeofCnMsgOp - size of CnMsgOp struct
+	SizeofCnMsgOp = unsafe.Sizeof(CnMsgOp{})
+
+	// SizeofBridgeVlanInfo - size of BridgeVlanInfo
+	SizeofBridgeVlanInfo = unsafe.Sizeof(BridgeVlanInfo{})
 )
 
 const (
-	// ReceiveBufferSize - RECEIVE_BUFFER_SIZE - Arbitrary set value (greater than default 4k) to allow receiving from kernel more
-	// verbose messages e.g. for statistics, tc rules or filters, or other more memory requiring data.
+	// ReceiveBufferSize - RECEIVE_BUFFER_SIZE - Arbitrary set value (greater than default 4k) to allow receiving
+	// from kernel more verbose messages e.g. for statistics, tc rules or filters, or other more memory requiring data.
 	ReceiveBufferSize = 65536
-	// PidKernel - Kernel netlink pid
-	PidKernel     uint32 = 0
-	SizeofCnMsgOp        = 0x18
-)
 
-const (
-	NLMSGERR_ATTR_UNUSED = 0
-	NLMSGERR_ATTR_MSG    = 1
-	NLMSGERR_ATTR_OFFS   = 2
-	NLMSGERR_ATTR_COOKIE = 3
-	NLMSGERR_ATTR_POLICY = 4
-)
-
-const (
-	PROC_CN_MCAST_LISTEN = 1
-	PROC_CN_MCAST_IGNORE
-)
-
-const (
-	SizeofBridgeVlanInfo = 0x04
-)
-
-/* Bridge Flags */
-const (
-	BRIDGE_FLAGS_MASTER = iota + 1 /* Bridge command to/from master */
-	BRIDGE_FLAGS_SELF              /* Bridge command to/from lowerdev */
-)
-
-/* Bridge management nested attributes
- * [IFLA_AF_SPEC] = {
- *     [IFLA_BRIDGE_FLAGS]
- *     [IFLA_BRIDGE_MODE]
- *     [IFLA_BRIDGE_VLAN_INFO]
- * }
- */
-const (
-	IFLA_BRIDGE_FLAGS = iota
-	IFLA_BRIDGE_MODE
-	IFLA_BRIDGE_VLAN_INFO
-)
-
-const (
-	BRIDGE_VLAN_INFO_MASTER = 1 << iota
-	BRIDGE_VLAN_INFO_PVID
-	BRIDGE_VLAN_INFO_UNTAGGED
-	BRIDGE_VLAN_INFO_RANGE_BEGIN
-	BRIDGE_VLAN_INFO_RANGE_END
+	// PortIdKernel - Kernel netlink port Id (nl_pid)
+	PortIdKernel uint32 = 0
 )
 
 /* New extended info filters for IFLA_EXT_MASK */
