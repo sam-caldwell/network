@@ -1,7 +1,7 @@
 package core
 
 // BridgeVlanInfoEnum - https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_bridge.h
-type BridgeVlanInfoEnum int
+type BridgeVlanInfoEnum uint16
 
 const (
 	// BridgeVlanInfoMaster - BRIDGE_VLAN_INFO_MASTER - Operate on Bridge device as well

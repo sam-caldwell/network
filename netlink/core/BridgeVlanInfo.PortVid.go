@@ -6,6 +6,6 @@ package core
 // determining which VLAN traffic is tagged for that port.
 func (bridge *BridgeVlanInfo) PortVID() bool {
 
-	return bridge.Flags&BRIDGE_VLAN_INFO_PVID > 0
+	return bridge.Flags&uint16(BridgeVlanInfoPvid) > 0
 
 }
