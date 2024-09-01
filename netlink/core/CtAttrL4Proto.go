@@ -1,0 +1,23 @@
+package core
+
+// CtAttrL4Proto - ctattr_l4proto - structure in the Linux Netfilter framework that stores layer 4 protocol-specific
+// attributes for a tracked connection, such as protocol-specific information related to TCP, UDP, SCTP, or DCCP,
+// within the connection tracking system.
+//
+// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
+type CtAttrL4Proto uint8
+
+const (
+
+	// CtaProtoNum - CTA_PROTO_NUM - specify the layer 4 protocol number (e.g., TCP, UDP, ICMP) for a tracked
+	// connection within the connection tracking system.
+	CtaProtoNum = 1
+
+	// CtaProtoSrcPort - CTA_PROTO_SRC_PORT - represents the source port number of a layer 4 protocol (such as TCP
+	// or UDP) for a tracked connection within the connection tracking system.
+	CtaProtoSrcPort = 2
+
+	// CtaProtoDstPort - CTA_PROTO_DST_PORT - represents the destination port number of a layer 4 protocol (such as
+	// TCP or UDP) for a tracked connection within the connection tracking system.
+	CtaProtoDstPort = 3
+)
