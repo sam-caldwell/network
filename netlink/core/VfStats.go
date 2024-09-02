@@ -6,12 +6,28 @@ package core
 //
 // See https://github.com/torvalds/linux/blob/master/include/linux/if_link.h
 type VfStats struct {
-	RxPackets uint64 // Number of received packets
-	TxPackets uint64 // Number of transmitted packets
-	RxBytes   uint64 // Number of received bytes
-	TxBytes   uint64 // Number of transmitted bytes
-	Multicast uint64 // Number of multicast packets
-	Broadcast uint64 // Number of broadcast packets
-	RxDropped uint64 // Number of dropped received packets
-	TxDropped uint64 // Number of dropped transmitted packets
+
+	// RxPackets - Number of received packets
+	RxPackets uint64
+
+	// TxPackets - Number of transmitted packets
+	TxPackets uint64
+
+	// RxBytes - Number of received bytes
+	RxBytes uint64
+
+	// TxBytes - Number of transmitted bytes
+	TxBytes uint64
+
+	// Multicast - Number of multicast packets
+	Multicast uint64
+
+	// Broadcast - Number of broadcast packets
+	Broadcast uint64
+
+	// RxDropped - Number of dropped received packets
+	RxDropped uint64
+
+	// TxDropped - Number of dropped transmitted packets
+	TxDropped uint64
 }
