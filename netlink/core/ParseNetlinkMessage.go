@@ -6,8 +6,7 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// ParseNetlinkMessage parses b as an array of netlink messages and
-// returns the slice containing the NetlinkMessage structures.
+// ParseNetlinkMessage - deserialize []byte into a list of NetlinkMessage objects.
 func ParseNetlinkMessage(b []byte) ([]NetlinkMessage, error) {
 
 	var messages []NetlinkMessage
