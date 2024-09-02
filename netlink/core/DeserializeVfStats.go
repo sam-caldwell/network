@@ -10,12 +10,17 @@ import (
 // DeserializeVfStats - parse byte slice and returns a VfStats struct. It extracts the relevant VF statistics
 // attributes from the provided byte slice.
 func DeserializeVfStats(b []byte) VfStats {
-	var vfstat VfStats
-	stats, err := ParseRouteAttr(b)
-	if err != nil {
+	var (
+		err      error
+		vfstat   VfStats
+		valueVar uint64
+		stats    []NetlinkRouteAttr
+	)
+
+	if stats, err = ParseRouteAttr(b); err != nil {
 		return vfstat
 	}
-	var valueVar uint64
+
 	for _, stat := range stats {
 		if err := binary.Read(bytes.NewBuffer(stat.Value), nativeEndian, &valueVar); err != nil {
 			break
