@@ -1,19 +1,23 @@
 package core
 
 import (
+	"bytes"
 	"encoding/binary"
-	"unsafe"
 )
 
-// Serialize - serialize VfVlanInfo
-func (msg *VfVlanInfo) Serialize() []byte {
-	return (*(*[SizeofVfVlanInfo]byte)(unsafe.Pointer(msg)))[:]
-}
+// Serialize - output the state of IfLaVfVlanInfoStruct as []byte
+func (msg *IfLaVfVlanInfoStruct) Serialize() ([]byte, error) {
+	buf := new(bytes.Buffer)
 
-// DeserializeVfVlanInfo - deserialize VfVlanInfo
-func DeserializeVfVlanInfo(b []byte) *VfVlanInfo {
-	return &VfVlanInfo{
-		*(*VfVlan)(unsafe.Pointer(&b[0:SizeofVfVlan][0])),
-		binary.BigEndian.Uint16(b[SizeofVfVlan:SizeofVfVlanInfo]),
+	// Serialize VfVlan
+	if err := binary.Write(buf, binary.LittleEndian, msg.VfVlan); err != nil {
+		return nil, err
 	}
+
+	// Serialize VlanProto
+	if err := binary.Write(buf, binary.LittleEndian, msg.VlanProto); err != nil {
+		return nil, err
+	}
+
+	return buf.Bytes(), nil
 }
