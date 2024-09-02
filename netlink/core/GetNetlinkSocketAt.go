@@ -13,7 +13,7 @@ import (
 // If newNamespace is close, the socket will be opened in the current network namespace.
 func GetNetlinkSocketAt(newNamespace, currentNamespace namespace.Handle, protocol int) (*NetlinkSocket, error) {
 
-	c, err := executeInNetns(newNamespace, currentNamespace)
+	c, err := executeInNetNamespace(newNamespace, currentNamespace)
 
 	if err != nil {
 		return nil, err
