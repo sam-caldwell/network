@@ -15,10 +15,16 @@ package core
 //	result := ConvertGoStringToNullTerminated(s)
 //	// result will be []byte{'t', 'e', 's', 't', 0}
 func ConvertGoStringToNullTerminated(s string) []byte {
-	bytes := make([]byte, len(s)+1)
-	for i := 0; i < len(s); i++ {
-		bytes[i] = s[i]
-	}
-	bytes[len(s)] = 0
-	return bytes
+
+	const Null byte = 0x00
+
+	out := make([]byte, len(s)+1)
+
+	raw := []byte(s)
+
+	copy(out, raw)
+
+	out[len(raw)] = Null
+
+	return out
 }
