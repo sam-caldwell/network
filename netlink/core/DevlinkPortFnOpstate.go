@@ -16,8 +16,8 @@ type DevlinkPortFnOpstate uint8
 
 const (
 	// DevlinkPortFnOpstateDetached - DEVLINK_PORT_FN_OPSTATE_DETACHED
-	DevlinkPortFnOpstateDetached = 0
+	DevlinkPortFnOpstateDetached DevlinkPortFnOpstate = 0
 
 	// DevlinkPortFnOpstateAttached - DEVLINK_PORT_FN_OPSTATE_ATTACHED
-	DevlinkPortFnOpstateAttached = 1
+	DevlinkPortFnOpstateAttached DevlinkPortFnOpstate = 1
 )
