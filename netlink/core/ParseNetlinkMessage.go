@@ -13,7 +13,7 @@ func ParseNetlinkMessage(b []byte) ([]NetlinkMessage, error) {
 
 	for len(b) >= unix.NLMSG_HDRLEN {
 
-		h, dataBuffer, dataLength, err := netlinkMessageHeaderAndData(b)
+		h, dataBuffer, dataLength, err := deserializeNetlinkMessageHeaderAndData(b)
 
 		if err != nil {
 			return nil, err
