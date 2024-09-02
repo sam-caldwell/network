@@ -1,0 +1,52 @@
+package core
+
+import (
+	"bytes"
+	"encoding/binary"
+	"golang.org/x/sys/unix"
+)
+
+// Serialize outputs a serialized []byte from the NetlinkRequest struct.
+func (req *NetlinkRequest) Serialize() (out []byte, err error) {
+	// Calculate the total length of the netlink message.
+	length := unix.SizeofNlMsghdr
+	for _, data := range req.Data {
+		length += len(data.Serialize())
+	}
+	length += len(req.RawData)
+
+	// Update the message length in the header.
+	req.Len = uint32(length)
+
+	// Create a buffer to hold the serialized data.
+	buf := bytes.NewBuffer(make([]byte, 0, length))
+
+	// Serialize the netlink message header.
+	if err = binary.Write(buf, binary.LittleEndian, req.Len); err != nil {
+		return nil, err
+	}
+	if err = binary.Write(buf, binary.LittleEndian, req.Type); err != nil {
+		return nil, err
+	}
+	if err = binary.Write(buf, binary.LittleEndian, req.Flags); err != nil {
+		return nil, err
+	}
+	if err = binary.Write(buf, binary.LittleEndian, req.Seq); err != nil {
+		return nil, err
+	}
+	if err = binary.Write(buf, binary.LittleEndian, req.Pid); err != nil {
+		return nil, err
+	}
+
+	// Serialize the payload data.
+	for _, data := range req.Data {
+		buf.Write(data.Serialize())
+	}
+
+	// Add the raw data, if any.
+	if len(req.RawData) > 0 {
+		buf.Write(req.RawData)
+	}
+
+	return buf.Bytes(), nil
+}
