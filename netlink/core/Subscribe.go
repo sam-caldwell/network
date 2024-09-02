@@ -12,14 +12,14 @@ import (
 // Returns the netlink socket on which Receive() method can be called to retrieve the messages from the kernel.
 func Subscribe(protocol int, groups ...uint) (*NetlinkSocket, error) {
 
-	fd, err := unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW, protocol)
+	socketFd, err := unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW, protocol)
 
 	if err != nil {
 		return nil, err
 	}
 
 	s := &NetlinkSocket{
-		fd: int32(fd),
+		fd: int32(socketFd),
 	}
 
 	s.lsa.Family = unix.AF_NETLINK
@@ -28,8 +28,8 @@ func Subscribe(protocol int, groups ...uint) (*NetlinkSocket, error) {
 		s.lsa.Groups |= 1 << (g - 1)
 	}
 
-	if err := unix.Bind(fd, &s.lsa); err != nil {
-		_ = unix.Close(fd)
+	if err := unix.Bind(socketFd, &s.lsa); err != nil {
+		_ = unix.Close(socketFd)
 		return nil, err
 	}
 
