@@ -16,7 +16,7 @@ package core
 //	                          if the attribute was missing at the message level
 //	@NLMSGERR_ATTR_MISS_NEST: offset of the nest where attribute was missing
 //	@NLMSGERR_ATTR_MAX: highest attribute number
-type NlmsgerrAttr int
+type NlmsgerrAttr uint16
 
 const (
 	// NlmsgerrAttrUnused - NLMSGERR_ATTR_UNUSED - Unused attribute in NLMSGERR netlink error.
