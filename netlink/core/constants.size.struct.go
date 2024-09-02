@@ -40,6 +40,30 @@ const (
 	// the unix.RtAttr.
 	SizeofUnixRtAttr = int(unsafe.Sizeof(unix.RtAttr{}))
 
+	//SizeofGenlmsg - size of Genlmsg struct
+	SizeofGenlmsg = int(unsafe.Sizeof(Genlmsg{}))
+
+	// SizeofVfRate - Size of VfRate struct
+	SizeofVfRate = int(unsafe.Sizeof(VfRate{}))
+
+	// SizeofVfSpoofchk - Size of VfSpoofchk
+	SizeofVfSpoofchk = int(unsafe.Sizeof(VfSpoofchk{}))
+
+	// SizeofVfTxRate - Size of VfTxRate struct
+	SizeofVfTxRate = int(unsafe.Sizeof(VfTxRate{}))
+
+	// SizeofVfLinkState - Size of VfLinkState struct
+	SizeofVfLinkState = int(unsafe.Sizeof(VfLinkState{}))
+
+	// SizeofVfRssQueryEn - Size of VfRssQueryEn struct
+	SizeofVfRssQueryEn = int(unsafe.Sizeof(VfRssQueryEn{}))
+
+	// SizeofVfTrust - Size of VfTrust struct
+	SizeofVfTrust = int(unsafe.Sizeof(VfTrust{}))
+
+	// SizeofVfGUID - Size of VfGUID struct
+	SizeofVfGUID = int(unsafe.Sizeof(VfGUID{}))
+
 	// SizeofNfattr -
 	SizeofNfattr = 4
 
@@ -48,12 +72,4 @@ const (
 
 	// SizeofNfctTupleHead -
 	SizeofNfctTupleHead = 52
-
-	SizeofVfTxRate     = 0x08
-	SizeofVfRate       = 0x0c
-	SizeofVfSpoofchk   = 0x08
-	SizeofVfLinkState  = 0x08
-	SizeofVfRssQueryEn = 0x08
-	SizeofVfTrust      = 0x08
-	SizeofVfGUID       = 0x10
 )
