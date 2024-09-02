@@ -13,4 +13,5 @@ import (
 func (s *NetlinkSocket) SetSendTimeout(timeout *unix.Timeval) error {
 
 	return unix.SetsockoptTimeval(int(s.fd), unix.SOL_SOCKET, unix.SO_SNDTIMEO, timeout)
+
 }
