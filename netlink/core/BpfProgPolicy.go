@@ -1,7 +1,7 @@
 package core
 
-// BpfProgPolicy - bpf_prog_policy - type grouping Lightweight Tunnels (LWT) and Berkeley Packet Filter (BPF) programs.
-//
+// BpfProgPolicy - bpf_prog_policy - represents the BPF program policies associated with Lightweight Tunnels (LWT).
+// These constants correspond to values used in the Linux kernel for managing BPF programs in LWT contexts.
 // See https://github.com/torvalds/linux/blob/master/net/core/lwt_bpf.c
 type BpfProgPolicy uint8
 
