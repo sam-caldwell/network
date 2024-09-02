@@ -6,12 +6,12 @@ import (
 	"fmt"
 )
 
-// DeserializeVfVlanList - Given []byte deserialize to a list of ILaVfVlanInfoStruct objects by reference.
-func DeserializeVfVlanList(b []byte) ([]*ILaVfVlanInfoStruct, error) {
+// DeserializeVfVlanList - Given []byte deserialize to a list of IfLaVfVlanInfoStruct objects by reference.
+func DeserializeVfVlanList(b []byte) ([]*IfLaVfVlanInfoStruct, error) {
 
 	var (
 		err            error
-		vfVlanInfoList []*ILaVfVlanInfoStruct
+		vfVlanInfoList []*IfLaVfVlanInfoStruct
 		attrs          []NetlinkRouteAttr
 	)
 
