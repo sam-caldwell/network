@@ -5,12 +5,19 @@ package core
 
 const (
 
-	// GenlDevlinkName - GENL_DEVLINK_NAME
-	GenlDevlinkName = "devlink"
+	// DevlinkGenlName - DEVLINK_GENL_NAME -
+	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
+	DevlinkGenlName = "devlink"
 
-	// GenlDevlinkVersion - GENL_DEVLINK_VERSION
-	GenlDevlinkVersion = 1
+	// DevlinkGenlVersion - DEVLINK_GENL_VERSION -
+	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
+	DevlinkGenlVersion = 1
+
+	// DevlinkGenlMcgrpConfigName - DEVLINK_GENL_MCGRP_CONFIG_NAME -
+	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
+	DevlinkGenlMcgrpConfigName = "config"
 )
+
 const (
 
 	// DevlinkAttrBusName - DEVLINK_ATTR_BUS_NAME
@@ -243,8 +250,4 @@ const (
 
 	// DEVLINK_PORT_FN_OPSTATE_ATTACHED
 	DEVLINK_PORT_FN_OPSTATE_ATTACHED = 1
-)
-const (
-	// DEVLINK_RESOURCE_UNIT_ENTRY
-	DEVLINK_RESOURCE_UNIT_ENTRY uint8 = 0
 )
