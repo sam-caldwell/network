@@ -1,6 +1,6 @@
 package core
 
-// VfVlanInfo - Vlan information.
+// VfVlanInfo - ifla_vf_vlan_info - Vlan information.
 //
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
 //

@@ -6,12 +6,12 @@ import (
 	"fmt"
 )
 
-// DeserializeVfVlanList - Given []byte deserialize to a list of VfVlanInfo objects by reference.
-func DeserializeVfVlanList(b []byte) ([]*VfVlanInfo, error) {
+// DeserializeVfVlanList - Given []byte deserialize to a list of ILaVfVlanInfoStruct objects by reference.
+func DeserializeVfVlanList(b []byte) ([]*ILaVfVlanInfoStruct, error) {
 
 	var (
 		err            error
-		vfVlanInfoList []*VfVlanInfo
+		vfVlanInfoList []*ILaVfVlanInfoStruct
 		attrs          []NetlinkRouteAttr
 	)
 
@@ -20,13 +20,13 @@ func DeserializeVfVlanList(b []byte) ([]*VfVlanInfo, error) {
 	}
 
 	for _, element := range attrs {
-		if element.Attr.Type == IflaVfVlanInfo {
+		if element.Attr.Type == IfLaVfVlanInfo {
 			vfVlanInfoList = append(vfVlanInfoList, DeserializeVfVlanInfo(element.Value))
 		}
 	}
 
 	if len(vfVlanInfoList) == 0 {
-		return nil, fmt.Errorf("VF vlan list is defined but no vf vlan info elements were found")
+		return nil, fmt.Errorf("VF vlan list is defined but no vf vlan info elements found")
 	}
 
 	return vfVlanInfoList, nil
