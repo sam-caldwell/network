@@ -9,7 +9,7 @@ import (
 
 // RunContainer - Run a given test program inside a docker container
 func RunContainer(imageName, testName string) error {
-	defer DeleteContainer(testName)
+	defer func() { _ = DeleteContainer(testName) }()
 	const command = "docker"
 	args := []string{
 		"run",
