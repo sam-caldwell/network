@@ -1,12 +1,11 @@
 package core
 
-// IflaIpVlan - Enumeration for IP VLAN attributes
+// IflaIpVlanEnum - Enumeration for IP VLAN attributes
 //
 // This enumeration defines various attributes related to IP VLANs in Linux.
 // IP VLANs allow the configuration of virtual LANs based on IP addressing.
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-
 type IflaIpVlanEnum uint8
 
 const (
