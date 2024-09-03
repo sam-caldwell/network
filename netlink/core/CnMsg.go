@@ -8,9 +8,29 @@ package core
 //
 // See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
 type CnMsg struct {
-	ID     CbID   // Contains Idx and Val fields to identify the message or its source/destination.
-	Seq    uint32 // Sequence number to track the order of messages.
-	Ack    uint32 // Acknowledgment number to confirm the receipt or manage synchronization.
-	Length uint16 // Length of the payload that follows the CnMsg header.
-	Flags  uint16 // Flags for message properties, such as indicating a multipart message.
+
+	// ID - Contains Idx and Val fields to identify the message or its source/destination.
+	//
+	// See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
+	ID CbID
+
+	// Seq - Sequence number to track the order of messages.
+	//
+	// See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
+	Seq uint32
+
+	// Ack - Acknowledgment number to confirm the receipt or manage synchronization.
+	//
+	// See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
+	Ack uint32
+
+	// Length - Size of the payload that follows the CnMsg header.
+	//
+	// See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
+	Length uint16
+
+	// Flags - message properties, such as indicating a multipart message.
+	//
+	// See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
+	Flags uint16
 }
