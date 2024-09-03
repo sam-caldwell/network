@@ -1,11 +1,34 @@
 package core
 
 import (
-	"unsafe"
+	"bytes"
+	"encoding/binary"
 )
 
-// Serialize - Serialize the IfInfoMsg structure
-// ToDo: let's do this in a safer way. This has the potential for bad things.
-func (msg *IfInfoMsg) Serialize() []byte {
-	return (*(*[SizeofIfInfoMsg]byte)(unsafe.Pointer(msg)))[:]
+// Serialize - Serialize the IfInfoMsg structure into a byte slice in a safe way.
+func (msg *IfInfoMsg) Serialize() ([]byte, error) {
+	buf := new(bytes.Buffer)
+
+	// Write each field to the buffer in the correct order and format
+	if err := binary.Write(buf, binary.LittleEndian, msg.Family); err != nil {
+		return nil, err
+	}
+	// Placeholder for the second byte, typically padding
+	if err := binary.Write(buf, binary.LittleEndian, uint8(0)); err != nil {
+		return nil, err
+	}
+	if err := binary.Write(buf, binary.LittleEndian, msg.Type); err != nil {
+		return nil, err
+	}
+	if err := binary.Write(buf, binary.LittleEndian, msg.Index); err != nil {
+		return nil, err
+	}
+	if err := binary.Write(buf, binary.LittleEndian, msg.Flags); err != nil {
+		return nil, err
+	}
+	if err := binary.Write(buf, binary.LittleEndian, msg.Change); err != nil {
+		return nil, err
+	}
+	// Return the byte slice
+	return buf.Bytes(), nil
 }
