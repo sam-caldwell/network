@@ -17,7 +17,7 @@ func (a *Uint32Attribute) Serialize() []byte {
 
 	// Check if the NlaFNetByteorder flag is set in the type identifier.
 	// If set, store the 32-bit value in big-endian order (network byte order).
-	if a.Type&NlaFNetByteorder != 0 {
+	if a.Type&uint16(NlaFNetByteorder) != 0 {
 		binary.BigEndian.PutUint32(buf[4:], a.Value)
 	} else {
 		// Otherwise, store the 32-bit value in the native endianness of the system.
