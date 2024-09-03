@@ -1,6 +1,6 @@
 package core
 
-// IfLaBridge - Bridge management nested attributes
+// IfLaBridgeEnum - Bridge management nested attributes
 //
 // Bridge management nested attributes
 //
@@ -9,30 +9,30 @@ package core
 //	   [IFLA_BRIDGE_MODE]
 //	   [IFLA_BRIDGE_VLAN_INFO]
 //	}
-type IfLaBridge int
+type IfLaBridgeEnum int
 
 const (
 	// IflaBridgeFlags - IFLA_BRIDGE_FLAGS
-	IflaBridgeFlags IfLaBridge = 0
+	IflaBridgeFlags IfLaBridgeEnum = 0
 
 	// IflaBridgeMode - IFLA_BRIDGE_MODE
-	IflaBridgeMode IfLaBridge = 1
+	IflaBridgeMode IfLaBridgeEnum = 1
 
 	// IflaBridgeVlanInfo - IFLA_BRIDGE_VLAN_INFO
-	IflaBridgeVlanInfo IfLaBridge = 2
+	IflaBridgeVlanInfo IfLaBridgeEnum = 2
 
 	// IflaBridgeVlanTunnelInfo - IFLA_BRIDGE_VLAN_TUNNEL_INFO
-	IflaBridgeVlanTunnelInfo IfLaBridge = 3
+	IflaBridgeVlanTunnelInfo IfLaBridgeEnum = 3
 
 	// IflaBridgeMrp - IFLA_BRIDGE_MRP
-	IflaBridgeMrp IfLaBridge = 4
+	IflaBridgeMrp IfLaBridgeEnum = 4
 
 	// IflaBridgeCfm - IFLA_BRIDGE_CFM
-	IflaBridgeCfm IfLaBridge = 5
+	IflaBridgeCfm IfLaBridgeEnum = 5
 
 	// IflaBridgeMst - IFLA_BRIDGE_MST
-	IflaBridgeMst IfLaBridge = 6
+	IflaBridgeMst IfLaBridgeEnum = 6
 
 	// IflaBridgeMax - IFLA_BRIDGE_MAX (maximum value)
-	IflaBridgeMax IfLaBridge = IflaBridgeMst
+	IflaBridgeMax IfLaBridgeEnum = IflaBridgeMst
 )
