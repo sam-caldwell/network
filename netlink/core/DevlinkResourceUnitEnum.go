@@ -1,6 +1,6 @@
 package core
 
-// DevlinkResourceUnit - devlink_resource_unit - represents the devlink resource unit type.
+// DevlinkResourceUnitEnum - devlink_resource_unit - represents the devlink resource unit type.
 //
 // The devlink_resource_unit is typically used to define units of resources for a particular network device.
 //
@@ -9,9 +9,9 @@ package core
 // the device to allocate or deallocate entries in a meaningful way.
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
-type DevlinkResourceUnit uint8
+type DevlinkResourceUnitEnum uint8
 
 const (
 	// DevlinkResourceUnitEntry represents the DEVLINK_RESOURCE_UNIT_ENTRY.
-	DevlinkResourceUnitEntry DevlinkResourceUnit = 0
+	DevlinkResourceUnitEntry DevlinkResourceUnitEnum = 0
 )
