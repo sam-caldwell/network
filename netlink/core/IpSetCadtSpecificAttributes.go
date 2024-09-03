@@ -6,12 +6,6 @@ package core
 type IpSetCadtSpecificAttributes int
 
 const (
-
-	// IPSET_ATTR_UNSPEC - unspecified IP set attribute.
-	//
-	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
-	IPSET_ATTR_UNSPEC = iota
-
 	/*
 		General attributes
 	*/
@@ -19,7 +13,7 @@ const (
 	// IpsetAttrIp - IPSET_ATTR_IP - represents a single IP address attribute.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
-	IpsetAttrIp IpSetCadtSpecificAttributes = 1
+	IpsetAttrIp = IpSetCadtSpecificAttributes(IpsetAttrUnspec) + 1
 
 	// IpsetAttrIpFrom - IPSET_ATTR_IP_FROM - Alias for IpsetAttrIp representing starting ip address in range.
 	//
@@ -44,7 +38,7 @@ const (
 	// IpsetAttrPortFrom - IPSET_ATTR_PORT_FROM - Represents a single port range start attribute.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
-	IpsetAttrPortFrom IpSetCadtSpecificAttributes = 4
+	IpsetAttrPortFrom IpSetCadtSpecificAttributes = IpsetAttrPort
 
 	// IpsetAttrPortTo - IPSET_ATTR_PORT_TO - Represents a single port range ending attribute.
 	//
@@ -81,10 +75,21 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
 	IpsetAttrMarkmask IpSetCadtSpecificAttributes = 11
 
+	// IpsetAttrBitmask - IPSET_ATTR_BITMASK -
+	//
+	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
+	IpsetAttrBitmask IpSetCadtSpecificAttributes = 12
+
+	_ = iota //Reserved empty slot
+
+	_ = iota //Reserved empty slot
+
+	_ = iota //Reserved empty slot
+
 	// IpsetAttrCadtMax - IPSET_ATTR_CADT_MAX - Reserve empty slots
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
-	IpsetAttrCadtMax IpSetCadtSpecificAttributes = 16
+	IpsetAttrCadtMax IpSetCadtSpecificAttributes = iota - 1
 
 	/*
 	  Create-only specific attributes
@@ -149,9 +154,9 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
 	IpsetAttrMemsize IpSetCadtSpecificAttributes = 26
 
-	// SetAttrCreateMax - SET_ATTR_CREATE_MAX - Kernel-only attribute. Maximum attribute index used during set
+	// IpsetAttrCreateMax - IPSET_ATTR_CREATE_MAX - Kernel-only attribute. Maximum attribute index used during set
 	// creation.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
-	SetAttrCreateMax IpSetCadtSpecificAttributes = 26
+	IpsetAttrCreateMax IpSetCadtSpecificAttributes = IpsetAttrMemsize
 )

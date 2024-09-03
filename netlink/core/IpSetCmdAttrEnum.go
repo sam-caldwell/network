@@ -9,7 +9,10 @@ package core
 type IpSetCmdAttrEnum uint8
 
 const (
-	_ IpSetCmdAttrEnum = 0
+	// IpsetAttrUnspec - IPSET_ATTR_UNSPEC - unspecified IP set attribute.
+	//
+	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
+	IpsetAttrUnspec IpSetCmdAttrEnum = 0
 
 	// IpsetAttrProtocol - IPSET_ATTR_PROTOCOL - Protocol version
 	// This attribute specifies the protocol version used by the IP Set infrastructure.
@@ -30,6 +33,13 @@ const (
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
 	IpsetAttrTypename IpSetCmdAttrEnum = 3
+
+	// IpsetAttrSetname2 - IPSET_ATTR_SETNAME2 - Setname at rename/swap
+	// This attribute specifies the second set name during rename or swap operations.
+	// It is used to reference the target set in these commands.
+	//
+	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
+	IpsetAttrSetname2 IpSetCmdAttrEnum = IpsetAttrTypename
 
 	// IpsetAttrRevision - IPSET_ATTR_REVISION - Settype revision
 	// This attribute specifies the revision of the IP Set type.
@@ -79,16 +89,19 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
 	IpsetAttrProtocolMin IpSetCmdAttrEnum = 10
 
-	// IpsetAttrSetname2 - IPSET_ATTR_SETNAME2 - Setname at rename/swap
-	// This attribute specifies the second set name during rename or swap operations.
-	// It is used to reference the target set in these commands.
-	//
-	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
-	IpsetAttrSetname2 IpSetCmdAttrEnum = IpsetAttrTypename
-
 	// IpsetAttrRevisionMin - IPSET_ATTR_REVISION_MIN - Type revision minimum
 	// This attribute specifies the minimal revision supported for a specific IP Set type.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
 	IpsetAttrRevisionMin IpSetCmdAttrEnum = IpsetAttrProtocolMin
+
+	// IpsetAttrIndex - IPSET_ATTR_INDEX - Kernel index of set
+	//
+	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
+	IpsetAttrIndex IpSetCmdAttrEnum = 11
+
+	// IpsetAttrCmdMax - IPSET_ATTR_CMD_MAX - Maximum value of set
+	//
+	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
+	IpsetAttrCmdMax = iota - 1
 )
