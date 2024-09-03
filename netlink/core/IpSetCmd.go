@@ -1,6 +1,9 @@
 package core
 
-type IpSetCmd int
+// IpSetCmd Message type / commands
+//
+// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
+type IpSetCmd uint8
 
 const (
 	_ IpSetCmd = iota
