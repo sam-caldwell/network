@@ -1,6 +1,6 @@
 package core
 
-// MacVlanMacAddrMode -
+// MacVlanMacAddrMode - macvlan_macaddr_mode
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
 type MacVlanMacAddrMode uint8
