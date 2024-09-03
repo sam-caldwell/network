@@ -5,45 +5,45 @@ import (
 )
 
 // ErrorString - Return the string error for a given IpSetError
-func (e IPSetError) ErrorString() string {
+func (e IpSetErrorEnum) ErrorString() string {
 	switch int(e) {
-	case IPSET_ERR_PRIVATE:
+	case IpsetErrPrivate:
 		return "private"
-	case IPSET_ERR_PROTOCOL:
+	case IpsetErrProtocol:
 		return "invalid protocol"
-	case IPSET_ERR_FIND_TYPE:
+	case IpsetErrFindType:
 		return "invalid type"
-	case IPSET_ERR_MAX_SETS:
+	case IpsetErrMaxSets:
 		return "max sets reached"
-	case IPSET_ERR_BUSY:
+	case IpsetErrBusy:
 		return "busy"
-	case IPSET_ERR_EXIST_SETNAME2:
+	case IpsetErrExistSetname2:
 		return "exist_setname2"
-	case IPSET_ERR_TYPE_MISMATCH:
+	case IpsetErrTypeMismatch:
 		return "type mismatch"
-	case IPSET_ERR_EXIST:
+	case IpsetErrExist:
 		return "exist"
-	case IPSET_ERR_INVALID_CIDR:
+	case IpsetErrInvalidCidr:
 		return "invalid cidr"
-	case IPSET_ERR_INVALID_NETMASK:
+	case IpsetErrInvalidNetmask:
 		return "invalid netmask"
-	case IPSET_ERR_INVALID_FAMILY:
+	case IpsetErrInvalidFamily:
 		return "invalid family"
-	case IPSET_ERR_TIMEOUT:
+	case IpsetErrTimeout:
 		return "timeout"
-	case IPSET_ERR_REFERENCED:
+	case IpsetErrReferenced:
 		return "referenced"
-	case IPSET_ERR_IPADDR_IPV4:
+	case IpsetErrIpaddrIpv4:
 		return "invalid ipv4 address"
-	case IPSET_ERR_IPADDR_IPV6:
+	case IpsetErrIpaddrIpv6:
 		return "invalid ipv6 address"
-	case IPSET_ERR_COUNTER:
+	case IpsetErrCounter:
 		return "invalid counter"
-	case IPSET_ERR_COMMENT:
+	case IpsetErrComment:
 		return "invalid comment"
-	case IPSET_ERR_INVALID_MARKMASK:
+	case IpsetErrInvalidMarkmask:
 		return "invalid markmask"
-	case IPSET_ERR_SKBINFO:
+	case IpsetErrSkbinfo:
 		return "skbinfo"
 	default:
 		return "errno " + strconv.Itoa(int(e))
