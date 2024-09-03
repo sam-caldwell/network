@@ -12,7 +12,7 @@ package core
 // Example:
 //
 //	s := "test"
-//	result := NonZeroTerminated(s)
+//	result := NonNullTerminated(s)
 //	// result will be []byte{'t', 'e', 's', 't'}
 func NonNullTerminated(s string) []byte {
 
