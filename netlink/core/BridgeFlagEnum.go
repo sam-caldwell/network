@@ -3,7 +3,7 @@ package core
 // BridgeFlagEnum - Bridge Flags
 //
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_bridge.h
-type BridgeFlagEnum int
+type BridgeFlagEnum uint8
 
 const (
 	//BridgeFlagsMaster -BRIDGE_FLAGS_MASTER - Bridge command to/from master
