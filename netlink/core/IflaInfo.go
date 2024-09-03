@@ -8,7 +8,6 @@ type IflaInfo uint8
 const (
 
 	// IflaInfoUnspec - IFLA_INFO_UNSPEC - This is an unspecified placeholder value used in the enumeration.
-	// It represents an undefined or unused attribute within the context of interface information.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
 	IflaInfoUnspec IflaInfo = 0
@@ -31,7 +30,7 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
 	IflaInfoXstats IflaInfo = 3
 
-	// IflaInfoSlaveKind - IFLA_INFO_SLAVE_KIND - This attribute represents the kind of a slave interface.
+	// IflaInfoSlaveKind - IFLA_INFO_SLAVE_KIND - This attribute represents the kind of slave interface.
 	// Slave interfaces are typically part of a bonding or bridging setup.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
