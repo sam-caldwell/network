@@ -80,6 +80,7 @@ const (
 const (
 	SizeofTcMsg          = int(unsafe.Sizeof(TcMsg{}))
 	SizeofTcActionMsg    = int(unsafe.Sizeof(TcActionMsg{}))
+	SizeofTcf            = int(unsafe.Sizeof(Tcf{}))
 	SizeofTcPrioMap      = int(unsafe.Sizeof(TcPrioMap{}))
 	SizeofTcRateSpec     = int(unsafe.Sizeof(TcRateSpec{}))
 	SizeofTcNetemQopt    = int(unsafe.Sizeof(TcNetemQopt{}))
@@ -90,18 +91,17 @@ const (
 	SizeofTcTbfQopt      = int(unsafe.Sizeof(TcTbfQopt{}))
 	SizeofTcHtbCopt      = int(unsafe.Sizeof(TcHtbCopt{}))
 	SizeofTcHtbGlob      = int(unsafe.Sizeof(TcHtbGlob{}))
-	SizeofTcU32Key       = 0x10
-	SizeofTcU32Sel       = 0x10 // without keys
-	SizeofTcGen          = 0x16
-	SizeofTcConnmark     = SizeofTcGen + 0x04
-	SizeofTcCsum         = SizeofTcGen + 0x04
-	SizeofTcMirred       = SizeofTcGen + 0x08
-	SizeofTcTunnelKey    = SizeofTcGen + 0x04
-	SizeofTcSkbEdit      = SizeofTcGen
-	SizeofTcPolice       = 2*SizeofTcRateSpec + 0x20
-	SizeofTcSfqQopt      = 0x0b
-	SizeofTcSfqRedStats  = 0x18
-	SizeofTcSfqQoptV1    = SizeofTcSfqQopt + SizeofTcSfqRedStats + 0x1c
-	SizeofUint32Bitfield = 0x8
-	SizeofTcf            = int(unsafe.Sizeof(Tcf{}))
+	SizeofTcPolice       = int(unsafe.Sizeof(TcPolice{}))
+	SizeofTcU32Key       = int(unsafe.Sizeof(TcU32Key{}))
+	SizeofTcU32Sel       = int(unsafe.Sizeof(TcU32Sel{})) // without keys
+	SizeofTcGen          = int(unsafe.Sizeof(TcGen{}))
+	SizeofUint32Bitfield = int(unsafe.Sizeof(Uint32Bitfield{}))
+	SizeofTcConnmark     = int(unsafe.Sizeof(TcConnmark{}))
+	SizeofTcCsum         = int(unsafe.Sizeof(TcCsum{}))
+	SizeofTcMirred       = int(unsafe.Sizeof(TcMirred{}))
+	SizeofTcTunnelKey    = int(unsafe.Sizeof(TcTunnelKey{}))
+	SizeofTcSkbEdit      = int(unsafe.Sizeof(TcSkbEdit{}))
+	SizeofTcSfqQoptV1    = int(unsafe.Sizeof(TcSfqQoptV1{}))
+	SizeofTcSfqQopt      = int(unsafe.Sizeof(TcSfqQopt{}))
+	SizeofTcSfqRedStats  = int(unsafe.Sizeof(TcSfqRedStats{}))
 )
