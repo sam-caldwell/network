@@ -11,7 +11,7 @@ func (attr *Attribute) Uint64() uint64 {
 
 	} else {
 
-		return nativeEndian.Uint64(attr.Value)
+		return NativeEndian.Uint64(attr.Value)
 
 	}
 
