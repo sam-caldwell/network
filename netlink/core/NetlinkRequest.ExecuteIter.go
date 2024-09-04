@@ -46,7 +46,7 @@ func (req *NetlinkRequest) ExecuteIter(sockType int, resType uint16, iterFunctio
 			}
 		}
 
-		defer s.Close()
+		defer func() { _ = s.Close() }()
 	} else {
 		s.Lock()
 		defer s.Unlock()
@@ -92,7 +92,7 @@ done:
 					break done
 				}
 
-				if errno := int32(nativeEndian.Uint32(m.Data[0:4])); errno == 0 {
+				if errno := int32(NativeEndian.Uint32(m.Data[0:4])); errno == 0 {
 					break done
 				} else {
 					err = unix.Errno(-errno)
