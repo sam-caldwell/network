@@ -26,3 +26,8 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/pkt_sched.h
 	LinkLayerAtm
 )
+
+// TcLinklayerMask - TC_LINKLAYER_MASK - limit use to lower 4 bits
+//
+// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/pkt_sched.h
+const TcLinklayerMask = 0x0F
