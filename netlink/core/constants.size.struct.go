@@ -76,3 +76,31 @@ const (
 	// SizeofRtNexthop - Size of the RtNexthop struct
 	SizeofRtNexthop = int(unsafe.Sizeof(RtNexthop{}))
 )
+
+const (
+	SizeofTcMsg          = int(unsafe.Sizeof(TcMsg{}))
+	SizeofTcActionMsg    = 0x04
+	SizeofTcPrioMap      = 0x14
+	SizeofTcRateSpec     = 0x0c
+	SizeofTcNetemQopt    = 0x18
+	SizeofTcNetemCorr    = 0x0c
+	SizeofTcNetemReorder = 0x08
+	SizeofTcNetemCorrupt = 0x08
+	SizeOfTcNetemRate    = 0x10
+	SizeofTcTbfQopt      = 2*SizeofTcRateSpec + 0x0c
+	SizeofTcHtbCopt      = 2*SizeofTcRateSpec + 0x14
+	SizeofTcHtbGlob      = 0x14
+	SizeofTcU32Key       = 0x10
+	SizeofTcU32Sel       = 0x10 // without keys
+	SizeofTcGen          = 0x16
+	SizeofTcConnmark     = SizeofTcGen + 0x04
+	SizeofTcCsum         = SizeofTcGen + 0x04
+	SizeofTcMirred       = SizeofTcGen + 0x08
+	SizeofTcTunnelKey    = SizeofTcGen + 0x04
+	SizeofTcSkbEdit      = SizeofTcGen
+	SizeofTcPolice       = 2*SizeofTcRateSpec + 0x20
+	SizeofTcSfqQopt      = 0x0b
+	SizeofTcSfqRedStats  = 0x18
+	SizeofTcSfqQoptV1    = SizeofTcSfqQopt + SizeofTcSfqRedStats + 0x1c
+	SizeofUint32Bitfield = 0x8
+)
