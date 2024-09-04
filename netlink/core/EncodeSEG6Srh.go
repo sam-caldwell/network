@@ -26,7 +26,7 @@ func EncodeSEG6Srh(segments []net.IP) ([]byte, error) {
 	// Populate the SRH fields
 	b[0] = 0                         // srh.nextHdr (0 when calling netlink)
 	b[1] = uint8(16 * nsegs >> 3)    // srh.hdrLen (in 8-octet units)
-	b[2] = IPV6_SRCRT_TYPE_4         // srh.routingType (assigned by IANA)
+	b[2] = Ipv6SrcrtType4            // srh.routingType (assigned by IANA)
 	b[3] = uint8(nsegs - 1)          // srh.segmentsLeft
 	b[4] = uint8(nsegs - 1)          // srh.firstSegment
 	b[5] = 0                         // srh.flags (set to 0)

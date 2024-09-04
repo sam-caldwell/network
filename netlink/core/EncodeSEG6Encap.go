@@ -32,7 +32,7 @@ func EncodeSEG6Encap(mode int, segments []net.IP) ([]byte, error) {
 	// Populate the SRH fields
 	b[4] = 0                          // srh.nextHdr: Placeholder
 	b[5] = uint8(16 * nsegs >> 3)     // srh.hdrLen: Length of SRH in 8-octet units
-	b[6] = IPV6_SRCRT_TYPE_4          // srh.routingType: Segment Routing Type (IANA-assigned)
+	b[6] = Ipv6SrcrtType4             // srh.routingType: Segment Routing Type (IANA-assigned)
 	b[7] = uint8(nsegs - 1)           // srh.segmentsLeft: Segments left to process
 	b[8] = uint8(nsegs - 1)           // srh.firstSegment: Index of the first segment
 	b[9] = 0                          // srh.flags: Flags (e.g., HMAC)
