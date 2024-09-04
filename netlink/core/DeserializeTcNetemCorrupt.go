@@ -1,8 +1,14 @@
 package core
 
-import "unsafe"
+import "encoding/binary"
 
-// DeserializeTcNetemCorrupt - Converts a byte slice into a TcNetemCorrupt object.
+// DeserializeTcNetemCorrupt - Safely converts a byte slice into a TcNetemCorrupt object.
 func DeserializeTcNetemCorrupt(b []byte) *TcNetemCorrupt {
-	return (*TcNetemCorrupt)(unsafe.Pointer(&b[0:SizeofTcNetemCorrupt][0]))
+	if len(b) < SizeofTcNetemCorrupt {
+		return nil // Return nil if the byte slice is too short
+	}
+	msg := &TcNetemCorrupt{}
+	msg.Probability = binary.LittleEndian.Uint32(b[0:])
+	msg.Correlation = binary.LittleEndian.Uint32(b[4:])
+	return msg
 }
