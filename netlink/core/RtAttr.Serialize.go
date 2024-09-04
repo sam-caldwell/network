@@ -21,10 +21,10 @@ func (attr *RtAttr) Serialize() []byte {
 	}
 
 	if l := uint16(length); l != 0 {
-		nativeEndian.PutUint16(buf[0:2], l)
+		NativeEndian.PutUint16(buf[0:2], l)
 	}
 
-	nativeEndian.PutUint16(buf[2:4], attr.Type)
+	NativeEndian.PutUint16(buf[2:4], attr.Type)
 	return buf
 
 }
