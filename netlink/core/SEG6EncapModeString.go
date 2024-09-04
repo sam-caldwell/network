@@ -8,11 +8,11 @@ package core
 //
 // Returns:
 //   - string: A string describing the mode ("inline", "encap", or "unknown").
-func SEG6EncapModeString(mode int) string {
+func SEG6EncapModeString(mode Seg6IptunMode) string {
 	switch mode {
-	case SEG6_IPTUN_MODE_INLINE:
+	case Seg6IptunModeInline:
 		return "inline"
-	case SEG6_IPTUN_MODE_ENCAP:
+	case Seg6IptunModeEncap:
 		return "encap"
 	}
 	return "unknown"
