@@ -72,4 +72,7 @@ const (
 
 	// SizeofNfctTupleHead -
 	SizeofNfctTupleHead = 52
+
+	// SizeofRtNexthop -
+	SizeofRtNexthop = int(unsafe.Sizeof(RtNexthop{}))
 )
