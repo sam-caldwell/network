@@ -6,11 +6,17 @@ import (
 
 // ConvertUint32ToBigEndian -  Flip bit order of little endian uint32 to big endian
 func ConvertUint32ToBigEndian(i uint32) uint32 {
-	if nativeEndian == binary.BigEndian {
+	const (
+		byte0 = 0xff000000
+		byte1 = 0x00ff0000
+		byte2 = 0x0000ff00
+		byte3 = 0x000000ff
+	)
+	if NativeEndian == binary.BigEndian {
 		return i
 	}
-	return (i&0xff000000)>>24 |
-		(i&0xff0000)>>8 |
-		(i&0xff00)<<8 |
-		(i&0xff)<<24
+	return (i&byte0)>>24 |
+		(i&byte1)>>8 |
+		(i&byte2)<<8 |
+		(i&byte3)<<24
 }

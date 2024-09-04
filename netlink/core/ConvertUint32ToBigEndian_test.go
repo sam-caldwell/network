@@ -18,9 +18,9 @@ func TestConvertUin32ToBigEndian(t *testing.T) {
 
 	for _, tt := range tests {
 		result := ConvertUint32ToBigEndian(tt.input)
-		if nativeEndian == binary.LittleEndian && result != tt.expected {
+		if NativeEndian == binary.LittleEndian && result != tt.expected {
 			t.Errorf("ConvertUin32ToBigEndian(%#08x) = %#08x; want %#08x", tt.input, result, tt.expected)
-		} else if nativeEndian == binary.BigEndian && result != tt.input {
+		} else if NativeEndian == binary.BigEndian && result != tt.input {
 			t.Errorf("ConvertUin32ToBigEndian(%#08x) = %#08x; want %#08x (no change expected for BigEndian)", tt.input, result, tt.input)
 		}
 	}
