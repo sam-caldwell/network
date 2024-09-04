@@ -19,7 +19,7 @@ func TestNativeEndian(t *testing.T) {
 	// Get the native endianness from the function
 
 	// Check if the actual endianness matches the expected endianness
-	if nativeEndian != expected {
-		t.Errorf("NativeEndian() = %v; want %v", nativeEndian, expected)
+	if NativeEndian != expected {
+		t.Errorf("NativeEndian() = %v; want %v", NativeEndian, expected)
 	}
 }
