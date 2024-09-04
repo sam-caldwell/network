@@ -19,10 +19,10 @@ func DeserializeIfaCacheInfo(data []byte) (*IfaCacheInfo, error) {
 	}
 	info := &IfaCacheInfo{
 		unix.IfaCacheinfo{
-			Prefered: nativeEndian.Uint32(data[0:4]),
-			Valid:    nativeEndian.Uint32(data[4:8]),
-			Cstamp:   nativeEndian.Uint32(data[8:12]),
-			Tstamp:   nativeEndian.Uint32(data[12:16]),
+			Prefered: NativeEndian.Uint32(data[0:4]),
+			Valid:    NativeEndian.Uint32(data[4:8]),
+			Cstamp:   NativeEndian.Uint32(data[8:12]),
+			Tstamp:   NativeEndian.Uint32(data[12:16]),
 		},
 	}
 	return info, nil

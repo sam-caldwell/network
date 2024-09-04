@@ -14,8 +14,8 @@ func DeserializeBridgeVlanInfo(b []byte) (*BridgeVlanInfo, error) {
 	}
 
 	return &BridgeVlanInfo{
-		Flags: nativeEndian.Uint16(b[0:2]),
-		Vid:   nativeEndian.Uint16(b[2:4]),
+		Flags: NativeEndian.Uint16(b[0:2]),
+		Vid:   NativeEndian.Uint16(b[2:4]),
 	}, nil
 
 }

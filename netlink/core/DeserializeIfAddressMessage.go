@@ -21,7 +21,7 @@ func DeserializeIfAddressMessage(b []byte) (result *IfAddressMessage, err error)
 		},
 	}
 
-	nativeEndian.PutUint32(b[4:8], result.Index)
+	NativeEndian.PutUint32(b[4:8], result.Index)
 
 	return result, nil
 }

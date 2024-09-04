@@ -25,13 +25,13 @@ func DeserializeIfInfoMsg(b []byte) (*IfInfoMsg, error) {
 			Family: b[0],
 			// byte 1 is skipped
 			// bytes 2-3: Type
-			Type: nativeEndian.Uint16(b[2:4]),
+			Type: NativeEndian.Uint16(b[2:4]),
 			// bytes 4-7: Index
-			Index: int32(nativeEndian.Uint32(b[4:8])),
+			Index: int32(NativeEndian.Uint32(b[4:8])),
 			// bytes 8-11: Flags
-			Flags: nativeEndian.Uint32(b[8:12]),
+			Flags: NativeEndian.Uint32(b[8:12]),
 			// bytes 12-15: Change
-			Change: nativeEndian.Uint32(b[12:16]),
+			Change: NativeEndian.Uint32(b[12:16]),
 		},
 	}
 	return &result, nil
