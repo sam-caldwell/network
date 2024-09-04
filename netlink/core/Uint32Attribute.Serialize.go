@@ -10,10 +10,10 @@ func (a *Uint32Attribute) Serialize() []byte {
 	buf := make([]byte, rtaAlignOf(8))
 
 	// Store the length of the attribute (8 bytes) in the first 2 bytes of the buffer.
-	nativeEndian.PutUint16(buf[0:2], 8)
+	NativeEndian.PutUint16(buf[0:2], 8)
 
 	// Store the attribute type identifier in the next 2 bytes of the buffer.
-	nativeEndian.PutUint16(buf[2:4], a.Type)
+	NativeEndian.PutUint16(buf[2:4], a.Type)
 
 	// Check if the NlaFNetByteorder flag is set in the type identifier.
 	// If set, store the 32-bit value in big-endian order (network byte order).
@@ -21,7 +21,7 @@ func (a *Uint32Attribute) Serialize() []byte {
 		binary.BigEndian.PutUint32(buf[4:], a.Value)
 	} else {
 		// Otherwise, store the 32-bit value in the native endianness of the system.
-		nativeEndian.PutUint32(buf[4:], a.Value)
+		NativeEndian.PutUint32(buf[4:], a.Value)
 	}
 
 	// Return the serialized byte slice.

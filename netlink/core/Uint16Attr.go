@@ -6,6 +6,6 @@ package core
 func Uint16Attr(v uint16) []byte {
 
 	bytes := make([]byte, 2)
-	nativeEndian.PutUint16(bytes, v)
+	NativeEndian.PutUint16(bytes, v)
 	return bytes
 }
