@@ -13,8 +13,7 @@ import (
 // The primary fields include information on routing family, destination length, source length, and flags
 // which control the behavior of route messages.
 //
-// For more details, see: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h,
-// https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
+// For more details, see: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
 type RtMsg struct {
 	unix.RtMsg
 }
