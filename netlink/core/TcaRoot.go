@@ -43,10 +43,6 @@ const (
 	// See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
 	TcaRootMax = iota - 1
 
-	/*
-
-	 */
-
 	// TcaActTab - TCA_ACT_TAB -
 	//
 	// See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
