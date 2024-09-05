@@ -13,7 +13,7 @@ func (msg *VfMac) Deserialize(b []byte) error {
 	}
 
 	// Deserialize the Vf field
-	msg.Vf = binary.LittleEndian.Uint32(b[0:4])
+	msg.Vf = NativeEndian.Uint32(b[0:4])
 
 	// Deserialize the Mac field
 	copy(msg.Mac[:], b[4:36])

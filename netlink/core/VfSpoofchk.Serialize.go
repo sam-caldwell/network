@@ -10,7 +10,7 @@ func (msg *VfSpoofchk) Serialize() ([]byte, error) {
 
 	buf := new(bytes.Buffer)
 
-	if err := binary.Write(buf, binary.LittleEndian, msg); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg); err != nil {
 		return nil, err
 	}
 

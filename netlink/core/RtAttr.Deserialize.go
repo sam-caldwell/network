@@ -13,8 +13,8 @@ func (attr *RtAttr) Deserialize(b []byte) error {
 	}
 
 	// Parse the RtAttr header
-	attr.RtAttr.Len = binary.LittleEndian.Uint16(b[0:2])
-	attr.RtAttr.Type = binary.LittleEndian.Uint16(b[2:4])
+	attr.RtAttr.Len = NativeEndian.Uint16(b[0:2])
+	attr.RtAttr.Type = NativeEndian.Uint16(b[2:4])
 
 	// Validate length
 	totalLen := int(attr.RtAttr.Len)

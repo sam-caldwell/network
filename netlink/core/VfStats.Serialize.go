@@ -23,7 +23,7 @@ func (stats *VfStats) Serialize() ([]byte, error) {
 			},
 			Data: make([]byte, 8),
 		}
-		binary.LittleEndian.PutUint64(attr.Data, value)
+		NativeEndian.PutUint64(attr.Data, value)
 		if err := binary.Write(buf, NativeEndian, &attr.RtAttr); err != nil {
 			return err
 		}

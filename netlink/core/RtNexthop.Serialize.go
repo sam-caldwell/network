@@ -10,13 +10,13 @@ func (msg *RtNexthop) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 
 	// Serialize the RtNexthop struct fields manually
-	if err := binary.Write(buf, binary.LittleEndian, msg.Len); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg.Len); err != nil {
 		return nil, err
 	}
-	if err := binary.Write(buf, binary.LittleEndian, msg.Flags); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg.Flags); err != nil {
 		return nil, err
 	}
-	if err := binary.Write(buf, binary.LittleEndian, msg.Hops); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg.Hops); err != nil {
 		return nil, err
 	}
 	if err := binary.Write(buf, binary.LittleEndian, msg.Ifindex); err != nil {

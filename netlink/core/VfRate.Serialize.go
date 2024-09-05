@@ -10,7 +10,7 @@ func (v *VfRate) Serialize() ([]byte, error) {
 
 	buf := new(bytes.Buffer)
 
-	if err := binary.Write(buf, binary.LittleEndian, v); err != nil {
+	if err := binary.Write(buf, NativeEndian, v); err != nil {
 		return nil, err
 	}
 

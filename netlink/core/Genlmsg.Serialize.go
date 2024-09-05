@@ -9,11 +9,11 @@ import (
 func (msg *Genlmsg) Serialize() ([]byte, error) {
 
 	buf := new(bytes.Buffer)
-	if err := binary.Write(buf, binary.LittleEndian, msg.Command); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg.Command); err != nil {
 		return nil, err
 	}
 
-	if err := binary.Write(buf, binary.LittleEndian, msg.Version); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg.Version); err != nil {
 		return nil, err
 	}
 

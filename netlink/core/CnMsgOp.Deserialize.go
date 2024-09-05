@@ -12,15 +12,15 @@ func (msg *CnMsgOp) Deserialize(data []byte) error {
 	}
 
 	// Deserialize CbID (Idx and Val)
-	msg.ID.Idx = binary.LittleEndian.Uint32(data[0:])
-	msg.ID.Val = binary.LittleEndian.Uint32(data[4:])
+	msg.ID.Idx = NativeEndian.Uint32(data[0:])
+	msg.ID.Val = NativeEndian.Uint32(data[4:])
 
 	// Deserialize Seq, Ack, Length, Flags, and Op
-	msg.Seq = binary.LittleEndian.Uint32(data[8:])
-	msg.Ack = binary.LittleEndian.Uint32(data[12:])
-	msg.Length = binary.LittleEndian.Uint16(data[16:])
-	msg.Flags = binary.LittleEndian.Uint16(data[18:])
-	msg.Op = binary.LittleEndian.Uint32(data[20:])
+	msg.Seq = NativeEndian.Uint32(data[8:])
+	msg.Ack = NativeEndian.Uint32(data[12:])
+	msg.Length = NativeEndian.Uint16(data[16:])
+	msg.Flags = NativeEndian.Uint16(data[18:])
+	msg.Op = NativeEndian.Uint32(data[20:])
 
 	return nil
 }

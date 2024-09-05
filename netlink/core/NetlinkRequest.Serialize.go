@@ -22,19 +22,19 @@ func (req *NetlinkRequest) Serialize() (out []byte, err error) {
 	buf := bytes.NewBuffer(make([]byte, 0, length))
 
 	// Serialize the netlink message header.
-	if err = binary.Write(buf, binary.LittleEndian, req.Len); err != nil {
+	if err = binary.Write(buf, NativeEndian, req.Len); err != nil {
 		return nil, err
 	}
-	if err = binary.Write(buf, binary.LittleEndian, req.Type); err != nil {
+	if err = binary.Write(buf, NativeEndian, req.Type); err != nil {
 		return nil, err
 	}
-	if err = binary.Write(buf, binary.LittleEndian, req.Flags); err != nil {
+	if err = binary.Write(buf, NativeEndian, req.Flags); err != nil {
 		return nil, err
 	}
-	if err = binary.Write(buf, binary.LittleEndian, req.Seq); err != nil {
+	if err = binary.Write(buf, NativeEndian, req.Seq); err != nil {
 		return nil, err
 	}
-	if err = binary.Write(buf, binary.LittleEndian, req.Pid); err != nil {
+	if err = binary.Write(buf, NativeEndian, req.Pid); err != nil {
 		return nil, err
 	}
 

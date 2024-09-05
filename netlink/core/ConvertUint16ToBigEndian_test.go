@@ -18,7 +18,7 @@ func TestConvertUint16ToBigEndian(t *testing.T) {
 
 	for _, tt := range tests {
 		result := ConvertUint16ToBigEndian(tt.input)
-		if NativeEndian == binary.LittleEndian && result != tt.expected {
+		if NativeEndian == NativeEndian && result != tt.expected {
 			t.Errorf("ConvertUint16ToBigEndian(%#04x) = %#04x; want %#04x", tt.input, result, tt.expected)
 		} else if NativeEndian == binary.BigEndian && result != tt.input {
 			t.Errorf("ConvertUint16ToBigEndian(%#04x) = %#04x; want %#04x (no change expected for BigEndian)", tt.input, result, tt.input)

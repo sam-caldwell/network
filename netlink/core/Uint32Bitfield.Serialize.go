@@ -16,8 +16,8 @@ func (a *Uint32Bitfield) Serialize() ([]byte, error) {
 	}
 
 	// Use binary package to handle endian conversion
-	binary.LittleEndian.PutUint32(data[0:4], a.Value)
-	binary.LittleEndian.PutUint32(data[4:8], a.Selector)
+	NativeEndian.PutUint32(data[0:4], a.Value)
+	NativeEndian.PutUint32(data[4:8], a.Selector)
 
 	return data, nil
 }

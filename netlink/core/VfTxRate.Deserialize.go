@@ -14,10 +14,10 @@ func (msg *VfTxRate) Deserialize(b []byte) error {
 	}
 
 	// Deserialize the Vf field
-	msg.Vf = binary.LittleEndian.Uint32(b[0:4])
+	msg.Vf = NativeEndian.Uint32(b[0:4])
 
 	// Deserialize the Rate field
-	msg.Rate = binary.LittleEndian.Uint32(b[4:8])
+	msg.Rate = NativeEndian.Uint32(b[4:8])
 
 	return nil
 }

@@ -12,9 +12,9 @@ func DeserializeVfVlan(b []byte) (*VfVlan, error) {
 	}
 
 	vfVlan := &VfVlan{
-		Vf:   binary.LittleEndian.Uint32(b[0:4]),
-		Vlan: binary.LittleEndian.Uint32(b[4:8]),
-		Qos:  binary.LittleEndian.Uint32(b[8:12]),
+		Vf:   NativeEndian.Uint32(b[0:4]),
+		Vlan: NativeEndian.Uint32(b[4:8]),
+		Qos:  NativeEndian.Uint32(b[8:12]),
 	}
 
 	return vfVlan, nil

@@ -13,12 +13,12 @@ func (bridge *BridgeVlanInfo) Serialize() []byte {
 
 	// Convert each field to the appropriate byte representation
 	// Assuming little-endian, change to big-endian if needed
-	if err := binary.Write(buf, binary.LittleEndian, bridge.Flags); err != nil {
+	if err := binary.Write(buf, NativeEndian, bridge.Flags); err != nil {
 		// Handle the error according to your needs
 		return nil
 	}
 
-	if err := binary.Write(buf, binary.LittleEndian, bridge.Vid); err != nil {
+	if err := binary.Write(buf, NativeEndian, bridge.Vid); err != nil {
 		// Handle the error according to your needs
 		return nil
 	}
