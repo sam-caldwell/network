@@ -16,7 +16,7 @@ func deserializeNlMsgHdr(unreadData []byte) (*unix.NlMsghdr, error) {
 	var hdr unix.NlMsghdr
 	buf := bytes.NewReader(unreadData)
 
-	if err := binary.Read(buf, binary.LittleEndian, &hdr); err != nil {
+	if err := binary.Read(buf, NativeEndian, &hdr); err != nil {
 		return nil, err
 	}
 

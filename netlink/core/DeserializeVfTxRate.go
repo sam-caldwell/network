@@ -16,10 +16,10 @@ func DeserializeVfTxRate(b []byte) (*VfTxRate, error) {
 	vfTxRate := &VfTxRate{}
 
 	// Deserialize the Vf field
-	vfTxRate.Vf = binary.LittleEndian.Uint32(b[0:4])
+	vfTxRate.Vf = NativeEndian.Uint32(b[0:4])
 
 	// Deserialize the Rate field
-	vfTxRate.Rate = binary.LittleEndian.Uint32(b[4:8])
+	vfTxRate.Rate = NativeEndian.Uint32(b[4:8])
 
 	return vfTxRate, nil
 }

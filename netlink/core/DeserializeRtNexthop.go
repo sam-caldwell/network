@@ -12,10 +12,10 @@ func DeserializeRtNexthop(b []byte) *RtNexthop {
 	}
 	return &RtNexthop{
 		RtNexthop: unix.RtNexthop{
-			Len:     binary.LittleEndian.Uint16(b[:2]),
+			Len:     NativeEndian.Uint16(b[:2]),
 			Flags:   b[2],
 			Hops:    b[3],
-			Ifindex: int32(binary.LittleEndian.Uint32(b[4:8])),
+			Ifindex: int32(NativeEndian.Uint32(b[4:8])),
 		},
 	}
 }

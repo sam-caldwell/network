@@ -17,7 +17,7 @@ func DeserializeVfRate(b []byte) (*VfRate, error) {
 	}
 
 	reader := bytes.NewReader(b)
-	if err := binary.Read(reader, binary.LittleEndian, &v); err != nil {
+	if err := binary.Read(reader, NativeEndian, &v); err != nil {
 		return nil, err
 	}
 

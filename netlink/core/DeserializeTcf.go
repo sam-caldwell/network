@@ -14,7 +14,7 @@ func DeserializeTcf(b []byte) (*Tcf, error) {
 
 	buf := bytes.NewReader(b)
 	tcf := &Tcf{}
-	err := binary.Read(buf, binary.LittleEndian, tcf)
+	err := binary.Read(buf, NativeEndian, tcf)
 	if err != nil {
 		return nil, err
 	}

@@ -15,7 +15,7 @@ func DeserializeVfRssQueryEn(b []byte) (*VfRssQueryEn, error) {
 
 	var msg VfRssQueryEn
 	reader := bytes.NewReader(b)
-	if err := binary.Read(reader, binary.LittleEndian, &msg); err != nil {
+	if err := binary.Read(reader, NativeEndian, &msg); err != nil {
 		return nil, err
 	}
 	return &msg, nil

@@ -13,8 +13,8 @@ func DeserializeUint32Bitfield(data []byte) (*Uint32Bitfield, error) {
 
 	// Create a new Uint32Bitfield and use binary package to handle endian conversion
 	bitfield := &Uint32Bitfield{
-		Value:    binary.LittleEndian.Uint32(data[0:4]),
-		Selector: binary.LittleEndian.Uint32(data[4:8]),
+		Value:    NativeEndian.Uint32(data[0:4]),
+		Selector: NativeEndian.Uint32(data[4:8]),
 	}
 
 	return bitfield, nil

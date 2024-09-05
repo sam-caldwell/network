@@ -14,7 +14,7 @@ func DeserializeTcActionMsg(b []byte) *TcActionMsg {
 
 	msg := &TcActionMsg{}
 	buf := bytes.NewReader(b[:SizeofTcActionMsg])
-	err := binary.Read(buf, binary.LittleEndian, msg)
+	err := binary.Read(buf, NativeEndian, msg)
 	if err != nil {
 		log.Fatalf("Failed to deserialize TcActionMsg: %v", err)
 	}

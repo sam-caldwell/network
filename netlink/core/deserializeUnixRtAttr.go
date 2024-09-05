@@ -16,7 +16,7 @@ func deserializeUnixRtAttr(unreadData []byte) (*unix.RtAttr, error) {
 	var attr unix.RtAttr
 	buf := bytes.NewReader(unreadData)
 
-	if err := binary.Read(buf, binary.LittleEndian, &attr); err != nil {
+	if err := binary.Read(buf, NativeEndian, &attr); err != nil {
 		return nil, err
 	}
 

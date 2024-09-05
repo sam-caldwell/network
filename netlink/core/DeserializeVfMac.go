@@ -15,7 +15,7 @@ func DeserializeVfMac(b []byte) (*VfMac, error) {
 	vfMac := &VfMac{}
 
 	// Deserialize the Vf field
-	vfMac.Vf = binary.LittleEndian.Uint32(b[0:4])
+	vfMac.Vf = NativeEndian.Uint32(b[0:4])
 
 	// Deserialize the Mac field
 	copy(vfMac.Mac[:], b[4:36])

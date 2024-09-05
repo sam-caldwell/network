@@ -16,10 +16,10 @@ func DeserializeVfTrust(b []byte) (*VfTrust, error) {
 	vfTrust := &VfTrust{}
 
 	// Deserialize the Vf field
-	vfTrust.Vf = binary.LittleEndian.Uint32(b[0:4])
+	vfTrust.Vf = NativeEndian.Uint32(b[0:4])
 
 	// Deserialize the Setting field
-	vfTrust.Setting = binary.LittleEndian.Uint32(b[4:8])
+	vfTrust.Setting = NativeEndian.Uint32(b[4:8])
 
 	return vfTrust, nil
 }

@@ -18,7 +18,7 @@ func DeserializeVfSpoofchk(b []byte) (*VfSpoofchk, error) {
 
 	reader := bytes.NewReader(b)
 
-	if err := binary.Read(reader, binary.LittleEndian, &msg); err != nil {
+	if err := binary.Read(reader, NativeEndian, &msg); err != nil {
 		return nil, err
 	}
 

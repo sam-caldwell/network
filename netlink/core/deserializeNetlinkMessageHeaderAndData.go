@@ -18,7 +18,7 @@ func deserializeNetlinkMessageHeaderAndData(b []byte) (header *unix.NlMsghdr, re
 	buf := bytes.NewReader(b)
 	header = &(unix.NlMsghdr{})
 
-	if err = binary.Read(buf, binary.LittleEndian, header); err != nil {
+	if err = binary.Read(buf, NativeEndian, header); err != nil {
 		return nil, nil, 0, err
 	}
 
