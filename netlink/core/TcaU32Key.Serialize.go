@@ -13,8 +13,8 @@ func (msg *TcU32Key) Serialize() []byte {
 	// Serialize each field with proper endianness
 	_ = binary.Write(buf, binary.BigEndian, msg.Mask)
 	_ = binary.Write(buf, binary.BigEndian, msg.Val)
-	_ = binary.Write(buf, binary.LittleEndian, msg.Off)
-	_ = binary.Write(buf, binary.LittleEndian, msg.OffMask)
+	_ = binary.Write(buf, NativeEndian, msg.Off)
+	_ = binary.Write(buf, NativeEndian, msg.OffMask)
 
 	return buf.Bytes()
 }
