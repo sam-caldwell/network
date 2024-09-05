@@ -104,4 +104,5 @@ const (
 	SizeofTcSfqQoptV1    = int(unsafe.Sizeof(TcSfqQoptV1{}))
 	SizeofTcSfqQopt      = int(unsafe.Sizeof(TcSfqQopt{}))
 	SizeofTcSfqRedStats  = int(unsafe.Sizeof(TcSfqRedStats{}))
+	SizeofXfrmUserExpire = int(unsafe.Sizeof(XfrmUserExpire{}))
 )
