@@ -13,6 +13,7 @@ package core
 // - https://github.com/torvalds/linux/blob/master/include/uapi/linux/tc_act/tc_mirred.h
 // - https://man7.org/linux/man-pages/man8/tc-mirred.8.html
 type TcMirred struct {
+	// TcGen - The general traffic control structure containing common parameters (e.g., action, refcnt).
 	TcGen
 	// Eaction - Defines the mirroring or redirection action, which can be ingress or egress mirror/redirect.
 	Eaction int32
