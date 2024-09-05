@@ -7,13 +7,13 @@ import (
 )
 
 // NewRtAttr - Create a new Extended RtAttr object
-func NewRtAttr(attrType int, data []byte) *RtAttr {
+func NewRtAttr(attrType uint16, data []byte) *RtAttr {
 
 	return &RtAttr{
 
 		RtAttr: unix.RtAttr{
 
-			Type: uint16(attrType),
+			Type: attrType,
 		},
 
 		children: []NetlinkRequestData{},
