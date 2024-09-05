@@ -6,6 +6,6 @@ package core
 //
 // See more about SFQ (Stochastic Fairness Queueing) at:
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/pkt_sched.h
-func (x *TcSfqQopt) Len() int {
+func (msg *TcSfqQopt) Len() int {
 	return SizeofTcSfqQopt
 }
