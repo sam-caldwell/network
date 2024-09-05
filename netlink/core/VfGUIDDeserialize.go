@@ -14,13 +14,13 @@ func (msg *VfGUID) Deserialize(b []byte) error {
 	}
 
 	// Deserialize the Vf field
-	msg.Vf = binary.LittleEndian.Uint32(b[0:4])
+	msg.Vf = NativeEndian.Uint32(b[0:4])
 
 	// Deserialize the Rsvd field
-	msg.Rsvd = binary.LittleEndian.Uint32(b[4:8])
+	msg.Rsvd = NativeEndian.Uint32(b[4:8])
 
 	// Deserialize the GUID field
-	msg.GUID = binary.LittleEndian.Uint64(b[8:16])
+	msg.GUID = NativeEndian.Uint64(b[8:16])
 
 	return nil
 }
