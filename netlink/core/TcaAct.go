@@ -68,3 +68,10 @@ const (
 	// For more information, see: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
 	TcaActMax TcaAct = iota - 1
 )
+
+const (
+	// TcaActGact - TCA_ACT_GACT
+	//
+	// For more information, see: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
+	TcaActGact = 5
+)
