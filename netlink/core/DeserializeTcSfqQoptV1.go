@@ -34,7 +34,10 @@ func DeserializeTcSfqQoptV1(b []byte) (*TcSfqQoptV1, error) {
 	msg.MaxP = NativeEndian.Uint32(b[SizeofTcSfqQopt+24:])
 
 	// Deserialize the TcSfqRedStats structure
-	msg.TcSfqRedStats = *DeserializeTcSfqRedStats(b[SizeofTcSfqQopt+28:])
-
-	return msg, nil
+	t, err := DeserializeTcSfqRedStats(b[SizeofTcSfqQopt+28:])
+	if err != nil {
+		return nil, err
+	}
+	msg.TcSfqRedStats = *t
+	return msg, err
 }
