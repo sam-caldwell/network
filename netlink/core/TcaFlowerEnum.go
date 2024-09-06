@@ -48,7 +48,7 @@ const (
 	TcaFlowerKeyEthType
 
 	// TcaFlowerKeyIpProto - TCA_FLOWER_KEY_IP_PROTO - IP protocol.
-	// Matches packets based on the IP protocol (e.g., TCP, UDP).
+	// Matches packets based on the IP protocol (e.g., TCP, IpProtoUDP).
 	TcaFlowerKeyIpProto
 
 	// TcaFlowerKeyIpv4Src - TCA_FLOWER_KEY_IPV4_SRC - IPv4 source address.
@@ -91,15 +91,15 @@ const (
 	// Matches packets based on the TCP destination port.
 	TcaFlowerKeyTcpDst
 
-	// TcaFlowerKeyUdpSrc - TCA_FLOWER_KEY_UDP_SRC - UDP source port.
-	// Matches packets based on the UDP source port.
+	// TcaFlowerKeyUdpSrc - TCA_FLOWER_KEY_UDP_SRC - IpProtoUDP source port.
+	// Matches packets based on the IpProtoUDP source port.
 	TcaFlowerKeyUdpSrc
 
-	// TcaFlowerKeyUdpDst - TCA_FLOWER_KEY_UDP_DST - UDP destination port.
-	// Matches packets based on the UDP destination port.
+	// TcaFlowerKeyUdpDst - TCA_FLOWER_KEY_UDP_DST - IpProtoUDP destination port.
+	// Matches packets based on the IpProtoUDP destination port.
 	TcaFlowerKeyUdpDst
 
-	// More keys continue, following the same pattern for fields like VLAN, MPLS, SCTP, ICMP, and encapsulation options.
+	// More keys continue, following the same pattern for fields like VLAN, MPLS, SCTP, IpProtoIcmp, and encapsulation options.
 
 	// TcaFlowerMax - Placeholder for the maximum value of the Flower key.
 	__TcaFlowerMax = iota - 1

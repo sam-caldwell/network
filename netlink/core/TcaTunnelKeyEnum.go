@@ -60,7 +60,7 @@ const (
 
 	// TcaTunnelKeyEncDstPort - TCA_TUNNEL_KEY_ENC_DST_PORT - Encapsulation destination port.
 	//
-	// This attribute represents the destination port for UDP-based encapsulation, such as VXLAN.
+	// This attribute represents the destination port for IpProtoUDP-based encapsulation, such as VXLAN.
 	TcaTunnelKeyEncDstPort TcaTunnelKeyEnum = iota
 
 	// TcaTunnelKeyNoCsum - TCA_TUNNEL_KEY_NO_CSUM - Disable checksum calculation.
