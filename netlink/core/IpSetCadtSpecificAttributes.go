@@ -50,7 +50,7 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
 	IpsetAttrTimeout IpSetCadtSpecificAttributes = 6
 
-	// IpsetAttrProto - IPSET_ATTR_PROTO - Represents the protocol (e.g., TCP, UDP) associated with an IP set entry.
+	// IpsetAttrProto - IPSET_ATTR_PROTO - Represents the protocol (e.g., TCP, IpProtoUDP) associated with an IP set entry.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
 	IpsetAttrProto IpSetCadtSpecificAttributes = 7

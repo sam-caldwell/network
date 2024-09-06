@@ -39,8 +39,8 @@ const (
 	// This attribute specifies a 32-bit label that can be used for classifying traffic in the Geneve tunnel.
 	IflaGeneveLabel
 
-	// IflaGenevePort - IFLA_GENEVE_PORT - UDP port number for the Geneve tunnel.
-	// This attribute specifies the UDP port number used by the Geneve tunnel.
+	// IflaGenevePort - IFLA_GENEVE_PORT - IpProtoUDP port number for the Geneve tunnel.
+	// This attribute specifies the IpProtoUDP port number used by the Geneve tunnel.
 	IflaGenevePort
 
 	// IflaGeneveCollectMetadata - IFLA_GENEVE_COLLECT_METADATA - Collect metadata flag.
@@ -48,16 +48,16 @@ const (
 	// management.
 	IflaGeneveCollectMetadata
 
-	// IflaGeneveUdpCsum - IFLA_GENEVE_UDP_CSUM - UDP checksum setting for the Geneve tunnel.
-	// This attribute specifies whether UDP checksums should be used for packets sent through the Geneve tunnel.
+	// IflaGeneveUdpCsum - IFLA_GENEVE_UDP_CSUM - IpProtoUDP checksum setting for the Geneve tunnel.
+	// This attribute specifies whether IpProtoUDP checksums should be used for packets sent through the Geneve tunnel.
 	IflaGeneveUdpCsum
 
-	// IflaGeneveUdpZeroCsum6Tx - IFLA_GENEVE_UDP_ZERO_CSUM6_TX - Zero UDP checksum for IPv6 transmit.
-	// This attribute specifies whether to use a zero UDP checksum for IPv6 packets transmitted by the Geneve tunnel.
+	// IflaGeneveUdpZeroCsum6Tx - IFLA_GENEVE_UDP_ZERO_CSUM6_TX - Zero IpProtoUDP checksum for IPv6 transmit.
+	// This attribute specifies whether to use a zero IpProtoUDP checksum for IPv6 packets transmitted by the Geneve tunnel.
 	IflaGeneveUdpZeroCsum6Tx
 
-	// IflaGeneveUdpZeroCsum6Rx - IFLA_GENEVE_UDP_ZERO_CSUM6_RX - Zero UDP checksum for IPv6 receive.
-	// This attribute specifies whether to accept packets with a zero UDP checksum for IPv6 packets received by the
+	// IflaGeneveUdpZeroCsum6Rx - IFLA_GENEVE_UDP_ZERO_CSUM6_RX - Zero IpProtoUDP checksum for IPv6 receive.
+	// This attribute specifies whether to accept packets with a zero IpProtoUDP checksum for IPv6 packets received by the
 	// Geneve tunnel.
 	IflaGeneveUdpZeroCsum6Rx
 

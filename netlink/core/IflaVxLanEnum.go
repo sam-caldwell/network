@@ -132,21 +132,21 @@ const (
 	IflaVxlanLocal6 IflaVxLanEnum = 17
 
 	// IflaVxlanUdpCsum - IFLA_VXLAN_UDP_CSUM -
-	// This attribute controls whether UDP checksum is enabled for VXLAN packets.
-	// Enabling UDP checksum can help in verifying packet integrity.
+	// This attribute controls whether IpProtoUDP checksum is enabled for VXLAN packets.
+	// Enabling IpProtoUDP checksum can help in verifying packet integrity.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
 	IflaVxlanUdpCsum IflaVxLanEnum = 18
 
 	// IflaVxlanUdpZeroCsum6Tx - IFLA_VXLAN_UDP_ZERO_CSUM6_TX -
-	// This attribute controls whether to disable UDP checksum for transmitted IPv6 VXLAN packets.
+	// This attribute controls whether to disable IpProtoUDP checksum for transmitted IPv6 VXLAN packets.
 	// It sets the checksum to zero for outgoing IPv6 VXLAN traffic.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
 	IflaVxlanUdpZeroCsum6Tx IflaVxLanEnum = 19
 
 	// IflaVxlanUdpZeroCsum6Rx - IFLA_VXLAN_UDP_ZERO_CSUM6_RX -
-	// This attribute controls whether to allow received IPv6 VXLAN packets with zero UDP checksum.
+	// This attribute controls whether to allow received IPv6 VXLAN packets with zero IpProtoUDP checksum.
 	// It allows for the acceptance of incoming IPv6 VXLAN packets even if the checksum is zero.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
