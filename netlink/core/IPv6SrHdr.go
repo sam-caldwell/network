@@ -14,7 +14,7 @@ import (
 //
 // See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/seg6.h
 type IPv6SrHdr struct {
-	nextHdr      uint8  // Next header type (e.g., TCP, UDP, etc.)
+	nextHdr      uint8  // Next header type (e.g., TCP, IpProtoUDP, etc.)
 	hdrLen       uint8  // Length of the SRH
 	routingType  uint8  // Routing type for Segment Routing
 	segmentsLeft uint8  // Number of segments left to visit
