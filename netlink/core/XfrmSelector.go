@@ -26,7 +26,7 @@ type XfrmSelector struct {
 	PrefixlenD uint8
 	// Prefix length for source address
 	PrefixlenS uint8
-	// Protocol identifier (e.g., TCP, UDP)
+	// Protocol identifier (e.g., TCP, IpProtoUDP)
 	Proto uint8
 	// Padding for 8-byte alignment
 	Pad [3]byte
