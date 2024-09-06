@@ -1,39 +1,45 @@
 package core
 
-import "unsafe"
+import (
+	"errors"
+)
 
 // DeserializeTcPedit safely deserializes a byte slice into a TcPeditSel structure and a slice of TcPeditKey.
 // The function ensures that the byte slice is large enough to hold both the TcPeditSel structure and all keys.
 //
-// If the byte slice is too small or invalid, it returns nil for both TcPeditSel and TcPeditKey slices.
-func DeserializeTcPedit(b []byte) (*TcPeditSel, []TcPeditKey) {
+// If the byte slice is too small or invalid, it returns nil slices and an error.
+func DeserializeTcPedit(b []byte) (*TcPeditSel, []TcPeditKey, error) {
 	// Check if the byte slice is large enough to contain TcPeditSel.
 	if len(b) < SizeOfTcPeditSel {
-		return nil, nil // Return nil if the byte slice is too small
+		return nil, nil, errors.New("input too small for TcPeditSel")
 	}
 
-	// Deserialize TcPeditSel
-	x := &TcPeditSel{}
-	copy((*(*[SizeOfTcPeditSel]byte)(unsafe.Pointer(x)))[:SizeOfTcPeditSel], b)
+	// Deserialize the TcPeditSel structure.
+	tcPeditSel, err := DeserializeTcPeditSel(b)
+	if err != nil {
+		return nil, nil, err
+	}
 
-	// Prepare to deserialize keys, check if there are enough bytes for the keys
-	keys := make([]TcPeditKey, 0, x.NKeys)
+	// Prepare to deserialize keys, ensure there is enough space for NKeys.
+	keys := make([]TcPeditKey, 0, tcPeditSel.NKeys)
 	next := SizeOfTcPeditSel
 
-	for i := uint8(0); i < x.NKeys; i++ {
-		// Ensure there's enough data left in the byte slice for the next key
+	// Loop over NKeys and deserialize each key.
+	for i := uint8(0); i < tcPeditSel.NKeys; i++ {
+		// Ensure there's enough data left in the byte slice for the next key.
 		if len(b[next:]) < SizeOfTcPeditKey {
-			return nil, nil // Return nil if the byte slice doesn't contain enough bytes for the key
+			return nil, nil, errors.New("not enough bytes for the key")
 		}
 
-		// Deserialize each key
-		key := DeserializeTcPeditKey(b[next:])
-		if key == nil {
-			return nil, nil // Return nil if deserialization of the key fails
+		// Deserialize each key.
+		key, err := DeserializeTcPeditKey(b[next:])
+		if err != nil {
+			return nil, nil, err
 		}
 		keys = append(keys, *key)
 		next += SizeOfTcPeditKey
 	}
 
-	return x, keys
+	// Return the deserialized TcPeditSel and the list of keys.
+	return tcPeditSel, keys, nil
 }

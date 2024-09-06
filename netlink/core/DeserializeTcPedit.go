@@ -1,15 +1,48 @@
 package core
 
-import "unsafe"
+import (
+	"bytes"
+	"encoding/binary"
+	"errors"
+)
 
 // DeserializeTcPeditKey safely deserializes a byte slice into a TcPeditKey structure.
 // It checks the length of the byte slice to ensure that it is at least the size of TcPeditKey
-// to prevent out-of-bounds memory access.
+// and uses the encoding/binary package to read the fields safely.
 //
-// Returns nil if the byte slice is too small.
-func DeserializeTcPeditKey(b []byte) *TcPeditKey {
+// Returns an error if the byte slice is too small or cannot be properly deserialized.
+func DeserializeTcPeditKey(b []byte) (*TcPeditKey, error) {
+	// Check if the byte slice is large enough to hold a TcPeditKey
 	if len(b) < SizeOfTcPeditKey {
-		return nil // Return nil if the byte slice is too small
+		return nil, errors.New("byte slice too small to deserialize TcPeditKey")
 	}
-	return (*TcPeditKey)(unsafe.Pointer(&b[0])) // Safely convert the byte slice to a TcPeditKey pointer
+
+	// Create a new TcPeditKey struct
+	key := TcPeditKey{}
+
+	// Create a reader for the byte slice
+	reader := bytes.NewReader(b)
+
+	// Safely deserialize the fields using binary.Read
+	if err := binary.Read(reader, binary.BigEndian, &key.Mask); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.Val); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.Off); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.At); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.OffMask); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.Shift); err != nil {
+		return nil, err
+	}
+
+	// Return the deserialized TcPeditKey
+	return &key, nil
 }
