@@ -202,4 +202,6 @@ const (
 
 	// SizeofXfrmUserSpiInfo - Size of the XfrmUserSpiInfo struct, used for Security Parameter Index (SPI) information.
 	SizeofXfrmUserSpiInfo = int(unsafe.Sizeof(XfrmUserSpiInfo{}))
+
+	SizeofXfrmUserTmpl = int(unsafe.Sizeof(XfrmUserTmpl{}))
 )
