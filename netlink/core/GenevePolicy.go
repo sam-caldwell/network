@@ -48,8 +48,8 @@ var GenevePolicy = [IflaGeneveMax + 1]NlaPolicy{
 		Type: NlaU32,
 	},
 
-	// IFLA_GENEVE_PORT - UDP port number for the Geneve tunnel.
-	// 16-bit UDP port number.
+	// IFLA_GENEVE_PORT - IpProtoUDP port number for the Geneve tunnel.
+	// 16-bit IpProtoUDP port number.
 	IflaGenevePort: {
 		Type: NlaU16,
 	},
@@ -60,19 +60,19 @@ var GenevePolicy = [IflaGeneveMax + 1]NlaPolicy{
 		Type: NlaFlag,
 	},
 
-	// IFLA_GENEVE_UDP_CSUM - UDP checksum setting for the Geneve tunnel.
-	// 8-bit value indicating UDP checksum behavior.
+	// IFLA_GENEVE_UDP_CSUM - IpProtoUDP checksum setting for the Geneve tunnel.
+	// 8-bit value indicating IpProtoUDP checksum behavior.
 	IflaGeneveUdpCsum: {
 		Type: NlaU8,
 	},
 
-	// IFLA_GENEVE_UDP_ZERO_CSUM6_TX - Zero UDP checksum for IPv6 transmit.
+	// IFLA_GENEVE_UDP_ZERO_CSUM6_TX - Zero IpProtoUDP checksum for IPv6 transmit.
 	// 8-bit value indicating zero checksum for IPv6 transmit.
 	IflaGeneveUdpZeroCsum6Tx: {
 		Type: NlaU8,
 	},
 
-	// IFLA_GENEVE_UDP_ZERO_CSUM6_RX - Zero UDP checksum for IPv6 receive.
+	// IFLA_GENEVE_UDP_ZERO_CSUM6_RX - Zero IpProtoUDP checksum for IPv6 receive.
 	// 8-bit value indicating zero checksum for IPv6 receive.
 	IflaGeneveUdpZeroCsum6Rx: {
 		Type: NlaU8,
