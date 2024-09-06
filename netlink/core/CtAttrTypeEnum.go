@@ -29,7 +29,7 @@ const (
 	CtaStatus CtAttrTypeEnum = 3
 
 	// CtaProtoinfo - CTA_PROTOINFO - constant in the Linux Netfilter framework that represents protocol-specific
-	// information for a tracked connection, such as details related to TCP, UDP, SCTP, or DCCP protocols, within
+	// information for a tracked connection, such as details related to TCP, IpProtoUDP, SCTP, or DCCP protocols, within
 	// the connection tracking system.
 	CtaProtoinfo CtAttrTypeEnum = 4
 
