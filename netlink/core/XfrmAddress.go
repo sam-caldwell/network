@@ -1,7 +1,5 @@
 package core
 
-package core
-
 // XfrmAddress represents an IP address used in XFRM (IPsec) related structures.
 //
 // In the Linux kernel, the `xfrm_address_t` is defined as a union of a 32-bit
