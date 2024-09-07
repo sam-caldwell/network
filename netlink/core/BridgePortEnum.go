@@ -7,10 +7,10 @@ type BridgePortEnum uint8
 
 const (
 
-	// IflaBrportUnspec - IFLA_BRPORT_UNSPEC - unspecified value used as a placeholder
-	IflaBrportUnspec BridgePortEnum = 0
+	// IflaBrPortUnspec - IFLA_BRPORT_UNSPEC - unspecified value used as a placeholder
+	IflaBrPortUnspec BridgePortEnum = 0
 
-	// IflaBrportState - IFLA_BRPORT_STATE - Spanning tree state
+	// IflaBrPortState - IFLA_BRPORT_STATE - Spanning tree state
 	//
 	//  The operation state of the port. Here are the valid values.
 	//
@@ -26,26 +26,26 @@ const (
 	//         the STP election process. In this state, port will only process STP BPDUs.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportState BridgePortEnum = 1
+	IflaBrPortState BridgePortEnum = 1
 
-	// IflaBrportPriority - IFLA_BRPORT_PRIORITY - The STP port priority. The valid values are between 0 and 255.
+	// IflaBrPortPriority - IFLA_BRPORT_PRIORITY - The STP port priority. The valid values are between 0 and 255.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportPriority BridgePortEnum = 2
+	IflaBrPortPriority BridgePortEnum = 2
 
-	// IflaBrportCost -IFLA_BRPORT_COST - The STP path cost of the port. The valid values are between 1 and 65535.
+	// IflaBrPortCost -IFLA_BRPORT_COST - The STP path cost of the port. The valid values are between 1 and 65535.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportCost BridgePortEnum = 3
+	IflaBrPortCost BridgePortEnum = 3
 
-	// IflaBrportMode - IFLA_BRPORT_MODE - Set the bridge port (hairpin) mode.
+	// IflaBrPortMode - IFLA_BRPORT_MODE - Set the bridge port (hairpin) mode.
 	//
 	// See *BRIDGE_MODE_HAIRPIN* for more details.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMode BridgePortEnum = 4
+	IflaBrPortMode BridgePortEnum = 4
 
-	// IflaBrportGuard - IFLA_BRPORT_GUARD - Controls whether STP BPDUs will be processed by the bridge port. By
+	// IflaBrPortGuard - IFLA_BRPORT_GUARD - Controls whether STP BPDUs will be processed by the bridge port. By
 	// default, the flag is turned off to allow BPDU processing. Turning this flag on will disable the bridge port
 	// if an STP BPDU packet is received.
 	//
@@ -54,115 +54,115 @@ const (
 	// if the link is brought down, or removed and reattached.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportGuard BridgePortEnum = 5
+	IflaBrPortGuard BridgePortEnum = 5
 
-	// IflaBrportProtect - IFLA_BRPORT_PROTECT - Controls whether a given port is allowed to become a root port or
+	// IflaBrPortProtect - IFLA_BRPORT_PROTECT - Controls whether a given port is allowed to become a root port or
 	// not. Only used when STP is enabled on the bridge. By default, the flag is off. This feature is also called root
 	// port guard. If BPDU is received from a leaf (edge) port, it should not be elected as root port. This could be
 	// used if using STP on a bridge and the downstream bridges are not fully trusted; this prevents a hostile guest
 	// from rerouting traffic.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportProtect BridgePortEnum = 6 /* root port protection    */
+	IflaBrPortProtect BridgePortEnum = 6 /* root port protection    */
 
-	// IflaBrportFastLeave - IFLA_BRPORT_FAST_LEAVE - This flag allows the bridge to immediately stop multicast traffic
+	// IflaBrPortFastLeave - IFLA_BRPORT_FAST_LEAVE - This flag allows the bridge to immediately stop multicast traffic
 	// forwarding on a port that receives an IGMP Leave message. It is only used when IGMP snooping is enabled on the
 	// bridge. By default, the flag is off.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportFastLeave BridgePortEnum = 7 /* multicast fast leave    */
+	IflaBrPortFastLeave BridgePortEnum = 7 /* multicast fast leave    */
 
-	// IflaBrportLearning - IFLA_BRPORT_LEARNING - Controls whether a given port will learn *source* MAC addresses
+	// IflaBrPortLearning - IFLA_BRPORT_LEARNING - Controls whether a given port will learn *source* MAC addresses
 	// from received traffic or not. Also controls whether dynamic FDB entries (which can also be added by software)
 	// will be refreshed by incoming traffic. By default, this flag is on.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportLearning BridgePortEnum = 8 /* mac learning */
+	IflaBrPortLearning BridgePortEnum = 8 /* mac learning */
 
-	// IflaBrportUnicastFlood - IFLA_BRPORT_UNICAST_FLOOD -  Controls whether unicast traffic for which there is no
+	// IflaBrPortUnicastFlood - IFLA_BRPORT_UNICAST_FLOOD -  Controls whether unicast traffic for which there is no
 	// FDB entry will be flooded towards this port. By default, this flag is on.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportUnicastFlood BridgePortEnum = 9 /* flood unicast traffic */
+	IflaBrPortUnicastFlood BridgePortEnum = 9 /* flood unicast traffic */
 
-	// IflaBrportProxyarp - IFLA_BRPORT_PROXYARP - Enable proxy ARP on this port.
+	// IflaBrPortProxyArp - IFLA_BRPORT_PROXYARP - Enable proxy ARP on this port.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportProxyarp BridgePortEnum = 10 /* proxy ARP */
+	IflaBrPortProxyArp BridgePortEnum = 10 /* proxy ARP */
 
-	// IflaBrportLearningSync - IFLA_BRPORT_LEARNING_SYNC -Controls whether a given port will sync MAC addresses
+	// IflaBrPortLearningSync - IFLA_BRPORT_LEARNING_SYNC -Controls whether a given port will sync MAC addresses
 	// learned on device port to bridge FDB.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportLearningSync BridgePortEnum = 11 /* mac learning sync from device */
+	IflaBrPortLearningSync BridgePortEnum = 11 /* mac learning sync from device */
 
-	// IflaBrportProxyarpWifi -IFLA_BRPORT_PROXYARP_WIFI - Enable proxy ARP on this port which meets extended
+	// IflaBrPortProxyArpWifi -IFLA_BRPORT_PROXYARP_WIFI - Enable proxy ARP on this port which meets extended
 	// requirements by IEEE 802.11 and Hotspot 2.0 specifications.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportProxyarpWifi BridgePortEnum = 12 /* proxy ARP for Wi-Fi */
+	IflaBrPortProxyArpWifi BridgePortEnum = 12 /* proxy ARP for Wi-Fi */
 
-	// IflaBrportRootId - IFLA_BRPORT_ROOT_ID - designated root
+	// IflaBrPortRootId - IFLA_BRPORT_ROOT_ID - designated root
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportRootId BridgePortEnum = 13 /* designated root */
+	IflaBrPortRootId BridgePortEnum = 13 /* designated root */
 
-	// IflaBrportBridgeId - IFLA_BRPORT_BRIDGE_ID - designated bridge
+	// IflaBrPortBridgeId - IFLA_BRPORT_BRIDGE_ID - designated bridge
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportBridgeId BridgePortEnum = 14 /* designated bridge */
+	IflaBrPortBridgeId BridgePortEnum = 14 /* designated bridge */
 
-	// IflaBrportDesignatedPort - IFLA_BRPORT_DESIGNATED_PORT -
+	// IflaBrPortDesignatedPort - IFLA_BRPORT_DESIGNATED_PORT -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportDesignatedPort BridgePortEnum = 15
+	IflaBrPortDesignatedPort BridgePortEnum = 15
 
-	// IflaBrportDesignatedCost - IFLA_BRPORT_DESIGNATED_COST -
+	// IflaBrPortDesignatedCost - IFLA_BRPORT_DESIGNATED_COST -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportDesignatedCost BridgePortEnum = 16
+	IflaBrPortDesignatedCost BridgePortEnum = 16
 
-	// IflaBrportId - IFLA_BRPORT_ID -
+	// IflaBrPortId - IFLA_BRPORT_ID -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportId BridgePortEnum = 17
+	IflaBrPortId BridgePortEnum = 17
 
-	// IflaBrportNo - IFLA_BRPORT_NO -
+	// IflaBrPortNo - IFLA_BRPORT_NO -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportNo BridgePortEnum = 18
+	IflaBrPortNo BridgePortEnum = 18
 
-	// IflaBrportTopologyChangeAck - IFLA_BRPORT_TOPOLOGY_CHANGE_ACK -
+	// IflaBrPortTopologyChangeAck - IFLA_BRPORT_TOPOLOGY_CHANGE_ACK -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportTopologyChangeAck BridgePortEnum = 19
+	IflaBrPortTopologyChangeAck BridgePortEnum = 19
 
-	// IflaBrportConfigPending - IFLA_BRPORT_CONFIG_PENDING -
+	// IflaBrPortConfigPending - IFLA_BRPORT_CONFIG_PENDING -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportConfigPending BridgePortEnum = 20
+	IflaBrPortConfigPending BridgePortEnum = 20
 
-	// IflaBrportMessageAgeTimer - IFLA_BRPORT_MESSAGE_AGE_TIMER -
+	// IflaBrPortMessageAgeTimer - IFLA_BRPORT_MESSAGE_AGE_TIMER -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMessageAgeTimer BridgePortEnum = 21
+	IflaBrPortMessageAgeTimer BridgePortEnum = 21
 
-	// IflaBrportForwardDelayTimer - IFLA_BRPORT_FORWARD_DELAY_TIMER -
+	// IflaBrPortForwardDelayTimer - IFLA_BRPORT_FORWARD_DELAY_TIMER -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportForwardDelayTimer BridgePortEnum = 22
+	IflaBrPortForwardDelayTimer BridgePortEnum = 22
 
-	// IflaBrportHoldTimer - IFLA_BRPORT_HOLD_TIMER -
+	// IflaBrPortHoldTimer - IFLA_BRPORT_HOLD_TIMER -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportHoldTimer BridgePortEnum = 23
+	IflaBrPortHoldTimer BridgePortEnum = 23
 
-	// IflaBrportFlush - IFLA_BRPORT_FLUSH - Flush bridge ports' fdb dynamic entries.
+	// IflaBrPortFlush - IFLA_BRPORT_FLUSH - Flush bridge ports' fdb dynamic entries.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportFlush BridgePortEnum = 24
+	IflaBrPortFlush BridgePortEnum = 24
 
-	// IflaBrportMulticastRouter - IFLA_BRPORT_MULTICAST_ROUTER - Configure the port's multicast router presence.
+	// IflaBrPortMulticastRouter - IFLA_BRPORT_MULTICAST_ROUTER - Configure the port's multicast router presence.
 	// A port with a multicast router will receive all multicast traffic.
 	//
 	// The valid values are:
@@ -173,20 +173,20 @@ const (
 	//     on incoming queries.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMulticastRouter BridgePortEnum = 25
+	IflaBrPortMulticastRouter BridgePortEnum = 25
 
-	// IflaBrportPad - IFLA_BRPORT_PAD -
+	// IflaBrPortPad - IFLA_BRPORT_PAD -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportPad BridgePortEnum = 26
+	IflaBrPortPad BridgePortEnum = 26
 
-	// IflaBrportMcastFlood - IFLA_BRPORT_MCAST_FLOOD - Controls whether a given port will flood multicast traffic
+	// IflaBrPortMcastFlood - IFLA_BRPORT_MCAST_FLOOD - Controls whether a given port will flood multicast traffic
 	// for which there is no MDB entry. By default, this flag is on.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMcastFlood BridgePortEnum = 27
+	IflaBrPortMcastFlood BridgePortEnum = 27
 
-	// IflaBrportMcastToUcast - IFLA_BRPORT_MCAST_TO_UCAST - Controls whether a given port will replicate packets using
+	// IflaBrPortMcastToUcast - IFLA_BRPORT_MCAST_TO_UCAST - Controls whether a given port will replicate packets using
 	// unicast instead of multicast. By default, this flag is off.
 	//
 	// This is done by copying the packet per host and changing the multicast destination MAC to an unicast one
@@ -208,57 +208,57 @@ const (
 	// multicast router.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMcastToUcast BridgePortEnum = 28
+	IflaBrPortMcastToUcast BridgePortEnum = 28
 
-	// IflaBrportVlanTunnel - IFLA_BRPORT_VLAN_TUNNEL - Controls whether vlan to tunnel mapping is enabled on the port.
+	// IflaBrPortVlanTunnel - IFLA_BRPORT_VLAN_TUNNEL - Controls whether vlan to tunnel mapping is enabled on the port.
 	// By default, this flag is off.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportVlanTunnel BridgePortEnum = 29
+	IflaBrPortVlanTunnel BridgePortEnum = 29
 
-	// IflaBrportBcastFlood - IFLA_BRPORT_BCAST_FLOOD - Controls flooding of broadcast traffic on the given port.
+	// IflaBrPortBcastFlood - IFLA_BRPORT_BCAST_FLOOD - Controls flooding of broadcast traffic on the given port.
 	// By default, this flag is on.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportBcastFlood BridgePortEnum = 30
+	IflaBrPortBcastFlood BridgePortEnum = 30
 
-	// IflaBrportGroupFwdMask - IFLA_BRPORT_GROUP_FWD_MASK - Set the group forward mask. This is a bitmask that is
+	// IflaBrPortGroupFwdMask - IFLA_BRPORT_GROUP_FWD_MASK - Set the group forward mask. This is a bitmask that is
 	// applied to decide whether to forward incoming frames destined to link-local addresses. The addresses of the
 	// form are 01:80:C2:00:00:0X (defaults to 0, which means the bridge does not forward any link-local frames
 	// coming on this port).
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportGroupFwdMask BridgePortEnum = 31
+	IflaBrPortGroupFwdMask BridgePortEnum = 31
 
-	// IflaBrportNeighSuppress - IFLA_BRPORT_NEIGH_SUPPRESS - Controls whether neighbor discovery (arp and nd) proxy
+	// IflaBrPortNeighSuppress - IFLA_BRPORT_NEIGH_SUPPRESS - Controls whether neighbor discovery (arp and nd) proxy
 	// and suppression is enabled on the port. By default, this flag is off.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportNeighSuppress BridgePortEnum = 32
+	IflaBrPortNeighSuppress BridgePortEnum = 32
 
-	// IflaBrportIsolated - IFLA_BRPORT_ISOLATED - Controls whether a given port will be isolated, which means it will
+	// IflaBrPortIsolated - IFLA_BRPORT_ISOLATED - Controls whether a given port will be isolated, which means it will
 	// be able to communicate with non-isolated ports only. By default, this flag is off.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportIsolated BridgePortEnum = 33
+	IflaBrPortIsolated BridgePortEnum = 33
 
-	// IflaBrportBackupPort - IFLA_BRPORT_BACKUP_PORT - Set a backup port. If the port loses carrier all traffic will
+	// IflaBrPortBackupPort - IFLA_BRPORT_BACKUP_PORT - Set a backup port. If the port loses carrier all traffic will
 	// be redirected to the configured backup port. Set the value to 0 to disable it.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportBackupPort BridgePortEnum = 34
+	IflaBrPortBackupPort BridgePortEnum = 34
 
-	// IflaBrportMrpRingOpen - IFLA_BRPORT_MRP_RING_OPEN -
+	// IflaBrPortMrpRingOpen - IFLA_BRPORT_MRP_RING_OPEN -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMrpRingOpen BridgePortEnum = 35
+	IflaBrPortMrpRingOpen BridgePortEnum = 35
 
-	// IflaBrportMrpInOpen - IFLA_BRPORT_MRP_IN_OPEN -
+	// IflaBrPortMrpInOpen - IFLA_BRPORT_MRP_IN_OPEN -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMrpInOpen BridgePortEnum = 36
+	IflaBrPortMrpInOpen BridgePortEnum = 36
 
-	// IflaBrportMcastEhtHostsLimit - IFLA_BRPORT_MCAST_EHT_HOSTS_LIMIT - The number of per-port EHT hosts limit.
+	// IflaBrPortMcastEhtHostsLimit - IFLA_BRPORT_MCAST_EHT_HOSTS_LIMIT - The number of per-port EHT hosts limit.
 	// The default value is 512. Setting to 0 is not allowed.
 	//
 	// "Efficient Host Tracking" (EHT). Efficient Host Tracking is essential for optimizing the management of
@@ -267,16 +267,16 @@ const (
 	// and improving performance.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMcastEhtHostsLimit BridgePortEnum = 37
+	IflaBrPortMcastEhtHostsLimit BridgePortEnum = 37
 
-	// IflaBrportMcastEhtHostsCnt - IFLA_BRPORT_MCAST_EHT_HOSTS_CNT - The current number of tracked hosts, read only.
+	// IflaBrPortMcastEhtHostsCnt - IFLA_BRPORT_MCAST_EHT_HOSTS_CNT - The current number of tracked hosts, read only.
 	//
-	// See IflaBrportMcastEhtHostsLimit comment for definition of "Efficient Host Tracking" (EHT).
+	// See IflaBrPortMcastEhtHostsLimit comment for definition of "Efficient Host Tracking" (EHT).
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMcastEhtHostsCnt BridgePortEnum = 38
+	IflaBrPortMcastEhtHostsCnt BridgePortEnum = 38
 
-	// IflaBrportLocked - IFLA_BRPORT_LOCKED - Controls whether a port will be locked, meaning that hosts behind the
+	// IflaBrPortLocked - IFLA_BRPORT_LOCKED - Controls whether a port will be locked, meaning that hosts behind the
 	// port will not be able to communicate through the port unless an FDB entry with the unit's MAC address is in
 	// the FDB. The common use case is that hosts are allowed access through authentication with the IEEE 802.1X
 	// protocol or based on whitelists. By default, this flag is off.
@@ -285,9 +285,9 @@ const (
 	// the bridge to populate its FDB based on link-local (EAPOL) traffic received on the port.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportLocked BridgePortEnum = 39
+	IflaBrPortLocked BridgePortEnum = 39
 
-	// IflaBrportMab - IFLA_BRPORT_MAB - Controls whether a port will use MAC Authentication Bypass (MAB), a technique
+	// IflaBrPortMab - IFLA_BRPORT_MAB - Controls whether a port will use MAC Authentication Bypass (MAB), a technique
 	// through which select MAC addresses may be allowed on a locked port, without using 802.1X authentication. Packets
 	// with an unknown source MAC address generates a "locked" FDB entry on the incoming bridge port. The common use
 	// case is for user space to react to these bridge FDB notifications and optionally replace the locked FDB entry
@@ -297,38 +297,38 @@ const (
 	// that unauthorized data packets are dropped, and *IFLA_BRPORT_LEARNING* allows the dynamic FDB entries installed
 	// by user space (as replacements for the locked FDB entries) to be refreshed and/or aged out.
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMab BridgePortEnum = 40
+	IflaBrPortMab BridgePortEnum = 40
 
-	// IflaBrportMcastNGroups - IFLA_BRPORT_MCAST_N_GROUPS -
+	// IflaBrPortMcastNGroups - IFLA_BRPORT_MCAST_N_GROUPS -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMcastNGroups BridgePortEnum = 41
+	IflaBrPortMcastNGroups BridgePortEnum = 41
 
-	// IflaBrportMcastMaxGroups - IFLA_BRPORT_MCAST_MAX_GROUPS -Sets the maximum number of MDB entries that can be
+	// IflaBrPortMcastMaxGroups - IFLA_BRPORT_MCAST_MAX_GROUPS -Sets the maximum number of MDB entries that can be
 	// registered for a given port. Attempts to register more MDB entries at the port than this limit allows will be
 	// rejected, whether they are done through netlink (e.g. the bridge tool), or IGMP or MLD membership reports.
 	// Setting a limit of 0 disables the limit. The default value is 0.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMcastMaxGroups BridgePortEnum = 42
+	IflaBrPortMcastMaxGroups BridgePortEnum = 42
 
-	// IflaBrportNeighVlanSuppress - IFLA_BRPORT_NEIGH_VLAN_SUPPRESS - Controls whether neighbor discovery (arp and nd)
+	// IflaBrPortNeighVlanSuppress - IFLA_BRPORT_NEIGH_VLAN_SUPPRESS - Controls whether neighbor discovery (arp and nd)
 	// proxy and suppression is enabled for a given port. By default, this flag is off.
 	//
 	// Note that this option only takes effect when *IFLA_BRPORT_NEIGH_SUPPRESS* is enabled for a given port.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportNeighVlanSuppress BridgePortEnum = 43
+	IflaBrPortNeighVlanSuppress BridgePortEnum = 43
 
-	// IflaBrportBackupNhid - IFLA_BRPORT_BACKUP_NHID - The FDB nexthop object ID to attach to packets being redirected
+	// IflaBrPortBackupNhid - IFLA_BRPORT_BACKUP_NHID - The FDB nexthop object ID to attach to packets being redirected
 	// to a backup port that has VLAN tunnel mapping enabled (via the *IFLA_BRPORT_VLAN_TUNNEL* option). Setting a
 	// value of 0 (default) has the effect of not attaching any ID.v
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportBackupNhid BridgePortEnum = 44
+	IflaBrPortBackupNhid BridgePortEnum = 44
 
-	// IflaBrportMax - IFLA_BRPORT_NEIGH_VLAN_SUPPRESS -
+	// IflaBrPortMax - IFLA_BRPORT_NEIGH_VLAN_SUPPRESS -
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrportMax = 45 - 1
+	IflaBrPortMax = 45 - 1
 )
