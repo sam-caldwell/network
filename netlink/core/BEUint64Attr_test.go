@@ -27,7 +27,7 @@ func TestBEUint64Attr(t *testing.T) {
 		},
 		{
 			name: "Middle value",
-			v:    1311768465173141112, // 0x123456789ABCDEF8 in hex
+			v:    0x123456789ABCDEF8, // Correct representation of 1311768465173141112
 			want: []byte{0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF8},
 		},
 	}
