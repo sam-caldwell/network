@@ -9,17 +9,7 @@ import (
 // IfAddressMessage - wrapper around unix.IfAddrmsg in case golang will
 // eventually want to make changes here, and I need to minimize impact.
 //
-// The C implementation...
-//
-//	struct ifaddrmsg {
-//	  __u8    ifa_family;
-//	  __u8    ifa_prefixlen;  /* The prefix length    */
-//	  __u8    ifa_flags;  /* Flags      */
-//	  __u8    ifa_scope;  /* Address scope    */
-//	  __u32   ifa_index;  /* Link index     */
-//	};
-//
-// unix.IfAddrmsg looks like this...
+// // unix.IfAddrmsg looks like this...
 //
 //	type IfAddrmsg struct {
 //		Family    uint8
