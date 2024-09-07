@@ -7,9 +7,9 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// deserializeUnixRtAttr deserializes a byte slice into a unix.RtAttr structure.
-func deserializeUnixRtAttr(unreadData []byte) (*unix.RtAttr, error) {
-	if len(unreadData) < unix.SizeofRtAttr {
+// DeserializeUnixRtAttr deserializes a byte slice into a unix.RtAttr structure.
+func DeserializeUnixRtAttr(unreadData []byte) (*unix.RtAttr, error) {
+	if len(unreadData) < SizeOfUnixRtAttr {
 		return nil, errors.New("byte slice is too short to contain RtAttr")
 	}
 
