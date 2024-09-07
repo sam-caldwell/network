@@ -2,11 +2,11 @@ package core
 
 import "golang.org/x/sys/unix"
 
-// IfFamily - interface family used in IfAddressMessage (unix.IfAddrmsg/ifaddrmsg)
+// InterfaceFamily - interface family used in IfAddressMessage (unix.IfAddrmsg/ifaddrmsg)
 //
 //		 See https://man7.org/linux/man-pages/man7/rtnetlink.7.html and
 //	     https://github.com/torvalds/linux/blob/master/include/linux/socket.h
-type IfFamily uint8
+type InterfaceFamily uint8
 
 const (
 	// AfUnspec - AF_UNSPEC - unspecified
