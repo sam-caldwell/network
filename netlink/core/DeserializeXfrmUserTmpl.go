@@ -29,7 +29,7 @@ func DeserializeXfrmUserTmpl(b []byte) (*XfrmUserTmpl, error) {
 	offset := SizeOfXfrmId
 
 	// Move the reader to the next field (Family)
-	reader.Seek(int64(offset), 0)
+	_, _ = reader.Seek(int64(offset), 0)
 
 	// Deserialize Family
 	if err := binary.Read(reader, binary.BigEndian, &tmpl.Family); err != nil {
@@ -52,7 +52,7 @@ func DeserializeXfrmUserTmpl(b []byte) (*XfrmUserTmpl, error) {
 	offset += SizeOfXfrmAddress
 
 	// Move the reader to the next field (Reqid)
-	reader.Seek(int64(offset), 0)
+	_, _ = reader.Seek(int64(offset), 0)
 
 	// Deserialize Reqid
 	if err := binary.Read(reader, binary.BigEndian, &tmpl.Reqid); err != nil {
