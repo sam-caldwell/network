@@ -4,5 +4,5 @@ package core
 // data to be encapsulated and sent as part of a netlink message.
 type NetlinkRequestData interface {
 	Len() int
-	Serialize() []byte
+	Serialize() ([]byte, error)
 }
