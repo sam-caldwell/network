@@ -8,8 +8,8 @@ import (
 func TestBridgeVlanInfo_struct(t *testing.T) {
 	t.Run("test struct", func(t *testing.T) {
 		_ = BridgeVlanInfo{
-			Flags: uint16(0),
-			Vid:   uint16(0),
+			Flags: BridgeVlanInfoEnum(0),
+			Vid:   VlanIdType(0),
 		}
 	})
 	t.Run("test struct size", func(t *testing.T) {

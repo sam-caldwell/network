@@ -9,8 +9,8 @@ func TestDeserializeBridgeVlanInfo(t *testing.T) {
 	tests := []struct {
 		name          string
 		input         []byte
-		expectedVid   uint16
-		expectedFlags uint16
+		expectedVid   VlanIdType
+		expectedFlags BridgeVlanInfoEnum
 		expectError   bool
 	}{
 		{

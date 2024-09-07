@@ -1,5 +1,3 @@
-//go:build linux
-
 package core
 
 import (
@@ -52,7 +50,7 @@ func DeserializeBridgeVlanInfo(b []byte) (*BridgeVlanInfo, error) {
 
 	// Deserialize the byte slice into a BridgeVlanInfo structure
 	return &BridgeVlanInfo{
-		Flags: NativeEndian.Uint16(b[0:2]), // Deserialize the Flags field
-		Vid:   NativeEndian.Uint16(b[2:4]), // Deserialize the VLAN ID field
+		Flags: BridgeVlanInfoEnum(NativeEndian.Uint16(b[0:2])), // Deserialize the Flags field
+		Vid:   VlanIdType(NativeEndian.Uint16(b[2:4])),         // Deserialize the VLAN ID field
 	}, nil
 }

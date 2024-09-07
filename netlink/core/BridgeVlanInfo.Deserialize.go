@@ -1,5 +1,3 @@
-//go:build linux
-
 package core
 
 // Deserialize - Safely deserialize a byte slice into a BridgeVlanInfo structure by calling the
