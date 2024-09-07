@@ -11,7 +11,7 @@ import (
 //
 // See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
 func DeserializeRtMsg(b []byte) *RtMsg {
-	if len(b) < unix.SizeofRtMsg {
+	if len(b) < SizeOfUnixRtMsg {
 		return nil // Error handling for insufficient byte length
 	}
 

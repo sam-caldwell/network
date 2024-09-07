@@ -120,6 +120,9 @@ const (
 	// SizeOfUnixRtAttr - The size of a unix.RtAttr struct
 	SizeOfUnixRtAttr = int(unsafe.Sizeof(unix.RtAttr{}))
 
+	// SizeOfUnixRtMsg - the size of unix.RtMsg struct
+	SizeOfUnixRtMsg = int(unsafe.Sizeof(unix.RtMsg{}))
+
 	// SizeOfVfGUID - Size of VfGUID struct
 	SizeOfVfGUID = int(unsafe.Sizeof(VfGUID{}))
 
