@@ -15,8 +15,8 @@ const (
 	// SizeofBridgeVlanInfo - size of BridgeVlanInfo
 	SizeofBridgeVlanInfo = int(unsafe.Sizeof(BridgeVlanInfo{}))
 
-	// SizeofCnMsgOp - size of CnMsgOp struct
-	SizeofCnMsgOp = int(unsafe.Sizeof(CnMsgOp{}))
+	// SizeOfCnMsgOp - size of CnMsgOp struct
+	SizeOfCnMsgOp = int(unsafe.Sizeof(CnMsgOp{}))
 
 	// SizeofGenlmsg - size of Genlmsg struct
 	SizeofGenlmsg = int(unsafe.Sizeof(Genlmsg{}))
