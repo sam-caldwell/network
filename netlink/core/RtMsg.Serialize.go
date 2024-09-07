@@ -10,7 +10,7 @@ import (
 // making it ready for netlink message transmission.
 //
 // See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
-func (msg *RtMsg) Serialize() ([]byte, nil) {
+func (msg *RtMsg) Serialize() ([]byte, error) {
 	buf := make([]byte, unix.SizeofRtMsg)
 	buf[0] = msg.Family
 	buf[1] = msg.Dst_len
