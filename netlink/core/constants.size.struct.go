@@ -143,7 +143,8 @@ const (
 	SizeofVfVlanInfo = int(unsafe.Sizeof(IfLaVfVlanInfoStruct{}))
 
 	// SizeofXfrmAddress - Size of the XfrmAddress struct, used to represent addresses in XFRM (IPsec framework).
-	SizeofXfrmAddress = int(unsafe.Sizeof(XfrmAddress{}))
+	// Assumes largest size (ipV6)
+	SizeofXfrmAddress = int(4 * 32)
 
 	// SizeofXfrmAlgo - Size of the XfrmAlgo struct, representing cryptographic algorithms for IPsec SAs.
 	SizeofXfrmAlgo = int(unsafe.Sizeof(XfrmAlgo{}))
@@ -182,6 +183,9 @@ const (
 	// SizeofXfrmReplayStateEsn - Size of XfrmReplayStateEsn struct, representing replay state with extended
 	// sequence numbers.
 	SizeofXfrmReplayStateEsn = int(unsafe.Sizeof(XfrmReplayStateEsn{}))
+
+	// SizeOfXfrmSelector defines the size of the XfrmSelector structure.
+	SizeOfXfrmSelector = int(unsafe.Sizeof(XfrmSelector{}))
 
 	// SizeofXfrmStats - Size of the XfrmStats struct, representing IPsec framework statistics.
 	SizeofXfrmStats = int(unsafe.Sizeof(XfrmStats{}))
