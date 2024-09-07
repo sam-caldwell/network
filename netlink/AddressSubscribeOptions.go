@@ -41,14 +41,14 @@ type AddressSubscribeOptions struct {
 	// - `rtnl_dump_all()`: https://github.com/torvalds/linux/blob/master/net/core/rtnetlink.c
 	ListExisting bool
 
-	// ReceiveBufferSize sets the size of the receive buffer for the netlink socket. This controls
+	// ReceiveBufferSize sets the size of the recv buffer for the netlink socket. This controls
 	// how much data can be received at once. If set, the system will attempt to allocate a buffer of this size.
 	//
 	// Corresponds to setting the socket receive buffer size via `setsockopt()`, specifically:
 	// - `SO_RCVBUF`: https://github.com/torvalds/linux/blob/master/net/core/sock.c
 	ReceiveBufferSize int
 
-	// ReceiveBufferForceSize, when set to true, forces the receive buffer size to the value
+	// ReceiveBufferForceSize, when set to true, forces the recv buffer size to the value
 	// specified by ReceiveBufferSize, overriding system defaults or limits.
 	//
 	// Corresponds to `SO_RCVBUFFORCE` socket option, which allows privileged processes to set
