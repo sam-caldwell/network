@@ -15,10 +15,13 @@ package core
 // Reference:
 // - https://github.com/torvalds/linux/blob/master/include/uapi/linux/xfrm.h
 type XfrmUserExpire struct {
+
 	// XfrmUsersaInfo contains information about the expired SA.
 	XfrmUsersaInfo XfrmUsersaInfo
+
 	// Hard indicates if the expiration was due to hard limits (1) or soft limits (0).
 	Hard uint8
+
 	// Pad ensures 64-bit alignment of the structure.
 	Pad [7]byte
 }
