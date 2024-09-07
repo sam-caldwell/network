@@ -6,7 +6,7 @@ import (
 
 // DeserializeRtNexthop - Converts a byte slice into an RtNexthop struct.
 func DeserializeRtNexthop(b []byte) *RtNexthop {
-	if len(b) < unix.SizeofRtNexthop {
+	if len(b) < SizeOfRtNextHop {
 		return nil // Error handling for insufficient byte length
 	}
 	return &RtNexthop{
