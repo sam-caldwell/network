@@ -4,7 +4,7 @@ import (
 	"github.com/sam-caldwell/network/namespace"
 )
 
-// AddressSubscribeWithOptions -  subscribes to address updates in the system, similar to AddrSubscribe, but allows
+// AddressSubscribeWithOptions -  subscribes to address updates in the system, similar to AddressSubscribe, but allows
 // additional options to modify its behavior. This function is particularly useful for monitoring IP address
 // changes across network interfaces in Linux. You can provide a specific network namespace, an error callback,
 // and other options like buffer sizes and timeouts.
@@ -47,11 +47,11 @@ func AddressSubscribeWithOptions(ch chan<- AddrUpdate, done <-chan struct{}, opt
 		options.Namespace = &none
 	}
 
-	// Start the subscription by calling addrSubscribeAt with the provided options.
+	// Start the subscription by calling addressSubscribeAt with the provided options.
 	// This function subscribes to IP address changes using RTNETLINK within the specified namespace.
 	// - The 'namespace' package provides the ability to switch to a specific network namespace.
-	// - 'addrSubscribeAt()' handles the actual interaction with RTNETLINK to listen for address changes.
-	return addrSubscribeAt(
+	// - 'addressSubscribeAt()' handles the actual interaction with RTNETLINK to listen for address changes.
+	return addressSubscribeAt(
 		*options.Namespace,             // The network namespace for the subscription
 		namespace.None(),               // Fallback to default namespace if none is provided
 		ch,                             // Channel for sending address updates
