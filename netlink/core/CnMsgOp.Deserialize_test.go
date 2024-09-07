@@ -49,7 +49,7 @@ func TestCnMsgOp_Deserialize(t *testing.T) {
 
 	// Test deserialization with insufficient data
 	t.Run("Insufficient Data", func(t *testing.T) {
-		shortData := testData[:10] // Shorter than SizeofCnMsgOp
+		shortData := testData[:10] // Shorter than SizeOfCnMsgOp
 		var msg CnMsgOp
 		err := msg.Deserialize(shortData)
 		if err == nil {
