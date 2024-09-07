@@ -24,6 +24,6 @@ package core
 //     untagged, or set as the PVID.
 //   - Vid: The VLAN ID (12 bits in the 802.1Q VLAN header).
 type BridgeVlanInfo struct {
-	Flags BridgeVlanInfoEnum // VLAN-specific flags (e.g., untagged, PVID)
-	Vid   VlanIdType         // VLAN ID (range: 1-4094)
+	Flags BridgeVlanInfoFlags // VLAN-specific flags (e.g., untagged, PVID)
+	Vid   VlanIdType          // VLAN ID (range: 1-4094)
 }
