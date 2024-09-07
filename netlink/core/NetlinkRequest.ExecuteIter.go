@@ -112,7 +112,7 @@ done:
 						if attr, err = deserializeUnixRtAttr(unreadData); err != nil {
 							return err
 						}
-						attrData := unreadData[SizeofUnixRtAttr:attr.Len]
+						attrData := unreadData[SizeOfUnixRtAttr:attr.Len]
 
 						switch v := NlmsgerrAttr(attr.Type); v {
 						case NlmsgerrAttrMsg:
