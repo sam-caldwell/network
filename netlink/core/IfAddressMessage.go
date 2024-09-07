@@ -31,7 +31,7 @@ import (
 //
 // Note:
 //
-//	We have some stricter types in this package (e.g. IfFamily) to help
+//	We have some stricter types in this package (e.g. InterfaceFamily) to help
 //	developers quickly identify relevant constants without having to resort
 //	to Linux man pages.
 type IfAddressMessage struct {
