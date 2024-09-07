@@ -1,7 +1,6 @@
 package core
 
 import (
-	"encoding/binary"
 	"golang.org/x/sys/unix"
 )
 
