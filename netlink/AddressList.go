@@ -4,5 +4,7 @@ package netlink
 //
 // Shell Command: `ip addr show`.
 func AddressList(link Link, family int) ([]Addr, error) {
+
 	return pkgHandle.AddrList(link, family)
+
 }
