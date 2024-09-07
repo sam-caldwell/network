@@ -1,13 +1,9 @@
 package core
 
-import (
-	"golang.org/x/sys/unix"
-)
-
 // Serialize - ifa_cacheinfo - serialize IfaCacheInfo to byte slice
 func (msg *IfaCacheInfo) Serialize() ([]byte, error) {
 
-	length := unix.SizeofIfaCacheinfo
+	length := SizeOfIfaCacheInfo
 
 	b := make([]byte, length)
 
