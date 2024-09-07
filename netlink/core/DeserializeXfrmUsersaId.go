@@ -28,8 +28,7 @@ func DeserializeXfrmUsersaId(b []byte) (*XfrmUsersaId, error) {
 	offset := SizeofXfrmAddress // Adjust the offset after deserializing the XfrmAddress
 
 	// Seek the reader to the next field (after Daddr)
-	_, err = reader.Seek(int64(offset), 0)
-	if err != nil {
+	if _, err = reader.Seek(int64(offset), 0); err != nil {
 		return nil, err
 	}
 
