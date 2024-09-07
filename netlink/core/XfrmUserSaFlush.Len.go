@@ -1,6 +1,6 @@
 package core
 
-// Len - return size of XfrmUsersaFlush in bytes
-func (msg *XfrmUsersaFlush) Len() int {
-	return SizeOfXfrmUsersaFlush
+// Len - return size of XfrmUserSaFlush in bytes
+func (msg *XfrmUserSaFlush) Len() int {
+	return SizeOfXfrmUserSaFlush
 }

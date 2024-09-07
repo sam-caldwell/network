@@ -8,7 +8,7 @@ package core
 type XfrmUserSpiInfo struct {
 	// XfrmUsersaInfo contains the details about the Security Association (SA), such as traffic selectors,
 	// source address, lifetime configuration, current lifetime, and related statistics.
-	XfrmUsersaInfo XfrmUsersaInfo
+	XfrmUsersaInfo XfrmUserSaInfo
 
 	// Min represents the minimum value in the SPI range. SPIs are 32-bit values, and this field indicates
 	// the lower bound for the range of SPIs that may be assigned to Security Associations.

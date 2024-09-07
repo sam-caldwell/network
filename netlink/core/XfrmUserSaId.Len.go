@@ -1,6 +1,6 @@
 package core
 
-// Len - Return the size of the XfrmUsersaId struct (in bytes)
-func (msg *XfrmUsersaId) Len() int {
-	return SizeOfXfrmUsersaId
+// Len - Return the size of the XfrmUserSaId struct (in bytes)
+func (msg *XfrmUserSaId) Len() int {
+	return SizeOfXfrmUserSaId
 }

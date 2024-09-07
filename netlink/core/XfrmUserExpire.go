@@ -8,7 +8,7 @@ package core
 // The struct corresponds to the Linux kernel's netlink message for XFRM (IPsec) expiration events.
 //
 // Fields:
-// - XfrmUsersaInfo: Contains details about the expired SA (such as encryption algorithms, SPI, etc.).
+// - XfrmUserSaInfo: Contains details about the expired SA (such as encryption algorithms, SPI, etc.).
 // - Hard: A flag indicating if the expiration was due to hard (1) or soft (0) limits.
 // - Pad: Padding to align the structure to 64 bits.
 //
@@ -17,7 +17,7 @@ package core
 type XfrmUserExpire struct {
 
 	// XfrmUsersaInfo contains information about the expired SA.
-	XfrmUsersaInfo XfrmUsersaInfo
+	XfrmUsersaInfo XfrmUserSaInfo
 
 	// Hard indicates if the expiration was due to hard limits (1) or soft limits (0).
 	Hard uint8

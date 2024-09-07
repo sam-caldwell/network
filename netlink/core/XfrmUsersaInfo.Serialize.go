@@ -5,9 +5,9 @@ import (
 	"encoding/binary"
 )
 
-// Serialize safely serializes the XfrmUsersaInfo structure into a byte slice.
+// Serialize safely serializes the XfrmUserSaInfo structure into a byte slice.
 // It returns the byte slice that represents the serialized structure, or an error if serialization fails.
-func (msg *XfrmUsersaInfo) Serialize() ([]byte, error) {
+func (msg *XfrmUserSaInfo) Serialize() ([]byte, error) {
 	// Create a buffer to hold the serialized data.
 	buf := new(bytes.Buffer)
 

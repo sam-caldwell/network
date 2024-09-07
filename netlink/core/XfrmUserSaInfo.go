@@ -1,11 +1,11 @@
 package core
 
-// XfrmUsersaInfo represents the `xfrm_usersa_info` structure in the Linux kernel's XFRM subsystem.
+// XfrmUserSaInfo represents the `xfrm_usersa_info` structure in the Linux kernel's XFRM subsystem.
 // This structure defines an IPsec Security Association (SA) and includes details about the selector, identifiers,
 // lifetime configuration, current lifetime, statistics, and other parameters.
 //
 // Reference: https://github.com/torvalds/linux/blob/master/include/uapi/linux/xfrm.h
-type XfrmUsersaInfo struct {
+type XfrmUserSaInfo struct {
 	// Sel represents the XfrmSelector, which is used to define traffic matching rules for the IPsec SA.
 	// It specifies the source and destination addresses, ports, protocol, and other traffic-related fields.
 	Sel XfrmSelector

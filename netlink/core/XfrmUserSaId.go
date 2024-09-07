@@ -1,11 +1,11 @@
 package core
 
-// XfrmUsersaId represents the `xfrm_usersa_id` structure used in the Linux kernel's XFRM subsystem.
+// XfrmUserSaId represents the `xfrm_usersa_id` structure used in the Linux kernel's XFRM subsystem.
 // This structure is used to define the identifier for an IPsec Security Association (SA). It includes
 // details such as the destination address (Daddr), Security Parameter Index (SPI), and the protocol.
 //
 // Reference: https://github.com/torvalds/linux/blob/master/include/uapi/linux/xfrm.h
-type XfrmUsersaId struct {
+type XfrmUserSaId struct {
 	// Daddr represents the destination IP address for the Security Association (SA).
 	// It can be an IPv4 or IPv6 address, depending on the family.
 	Daddr XfrmAddress

@@ -11,7 +11,7 @@ func (msg *XfrmUserSpiInfo) Serialize() ([]byte, error) {
 	// Create a buffer to hold the serialized data.
 	buf := new(bytes.Buffer)
 
-	// Serialize the embedded XfrmUsersaInfo
+	// Serialize the embedded XfrmUserSaInfo
 	usersaBytes, err := msg.XfrmUsersaInfo.Serialize()
 	if err != nil {
 		return nil, err

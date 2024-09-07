@@ -5,9 +5,9 @@ import (
 	"encoding/binary"
 )
 
-// Serialize safely serializes the XfrmUsersaFlush structure into a byte slice.
+// Serialize safely serializes the XfrmUserSaFlush structure into a byte slice.
 // It returns the serialized byte slice or an error if serialization fails.
-func (msg *XfrmUsersaFlush) Serialize() ([]byte, error) {
+func (msg *XfrmUserSaFlush) Serialize() ([]byte, error) {
 	// Create a buffer to hold the serialized data.
 	buf := new(bytes.Buffer)
 
