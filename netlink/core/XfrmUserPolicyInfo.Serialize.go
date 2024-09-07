@@ -17,7 +17,7 @@ func (msg *XfrmUserPolicyInfo) Serialize() ([]byte, error) {
 	if temp, err := msg.Sel.Serialize(); err != nil {
 		return nil, err
 	} else {
-		if err := binary.Write(buf, binary.BigEndian, &temp); err != nil {
+		if _, err := buf.Write(temp); err != nil {
 			return nil, err
 		}
 	}
@@ -26,7 +26,7 @@ func (msg *XfrmUserPolicyInfo) Serialize() ([]byte, error) {
 	if temp, err := msg.Lft.Serialize(); err != nil {
 		return nil, err
 	} else {
-		if err := binary.Write(buf, binary.BigEndian, &temp); err != nil {
+		if _, err := buf.Write(temp); err != nil {
 			return nil, err
 		}
 	}
@@ -35,7 +35,7 @@ func (msg *XfrmUserPolicyInfo) Serialize() ([]byte, error) {
 	if temp, err := msg.Curlft.Serialize(); err != nil {
 		return nil, err
 	} else {
-		if err := binary.Write(buf, binary.BigEndian, &temp); err != nil {
+		if _, err := buf.Write(temp); err != nil {
 			return nil, err
 		}
 	}
