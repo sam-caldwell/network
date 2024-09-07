@@ -10,13 +10,14 @@ func DeserializeXfrmUserExpire(b []byte) (*XfrmUserExpire, error) {
 		return nil, errors.New("DeserializeXfrmUserExpire: byte slice too short")
 	}
 
-	msg := &XfrmUserExpire{}
-
 	// Manually copy each field from the byte slice to the struct
-	copy(msg.XfrmUsersaInfo.Serialize(), b[:SizeofXfrmUsersaInfo])
-	msg.Hard = b[SizeofXfrmUsersaInfo]
-	// Ensure remaining bytes are appropriately set (padding)
-	copy(msg.Pad[:], b[SizeofXfrmUsersaInfo+1:SizeofXfrmUserExpire])
-
-	return msg, nil
+	info, err := DeserializeXfrmUsersaInfo(b)
+	if err != nil {
+		return nil, err
+	}
+	return &(XfrmUserExpire{
+		XfrmUsersaInfo: *info,
+		Hard:           b[SizeofXfrmUsersaInfo],
+		Pad:            [7]byte(b[SizeofXfrmUsersaInfo+1:]),
+	}), nil
 }
