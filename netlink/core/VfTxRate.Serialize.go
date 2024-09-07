@@ -2,12 +2,8 @@
 
 package core
 
-import (
-	"encoding/binary"
-)
-
 // Serialize - Serialize VfTxRate to []byte
-func (msg *VfTxRate) Serialize() []byte {
+func (msg *VfTxRate) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofVfTxRate)
 
 	// Serialize the Vf field
@@ -16,5 +12,5 @@ func (msg *VfTxRate) Serialize() []byte {
 	// Serialize the Rate field
 	NativeEndian.PutUint32(buf[4:8], msg.Rate)
 
-	return buf
+	return buf, nil
 }

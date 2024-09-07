@@ -30,11 +30,19 @@ func (msg *XfrmUsersaInfo) Serialize() ([]byte, error) {
 	}
 
 	// Serialize the XfrmAddress (Saddr)
-	if _, err := buf.Write(msg.Saddr.Serialize()); err != nil {
+	data, err := msg.Saddr.Serialize()
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(data); err != nil {
 		return nil, err
 	}
 
 	// Serialize the XfrmLifetimeCfg (Lft)
+	data, err = msg.Lft.Serialize()
+	if err != nil {
+		return nil, err
+	}
 	lftBytes, err := msg.Lft.Serialize()
 	if err != nil {
 		return nil, err

@@ -14,7 +14,11 @@ func (msg *XfrmUsersaId) Serialize() ([]byte, error) {
 	// Serialize the fields in the order they appear in the structure.
 
 	// Serialize the Daddr (XfrmAddress)
-	if _, err := buf.Write(msg.Daddr.Serialize()); err != nil {
+	data, err := msg.Daddr.Serialize()
+	if err != nil {
+		return nil, err
+	}
+	if _, err := buf.Write(data); err != nil {
 		return nil, err
 	}
 

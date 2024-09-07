@@ -1,7 +1,7 @@
 package core
 
 // Serialize - converts the TcGen structure into a byte slice.
-func (msg *TcGen) Serialize() []byte {
+func (msg *TcGen) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofTcGen)
 
 	// Serialize fields in order using binary encoding
@@ -11,5 +11,5 @@ func (msg *TcGen) Serialize() []byte {
 	NativeEndian.PutUint32(buf[12:], uint32(msg.Refcnt))
 	NativeEndian.PutUint32(buf[16:], uint32(msg.Bindcnt))
 
-	return buf
+	return buf, nil
 }

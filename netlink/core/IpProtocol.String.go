@@ -11,8 +11,8 @@ package core
 //
 //	http://en.wikipedia.org/wiki/List_of_IP_protocol_numbers,
 //	https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-func (p IpProtocol) String() string {
-	switch p {
+func (p *IpProtocol) String() string {
+	switch *p {
 	case IpProtoHOPOPT:
 		return "HOPOPT"
 	case IpProtoIcmp:

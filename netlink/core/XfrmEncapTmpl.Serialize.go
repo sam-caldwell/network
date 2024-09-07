@@ -32,7 +32,11 @@ func (msg *XfrmEncapTmpl) Serialize() ([]byte, error) {
 	}
 
 	// Serialize EncapOa (XfrmAddress, variable size)
-	if _, err := buf.Write(msg.EncapOa.Serialize()); err != nil {
+	data, err := msg.EncapOa.Serialize()
+	if err != nil {
+		return nil, err
+	}
+	if _, err = buf.Write(data); err != nil {
 		return nil, err
 	}
 

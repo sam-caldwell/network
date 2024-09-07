@@ -8,8 +8,8 @@ package core
 // packet manipulation.
 //
 // Returns a byte slice containing the serialized IPProto.
-func (i *IPProto) Serialize() []byte {
-	arr := make([]byte, 1)
-	arr[0] = byte(*i)
-	return arr
+func (p *IpProtocol) Serialize() ([]byte, error) {
+	result := make([]byte, 1)
+	result[0] = byte(*p)
+	return result, nil
 }

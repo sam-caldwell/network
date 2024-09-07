@@ -33,7 +33,10 @@ func (msg *XfrmUserTmpl) Serialize() ([]byte, error) {
 	}
 
 	// Serialize Saddr (XfrmAddress)
-	sAddr := msg.Saddr.Serialize()
+	sAddr, err := msg.Saddr.Serialize()
+	if err != nil {
+		return nil, err
+	}
 	if err := binary.Write(buf, binary.BigEndian, &sAddr); err != nil {
 		return nil, err
 	}

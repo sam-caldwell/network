@@ -1,16 +1,14 @@
 package core
 
-import "encoding/binary"
-
 // Serialize - Safely serializes TcNetemReorder into a byte slice using binary encoding.
-func (msg *TcNetemReorder) Serialize() []byte {
+func (msg *TcNetemReorder) Serialize() ([]byte, error) {
 
 	buf := make([]byte, SizeofTcNetemReorder)
 
 	// Serialize each field
-	binary.LittleEndian.PutUint32(buf[0:], msg.Probability)
-	binary.LittleEndian.PutUint32(buf[4:], msg.Correlation)
+	NativeEndian.PutUint32(buf[0:], msg.Probability)
+	NativeEndian.PutUint32(buf[4:], msg.Correlation)
 
-	return buf
+	return buf, nil
 
 }

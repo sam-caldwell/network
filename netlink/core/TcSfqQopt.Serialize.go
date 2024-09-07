@@ -2,7 +2,7 @@ package core
 
 // Serialize - Safely converts the TcSfqQopt structure into a byte slice.
 // This function manually encodes each field into the byte slice.
-func (msg *TcSfqQopt) Serialize() []byte {
+func (msg *TcSfqQopt) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofTcSfqQopt)
 
 	// Encode each field into the byte slice using the appropriate byte size and endianness
@@ -12,5 +12,5 @@ func (msg *TcSfqQopt) Serialize() []byte {
 	buf[9] = msg.Divisor
 	buf[10] = msg.Flows
 
-	return buf
+	return buf, nil
 }

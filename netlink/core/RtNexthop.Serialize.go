@@ -26,7 +26,10 @@ func (msg *RtNexthop) Serialize() ([]byte, error) {
 	// Serialize children (netlink attributes)
 	if len(msg.Children) > 0 {
 		for _, child := range msg.Children {
-			childBuf := child.Serialize()
+			childBuf, err := child.Serialize()
+			if err != nil {
+				return nil, err
+			}
 			buf.Write(childBuf)
 		}
 	}

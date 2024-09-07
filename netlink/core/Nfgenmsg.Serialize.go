@@ -7,7 +7,7 @@ import (
 )
 
 // Serialize - Serialize Nfgenmsg to []byte
-func (msg *Nfgenmsg) Serialize() []byte {
+func (msg *Nfgenmsg) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofNfgenmsg)
 
 	// Serialize the NfgenFamily field
@@ -19,5 +19,5 @@ func (msg *Nfgenmsg) Serialize() []byte {
 	// Serialize the ResId field (big endian)
 	binary.BigEndian.PutUint16(buf[2:4], msg.ResId)
 
-	return buf
+	return buf, nil
 }

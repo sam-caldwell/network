@@ -1,11 +1,7 @@
 package core
 
-import (
-	"encoding/binary"
-)
-
 // Serialize - serialize VfVlan to []byte
-func (msg *VfVlan) Serialize() []byte {
+func (msg *VfVlan) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofVfVlan)
 
 	// Serialize each field into the byte slice
@@ -13,5 +9,5 @@ func (msg *VfVlan) Serialize() []byte {
 	NativeEndian.PutUint32(buf[4:8], msg.Vlan)
 	NativeEndian.PutUint32(buf[8:12], msg.Qos)
 
-	return buf
+	return buf, nil
 }

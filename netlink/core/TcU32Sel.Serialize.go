@@ -1,10 +1,18 @@
 package core
 
-import "encoding/binary"
+import (
+	"encoding/binary"
+	"unsafe"
+)
+
+const (
+	SizeOfTcU32Sel = int(unsafe.Sizeof(TcU32Sel{}))
+	SizeOfTcU32Key = int(unsafe.Sizeof(TcU32Key{}))
+)
 
 // Serialize converts the TcU32Sel object into a byte slice safely.
 // It manually converts the fields and the keys into a byte slice using the encoding/binary package.
-func (msg *TcU32Sel) Serialize() []byte {
+func (msg *TcU32Sel) Serialize() ([]byte, error) {
 	// Allocate a buffer large enough to hold the entire structure, including keys.
 	buf := make([]byte, msg.Len())
 
@@ -14,18 +22,21 @@ func (msg *TcU32Sel) Serialize() []byte {
 	buf[2] = msg.Nkeys
 	buf[3] = msg.Pad
 	binary.BigEndian.PutUint16(buf[4:], msg.Offmask)
-	binary.LittleEndian.PutUint16(buf[6:], msg.Off)
-	binary.LittleEndian.PutUint16(buf[8:], uint16(msg.Offoff))
-	binary.LittleEndian.PutUint16(buf[10:], uint16(msg.Hoff))
+	NativeEndian.PutUint16(buf[6:], msg.Off)
+	NativeEndian.PutUint16(buf[8:], uint16(msg.Offoff))
+	NativeEndian.PutUint16(buf[10:], uint16(msg.Hoff))
 	binary.BigEndian.PutUint32(buf[12:], msg.Hmask)
 
 	// Serialize each key in the Keys array
-	next := SizeofTcU32Sel
+	next := SizeOfTcU32Sel
 	for _, key := range msg.Keys {
-		keyBuf := key.Serialize()
+		keyBuf, err := key.Serialize()
+		if err != nil {
+			return nil, err
+		}
 		copy(buf[next:], keyBuf)
-		next += SizeofTcU32Key
+		next += SizeOfTcU32Key
 	}
 
-	return buf
+	return buf, nil
 }

@@ -5,7 +5,7 @@ import (
 )
 
 // Serialize - ifa_cacheinfo - serialize IfaCacheInfo to byte slice
-func (msg *IfaCacheInfo) Serialize() []byte {
+func (msg *IfaCacheInfo) Serialize() ([]byte, error) {
 
 	length := unix.SizeofIfaCacheinfo
 
@@ -19,6 +19,6 @@ func (msg *IfaCacheInfo) Serialize() []byte {
 
 	NativeEndian.PutUint32(b[12:16], msg.Tstamp)
 
-	return b
+	return b, nil
 
 }

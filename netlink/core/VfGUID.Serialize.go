@@ -2,12 +2,8 @@
 
 package core
 
-import (
-	"encoding/binary"
-)
-
 // Serialize - Serialize VfGUID to []byte
-func (msg *VfGUID) Serialize() []byte {
+func (msg *VfGUID) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofVfGUID)
 
 	// Serialize the Vf field
@@ -19,5 +15,5 @@ func (msg *VfGUID) Serialize() []byte {
 	// Serialize the GUID field
 	NativeEndian.PutUint64(buf[8:16], msg.GUID)
 
-	return buf
+	return buf, nil
 }

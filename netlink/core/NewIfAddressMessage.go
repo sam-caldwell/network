@@ -5,7 +5,7 @@ import (
 )
 
 // NewIfAddressMessage - create, configure and return a new IFAddressMessage object (by reference)
-func NewIfAddressMessage(family IfFamily) *IfAddressMessage {
+func NewIfAddressMessage(family InterfaceFamily) *IfAddressMessage {
 	return &IfAddressMessage{
 		IfAddrmsg: unix.IfAddrmsg{
 			Family: uint8(family),

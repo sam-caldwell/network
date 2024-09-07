@@ -1,11 +1,7 @@
 package core
 
-import (
-	"encoding/binary"
-)
-
 // Serialize - Serialize the CnMsgOp struct
-func (msg *CnMsgOp) Serialize() []byte {
+func (msg *CnMsgOp) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofCnMsgOp)
 
 	// Serialize CbID (Idx and Val)
@@ -19,5 +15,5 @@ func (msg *CnMsgOp) Serialize() []byte {
 	NativeEndian.PutUint16(buf[18:], msg.Flags)
 	NativeEndian.PutUint32(buf[20:], msg.Op)
 
-	return buf
+	return buf, nil
 }

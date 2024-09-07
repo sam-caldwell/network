@@ -2,12 +2,8 @@
 
 package core
 
-import (
-	"encoding/binary"
-)
-
 // Serialize - Serialize VfMac to []byte
-func (msg *VfMac) Serialize() []byte {
+func (msg *VfMac) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofVfMac)
 
 	// Serialize the Vf field
@@ -16,5 +12,5 @@ func (msg *VfMac) Serialize() []byte {
 	// Serialize the Mac field
 	copy(buf[4:], msg.Mac[:])
 
-	return buf
+	return buf, nil
 }

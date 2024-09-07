@@ -2,12 +2,8 @@
 
 package core
 
-import (
-	"encoding/binary"
-)
-
 // Serialize - Serialize VfTrust to []byte
-func (msg *VfTrust) Serialize() []byte {
+func (msg *VfTrust) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofVfTrust)
 
 	// Serialize the Vf field
@@ -16,5 +12,5 @@ func (msg *VfTrust) Serialize() []byte {
 	// Serialize the Setting field
 	NativeEndian.PutUint32(buf[4:8], msg.Setting)
 
-	return buf
+	return buf, nil
 }

@@ -3,7 +3,7 @@ package core
 // Serialize - Converts the TcSfqRedStats structure into a byte slice safely.
 // This method manually encodes each field in the TcSfqRedStats struct to a byte slice,
 // ensuring portability and safety by avoiding the use of unsafe pointers.
-func (msg *TcSfqRedStats) Serialize() []byte {
+func (msg *TcSfqRedStats) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofTcSfqRedStats)
 
 	// Manually serialize each field using the appropriate endianness
@@ -14,5 +14,5 @@ func (msg *TcSfqRedStats) Serialize() []byte {
 	NativeEndian.PutUint32(buf[16:20], msg.ProbMarkHead)
 	NativeEndian.PutUint32(buf[20:24], msg.ForcedMarkHead)
 
-	return buf
+	return buf, nil
 }

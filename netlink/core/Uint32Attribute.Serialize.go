@@ -3,7 +3,7 @@ package core
 import "encoding/binary"
 
 // Serialize converts the Uint32Attribute into a byte slice, ready for transmission or storage.
-func (a *Uint32Attribute) Serialize() []byte {
+func (a *Uint32Attribute) Serialize() ([]byte, error) {
 
 	// Create a byte slice buffer, aligned to the required size, to hold the serialized data.
 	// The buffer size is calculated using rtaAlignOf(8), assuming 8 bytes for alignment.
@@ -25,5 +25,5 @@ func (a *Uint32Attribute) Serialize() []byte {
 	}
 
 	// Return the serialized byte slice.
-	return buf
+	return buf, nil
 }

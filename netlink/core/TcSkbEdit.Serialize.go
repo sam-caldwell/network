@@ -1,7 +1,7 @@
 package core
 
 // Serialize converts the TcSkbEdit structure into a byte slice in a safe way.
-func (msg *TcSkbEdit) Serialize() []byte {
+func (msg *TcSkbEdit) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofTcSkbEdit)
 
 	// Write each field to the buffer
@@ -11,5 +11,5 @@ func (msg *TcSkbEdit) Serialize() []byte {
 	NativeEndian.PutUint32(buf[12:16], uint32(msg.Refcnt))
 	NativeEndian.PutUint32(buf[16:20], uint32(msg.Bindcnt))
 
-	return buf
+	return buf, nil
 }

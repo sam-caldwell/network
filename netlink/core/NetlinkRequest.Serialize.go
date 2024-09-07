@@ -11,7 +11,11 @@ func (req *NetlinkRequest) Serialize() (out []byte, err error) {
 	// Calculate the total length of the netlink message.
 	length := unix.SizeofNlMsghdr
 	for _, data := range req.Data {
-		length += len(data.Serialize())
+		s, err := data.Serialize()
+		if err != nil {
+			return nil, err
+		}
+		length += len(s)
 	}
 	length += len(req.RawData)
 
@@ -40,7 +44,11 @@ func (req *NetlinkRequest) Serialize() (out []byte, err error) {
 
 	// Serialize the payload data.
 	for _, data := range req.Data {
-		buf.Write(data.Serialize())
+		s, err := data.Serialize()
+		if err != nil {
+			return nil, err
+		}
+		buf.Write(s)
 	}
 
 	// Add the raw data, if any.

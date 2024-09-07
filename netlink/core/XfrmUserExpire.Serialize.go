@@ -2,11 +2,14 @@ package core
 
 // Serialize safely converts the XfrmUserExpire structure into a byte slice.
 // This method manually encodes each field into the byte slice, ensuring no unsafe pointers are used.
-func (msg *XfrmUserExpire) Serialize() []byte {
+func (msg *XfrmUserExpire) Serialize() ([]byte, error) {
 	buf := make([]byte, SizeofXfrmUserExpire)
 
 	// Serialize the XfrmUsersaInfo structure
-	xfrmInfoBytes := msg.XfrmUsersaInfo.Serialize()
+	xfrmInfoBytes, err := msg.XfrmUsersaInfo.Serialize()
+	if err != nil {
+		return nil, err
+	}
 	copy(buf[:SizeofXfrmUsersaInfo], xfrmInfoBytes)
 
 	// Serialize the Hard field
@@ -15,5 +18,5 @@ func (msg *XfrmUserExpire) Serialize() []byte {
 	// Serialize the Pad field (7 bytes)
 	copy(buf[SizeofXfrmUsersaInfo+1:], msg.Pad[:])
 
-	return buf
+	return buf, nil
 }
