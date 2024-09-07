@@ -1,8 +1,8 @@
 package netlink
 
 import (
+	"github.com/sam-caldwell/network/namespace"
 	"golang.org/x/sys/unix"
-	"namespace" // Assuming this is a custom namespace package that allows handling network namespaces
 )
 
 // AddressSubscribeOptions contains a set of options to use with AddressSubscribeWithOptions.
