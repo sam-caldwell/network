@@ -21,7 +21,11 @@ func DeserializeVfVlanList(b []byte) ([]*IfLaVfVlanInfoStruct, error) {
 
 	for _, element := range attrs {
 		if element.Attr.Type == IfLaVfVlanInfo {
-			vfVlanInfoList = append(vfVlanInfoList, DeserializeVfVlanInfo(element.Value))
+			data, err := DeserializeVfVlanInfo(element.Value)
+			if err != nil {
+				return nil, err
+			}
+			vfVlanInfoList = append(vfVlanInfoList, data)
 		}
 	}
 
