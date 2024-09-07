@@ -6,7 +6,7 @@ import (
 
 // DeserializeUint32Bitfield - deserialize a Uint32Bitfield from a byte slice.
 func DeserializeUint32Bitfield(data []byte) (*Uint32Bitfield, error) {
-	if len(data) < SizeofUint32Bitfield {
+	if len(data) < SizeOfUint32Bitfield {
 		return nil, errors.New("data slice too short")
 	}
 

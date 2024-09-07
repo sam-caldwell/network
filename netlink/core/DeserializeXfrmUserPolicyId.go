@@ -11,7 +11,7 @@ import (
 func DeserializeXfrmUserPolicyId(b []byte) (*XfrmUserPolicyId, error) {
 
 	// Check if the byte slice is large enough to hold a XfrmUserPolicyId.
-	if len(b) < SizeofXfrmUserPolicyId {
+	if len(b) < SizeOfXfrmUserPolicyId {
 		return nil, errors.New("byte slice too small to deserialize XfrmUserPolicyId")
 	}
 

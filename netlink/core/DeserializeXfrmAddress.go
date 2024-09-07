@@ -17,7 +17,7 @@ import (
 // - `error`: An error if the input byte slice is too short.
 func DeserializeXfrmAddress(b []byte) (*XfrmAddress, error) {
 	// Ensure that the byte slice is the correct length
-	if len(b) < SizeofXfrmAddress {
+	if len(b) < SizeOfXfrmAddress {
 		return nil, errors.New("DeserializeXfrmAddress: byte slice too short")
 	}
 
@@ -25,7 +25,7 @@ func DeserializeXfrmAddress(b []byte) (*XfrmAddress, error) {
 	var addr XfrmAddress
 
 	// Safely copy the byte slice into the XfrmAddress structure
-	copy(addr[:], b[:SizeofXfrmAddress])
+	copy(addr[:], b[:SizeOfXfrmAddress])
 
 	return &addr, nil
 }

@@ -10,7 +10,7 @@ import (
 // Returns an error if the byte slice is too small or if deserialization fails.
 func DeserializeXfrmStats(b []byte) (*XfrmStats, error) {
 	// Check if the byte slice is large enough to hold an XfrmStats structure.
-	if len(b) < SizeofXfrmStats {
+	if len(b) < SizeOfXfrmStats {
 		return nil, errors.New("byte slice too small to deserialize XfrmStats")
 	}
 

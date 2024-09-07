@@ -6,15 +6,15 @@ import (
 	"errors"
 )
 
-// DeserializeXfrmUsersaId safely deserializes a byte slice into an XfrmUsersaId structure.
+// DeserializeXfrmUsersaId safely deserializes a byte slice into an XfrmUserSaId structure.
 // It uses DeserializeXfrmAddress for the Daddr field and manually deserializes the other fields.
-func DeserializeXfrmUsersaId(b []byte) (*XfrmUsersaId, error) {
-	if len(b) < SizeofXfrmUsersaId {
-		return nil, errors.New("byte slice too small to deserialize XfrmUsersaId")
+func DeserializeXfrmUsersaId(b []byte) (*XfrmUserSaId, error) {
+	if len(b) < SizeOfXfrmUsersaId {
+		return nil, errors.New("byte slice too small to deserialize XfrmUserSaId")
 	}
 
-	// Create a new XfrmUsersaId struct
-	id := &XfrmUsersaId{}
+	// Create a new XfrmUserSaId struct
+	id := &XfrmUserSaId{}
 
 	// Create a reader for the byte slice
 	reader := bytes.NewReader(b)
@@ -25,7 +25,7 @@ func DeserializeXfrmUsersaId(b []byte) (*XfrmUsersaId, error) {
 		return nil, err
 	}
 	id.Daddr = *daddr
-	offset := SizeofXfrmAddress // Adjust the offset after deserializing the XfrmAddress
+	offset := SizeOfXfrmAddress // Adjust the offset after deserializing the XfrmAddress
 
 	// Seek the reader to the next field (after Daddr)
 	if _, err = reader.Seek(int64(offset), 0); err != nil {
@@ -52,6 +52,6 @@ func DeserializeXfrmUsersaId(b []byte) (*XfrmUsersaId, error) {
 		return nil, err
 	}
 
-	// Return the deserialized XfrmUsersaId structure
+	// Return the deserialized XfrmUserSaId structure
 	return id, nil
 }

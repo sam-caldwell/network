@@ -7,8 +7,8 @@ import (
 
 // DeserializeNfgenmsg - Deserialize Nfgenmsg from []byte and return pointer to the object.
 func DeserializeNfgenmsg(b []byte) (*Nfgenmsg, error) {
-	if len(b) < SizeofNfgenmsg {
-		return nil, errors.New("byte slice too short to deserialize Nfgenmsg")
+	if len(b) < SizeOfNfGenMsg {
+		return nil, errors.New("byte slice too short")
 	}
 
 	nfgenmsg := &Nfgenmsg{}

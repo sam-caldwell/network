@@ -12,7 +12,7 @@ func DeserializeVfLinkState(b []byte) (*VfLinkState, error) {
 
 	var msg VfLinkState
 
-	if len(b) != SizeofVfLinkState {
+	if len(b) != SizeOfVfLinkState {
 		return nil, errors.New("invalid length for VfLinkState")
 	}
 

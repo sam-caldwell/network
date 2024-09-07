@@ -9,7 +9,7 @@ import (
 // DeserializeTcConnmark - Safely deserialize a byte slice into a TcConnmark object.
 // This method reads each field manually and ensures proper byte order and alignment.
 func DeserializeTcConnmark(b []byte) (*TcConnmark, error) {
-	if len(b) < SizeofTcConnmark {
+	if len(b) < SizeOfTcConnmark {
 		return nil, errors.New("byte slice too short to deserialize TcConnmark")
 	}
 

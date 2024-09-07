@@ -7,7 +7,7 @@ import (
 // DeserializeTcSfqRedStats - Safely deserializes a byte slice into a TcSfqRedStats struct.
 // This function ensures the byte slice is of the correct length and manually decodes each field.
 func DeserializeTcSfqRedStats(b []byte) (*TcSfqRedStats, error) {
-	if len(b) < SizeofTcSfqRedStats {
+	if len(b) < SizeOfTcSfqRedStats {
 		return nil, errors.New("DeserializeTcSfqRedStats: byte slice too short")
 	}
 

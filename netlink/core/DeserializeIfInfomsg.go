@@ -16,7 +16,7 @@ import (
 //	   Change uint32
 //	}
 func DeserializeIfInfoMsg(b []byte) (*IfInfoMsg, error) {
-	if len(b) < SizeofIfInfoMsg {
+	if len(b) < SizeOfIfInfoMsg {
 		return nil, errors.New("IfInfoMsg to short")
 	}
 	result := IfInfoMsg{

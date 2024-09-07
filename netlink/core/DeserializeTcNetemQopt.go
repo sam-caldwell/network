@@ -8,7 +8,7 @@ import (
 
 // DeserializeTcNetemQopt - Deserialize a byte slice into a TcNetemQopt structure using the binary package.
 func DeserializeTcNetemQopt(b []byte) (*TcNetemQopt, error) {
-	if len(b) < SizeofTcNetemQopt {
+	if len(b) < SizeOfTcNetemQopt {
 		return nil, errors.New("DeserializeTcNetemQopt: buffer too small")
 	}
 

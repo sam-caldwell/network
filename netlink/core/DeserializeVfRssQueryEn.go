@@ -9,7 +9,7 @@ import (
 // DeserializeVfRssQueryEn - create a VfRssQueryEn structure from a byte slice. Return error if the slice not the
 // correct length.
 func DeserializeVfRssQueryEn(b []byte) (*VfRssQueryEn, error) {
-	if len(b) != SizeofVfRssQueryEn {
+	if len(b) != SizeOfVfRssQueryEn {
 		return nil, errors.New("invalid length for VfRssQueryEn")
 	}
 

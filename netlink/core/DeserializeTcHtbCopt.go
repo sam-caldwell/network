@@ -8,7 +8,7 @@ import (
 
 // DeserializeTcHtbCopt safely deserializes a byte slice into a TcHtbCopt structure.
 func DeserializeTcHtbCopt(b []byte) (*TcHtbCopt, error) {
-	if len(b) < SizeofTcHtbCopt {
+	if len(b) < SizeOfTcHtbCopt {
 		return nil, errors.New("byte slice too short to deserialize TcHtbCopt")
 	}
 

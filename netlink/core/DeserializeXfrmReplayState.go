@@ -10,7 +10,7 @@ import (
 // It returns the deserialized structure or an error if deserialization fails.
 func DeserializeXfrmReplayState(b []byte) (*XfrmReplayState, error) {
 	// Check if the byte slice is large enough to hold the XfrmReplayState structure.
-	if len(b) < SizeofXfrmReplayState {
+	if len(b) < SizeOfXfrmReplayState {
 		return nil, errors.New("byte slice too small to deserialize XfrmReplayState")
 	}
 

@@ -8,7 +8,7 @@ import (
 
 // DeserializeTcf - Safely deserialize a byte slice into a Tcf struct.
 func DeserializeTcf(b []byte) (*Tcf, error) {
-	if len(b) < SizeofTcf {
+	if len(b) < SizeOfTcf {
 		return nil, fmt.Errorf("byte slice is too short to be a valid Tcf")
 	}
 

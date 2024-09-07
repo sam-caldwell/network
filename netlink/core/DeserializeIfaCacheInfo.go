@@ -14,7 +14,7 @@ import (
 //	   Tstamp   uint32
 //	}
 func DeserializeIfaCacheInfo(data []byte) (*IfaCacheInfo, error) {
-	if len(data) < int(SizeOfIfaCacheinfo) {
+	if len(data) < SizeOfIfaCacheInfo {
 		return nil, errors.New("data slice too short")
 	}
 	info := &IfaCacheInfo{

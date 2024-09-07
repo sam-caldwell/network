@@ -10,7 +10,7 @@ import (
 // DeserializeXfrmEncapTmpl safely deserializes a byte slice into an XfrmEncapTmpl structure.
 // It returns the deserialized structure or an error if deserialization fails.
 func DeserializeXfrmEncapTmpl(b []byte) (*XfrmEncapTmpl, error) {
-	if len(b) < SizeofXfrmEncapTmpl {
+	if len(b) < SizeOfXfrmEncapTmpl {
 		return nil, errors.New("byte slice too small to deserialize XfrmEncapTmpl")
 	}
 

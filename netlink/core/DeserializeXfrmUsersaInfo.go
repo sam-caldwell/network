@@ -6,18 +6,18 @@ import (
 	"errors"
 )
 
-// DeserializeXfrmUsersaInfo safely deserializes a byte slice into an XfrmUsersaInfo structure.
+// DeserializeXfrmUsersaInfo safely deserializes a byte slice into an XfrmUserSaInfo structure.
 // It uses appropriate deserialization functions for fields like XfrmSelector, XfrmId, XfrmAddress, etc.
-func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUsersaInfo, error) {
-	if len(b) < SizeofXfrmUsersaInfo {
-		return nil, errors.New("byte slice too small to deserialize XfrmUsersaInfo")
+func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUserSaInfo, error) {
+	if len(b) < SizeOfXfrmUserSaInfo {
+		return nil, errors.New("byte slice too small to deserialize XfrmUserSaInfo")
 	}
 
 	// Create a reader for the byte slice
 	reader := bytes.NewReader(b)
 
-	// Create a new XfrmUsersaInfo struct
-	msg := &XfrmUsersaInfo{}
+	// Create a new XfrmUserSaInfo struct
+	msg := &XfrmUserSaInfo{}
 
 	// Deserialize XfrmSelector (Sel)
 	sel, err := DeserializeXfrmSelector(b)
@@ -33,7 +33,7 @@ func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUsersaInfo, error) {
 		return nil, err
 	}
 	msg.Id = *id
-	offset += SizeofXfrmId
+	offset += SizeOfXfrmId
 
 	// Deserialize XfrmAddress (Saddr)
 	saddr, err := DeserializeXfrmAddress(b[offset:])
@@ -41,7 +41,7 @@ func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUsersaInfo, error) {
 		return nil, err
 	}
 	msg.Saddr = *saddr
-	offset += SizeofXfrmAddress
+	offset += SizeOfXfrmAddress
 
 	// Deserialize XfrmLifetimeCfg (Lft)
 	lft, err := DeserializeXfrmLifetimeCfg(b[offset:])
@@ -49,7 +49,7 @@ func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUsersaInfo, error) {
 		return nil, err
 	}
 	msg.Lft = *lft
-	offset += SizeofXfrmLifetimeCfg
+	offset += SizeOfXfrmLifetimeCfg
 
 	// Deserialize XfrmLifetimeCur (Curlft)
 	curlft, err := DeserializeXfrmLifetimeCur(b[offset:])
@@ -57,7 +57,7 @@ func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUsersaInfo, error) {
 		return nil, err
 	}
 	msg.Curlft = *curlft
-	offset += SizeofXfrmLifetimeCur
+	offset += SizeOfXfrmLifetimeCur
 
 	// Deserialize XfrmStats (Stats)
 	stats, err := DeserializeXfrmStats(b[offset:])
@@ -65,7 +65,7 @@ func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUsersaInfo, error) {
 		return nil, err
 	}
 	msg.Stats = *stats
-	offset += SizeofXfrmStats
+	offset += SizeOfXfrmStats
 
 	// Deserialize Seq (uint32)
 	if err := binary.Read(reader, binary.BigEndian, &msg.Seq); err != nil {
@@ -102,6 +102,6 @@ func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUsersaInfo, error) {
 		return nil, err
 	}
 
-	// Return the deserialized XfrmUsersaInfo structure
+	// Return the deserialized XfrmUserSaInfo structure
 	return msg, nil
 }

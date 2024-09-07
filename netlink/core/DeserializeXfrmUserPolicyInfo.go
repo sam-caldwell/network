@@ -11,7 +11,7 @@ import (
 // Returns an error if the byte slice is too small or deserialization fails.
 func DeserializeXfrmUserPolicyInfo(b []byte) (*XfrmUserPolicyInfo, error) {
 	// Check if the byte slice is large enough to hold the mandatory fields of XfrmUserPolicyInfo.
-	if len(b) < SizeofXfrmUserPolicyInfo {
+	if len(b) < SizeOfXfrmUserPolicyInfo {
 		return nil, errors.New("byte slice too small to deserialize XfrmUserPolicyInfo")
 	}
 
@@ -33,7 +33,7 @@ func DeserializeXfrmUserPolicyInfo(b []byte) (*XfrmUserPolicyInfo, error) {
 		return nil, err
 	}
 	info.Lft = *lft
-	offset += SizeofXfrmLifetimeCfg
+	offset += SizeOfXfrmLifetimeCfg
 
 	// Deserialize the Curlft (XfrmLifetimeCur) using DeserializeXfrmLifetimeCur
 	curlft, err := DeserializeXfrmLifetimeCur(b[offset:])
@@ -41,7 +41,7 @@ func DeserializeXfrmUserPolicyInfo(b []byte) (*XfrmUserPolicyInfo, error) {
 		return nil, err
 	}
 	info.Curlft = *curlft
-	offset += SizeofXfrmLifetimeCur
+	offset += SizeOfXfrmLifetimeCur
 
 	// Deserialize the remaining fields directly using binary.Read.
 

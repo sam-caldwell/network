@@ -7,9 +7,9 @@ import (
 )
 
 // DeserializeXfrmUserSpiInfo safely deserializes a byte slice into an XfrmUserSpiInfo structure.
-// It uses appropriate deserialization functions for the embedded XfrmUsersaInfo.
+// It uses appropriate deserialization functions for the embedded XfrmUserSaInfo.
 func DeserializeXfrmUserSpiInfo(b []byte) (*XfrmUserSpiInfo, error) {
-	if len(b) < SizeofXfrmUserSpiInfo {
+	if len(b) < SizeOfXfrmUserSpiInfo {
 		return nil, errors.New("byte slice too small to deserialize XfrmUserSpiInfo")
 	}
 
@@ -19,15 +19,15 @@ func DeserializeXfrmUserSpiInfo(b []byte) (*XfrmUserSpiInfo, error) {
 	// Create a new XfrmUserSpiInfo struct
 	msg := &XfrmUserSpiInfo{}
 
-	// Deserialize the XfrmUsersaInfo
+	// Deserialize the XfrmUserSaInfo
 	usersaInfo, err := DeserializeXfrmUsersaInfo(b)
 	if err != nil {
 		return nil, err
 	}
 	msg.XfrmUsersaInfo = *usersaInfo
-	offset := SizeofXfrmUsersaInfo
+	offset := SizeOfXfrmUserSaInfo
 
-	// Move the reader past the deserialized XfrmUsersaInfo
+	// Move the reader past the deserialized XfrmUserSaInfo
 	if _, err := reader.Seek(int64(offset), 0); err != nil {
 		return nil, err
 	}

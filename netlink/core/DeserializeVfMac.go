@@ -7,7 +7,7 @@ import (
 // DeserializeVfMac - Deserialize a byte slice into a VfMac struct
 func DeserializeVfMac(b []byte) (*VfMac, error) {
 
-	if len(b) < SizeofVfMac {
+	if len(b) < SizeOfVfMac {
 		return nil, errors.New("input too short to deserialize VfMac")
 	}
 

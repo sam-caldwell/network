@@ -7,8 +7,8 @@ import (
 // DeserializeSkbEdit safely deserializes a byte slice into a TcSkbEdit struct.
 // The function ensures the byte slice is of the correct size and uses binary deserialization.
 func DeserializeSkbEdit(b []byte) (*TcSkbEdit, error) {
-	if len(b) < SizeofTcSkbEdit {
-		return nil, errors.New("DeserializeSkbEdit: byte slice too short")
+	if len(b) < SizeOfTcSkbEdit {
+		return nil, errors.New("byte slice too short")
 	}
 
 	msg := &TcSkbEdit{}

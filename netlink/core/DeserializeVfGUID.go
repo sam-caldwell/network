@@ -8,7 +8,7 @@ import (
 
 // DeserializeVfGUID - Deserialize a byte slice into a VfGUID struct and return by reference
 func DeserializeVfGUID(b []byte) (*VfGUID, error) {
-	if len(b) < SizeofVfGUID {
+	if len(b) < SizeOfVfGUID {
 		return nil, errors.New("byte slice too short to deserialize VfGUID")
 	}
 

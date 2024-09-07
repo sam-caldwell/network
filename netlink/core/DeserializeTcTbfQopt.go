@@ -8,7 +8,7 @@ import (
 
 // DeserializeTcTbfQopt safely deserializes a byte slice into a TcTbfQopt object.
 func DeserializeTcTbfQopt(b []byte) (*TcTbfQopt, error) {
-	if len(b) < SizeofTcTbfQopt {
+	if len(b) < SizeOfTcTbfQopt {
 		return nil, errors.New("DeserializeTcTbfQopt: insufficient byte slice size")
 	}
 

@@ -44,13 +44,13 @@ import (
 func DeserializeBridgeVlanInfo(b []byte) (*BridgeVlanInfo, error) {
 
 	// Ensure that the byte slice is at least the size of the BridgeVlanInfo structure
-	if len(b) < SizeofBridgeVlanInfo {
+	if len(b) < SizeOfBridgeVlanInfo {
 		return nil, errors.New("input byte slice is too short")
 	}
 
 	// Deserialize the byte slice into a BridgeVlanInfo structure
 	return &BridgeVlanInfo{
-		Flags: BridgeVlanInfoEnum(NativeEndian.Uint16(b[0:2])), // Deserialize the Flags field
-		Vid:   VlanIdType(NativeEndian.Uint16(b[2:4])),         // Deserialize the VLAN ID field
+		Flags: BridgeVlanInfoFlags(NativeEndian.Uint16(b[0:2])), // Deserialize the Flags field
+		Vid:   VlanIdType(NativeEndian.Uint16(b[2:4])),          // Deserialize the VLAN ID field
 	}, nil
 }

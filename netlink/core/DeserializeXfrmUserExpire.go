@@ -6,7 +6,7 @@ import "errors"
 // Ensures that the input byte slice is of the correct length, avoiding the use of unsafe pointers.
 func DeserializeXfrmUserExpire(b []byte) (*XfrmUserExpire, error) {
 	// Check if the input byte slice has the correct length
-	if len(b) < SizeofXfrmUserExpire {
+	if len(b) < SizeOfXfrmUserExpire {
 		return nil, errors.New("DeserializeXfrmUserExpire: byte slice too short")
 	}
 
@@ -17,7 +17,7 @@ func DeserializeXfrmUserExpire(b []byte) (*XfrmUserExpire, error) {
 	}
 	return &(XfrmUserExpire{
 		XfrmUsersaInfo: *info,
-		Hard:           b[SizeofXfrmUsersaInfo],
-		Pad:            [7]byte(b[SizeofXfrmUsersaInfo+1:]),
+		Hard:           b[SizeOfXfrmUserSaInfo],
+		Pad:            [7]byte(b[SizeOfXfrmUserSaInfo+1:]),
 	}), nil
 }

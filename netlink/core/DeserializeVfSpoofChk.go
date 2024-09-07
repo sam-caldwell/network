@@ -12,7 +12,7 @@ func DeserializeVfSpoofchk(b []byte) (*VfSpoofchk, error) {
 
 	var msg VfSpoofchk
 
-	if len(b) != SizeofVfSpoofchk {
+	if len(b) != SizeOfVfSpoofchk {
 		return nil, errors.New("invalid length for VfSpoofchk")
 	}
 

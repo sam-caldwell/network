@@ -4,7 +4,7 @@ import "encoding/binary"
 
 // DeserializeTcNetemRate - Converts a byte slice into a TcNetemRate object using binary encoding.
 func DeserializeTcNetemRate(b []byte) *TcNetemRate {
-	if len(b) < SizeofTcRateSpec {
+	if len(b) < SizeOfTcRateSpec {
 		return nil
 	}
 	msg := &TcNetemRate{}

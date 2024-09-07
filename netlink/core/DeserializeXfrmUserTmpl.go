@@ -10,7 +10,7 @@ import (
 // It uses DeserializeXfrmId and DeserializeXfrmAddress for respective fields.
 // Returns an error if the byte slice is too small or deserialization fails.
 func DeserializeXfrmUserTmpl(b []byte) (*XfrmUserTmpl, error) {
-	if len(b) < SizeofXfrmUserTmpl {
+	if len(b) < SizeOfXfrmUserTmpl {
 		return nil, errors.New("byte slice too small to deserialize XfrmUserTmpl")
 	}
 
@@ -26,7 +26,7 @@ func DeserializeXfrmUserTmpl(b []byte) (*XfrmUserTmpl, error) {
 		return nil, err
 	}
 	tmpl.XfrmId = *xfrmId
-	offset := SizeofXfrmId
+	offset := SizeOfXfrmId
 
 	// Move the reader to the next field (Family)
 	reader.Seek(int64(offset), 0)
@@ -49,7 +49,7 @@ func DeserializeXfrmUserTmpl(b []byte) (*XfrmUserTmpl, error) {
 		return nil, err
 	}
 	tmpl.Saddr = *saddr
-	offset += SizeofXfrmAddress
+	offset += SizeOfXfrmAddress
 
 	// Move the reader to the next field (Reqid)
 	reader.Seek(int64(offset), 0)

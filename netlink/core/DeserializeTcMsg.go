@@ -9,7 +9,7 @@ import (
 // DeserializeTcMsg - Given []byte input, deserialize to TcMsg object and return by reference.
 // This version uses binary.Read for safer deserialization.
 func DeserializeTcMsg(b []byte) (*TcMsg, error) {
-	if len(b) < SizeofTcMsg {
+	if len(b) < SizeOfTcMsg {
 		return nil, errors.New("DeserializeTcMsg: input byte slice is too small")
 	}
 

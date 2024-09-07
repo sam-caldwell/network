@@ -19,20 +19,20 @@ func DeserializeXfrmSelector(b []byte) (*XfrmSelector, error) {
 	// Create a new XfrmSelector struct.
 	sel := XfrmSelector{}
 
-	if addr, err := DeserializeXfrmAddress(b[0:SizeofXfrmAddress]); err != nil {
+	if addr, err := DeserializeXfrmAddress(b[0:SizeOfXfrmAddress]); err != nil {
 		return nil, err
 	} else {
 		sel.Daddr = *addr
 	}
 
-	if addr, err := DeserializeXfrmAddress(b[SizeofXfrmAddress : 2*SizeofXfrmAddress]); err != nil {
+	if addr, err := DeserializeXfrmAddress(b[SizeOfXfrmAddress : 2*SizeOfXfrmAddress]); err != nil {
 		return nil, err
 	} else {
 		sel.Saddr = *addr
 	}
 
 	// Create a reader for the byte slice.
-	reader := bytes.NewReader(b[2*SizeofXfrmAddress:])
+	reader := bytes.NewReader(b[2*SizeOfXfrmAddress:])
 
 	if err := binary.Read(reader, binary.BigEndian, &sel.Dport); err != nil {
 		return nil, err

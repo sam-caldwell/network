@@ -9,7 +9,7 @@ import (
 //
 // If the length of the input byte slice is less than the size of TcPolice, it returns an error.
 func DeserializeTcPolice(b []byte) (*TcPolice, error) {
-	if len(b) < SizeofTcPolice {
+	if len(b) < SizeOfTcPolice {
 		return nil, errors.New("DeserializeTcPolice: byte slice too short")
 	}
 
@@ -22,8 +22,8 @@ func DeserializeTcPolice(b []byte) (*TcPolice, error) {
 	msg.Limit = NativeEndian.Uint32(b[8:12])
 	msg.Burst = NativeEndian.Uint32(b[12:16])
 	msg.Mtu = NativeEndian.Uint32(b[16:20])
-	msg.Rate = *DeserializeTcRateSpec(b[20 : 20+SizeofTcRateSpec])
-	msg.PeakRate = *DeserializeTcRateSpec(b[20+SizeofTcRateSpec : 20+2*SizeofTcRateSpec])
+	msg.Rate = *DeserializeTcRateSpec(b[20 : 20+SizeOfTcRateSpec])
+	msg.PeakRate = *DeserializeTcRateSpec(b[20+SizeOfTcRateSpec : 20+2*SizeOfTcRateSpec])
 	msg.Refcnt = int32(NativeEndian.Uint32(b[36:40]))
 	msg.Bindcnt = int32(NativeEndian.Uint32(b[40:44]))
 	msg.Capab = NativeEndian.Uint32(b[44:48])

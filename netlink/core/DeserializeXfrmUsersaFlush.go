@@ -6,15 +6,15 @@ import (
 	"errors"
 )
 
-// DeserializeXfrmUsersaFlush safely deserializes a byte slice into an XfrmUsersaFlush structure.
+// DeserializeXfrmUsersaFlush safely deserializes a byte slice into an XfrmUserSaFlush structure.
 // It returns the deserialized structure or an error if deserialization fails.
-func DeserializeXfrmUsersaFlush(b []byte) (*XfrmUsersaFlush, error) {
-	if len(b) < SizeofXfrmUsersaFlush {
-		return nil, errors.New("byte slice too small to deserialize XfrmUsersaFlush")
+func DeserializeXfrmUsersaFlush(b []byte) (*XfrmUserSaFlush, error) {
+	if len(b) < SizeOfXfrmUsersaFlush {
+		return nil, errors.New("byte slice too small to deserialize XfrmUserSaFlush")
 	}
 
-	// Create a new XfrmUsersaFlush structure
-	msg := &XfrmUsersaFlush{}
+	// Create a new XfrmUserSaFlush structure
+	msg := &XfrmUserSaFlush{}
 
 	// Create a reader for the byte slice
 	reader := bytes.NewReader(b)
@@ -24,6 +24,6 @@ func DeserializeXfrmUsersaFlush(b []byte) (*XfrmUsersaFlush, error) {
 		return nil, err
 	}
 
-	// Return the deserialized XfrmUsersaFlush structure
+	// Return the deserialized XfrmUserSaFlush structure
 	return msg, nil
 }

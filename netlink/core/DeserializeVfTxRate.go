@@ -8,7 +8,7 @@ import (
 
 // DeserializeVfTxRate - Deserialize a byte slice into a VfTxRate struct and return by reference
 func DeserializeVfTxRate(b []byte) (*VfTxRate, error) {
-	if len(b) < SizeofVfTxRate {
+	if len(b) < SizeOfVfTxRate {
 		return nil, errors.New("byte slice too short to deserialize VfTxRate")
 	}
 

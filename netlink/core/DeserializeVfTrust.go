@@ -8,7 +8,7 @@ import (
 
 // DeserializeVfTrust - Deserialize a byte slice into a VfTrust struct
 func DeserializeVfTrust(b []byte) (*VfTrust, error) {
-	if len(b) < SizeofVfTrust {
+	if len(b) < SizeOfVfTrust {
 		return nil, errors.New("input too short to deserialize VfTrust")
 	}
 

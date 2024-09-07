@@ -6,7 +6,7 @@ import (
 
 // DeserializeTcGen - converts a byte slice into a TcGen object using safe binary decoding.
 func DeserializeTcGen(b []byte) (*TcGen, error) {
-	if len(b) < SizeofTcGen {
+	if len(b) < SizeOfTcGen {
 		return nil, fmt.Errorf("invalid byte slice size for TcGen")
 	}
 

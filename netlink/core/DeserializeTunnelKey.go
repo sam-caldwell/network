@@ -8,7 +8,7 @@ import (
 // The function ensures that the byte slice is the correct length and uses
 // binary encoding to parse the data correctly.
 func DeserializeTunnelKey(b []byte) (*TcTunnelKey, error) {
-	if len(b) < SizeofTcTunnelKey {
+	if len(b) < SizeOfTcTunnelKey {
 		return nil, errors.New("DeserializeTunnelKey: byte slice too short")
 	}
 

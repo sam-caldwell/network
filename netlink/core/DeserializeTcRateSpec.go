@@ -11,7 +11,7 @@ import "encoding/binary"
 // Returns:
 // - A pointer to the deserialized TcRateSpec struct.
 func DeserializeTcRateSpec(b []byte) *TcRateSpec {
-	if len(b) < SizeofTcRateSpec {
+	if len(b) < SizeOfTcRateSpec {
 		return nil
 	}
 
