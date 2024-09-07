@@ -98,18 +98,18 @@ done:
 					err = unix.Errno(-errno)
 				}
 				unreadData := m.Data[4:]
-				if m.Header.Flags&unix.NLM_F_ACK_TLVS != 0 && len(unreadData) > SizeofNlMsghdr {
+				if m.Header.Flags&unix.NLM_F_ACK_TLVS != 0 && len(unreadData) > SizeOfNlMsgHdr {
 					// Skip the echoed request message.
 					var echoReqH *unix.NlMsghdr
-					if echoReqH, err = deserializeNlMsgHdr(unreadData); err != nil {
+					if echoReqH, err = DeserializeNlMsgHdr(unreadData); err != nil {
 						return err
 					}
 					unreadData = unreadData[nlmAlignOf(int(echoReqH.Len)):]
 
 					// Annotate `err` using nlmsgerr attributes.
-					for len(unreadData) >= unix.SizeofRtAttr {
+					for len(unreadData) >= SizeOfUnixRtAttr {
 						var attr *unix.RtAttr
-						if attr, err = deserializeUnixRtAttr(unreadData); err != nil {
+						if attr, err = DeserializeUnixRtAttr(unreadData); err != nil {
 							return err
 						}
 						attrData := unreadData[SizeOfUnixRtAttr:attr.Len]

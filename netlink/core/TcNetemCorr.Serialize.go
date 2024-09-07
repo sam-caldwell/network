@@ -2,7 +2,7 @@ package core
 
 // Serialize serializes TcNetemCorr into a byte slice using binary encoding.
 func (msg *TcNetemCorr) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofTcNetemCorr)
+	buf := make([]byte, SizeOfTcNetemCorr)
 
 	// Binary encoding of each field
 	NativeEndian.PutUint32(buf[0:], msg.DelayCorr)

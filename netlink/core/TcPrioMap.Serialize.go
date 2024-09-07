@@ -5,8 +5,8 @@ import (
 	"encoding/binary"
 )
 
-// Serialize serializes the TcPrioMap struct into a byte slice.
-func (x *TcPrioMap) Serialize() ([]byte, error) {
+// Serialize serializes the TcPriorityMap struct into a byte slice.
+func (x *TcPriorityMap) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 
 	// Serialize the Bands field (int32).

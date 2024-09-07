@@ -7,9 +7,9 @@ import (
 // Serialize - serialize the Uint32Bitfield struct into a byte slice
 func (a *Uint32Bitfield) Serialize() ([]byte, error) {
 	// Allocate a byte slice of the required size
-	data := make([]byte, SizeofUint32Bitfield)
+	data := make([]byte, SizeOfUint32Bitfield)
 
-	// Check if SizeofUint32Bitfield matches the expected size
+	// Check if SizeOfUint32Bitfield matches the expected size
 	if len(data) < 8 {
 		return nil, errors.New("invalid size for Uint32Bitfield serialization")
 	}

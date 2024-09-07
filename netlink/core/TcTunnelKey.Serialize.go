@@ -4,7 +4,7 @@ package core
 // This method uses the binary package to serialize the fields into a byte slice
 // while ensuring proper endianness, providing a safe alternative to unsafe pointer casting.
 func (msg *TcTunnelKey) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofTcTunnelKey)
+	buf := make([]byte, SizeOfTcTunnelKey)
 
 	// Serialize each field of the TcTunnelKey struct
 	NativeEndian.PutUint32(buf[0:], msg.Index)

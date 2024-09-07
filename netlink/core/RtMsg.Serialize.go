@@ -1,9 +1,5 @@
 package core
 
-import (
-	"golang.org/x/sys/unix"
-)
-
 // Serialize - Convert the RtMsg struct into a byte slice.
 //
 // This method serializes the RtMsg structure to its byte representation,
@@ -11,7 +7,7 @@ import (
 //
 // See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/rtnetlink.h
 func (msg *RtMsg) Serialize() ([]byte, error) {
-	buf := make([]byte, unix.SizeofRtMsg)
+	buf := make([]byte, SizeOfUnixRtMsg)
 	buf[0] = msg.Family
 	buf[1] = msg.Dst_len
 	buf[2] = msg.Src_len

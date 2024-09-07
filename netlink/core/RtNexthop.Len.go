@@ -4,7 +4,7 @@ package core
 func (msg *RtNexthop) Len() int {
 
 	if len(msg.Children) == 0 {
-		return SizeofRtNexthop
+		return SizeOfRtNextHop
 	}
 
 	l := 0
@@ -13,7 +13,7 @@ func (msg *RtNexthop) Len() int {
 		l += rtaAlignOf(child.Len())
 	}
 
-	l += SizeofRtNexthop
+	l += SizeOfRtNextHop
 
 	return rtaAlignOf(l)
 

@@ -9,5 +9,5 @@ package core
 //
 // Reference: https://github.com/torvalds/linux/blob/master/include/uapi/linux/pkt_sched.h
 func (msg *TcSfqRedStats) Len() int {
-	return SizeofTcSfqRedStats
+	return SizeOfTcSfqRedStats
 }

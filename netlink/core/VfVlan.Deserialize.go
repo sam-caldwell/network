@@ -6,7 +6,7 @@ import (
 
 // DeserializeVfVlan - deserialize []byte to VfVlan struct
 func DeserializeVfVlan(b []byte) (*VfVlan, error) {
-	if len(b) < SizeofVfVlan {
+	if len(b) < SizeOfVfVlan {
 		return nil, errors.New("byte slice too short to deserialize VfVlan")
 	}
 

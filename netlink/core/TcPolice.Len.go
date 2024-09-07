@@ -6,7 +6,7 @@ package core
 // important when working with netlink messages or other low-level networking
 // interactions that require the exact byte size of data structures.
 //
-// SizeofTcPolice is a constant defined elsewhere that represents the size of the TcPolice struct.
+// SizeOfTcPolice is a constant defined elsewhere that represents the size of the TcPolice struct.
 func (msg *TcPolice) Len() int {
-	return SizeofTcPolice
+	return SizeOfTcPolice
 }

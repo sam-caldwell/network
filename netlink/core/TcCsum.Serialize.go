@@ -5,7 +5,7 @@ package core
 //
 // Returns the serialized byte slice.
 func (msg *TcCsum) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofTcCsum)
+	buf := make([]byte, SizeOfTcCsum)
 
 	// Serialize fields
 	NativeEndian.PutUint32(buf[0:], msg.TcGen.Index)

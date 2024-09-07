@@ -23,7 +23,7 @@ import (
 // References:
 // - Linux Kernel Source: https://github.com/torvalds/linux/blob/master/include/uapi/linux/xfrm.h
 func (x *XfrmAddress) ToIPNet(prefixlen uint8, family uint16) *net.IPNet {
-	empty := [SizeofXfrmAddress]byte{}
+	empty := [SizeOfXfrmAddress]byte{}
 
 	// If the address is empty and prefixlen is 0, return based on the family type (IPv4/IPv6).
 	if bytes.Equal(x[:], empty[:]) && prefixlen == 0 {

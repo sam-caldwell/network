@@ -5,11 +5,11 @@ package core
 // which includes the embedded TcGen structure's size and the size
 // of the Zone field.
 //
-// The `SizeofTcConnmark` is assumed to be a constant defined elsewhere,
+// The `SizeOfTcConnmark` is assumed to be a constant defined elsewhere,
 // representing the total byte size of the structure.
 //
 // This method is particularly useful for serialization and deserialization
 // of TcConnmark objects in netlink messages or other low-level networking operations.
 func (msg *TcConnmark) Len() int {
-	return SizeofTcConnmark
+	return SizeOfTcConnmark
 }

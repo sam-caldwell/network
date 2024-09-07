@@ -12,5 +12,5 @@ package core
 // See the Linux source code for more information:
 // - https://github.com/torvalds/linux/blob/master/include/uapi/linux/tc_act/tc_tunnel_key.h
 func (msg *TcTunnelKey) Len() int {
-	return SizeofTcTunnelKey
+	return SizeOfTcTunnelKey
 }

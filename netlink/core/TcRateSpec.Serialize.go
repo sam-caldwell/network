@@ -4,7 +4,7 @@ package core
 // This function ensures safe serialization by manually converting each field
 // to a byte slice using the binary encoding package.
 func (msg *TcRateSpec) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofTcRateSpec)
+	buf := make([]byte, SizeOfTcRateSpec)
 	buf[0] = msg.CellLog   // Directly assign for uint8
 	buf[1] = msg.Linklayer // Directly assign for uint8
 	NativeEndian.PutUint16(buf[2:], msg.Overhead)

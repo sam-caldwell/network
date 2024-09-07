@@ -4,7 +4,7 @@ package core
 
 // Serialize - Serialize VfTrust to []byte
 func (msg *VfTrust) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofVfTrust)
+	buf := make([]byte, SizeOfVfTrust)
 
 	// Serialize the Vf field
 	NativeEndian.PutUint32(buf[0:4], msg.Vf)

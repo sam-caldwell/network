@@ -1,6 +1,6 @@
 package core
 
-// TcPrioMap represents the traffic control priority queueing option.
+// TcPriorityMap represents the traffic control priority queueing option.
 //
 // This struct mirrors the `tc_prio_qopt` structure in the Linux kernel's
 // traffic control (tc) system. It is used to configure priority queueing
@@ -11,7 +11,7 @@ package core
 //
 // References:
 // - https://github.com/torvalds/linux/blob/master/include/uapi/linux/pkt_sched.h
-type TcPrioMap struct {
+type TcPriorityMap struct {
 	Bands   int32                // Number of priority bands.
 	Priomap [TcPrioMax + 1]uint8 // Priority mapping to bands (0-15).
 }

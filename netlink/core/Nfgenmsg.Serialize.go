@@ -8,7 +8,7 @@ import (
 
 // Serialize - Serialize Nfgenmsg to []byte
 func (msg *Nfgenmsg) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofNfgenmsg)
+	buf := make([]byte, SizeOfNfGenMsg)
 
 	// Serialize the NfgenFamily field
 	buf[0] = msg.NfgenFamily

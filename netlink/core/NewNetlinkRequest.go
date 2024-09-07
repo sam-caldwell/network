@@ -11,7 +11,7 @@ import (
 func NewNetlinkRequest(proto, flags int) *NetlinkRequest {
 	return &NetlinkRequest{
 		NlMsghdr: unix.NlMsghdr{
-			Len:   uint32(unix.SizeofNlMsghdr),
+			Len:   uint32(SizeOfNlMsgHdr),
 			Type:  uint16(proto),
 			Flags: unix.NLM_F_REQUEST | uint16(flags),
 			Seq:   atomic.AddUint32(&nextSequenceNumber, 1),

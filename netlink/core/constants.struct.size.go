@@ -32,6 +32,9 @@ const (
 	// SizeOfNlMsgHdr - Size of unix.NlMsghdr struct
 	SizeOfNlMsgHdr = int(unsafe.Sizeof(unix.NlMsghdr{}))
 
+	//SizeOfRtGenMsg - Size of the RtGenMsg struct
+	SizeOfRtGenMsg = int(unsafe.Sizeof(RtGenMsg{}))
+
 	// SizeOfRtNextHop - Size of the RtNexthop struct
 	SizeOfRtNextHop = int(unsafe.Sizeof(RtNexthop{}))
 

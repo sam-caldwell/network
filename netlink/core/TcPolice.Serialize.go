@@ -4,7 +4,7 @@ package core
 // This method manually encodes each field in the TcPolice struct to a byte slice,
 // ensuring portability and safety by avoiding the use of unsafe pointers.
 func (msg *TcPolice) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofTcPolice)
+	buf := make([]byte, SizeOfTcPolice)
 
 	// Manually serialize each field using the appropriate endianness
 	NativeEndian.PutUint32(buf[0:4], msg.Index)

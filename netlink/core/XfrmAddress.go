@@ -16,4 +16,4 @@ package core
 //
 // References:
 // - Linux Kernel: https://github.com/torvalds/linux/blob/master/include/uapi/linux/xfrm.h
-type XfrmAddress [SizeofXfrmAddress]byte
+type XfrmAddress [SizeOfXfrmAddress]byte

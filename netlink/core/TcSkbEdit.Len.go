@@ -8,5 +8,5 @@ package core
 // The size of TcSkbEdit is determined based on the size of its fields,
 // ensuring it aligns correctly with the underlying system architecture.
 func (msg *TcSkbEdit) Len() int {
-	return SizeofTcSkbEdit
+	return SizeOfTcSkbEdit
 }

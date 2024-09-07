@@ -9,5 +9,5 @@ package core
 // See:
 // - https://github.com/torvalds/linux/blob/master/include/uapi/linux/tc_act/tc_mirred.h
 func (msg *TcMirred) Len() int {
-	return SizeofTcMirred
+	return SizeOfTcMirred
 }

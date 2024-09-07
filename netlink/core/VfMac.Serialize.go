@@ -4,7 +4,7 @@ package core
 
 // Serialize - Serialize VfMac to []byte
 func (msg *VfMac) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofVfMac)
+	buf := make([]byte, SizeOfVfMac)
 
 	// Serialize the Vf field
 	NativeEndian.PutUint32(buf[0:4], msg.Vf)

@@ -8,7 +8,7 @@ import (
 
 // Deserialize - Deserialize a byte slice into a VfTxRate struct
 func (msg *VfTxRate) Deserialize(b []byte) error {
-	if len(b) < SizeofVfTxRate {
+	if len(b) < SizeOfVfTxRate {
 		return errors.New("byte slice too short to deserialize VfTxRate")
 	}
 

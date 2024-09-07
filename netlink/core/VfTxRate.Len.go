@@ -4,5 +4,5 @@ package core
 
 // Len - Return the size of the VfTxRate struct
 func (msg *VfTxRate) Len() int {
-	return SizeofVfTxRate
+	return SizeOfVfTxRate
 }

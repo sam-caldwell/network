@@ -6,7 +6,7 @@ package core
 //
 // Returns the serialized byte slice.
 func (msg *TcNetemQopt) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeofTcNetemQopt)
+	buf := make([]byte, SizeOfTcNetemQopt)
 	NativeEndian.PutUint32(buf[0:], msg.Latency)
 	NativeEndian.PutUint32(buf[4:], msg.Limit)
 	NativeEndian.PutUint32(buf[8:], msg.Loss)

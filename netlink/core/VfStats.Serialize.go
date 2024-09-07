@@ -19,7 +19,7 @@ func (stats *VfStats) Serialize() ([]byte, error) {
 		attr := RtAttr{
 			RtAttr: unix.RtAttr{
 				Type: uint16(attrType),
-				Len:  uint16(binary.Size(value) + unix.SizeofRtAttr),
+				Len:  uint16(binary.Size(value) + SizeOfUnixRtAttr),
 			},
 			Data: make([]byte, 8),
 		}

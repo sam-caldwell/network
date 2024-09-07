@@ -3,13 +3,12 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
-	"golang.org/x/sys/unix"
 )
 
 // Serialize outputs a serialized []byte from the NetlinkRequest struct.
 func (req *NetlinkRequest) Serialize() (out []byte, err error) {
 	// Calculate the total length of the netlink message.
-	length := unix.SizeofNlMsghdr
+	length := SizeOfNlMsgHdr
 	for _, data := range req.Data {
 		s, err := data.Serialize()
 		if err != nil {

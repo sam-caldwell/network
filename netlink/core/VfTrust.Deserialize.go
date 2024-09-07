@@ -8,7 +8,7 @@ import (
 
 // Deserialize - Serialize VfTrust from []byte
 func (msg *VfTrust) Deserialize(b []byte) error {
-	if len(b) < SizeofVfTrust {
+	if len(b) < SizeOfVfTrust {
 		return errors.New("byte slice too short to deserialize VfTrust")
 	}
 	// Deserialize the Vf field

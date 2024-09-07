@@ -2,12 +2,11 @@ package core
 
 import (
 	"errors"
-	"golang.org/x/sys/unix"
 )
 
 // Deserialize parses a byte slice into an RtAttr structure, including its data and any child attributes.
 func (attr *RtAttr) Deserialize(b []byte) error {
-	if len(b) < unix.SizeofRtAttr {
+	if len(b) < SizeOfUnixRtAttr {
 		return errors.New("byte slice too short to contain RtAttr")
 	}
 
@@ -17,18 +16,18 @@ func (attr *RtAttr) Deserialize(b []byte) error {
 
 	// Validate length
 	totalLen := int(attr.RtAttr.Len)
-	if totalLen < unix.SizeofRtAttr || totalLen > len(b) {
+	if totalLen < SizeOfUnixRtAttr || totalLen > len(b) {
 		return errors.New("invalid RtAttr length")
 	}
 
 	// Extract the Data part
-	attr.Data = b[unix.SizeofRtAttr:totalLen]
+	attr.Data = b[SizeOfUnixRtAttr:totalLen]
 
 	// Initialize children slice
 	attr.children = []NetlinkRequestData{}
 
 	// Parse potential child attributes
-	childOffset := rtaAlignOf(unix.SizeofRtAttr + len(attr.Data))
+	childOffset := rtaAlignOf(SizeOfUnixRtAttr + len(attr.Data))
 	for childOffset < totalLen {
 		child := RtAttr{}
 		if err := child.Deserialize(b[childOffset:]); err != nil {

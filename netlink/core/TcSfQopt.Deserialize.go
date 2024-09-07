@@ -9,7 +9,7 @@ import (
 //
 // If the length of the input byte slice is less than the size of TcSfqQopt, it returns an error.
 func (msg *TcSfqQopt) Deserialize(b []byte) error {
-	if len(b) < SizeofTcSfqQopt {
+	if len(b) < SizeOfTcSfqQopt {
 		return errors.New("Deserialize: byte slice too short")
 	}
 
