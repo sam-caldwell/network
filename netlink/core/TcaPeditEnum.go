@@ -5,7 +5,7 @@ package core
 //
 // For more details, refer to the Linux Kernel Source:
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/tc_act/tc_pedit.h
-type TcaPeditEnum uint8
+type TcaPeditEnum uint16
 
 const (
 	// TcaPeditUnspec - TCA_PEDIT_UNSPEC - represents an unspecified pedit action.
@@ -20,12 +20,12 @@ const (
 	// TcaPeditPad - TCA_PEDIT_PAD - represents the padding for pedit.
 	TcaPeditPad TcaPeditEnum = iota
 
-	// TcaPeditParmsEx - TCA_PEDIT_PARMS_EX - represents extended pedit parameters.
+	// TcaPeditParmsEx - TcaPeditParmsEx - represents extended pedit parameters.
 	TcaPeditParmsEx TcaPeditEnum = iota
 
-	// TcaPeditKeysEx - TCA_PEDIT_KEYS_EX - represents extended pedit keys.
+	// TcaPeditKeysEx - TcaPeditKeysEx - represents extended pedit keys.
 	TcaPeditKeysEx TcaPeditEnum = iota
 
-	// TcaPeditKeyEx - TCA_PEDIT_KEY_EX - represents a single extended pedit key.
+	// TcaPeditKeyEx - TcaPeditKeyEx - represents a single extended pedit key.
 	TcaPeditKeyEx TcaPeditEnum = iota
 )
