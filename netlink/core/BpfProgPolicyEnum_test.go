@@ -18,13 +18,13 @@ func TestBpfProgPolicyEnum(t *testing.T) {
 			t.Fatalf("value check failed 0")
 		}
 		if value := BpfProgPolicyEnum(1); value != LwtBpfProgFd {
-			t.Fatalf("value check failed 0")
+			t.Fatalf("value check failed 1")
 		}
 		if value := BpfProgPolicyEnum(2); value != LwtBpfProgName {
-			t.Fatalf("value check failed 0")
+			t.Fatalf("value check failed 2")
 		}
 		if value := BpfProgPolicyEnum(2); value != LwtBpfProgMax {
-			t.Fatalf("value check failed 0")
+			t.Fatalf("value check failed 2")
 		}
 	})
 }
