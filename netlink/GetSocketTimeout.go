@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// GetSocketTimeout returns the timeout value used by default netlink sockets
+// GetSocketTimeout - returns timeout value used by default netlink sockets
 func GetSocketTimeout() time.Duration {
 	nanoseconds := unix.TimevalToNsec(core.SocketTimeoutTv)
 	return time.Duration(nanoseconds) * time.Nanosecond
