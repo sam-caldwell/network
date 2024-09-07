@@ -8,9 +8,9 @@ package core
 type PeditCmd uint16
 
 const (
-	// PeditCmdSet - TCA_PEDIT_KEY_EX_CMD_SET - represents the command to set a header field.
+	// PeditCmdSet - PeditCmdSet - represents the command to set a header field.
 	PeditCmdSet PeditCmd = 0
 
-	// PeditCmdAdd - TCA_PEDIT_KEY_EX_CMD_ADD - represents the command to add to a header field.
+	// PeditCmdAdd - TcaPeditKeyExCmd_ADD - represents the command to add to a header field.
 	PeditCmdAdd PeditCmd = 1
 )
