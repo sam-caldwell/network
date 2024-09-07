@@ -6,10 +6,10 @@ import (
 	"errors"
 )
 
-// DeserializeXfrmUsersaId safely deserializes a byte slice into an XfrmUserSaId structure.
+// DeserializeXfrmUserSaId - safely deserializes a byte slice into an XfrmUserSaId structure.
 // It uses DeserializeXfrmAddress for the Daddr field and manually deserializes the other fields.
-func DeserializeXfrmUsersaId(b []byte) (*XfrmUserSaId, error) {
-	if len(b) < SizeOfXfrmUsersaId {
+func DeserializeXfrmUserSaId(b []byte) (*XfrmUserSaId, error) {
+	if len(b) < SizeOfXfrmUserSaId {
 		return nil, errors.New("byte slice too small to deserialize XfrmUserSaId")
 	}
 
