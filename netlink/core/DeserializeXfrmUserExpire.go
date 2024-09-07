@@ -11,7 +11,7 @@ func DeserializeXfrmUserExpire(b []byte) (*XfrmUserExpire, error) {
 	}
 
 	// Manually copy each field from the byte slice to the struct
-	info, err := DeserializeXfrmUsersaInfo(b)
+	info, err := DeserializeXfrmUserSaInfo(b)
 	if err != nil {
 		return nil, err
 	}

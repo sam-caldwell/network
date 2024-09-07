@@ -6,10 +6,10 @@ import (
 	"errors"
 )
 
-// DeserializeXfrmUsersaFlush safely deserializes a byte slice into an XfrmUserSaFlush structure.
+// DeserializeXfrmUserSaFlush safely deserializes a byte slice into an XfrmUserSaFlush structure.
 // It returns the deserialized structure or an error if deserialization fails.
-func DeserializeXfrmUsersaFlush(b []byte) (*XfrmUserSaFlush, error) {
-	if len(b) < SizeOfXfrmUsersaFlush {
+func DeserializeXfrmUserSaFlush(b []byte) (*XfrmUserSaFlush, error) {
+	if len(b) < SizeOfXfrmUserSaFlush {
 		return nil, errors.New("byte slice too small to deserialize XfrmUserSaFlush")
 	}
 

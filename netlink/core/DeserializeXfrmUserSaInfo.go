@@ -6,9 +6,9 @@ import (
 	"errors"
 )
 
-// DeserializeXfrmUsersaInfo safely deserializes a byte slice into an XfrmUserSaInfo structure.
+// DeserializeXfrmUserSaInfo safely deserializes a byte slice into an XfrmUserSaInfo structure.
 // It uses appropriate deserialization functions for fields like XfrmSelector, XfrmId, XfrmAddress, etc.
-func DeserializeXfrmUsersaInfo(b []byte) (*XfrmUserSaInfo, error) {
+func DeserializeXfrmUserSaInfo(b []byte) (*XfrmUserSaInfo, error) {
 	if len(b) < SizeOfXfrmUserSaInfo {
 		return nil, errors.New("byte slice too small to deserialize XfrmUserSaInfo")
 	}

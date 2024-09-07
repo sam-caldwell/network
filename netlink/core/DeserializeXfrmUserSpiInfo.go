@@ -20,7 +20,7 @@ func DeserializeXfrmUserSpiInfo(b []byte) (*XfrmUserSpiInfo, error) {
 	msg := &XfrmUserSpiInfo{}
 
 	// Deserialize the XfrmUserSaInfo
-	usersaInfo, err := DeserializeXfrmUsersaInfo(b)
+	usersaInfo, err := DeserializeXfrmUserSaInfo(b)
 	if err != nil {
 		return nil, err
 	}
