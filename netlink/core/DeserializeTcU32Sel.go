@@ -16,7 +16,7 @@ import (
 // - *TcU32Sel: A pointer to the deserialized TcU32Sel object.
 // - error: An error if deserialization fails or the byte slice is too short.
 func DeserializeTcU32Sel(b []byte) (*TcU32Sel, error) {
-	if len(b) < SizeofTcU32Sel {
+	if len(b) < SizeOfTcU32Sel {
 		return nil, errors.New("DeserializeTcU32Sel: byte slice too short")
 	}
 
@@ -34,11 +34,11 @@ func DeserializeTcU32Sel(b []byte) (*TcU32Sel, error) {
 	resultObject.Hmask = binary.BigEndian.Uint32(b[12:])
 
 	// Start reading after the fixed-size part of TcU32Sel
-	next := SizeofTcU32Sel
+	next := SizeOfTcU32Sel
 
 	// Deserialize keys
 	for i := uint8(0); i < resultObject.Nkeys; i++ {
-		if len(b) < next+SizeofTcU32Key {
+		if len(b) < next+SizeOfTcU32Key {
 			return nil, errors.New("DeserializeTcU32Sel: byte slice too short for keys")
 		}
 
@@ -49,7 +49,7 @@ func DeserializeTcU32Sel(b []byte) (*TcU32Sel, error) {
 		}
 
 		resultObject.Keys = append(resultObject.Keys, *currentKey)
-		next += SizeofTcU32Key
+		next += SizeOfTcU32Key
 	}
 
 	return resultObject, nil

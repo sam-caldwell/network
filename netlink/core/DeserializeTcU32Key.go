@@ -8,8 +8,8 @@ import (
 
 // DeserializeTcU32Key - Deserializes a byte slice into a TcU32Key struct.
 func DeserializeTcU32Key(b []byte) (*TcU32Key, error) {
-	if len(b) < SizeofTcU32Key {
-		return nil, fmt.Errorf("byte slice too short: expected %d, got %d", SizeofTcU32Key, len(b))
+	if len(b) < SizeOfTcU32Key {
+		return nil, fmt.Errorf("byte slice too short: expected %d, got %d", SizeOfTcU32Key, len(b))
 	}
 
 	buf := bytes.NewReader(b)
