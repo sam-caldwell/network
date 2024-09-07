@@ -5,5 +5,5 @@ import (
 )
 
 const (
-	DefaultChange = math.MaxUint32 // 0xFFFFFFFF
+	DefaultChange uint32 = math.MaxUint32 // 0xFFFFFFFF
 )
