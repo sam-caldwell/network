@@ -25,22 +25,22 @@ func DeserializeVfStats(b []byte) VfStats {
 		if err := binary.Read(bytes.NewBuffer(stat.Value), NativeEndian, &valueVar); err != nil {
 			break
 		}
-		switch stat.Attr.Type {
-		case IFLA_VF_STATS_RX_PACKETS:
+		switch IflaVfStatsEnum(stat.Attr.Type) {
+		case IflaVfStatsRxPackets:
 			vfstat.RxPackets = valueVar
-		case IFLA_VF_STATS_TX_PACKETS:
+		case IflaVfStatsTxPackets:
 			vfstat.TxPackets = valueVar
-		case IFLA_VF_STATS_RX_BYTES:
+		case IflaVfStatsRxBytes:
 			vfstat.RxBytes = valueVar
-		case IFLA_VF_STATS_TX_BYTES:
+		case IflaVfStatsTxBytes:
 			vfstat.TxBytes = valueVar
-		case IFLA_VF_STATS_MULTICAST:
+		case IflaVfStatsMulticast:
 			vfstat.Multicast = valueVar
-		case IFLA_VF_STATS_BROADCAST:
+		case IflaVfStatsBroadcast:
 			vfstat.Broadcast = valueVar
-		case IFLA_VF_STATS_RX_DROPPED:
+		case IflaVfStatsRxDropped:
 			vfstat.RxDropped = valueVar
-		case IFLA_VF_STATS_TX_DROPPED:
+		case IflaVfStatsTxDropped:
 			vfstat.TxDropped = valueVar
 		default:
 			func() {}() //Do nothing but make the IDE happy
