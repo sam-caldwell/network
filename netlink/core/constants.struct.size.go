@@ -5,6 +5,11 @@ import (
 	"unsafe"
 )
 
+// constants.struct.size:
+//
+// This file defines the structure size constants used elsewhere in the program
+// We do this here to make our use of "unsafe" an exception rather than the norm.
+// This should be the only place where we need unsafe (outside of tests).
 const (
 	// SizeOfIfAddressMessage     = 0x8 // bytes as derived from unix.SizeOfIfAddressMessage
 	SizeOfIfAddressMessage = int(unsafe.Sizeof(IfAddressMessage{}))
