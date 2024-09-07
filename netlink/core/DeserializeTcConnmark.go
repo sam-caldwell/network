@@ -17,24 +17,24 @@ func DeserializeTcConnmark(b []byte) (*TcConnmark, error) {
 	result := &TcConnmark{}
 
 	// Deserialize TcGen part
-	if err := binary.Read(buf, binary.LittleEndian, &result.Index); err != nil {
+	if err := binary.Read(buf, NativeEndian, &result.Index); err != nil {
 		return nil, err
 	}
-	if err := binary.Read(buf, binary.LittleEndian, &result.Capab); err != nil {
+	if err := binary.Read(buf, NativeEndian, &result.Capab); err != nil {
 		return nil, err
 	}
-	if err := binary.Read(buf, binary.LittleEndian, &result.Action); err != nil {
+	if err := binary.Read(buf, NativeEndian, &result.Action); err != nil {
 		return nil, err
 	}
-	if err := binary.Read(buf, binary.LittleEndian, &result.Refcnt); err != nil {
+	if err := binary.Read(buf, NativeEndian, &result.Refcnt); err != nil {
 		return nil, err
 	}
-	if err := binary.Read(buf, binary.LittleEndian, &result.Bindcnt); err != nil {
+	if err := binary.Read(buf, NativeEndian, &result.Bindcnt); err != nil {
 		return nil, err
 	}
 
 	// Deserialize TcConnmark-specific part
-	if err := binary.Read(buf, binary.LittleEndian, &result.Zone); err != nil {
+	if err := binary.Read(buf, NativeEndian, &result.Zone); err != nil {
 		return nil, err
 	}
 
