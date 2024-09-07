@@ -112,6 +112,9 @@ const (
 	// SizeofUint32Bitfield - The size of a 32-bit bitfield used in various traffic control structs.
 	SizeofUint32Bitfield = int(unsafe.Sizeof(Uint32Bitfield{}))
 
+	// SizeOfUnixRtAttr - The size of a unix.RtAttr struct
+	SizeOfUnixRtAttr = int(unsafe.Sizeof(unix.RtAttr{}))
+
 	// SizeofVfGUID - Size of VfGUID struct
 	SizeofVfGUID = int(unsafe.Sizeof(VfGUID{}))
 
