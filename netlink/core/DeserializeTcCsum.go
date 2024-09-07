@@ -1,7 +1,6 @@
 package core
 
 import (
-	"encoding/binary"
 	"errors"
 )
 
@@ -22,14 +21,14 @@ func DeserializeTcCsum(b []byte) (*TcCsum, error) {
 	msg := &TcCsum{}
 
 	// Deserialize TcGen fields
-	msg.TcGen.Index = binary.LittleEndian.Uint32(b[0:4])
-	msg.TcGen.Capab = binary.LittleEndian.Uint32(b[4:8])
-	msg.TcGen.Action = int32(binary.LittleEndian.Uint32(b[8:12]))
-	msg.TcGen.Refcnt = int32(binary.LittleEndian.Uint32(b[12:16]))
-	msg.TcGen.Bindcnt = int32(binary.LittleEndian.Uint32(b[16:20]))
+	msg.TcGen.Index = NativeEndian.Uint32(b[0:4])
+	msg.TcGen.Capab = NativeEndian.Uint32(b[4:8])
+	msg.TcGen.Action = int32(NativeEndian.Uint32(b[8:12]))
+	msg.TcGen.Refcnt = int32(NativeEndian.Uint32(b[12:16]))
+	msg.TcGen.Bindcnt = int32(NativeEndian.Uint32(b[16:20]))
 
 	// Deserialize UpdateFlags field
-	msg.UpdateFlags = binary.LittleEndian.Uint32(b[20:24])
+	msg.UpdateFlags = NativeEndian.Uint32(b[20:24])
 
 	return msg, nil
 }
