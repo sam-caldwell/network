@@ -1,6 +1,7 @@
 package core
 
 import (
+	"encoding/binary"
 	"errors"
 )
 
@@ -14,11 +15,11 @@ func DeserializeSkbEdit(b []byte) (*TcSkbEdit, error) {
 	msg := &TcSkbEdit{}
 
 	// Deserialize each field in the TcSkbEdit struct.
-	msg.Index = NativeEndian.Uint32(b[0:4])
-	msg.Capab = NativeEndian.Uint32(b[4:8])
-	msg.Action = int32(NativeEndian.Uint32(b[8:12]))
-	msg.Refcnt = int32(NativeEndian.Uint32(b[12:16]))
-	msg.Bindcnt = int32(NativeEndian.Uint32(b[16:20]))
+	msg.Index = binary.LittleEndian.Uint32(b[0:4])
+	msg.Capab = binary.LittleEndian.Uint32(b[4:8])
+	msg.Action = int32(binary.LittleEndian.Uint32(b[8:12]))
+	msg.Refcnt = int32(binary.LittleEndian.Uint32(b[12:16]))
+	msg.Bindcnt = int32(binary.LittleEndian.Uint32(b[16:20]))
 
 	return msg, nil
 }
