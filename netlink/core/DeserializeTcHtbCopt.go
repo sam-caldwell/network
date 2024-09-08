@@ -9,7 +9,7 @@ import (
 // DeserializeTcHtbCopt safely deserializes a byte slice into a TcHtbCopt structure.
 func DeserializeTcHtbCopt(b []byte) (*TcHtbCopt, error) {
 	if len(b) < SizeOfTcHtbCopt {
-		return nil, errors.New("byte slice too short to deserialize TcHtbCopt")
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcHtbCopt{}
