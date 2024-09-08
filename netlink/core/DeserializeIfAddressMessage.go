@@ -1,5 +1,3 @@
-//go:build linux
-
 package core
 
 import (
@@ -10,7 +8,7 @@ import (
 // DeserializeIfAddressMessage - deserialize the interface address message
 func DeserializeIfAddressMessage(b []byte) (result *IfAddressMessage, err error) {
 	if len(b) < SizeOfIfAddressMessage {
-		return nil, errors.New("IfAddressMessage too short")
+		return nil, errors.New("input too short")
 	}
 	result = &IfAddressMessage{
 		unix.IfAddrmsg{
@@ -21,7 +19,8 @@ func DeserializeIfAddressMessage(b []byte) (result *IfAddressMessage, err error)
 		},
 	}
 
-	NativeEndian.PutUint32(b[4:8], result.Index)
+	// Read the 4 bytes for the Index field (offset 4 to 8) and assign it
+	result.Index = NativeEndian.Uint32(b[4:8])
 
-	return result, nil
+	return result, err
 }
