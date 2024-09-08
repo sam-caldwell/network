@@ -7,7 +7,6 @@ import (
 )
 
 func TestDeserializeNlMsgHdr(t *testing.T) {
-	// Subtest 1: Valid input
 	t.Run("valid input", func(t *testing.T) {
 		// Prepare a byte slice with valid input
 		buf := make([]byte, SizeOfNlMsgHdr)
@@ -45,7 +44,6 @@ func TestDeserializeNlMsgHdr(t *testing.T) {
 		}
 	})
 
-	// Subtest 2: Input too short
 	t.Run("input too short", func(t *testing.T) {
 		// Prepare a byte slice with insufficient length (less than NLMSG_HDRLEN)
 		buf := make([]byte, SizeOfNlMsgHdr-1)
