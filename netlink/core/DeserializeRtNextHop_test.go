@@ -27,7 +27,13 @@ func TestDeserializeRtNextHop(t *testing.T) {
 		fmt.Printf("Length of short byte slice: %d bytes\n", len(buf)) // Debugging slice size
 
 		// Call DeserializeRtNextHop
-		rtNextHop := DeserializeRtNextHop(buf)
+		rtNextHop, err := DeserializeRtNextHop(buf)
+		if err == nil {
+			t.Fatalf("expected error")
+		}
+		if err.Error() != "input too short" {
+			t.Fatalf("expected 'input too short' but got %s", err.Error())
+		}
 
 		// Check that the function returns nil for insufficient byte length
 		if rtNextHop != nil {
@@ -36,9 +42,15 @@ func TestDeserializeRtNextHop(t *testing.T) {
 	})
 
 	t.Run("valid input", func(t *testing.T) {
-		var rtNextHop *RtNexthop
+		var (
+			err       error
+			rtNextHop *RtNexthop
+		)
 		t.Run("setup", func(t *testing.T) {
-			rtNextHop = DeserializeRtNextHop(validTestData)
+			rtNextHop, err = DeserializeRtNextHop(validTestData)
+			if err != nil {
+				t.Fatalf("Expected rtNextHop to be nil due to valid input, but got %v", err)
+			}
 			// Print the actual byte slice length for debugging
 			fmt.Printf("Length of valid byte slice: %d bytes\n", len(validTestData))
 		})

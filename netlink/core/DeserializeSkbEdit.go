@@ -9,7 +9,7 @@ import (
 // The function ensures the byte slice is of the correct size and uses binary deserialization.
 func DeserializeSkbEdit(b []byte) (*TcSkbEdit, error) {
 	if len(b) < SizeOfTcSkbEdit {
-		return nil, errors.New("byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcSkbEdit{}

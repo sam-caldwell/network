@@ -2,22 +2,15 @@ package core
 
 import (
 	"encoding/binary"
-	"fmt"
+	"errors"
 	"golang.org/x/sys/unix"
 )
 
 // DeserializeRtNextHop - Converts a byte slice into an RtNexthop struct.
-func DeserializeRtNextHop(b []byte) *RtNexthop {
-	// Debugging: Print length of the byte slice
-	fmt.Printf("Length of byte slice: %d, Expected size: %d\n", len(b), SizeOfRtNextHop)
-
+func DeserializeRtNextHop(b []byte) (*RtNexthop, error) {
 	if len(b) < SizeOfRtNextHop {
-		fmt.Println("Byte slice too short!")
-		return nil // Error handling for insufficient byte length
+		return nil, errors.New("input too short")
 	}
-
-	// Debugging: Print the slice content for validation
-	fmt.Printf("Byte slice content: %v\n", b)
 
 	return &RtNexthop{
 		RtNexthop: unix.RtNexthop{
@@ -26,5 +19,5 @@ func DeserializeRtNextHop(b []byte) *RtNexthop {
 			Hops:    b[3],                                      // Deserialize Hops (1 byte)
 			Ifindex: int32(binary.LittleEndian.Uint32(b[4:8])), // Deserialize Ifindex (4 bytes, little-endian)
 		},
-	}
+	}, nil
 }
