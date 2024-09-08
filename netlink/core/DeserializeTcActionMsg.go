@@ -3,13 +3,14 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"log"
 )
 
 // DeserializeTcActionMsg safely deserializes a byte slice into a TcActionMsg object.
-func DeserializeTcActionMsg(b []byte) *TcActionMsg {
+func DeserializeTcActionMsg(b []byte) (*TcActionMsg, error) {
 	if len(b) < SizeOfTcActionMsg {
-		log.Fatalf("Byte slice too short to deserialize TcActionMsg")
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcActionMsg{}
@@ -19,5 +20,5 @@ func DeserializeTcActionMsg(b []byte) *TcActionMsg {
 		log.Fatalf("Failed to deserialize TcActionMsg: %v", err)
 	}
 
-	return msg
+	return msg, nil
 }

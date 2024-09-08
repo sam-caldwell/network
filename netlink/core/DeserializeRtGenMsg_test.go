@@ -10,7 +10,10 @@ func TestDeserializeRtGenMsg(t *testing.T) {
 		buf := []byte{0x02} // Example value for Family
 
 		// Call DeserializeRtGenMsg
-		rtGenMsg := DeserializeRtGenMsg(buf)
+		rtGenMsg, err := DeserializeRtGenMsg(buf)
+		if err != nil {
+			t.Errorf("DeserializeRtGenMsg error: %v", err)
+		}
 
 		// Check the deserialized value
 		if rtGenMsg.Family != 0x02 {
@@ -29,6 +32,12 @@ func TestDeserializeRtGenMsg(t *testing.T) {
 			}
 		}()
 
-		_ = DeserializeRtGenMsg(buf)
+		_, err := DeserializeRtGenMsg(buf)
+		if err == nil {
+			t.Errorf("Expected error due to empty input, but got none")
+		}
+		if err.Error() != "nil input" {
+			t.Errorf("Expected error due to empty input, but got %s", err.Error())
+		}
 	})
 }

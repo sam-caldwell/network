@@ -20,7 +20,10 @@ func TestDeserializeRtMsg(t *testing.T) {
 		}
 
 		// Call DeserializeRtMsg
-		rtMsg := DeserializeRtMsg(buf)
+		rtMsg, err := DeserializeRtMsg(buf)
+		if err != nil {
+			t.Fatalf("DeserializeRtMsg: %v", err)
+		}
 
 		// Check that the struct is not nil
 		if rtMsg == nil {
@@ -65,7 +68,13 @@ func TestDeserializeRtMsg(t *testing.T) {
 		buf := make([]byte, 8) // Too short
 
 		// Call DeserializeRtMsg
-		rtMsg := DeserializeRtMsg(buf)
+		rtMsg, err := DeserializeRtMsg(buf)
+		if err == nil {
+			t.Fatalf("DeserializeRtMsg: expects error.")
+		}
+		if err.Error() != "input too short" {
+			t.Fatalf("DeserializeRtMsg: expects error.")
+		}
 
 		// Check that the function returns nil for insufficient byte length
 		if rtMsg != nil {
