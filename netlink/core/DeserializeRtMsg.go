@@ -1,6 +1,7 @@
 package core
 
 import (
+	"encoding/binary"
 	"golang.org/x/sys/unix"
 )
 
@@ -25,7 +26,8 @@ func DeserializeRtMsg(b []byte) *RtMsg {
 			Protocol: b[5],
 			Scope:    b[6],
 			Type:     b[7],
-			Flags:    uint32(b[8]) | uint32(b[9])<<8 | uint32(b[10])<<16 | uint32(b[11])<<24,
+			// Use little-endian to correctly deserialize the Flags
+			Flags: binary.LittleEndian.Uint32(b[8:12]),
 		},
 	}
 }
