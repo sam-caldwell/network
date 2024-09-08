@@ -10,7 +10,7 @@ import (
 // This method reads each field manually and ensures proper byte order and alignment.
 func DeserializeTcConnmark(b []byte) (*TcConnmark, error) {
 	if len(b) < SizeOfTcConnmark {
-		return nil, errors.New("byte slice too short to deserialize TcConnmark")
+		return nil, errors.New("input too short")
 	}
 
 	buf := bytes.NewReader(b)
