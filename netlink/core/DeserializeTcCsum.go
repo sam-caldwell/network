@@ -14,7 +14,7 @@ import (
 // - Linux Kernel Source: https://github.com/torvalds/linux/blob/master/include/uapi/linux/tc_act/tc_csum.h
 func DeserializeTcCsum(b []byte) (*TcCsum, error) {
 	if len(b) < SizeOfTcCsum {
-		return nil, errors.New("DeserializeTcCsum: byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	// Create an empty TcCsum structure
