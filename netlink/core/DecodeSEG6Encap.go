@@ -1,6 +1,7 @@
 package core
 
 import (
+	"encoding/binary"
 	"fmt"
 	"net"
 )
@@ -19,8 +20,8 @@ import (
 //   - error: Returns an error if the segment list is malformed or invalid.
 func DecodeSEG6Encap(buf []byte) (int, []net.IP, error) {
 
-	// Extract the mode from the first 4 bytes
-	mode := int(NativeEndian.Uint32(buf))
+	// Extract the mode from the first 4 bytes using BigEndian (network byte order)
+	mode := int(binary.BigEndian.Uint32(buf))
 
 	// Parse the IPv6 Segment Routing Header (SRH) from the buffer
 	srh := IPv6SrHdr{
@@ -30,7 +31,7 @@ func DecodeSEG6Encap(buf []byte) (int, []net.IP, error) {
 		segmentsLeft: buf[7],
 		firstSegment: buf[8],
 		flags:        buf[9],
-		reserved:     NativeEndian.Uint16(buf[10:12]),
+		reserved:     binary.BigEndian.Uint16(buf[10:12]),
 	}
 
 	// Move the buffer forward, leaving the 12-byte SRH header
