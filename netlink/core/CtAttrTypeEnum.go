@@ -119,10 +119,10 @@ const (
 	// processing within the connection tracking system.
 	CtaZone CtAttrTypeEnum = 18
 
-	// CtaSecctx - CTA_SECCTX - constant in the Linux Netfilter framework that represents the security context
+	// CtaSeccTx - CTA_SECCTX - constant in the Linux Netfilter framework that represents the security context
 	// associated with a tracked connection, typically used to store and manage security attributes, such as SELinux
 	// labels, within the connection tracking system.
-	CtaSecctx CtAttrTypeEnum = 19
+	CtaSeccTx CtAttrTypeEnum = 19
 
 	// CtaTimestamp - CTA_TIMESTAMP - constant in the Linux Netfilter framework that represents the timestamp
 	// information associated with a tracked connection, typically recording when the connection was first seen and
@@ -144,10 +144,10 @@ const (
 	// within the connection tracking system.
 	CtaLabelsMask CtAttrTypeEnum = 23
 
-	// CtaSynproxy - CTA_SYNPROXY - constant in the Linux Netfilter framework that represents SYN proxy-related
+	// CtaSynProxy - CTA_SYNPROXY - constant in the Linux Netfilter framework that represents SYN proxy-related
 	// information for a tracked connection, used to mitigate SYN flood attacks by offloading the TCP handshake to
 	// the firewall within the connection tracking system.
-	CtaSynproxy CtAttrTypeEnum = 24
+	CtaSynProxy CtAttrTypeEnum = 24
 
 	// CtaFilter - CTA_FILTER - constant in the Linux Netfilter framework that represents filtering rules or criteria
 	// applied to a tracked connection, used to enforce specific actions or policies within the connection tracking
