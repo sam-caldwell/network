@@ -13,13 +13,13 @@ func TestDeserializeTcHtbCopt(t *testing.T) {
 
 		// Write values for TcHtbCopt fields (Rate, Ceil, Buffer, Cbuffer, Quantum, Level, Prio)
 		// Assuming TcRateSpec is 8 bytes
-		binary.Write(buf, NativeEndian, TcRateSpec{Rate: 10, CellLog: 1}) // Rate (TcRateSpec)
-		binary.Write(buf, NativeEndian, TcRateSpec{Rate: 20, CellLog: 2}) // Ceil (TcRateSpec)
-		binary.Write(buf, NativeEndian, uint32(100))                      // Buffer (uint32)
-		binary.Write(buf, NativeEndian, uint32(200))                      // Cbuffer (uint32)
-		binary.Write(buf, NativeEndian, uint32(300))                      // Quantum (uint32)
-		binary.Write(buf, NativeEndian, uint32(400))                      // Level (uint32)
-		binary.Write(buf, NativeEndian, uint32(500))                      // Prio (uint32)
+		_ = binary.Write(buf, NativeEndian, TcRateSpec{Rate: 10, CellLog: 1}) // Rate (TcRateSpec)
+		_ = binary.Write(buf, NativeEndian, TcRateSpec{Rate: 20, CellLog: 2}) // Ceil (TcRateSpec)
+		_ = binary.Write(buf, NativeEndian, uint32(100))                      // Buffer (uint32)
+		_ = binary.Write(buf, NativeEndian, uint32(200))                      // Cbuffer (uint32)
+		_ = binary.Write(buf, NativeEndian, uint32(300))                      // Quantum (uint32)
+		_ = binary.Write(buf, NativeEndian, uint32(400))                      // Level (uint32)
+		_ = binary.Write(buf, NativeEndian, uint32(500))                      // Prio (uint32)
 
 		return buf.Bytes()
 	}

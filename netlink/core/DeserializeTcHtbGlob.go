@@ -9,7 +9,7 @@ import (
 // DeserializeTcHtbGlob - Safely deserializes a byte slice into a TcHtbGlob struct.
 func DeserializeTcHtbGlob(b []byte) (*TcHtbGlob, error) {
 	if len(b) < SizeOfTcHtbGlob {
-		return nil, errors.New("byte slice is too short to contain a TcHtbGlob")
+		return nil, errors.New("input too short")
 	}
 
 	buf := bytes.NewReader(b)
