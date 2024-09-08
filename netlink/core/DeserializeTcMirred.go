@@ -18,7 +18,7 @@ import (
 // - https://github.com/torvalds/linux/blob/master/include/uapi/linux/tc_act/tc_mirred.h
 func DeserializeTcMirred(b []byte) (*TcMirred, error) {
 	if len(b) < SizeOfTcMirred {
-		return nil, errors.New("DeserializeTcMirred: byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	buf := bytes.NewReader(b)
