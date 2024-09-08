@@ -13,6 +13,18 @@ func TestCurve_struct(t *testing.T) {
 			m2: uint32(0),
 		}
 	})
+	t.Run("default value test", func(t *testing.T) {
+		var c Curve
+		if c.m1 != 0 {
+			t.Fatalf("m1 expects 0")
+		}
+		if c.d != 0 {
+			t.Fatalf("d expects 0")
+		}
+		if c.m2 != 0 {
+			t.Fatalf("m2 expects 0")
+		}
+	})
 
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 12
