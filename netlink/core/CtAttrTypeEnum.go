@@ -28,10 +28,10 @@ const (
 	// connection, such as whether it is established, related, assured, or in need of more processing.
 	CtaStatus CtAttrTypeEnum = 3
 
-	// CtaProtoinfo - CTA_PROTOINFO - constant in the Linux Netfilter framework that represents protocol-specific
+	// CtaProtoInfo - CTA_PROTOINFO - constant in the Linux Netfilter framework that represents protocol-specific
 	// information for a tracked connection, such as details related to TCP, IpProtoUDP, SCTP, or DCCP protocols, within
 	// the connection tracking system.
-	CtaProtoinfo CtAttrTypeEnum = 4
+	CtaProtoInfo CtAttrTypeEnum = 4
 
 	// CtaHelp - CTA_HELP - constant in the Linux Netfilter framework used to represent the connection helper
 	// information associated with a tracked connection, which typically involves assigning specific handling
