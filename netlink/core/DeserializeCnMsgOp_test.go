@@ -24,7 +24,10 @@ func TestDeserializeCnMsgOp(t *testing.T) {
 	binary.LittleEndian.PutUint32(buf[20:24], 500) // Op
 
 	// Call DeserializeCnMsgOp with the byte slice
-	cnMsgOp := DeserializeCnMsgOp(buf)
+	cnMsgOp, err := DeserializeCnMsgOp(buf)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	// Check if the deserialized CnMsgOp struct matches expected values
 	if cnMsgOp.ID.Idx != 1 {
