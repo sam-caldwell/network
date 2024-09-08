@@ -4,6 +4,8 @@ package core
 type CtAttrCountersEnum uint8
 
 const (
+	// CtaCountersUnspec - unspecified value placeholder
+	CtaCountersUnspec CtAttrCountersEnum = 0
 	// CtaCountersPackets - CTA_COUNTERS_PACKETS - 64bit counters
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
