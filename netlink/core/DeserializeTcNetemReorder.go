@@ -12,7 +12,7 @@ import (
 //	   Correlation uint32
 //	}
 func DeserializeTcNetemReorder(b []byte) (*TcNetemReorder, error) {
-	if b == nil || len(b) < 8 {
+	if b == nil || len(b) < SizeOfTcNetemReorder {
 		return nil, errors.New("input too small")
 	}
 
