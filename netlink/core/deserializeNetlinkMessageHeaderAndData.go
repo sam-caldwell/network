@@ -7,8 +7,8 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// deserializeNetlinkMessageHeaderAndData - deserialize a message header and data from a byte slice.
-func deserializeNetlinkMessageHeaderAndData(b []byte) (header *unix.NlMsghdr, remainingData []byte,
+// DeserializeNetlinkMessageHeaderAndData - deserialize a message header and data from a byte slice.
+func DeserializeNetlinkMessageHeaderAndData(b []byte) (header *unix.NlMsghdr, remainingData []byte,
 	messageLength int, err error) {
 
 	if len(b) < unix.NLMSG_HDRLEN {
