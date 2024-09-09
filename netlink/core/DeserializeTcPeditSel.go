@@ -14,7 +14,7 @@ import (
 func DeserializeTcPeditSel(b []byte) (*TcPeditSel, error) {
 	// Check if the byte slice is large enough to hold a TcPeditSel
 	if len(b) < SizeOfTcPeditSel {
-		return nil, errors.New("byte slice too small to deserialize TcPeditSel")
+		return nil, errors.New("input too small")
 	}
 
 	// Create a new TcPeditSel struct
