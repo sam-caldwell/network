@@ -30,7 +30,10 @@ func TestDeserializeVfLinkState(t *testing.T) {
 
 		// Check if the deserialized structure matches the expected structure
 		if deserializedState.Vf != expectedState.Vf || deserializedState.LinkState != expectedState.LinkState {
-			t.Fatalf("Deserialized object doesn't match expected.\nExpected: %+v\nGot: %+v", expectedState, deserializedState)
+			t.Fatalf("Deserialized object doesn't match expected.\n"+
+				"Expected: %+v\n"+
+				"Got: %+v",
+				expectedState, deserializedState)
 		}
 	})
 

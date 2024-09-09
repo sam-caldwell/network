@@ -45,7 +45,7 @@ func TestDeserializeUnixRtAttr(t *testing.T) {
 		}
 
 		// Verify the expected error message
-		expectedErr := "byte slice is too short to contain RtAttr"
+		expectedErr := "input too short"
 		if err.Error() != expectedErr {
 			t.Errorf("Expected error message %q, but got %q", expectedErr, err.Error())
 		}

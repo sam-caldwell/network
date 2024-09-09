@@ -10,7 +10,7 @@ import (
 // DeserializeUnixRtAttr deserializes a byte slice into a unix.RtAttr structure.
 func DeserializeUnixRtAttr(unreadData []byte) (*unix.RtAttr, error) {
 	if len(unreadData) < SizeOfUnixRtAttr {
-		return nil, errors.New("byte slice is too short to contain RtAttr")
+		return nil, errors.New("input too short")
 	}
 
 	var attr unix.RtAttr
