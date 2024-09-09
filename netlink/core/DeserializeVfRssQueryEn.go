@@ -10,7 +10,7 @@ import (
 // correct length.
 func DeserializeVfRssQueryEn(b []byte) (*VfRssQueryEn, error) {
 	if len(b) != SizeOfVfRssQueryEn {
-		return nil, errors.New("invalid length for VfRssQueryEn")
+		return nil, errors.New("input too short")
 	}
 
 	var msg VfRssQueryEn
