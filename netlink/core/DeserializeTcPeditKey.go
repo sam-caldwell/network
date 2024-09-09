@@ -1,45 +1,48 @@
 package core
 
 import (
+	"bytes"
+	"encoding/binary"
 	"errors"
 )
 
-// DeserializeTcPedit safely deserializes a byte slice into a TcPeditSel structure and a slice of TcPeditKey.
-// The function ensures that the byte slice is large enough to hold both the TcPeditSel structure and all keys.
+// DeserializeTcPeditKey safely deserializes a byte slice into a TcPeditKey structure.
+// It checks the length of the byte slice to ensure that it is at least the size of TcPeditKey
+// and uses the encoding/binary package to read the fields safely.
 //
-// If the byte slice is too small or invalid, it returns nil slices and an error.
-func DeserializeTcPedit(b []byte) (*TcPeditSel, []TcPeditKey, error) {
-	// Check if the byte slice is large enough to contain TcPeditSel.
-	if len(b) < SizeOfTcPeditSel {
-		return nil, nil, errors.New("input too small")
+// Returns an error if the byte slice is too small or cannot be properly deserialized.
+func DeserializeTcPeditKey(b []byte) (*TcPeditKey, error) {
+	// Check if the byte slice is large enough to hold a TcPeditKey
+	if len(b) < SizeOfTcPeditKey {
+		return nil, errors.New("input too small")
 	}
 
-	// Deserialize the TcPeditSel structure.
-	tcPeditSel, err := DeserializeTcPeditSel(b)
-	if err != nil {
-		return nil, nil, err
+	// Create a new TcPeditKey struct
+	key := TcPeditKey{}
+
+	// Create a reader for the byte slice
+	reader := bytes.NewReader(b)
+
+	// Safely deserialize the fields using binary.Read
+	if err := binary.Read(reader, binary.BigEndian, &key.Mask); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.Val); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.Off); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.At); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.OffMask); err != nil {
+		return nil, err
+	}
+	if err := binary.Read(reader, binary.BigEndian, &key.Shift); err != nil {
+		return nil, err
 	}
 
-	// Prepare to deserialize keys, ensure there is enough space for NKeys.
-	keys := make([]TcPeditKey, 0, tcPeditSel.NKeys)
-	next := SizeOfTcPeditSel
-
-	// Loop over NKeys and deserialize each key.
-	for i := uint8(0); i < tcPeditSel.NKeys; i++ {
-		// Ensure there's enough data left in the byte slice for the next key.
-		if len(b[next:]) < SizeOfTcPeditKey {
-			return nil, nil, errors.New("not enough bytes for the key")
-		}
-
-		// Deserialize each key.
-		key, err := DeserializeTcPeditKey(b[next:])
-		if err != nil {
-			return nil, nil, err
-		}
-		keys = append(keys, *key)
-		next += SizeOfTcPeditKey
-	}
-
-	// Return the deserialized TcPeditSel and the list of keys.
-	return tcPeditSel, keys, nil
+	// Return the deserialized TcPeditKey
+	return &key, nil
 }
