@@ -20,8 +20,10 @@ func TestDeserializeTcRateSpec(t *testing.T) {
 		binary.LittleEndian.PutUint32(data[8:], 0x100) // Rate (uint32)
 
 		// Call DeserializeTcRateSpec
-		result := DeserializeTcRateSpec(data)
-
+		result, err := DeserializeTcRateSpec(data)
+		if err != nil {
+			t.Fatal(err)
+		}
 		// Verify the result
 		if result == nil {
 			t.Fatal("Expected non-nil TcRateSpec, but got nil")
@@ -54,8 +56,13 @@ func TestDeserializeTcRateSpec(t *testing.T) {
 		shortData := make([]byte, SizeOfTcRateSpec-1)
 
 		// Call DeserializeTcRateSpec
-		result := DeserializeTcRateSpec(shortData)
-
+		result, err := DeserializeTcRateSpec(shortData)
+		if err == nil {
+			t.Fatal("Expected error, got nil")
+		}
+		if err.Error() != "input too short" {
+			t.Fatalf("Expected Input too short error, got %s", err.Error())
+		}
 		if result != nil {
 			t.Fatalf("Expected nil for short input, but got non-nil result")
 		}
