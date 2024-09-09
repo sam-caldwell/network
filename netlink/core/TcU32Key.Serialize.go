@@ -5,8 +5,7 @@ import (
 	"encoding/binary"
 )
 
-// Serialize - Converts the TcU32Key struct into a byte slice in a safe way.
-// This function ensures that each field is serialized with the correct endianness and alignment.
+// Serialize - converts the TcU32Key struct into a byte slice.
 func (msg *TcU32Key) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 
@@ -17,10 +16,10 @@ func (msg *TcU32Key) Serialize() ([]byte, error) {
 	if err := binary.Write(buf, binary.BigEndian, msg.Val); err != nil {
 		return nil, err
 	}
-	if err := binary.Write(buf, binary.LittleEndian, msg.Off); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg.Off); err != nil {
 		return nil, err
 	}
-	if err := binary.Write(buf, binary.LittleEndian, msg.OffMask); err != nil {
+	if err := binary.Write(buf, NativeEndian, msg.OffMask); err != nil {
 		return nil, err
 	}
 

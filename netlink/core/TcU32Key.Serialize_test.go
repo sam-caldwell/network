@@ -6,7 +6,6 @@ import (
 	"testing"
 )
 
-// TestTcU32KeySerialize tests the Serialize function of TcU32Key.
 func TestTcU32KeySerialize(t *testing.T) {
 	// Create a sample TcU32Key object
 	key := TcU32Key{
