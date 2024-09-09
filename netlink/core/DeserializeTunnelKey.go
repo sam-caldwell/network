@@ -7,9 +7,23 @@ import (
 // DeserializeTunnelKey safely deserializes a byte slice into a TcTunnelKey struct.
 // The function ensures that the byte slice is the correct length and uses
 // binary encoding to parse the data correctly.
+//
+// type TcTunnelKey struct {
+//    TcGen
+//    Action int32
+// }
+//
+// type TcGen struct {
+//    Index   uint32
+//    Capab   uint32
+//    Action  int32
+//    Refcnt  int32
+//    Bindcnt int32
+// }
+//
 func DeserializeTunnelKey(b []byte) (*TcTunnelKey, error) {
 	if len(b) < SizeOfTcTunnelKey {
-		return nil, errors.New("DeserializeTunnelKey: byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcTunnelKey{}
