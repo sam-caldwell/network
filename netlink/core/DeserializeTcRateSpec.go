@@ -1,6 +1,9 @@
 package core
 
-import "encoding/binary"
+import (
+	"encoding/binary"
+	"errors"
+)
 
 // DeserializeTcRateSpec - Safely deserialize a byte slice into a TcRateSpec struct.
 // This function reads the byte slice and converts it into a TcRateSpec struct using the binary package.
@@ -10,9 +13,9 @@ import "encoding/binary"
 //
 // Returns:
 // - A pointer to the deserialized TcRateSpec struct.
-func DeserializeTcRateSpec(b []byte) *TcRateSpec {
+func DeserializeTcRateSpec(b []byte) (*TcRateSpec, error) {
 	if len(b) < SizeOfTcRateSpec {
-		return nil
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcRateSpec{}
@@ -22,5 +25,5 @@ func DeserializeTcRateSpec(b []byte) *TcRateSpec {
 	msg.CellAlign = int16(binary.LittleEndian.Uint16(b[4:]))
 	msg.Mpu = binary.LittleEndian.Uint16(b[6:])
 	msg.Rate = binary.LittleEndian.Uint32(b[8:])
-	return msg
+	return msg, nil
 }
