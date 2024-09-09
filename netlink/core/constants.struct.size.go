@@ -150,6 +150,9 @@ const (
 	// SizeOfVfSpoofchk - Size of VfSpoofchk
 	SizeOfVfSpoofchk = int(unsafe.Sizeof(VfSpoofchk{}))
 
+	// SizeOfVfStats - Size of VfStats struct
+	SizeOfVfStats = int(unsafe.Sizeof(VfStats{}))
+
 	// SizeOfVfTrust - Size of VfTrust struct
 	SizeOfVfTrust = int(unsafe.Sizeof(VfTrust{}))
 
