@@ -48,9 +48,9 @@ func DeserializeTcU32Sel(b []byte) (*TcU32Sel, error) {
 	resultObject.Nkeys = b[2]
 	resultObject.Pad = b[3]
 	resultObject.Offmask = binary.BigEndian.Uint16(b[4:6])
-	resultObject.Off = binary.LittleEndian.Uint16(b[6:8])
-	resultObject.Offoff = int16(binary.LittleEndian.Uint16(b[8:10]))
-	resultObject.Hoff = int16(binary.LittleEndian.Uint16(b[10:12]))
+	resultObject.Off = NativeEndian.Uint16(b[6:8])
+	resultObject.Offoff = int16(NativeEndian.Uint16(b[8:10]))
+	resultObject.Hoff = int16(NativeEndian.Uint16(b[10:12]))
 	resultObject.Hmask = binary.BigEndian.Uint32(b[12:16])
 
 	// Start reading after the fixed-size part of TcU32Sel
