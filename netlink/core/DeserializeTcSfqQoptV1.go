@@ -8,15 +8,43 @@ import (
 // This method ensures that the length of the input byte slice matches the expected size of TcSfqQoptV1.
 //
 // If the length of the input byte slice is less than the size of TcSfqQoptV1, it returns an error.
+//
+//		type TcSfqQoptV1 struct {
+//		   TcSfqQopt struct {
+//		     Quantum uint8    // 0
+//		     Perturb int32    // 1-5
+//		     Limit   uint32   // 5-9
+//		     Divisor uint8    // 9
+//		     Flows   uint8    // 10
+//	    }
+//		   Depth    uint32
+//		   HeadDrop uint32
+//		   Limit    uint32
+//		   QthMin   uint32
+//		   QthMax   uint32
+//		   Wlog     byte
+//		   Plog     byte
+//		   ScellLog byte
+//		   Flags    byte
+//		   MaxP     uint32
+//		   TcSfqRedStats struct {
+//	    	   ProbDrop       uint32
+//		       ForcedDrop     uint32
+//	 	   ProbMark       uint32
+//	 	   ForcedMark     uint32
+//	 	   ProbMarkHead   uint32
+//	 	   ForcedMarkHead uint32
+//		   }
+//		}
 func DeserializeTcSfqQoptV1(b []byte) (*TcSfqQoptV1, error) {
 	if len(b) < SizeOfTcSfqQoptV1 {
-		return nil, errors.New("DeserializeTcSfqQoptV1: byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcSfqQoptV1{}
 
 	// Deserialize the base TcSfqQopt structure
-	err := msg.TcSfqQopt.Deserialize(b[:SizeOfTcSfqQopt])
+	err := msg.TcSfqQopt.Deserialize(b[0:SizeOfTcSfqQopt])
 	if err != nil {
 		return nil, err
 	}
