@@ -53,7 +53,7 @@ func TestDeserializeTcSfqQopt(t *testing.T) {
 			t.Fatal("Expected an error for short input, but got nil")
 		}
 
-		expectedErr := "DeserializeTcSfqQopt: byte slice too short"
+		expectedErr := "input too short"
 		if err.Error() != expectedErr {
 			t.Errorf("Expected error message %q, but got %q", expectedErr, err.Error())
 		}

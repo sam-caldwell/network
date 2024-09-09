@@ -11,7 +11,7 @@ import (
 // If the input byte slice is too short, it returns an error.
 func DeserializeTcSfqQopt(b []byte) (*TcSfqQopt, error) {
 	if len(b) < SizeOfTcSfqQopt {
-		return nil, errors.New("DeserializeTcSfqQopt: byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcSfqQopt{}
