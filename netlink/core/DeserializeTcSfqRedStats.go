@@ -8,7 +8,7 @@ import (
 // This function ensures the byte slice is of the correct length and manually decodes each field.
 func DeserializeTcSfqRedStats(b []byte) (*TcSfqRedStats, error) {
 	if len(b) < SizeOfTcSfqRedStats {
-		return nil, errors.New("DeserializeTcSfqRedStats: byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	// Deserialize each field using the appropriate endianness
