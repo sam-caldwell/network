@@ -10,7 +10,7 @@ import (
 // If the length of the input byte slice is less than the size of TcPolice, it returns an error.
 func DeserializeTcPolice(b []byte) (*TcPolice, error) {
 	if len(b) < SizeOfTcPolice {
-		return nil, errors.New("DeserializeTcPolice: byte slice too short")
+		return nil, errors.New("input too short")
 	}
 
 	msg := &TcPolice{}
