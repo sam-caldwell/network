@@ -1,25 +1,22 @@
 package core
 
 import (
-	"bytes"
-	"encoding/binary"
 	"testing"
 )
 
 func TestDeserializeTcPeditKey(t *testing.T) {
 	// Helper function to create a valid byte slice for TcPeditKey
 	createValidTcPeditKeyBytes := func() []byte {
-		buf := new(bytes.Buffer)
-
-		// Write values for TcPeditKey fields: Mask, Val, Off, At, OffMask, Shift (all uint32)
-		_ = binary.Write(buf, binary.BigEndian, uint32(1)) // Mask
-		_ = binary.Write(buf, binary.BigEndian, uint32(2)) // Val
-		_ = binary.Write(buf, binary.BigEndian, uint32(3)) // Off
-		_ = binary.Write(buf, binary.BigEndian, uint32(4)) // At
-		_ = binary.Write(buf, binary.BigEndian, uint32(5)) // OffMask
-		_ = binary.Write(buf, binary.BigEndian, uint32(6)) // Shift
-
-		return buf.Bytes()
+		// Manually construct the byte slice to represent TcPeditKey fields explicitly.
+		// TcPeditKey: Mask, Val, Off, At, OffMask, Shift (all uint32, BigEndian)
+		return []byte{
+			0x00, 0x00, 0x00, 0x01, // Mask (uint32)
+			0x00, 0x00, 0x00, 0x02, // Val (uint32)
+			0x00, 0x00, 0x00, 0x03, // Off (uint32)
+			0x00, 0x00, 0x00, 0x04, // At (uint32)
+			0x00, 0x00, 0x00, 0x05, // OffMask (uint32)
+			0x00, 0x00, 0x00, 0x06, // Shift (uint32)
+		}
 	}
 
 	// Test case for valid input
@@ -59,14 +56,18 @@ func TestDeserializeTcPeditKey(t *testing.T) {
 	// Test case for invalid input (too short)
 	t.Run("input too short", func(t *testing.T) {
 		// Prepare an invalid byte slice (less than the expected size)
-		invalidBytes := make([]byte, SizeOfTcPeditKey-10) // Too short
+		invalidBytes := []byte{
+			0x00, 0x00, 0x00, 0x01, // Mask (uint32)
+			0x00, 0x00, 0x00, 0x02, // Val (uint32)
+			// Too short, missing the rest of the fields
+		}
 
 		// Call DeserializeTcPeditKey
 		tcPeditKey, err := DeserializeTcPeditKey(invalidBytes)
 
 		// Verify that an error occurred
 		if err == nil {
-			t.Fatalf("Expected an error due to short input, but got none")
+			t.Fatalf("Expected error due to short input, but got none")
 		}
 
 		// Verify that tcPeditKey is nil
