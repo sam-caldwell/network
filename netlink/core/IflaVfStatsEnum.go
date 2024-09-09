@@ -6,7 +6,7 @@ package core
 // These statistics are used to monitor and manage the performance and activity of VFs in a network interface.
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-type IflaVfStatsEnum uint8
+type IflaVfStatsEnum uint16
 
 const (
 	// IflaVfStatsRxPackets - IFLA_VF_STATS_RX_PACKETS -
