@@ -52,7 +52,7 @@ func TestDeserializeVfRate(t *testing.T) {
 		}
 
 		// Verify the expected error message
-		expectedErr := "invalid length for VfRate"
+		expectedErr := "input too short"
 		if err.Error() != expectedErr {
 			t.Errorf("Expected error message %q, but got %q", expectedErr, err.Error())
 		}
