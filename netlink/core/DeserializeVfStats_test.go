@@ -49,7 +49,10 @@ func TestDeserializeVfStats(t *testing.T) {
 
 		// Check if the deserialized structure matches the expected structure
 		if deserializedStats != expectedStats {
-			t.Fatalf("Deserialized object doesn't match expected.\nExpected: %+v\nGot: %+v", expectedStats, deserializedStats)
+			t.Fatalf("Deserialized object doesn't match expected.\n"+
+				"Expected: %+v\n"+
+				"Got: %+v",
+				expectedStats, deserializedStats)
 		}
 	})
 
