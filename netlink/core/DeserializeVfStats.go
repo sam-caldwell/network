@@ -5,11 +5,12 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 )
 
 // DeserializeVfStats - parse byte slice and returns a VfStats struct. It extracts the relevant VF statistics
 // attributes from the provided byte slice.
-func DeserializeVfStats(b []byte) VfStats {
+func DeserializeVfStats(b []byte) (VfStats, error) {
 	var (
 		err      error
 		vfstat   VfStats
@@ -17,8 +18,12 @@ func DeserializeVfStats(b []byte) VfStats {
 		stats    []NetlinkRouteAttr
 	)
 
+	if b == nil || len(b) < SizeOfVfStats {
+		return vfstat, errors.New("input too short")
+	}
+
 	if stats, err = ParseRouteAttr(b); err != nil {
-		return vfstat
+		return vfstat, nil
 	}
 
 	for _, stat := range stats {
@@ -46,5 +51,5 @@ func DeserializeVfStats(b []byte) VfStats {
 			func() {}() //Do nothing but make the IDE happy
 		}
 	}
-	return vfstat
+	return vfstat, nil
 }
