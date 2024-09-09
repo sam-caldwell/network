@@ -13,7 +13,7 @@ func DeserializeVfRate(b []byte) (*VfRate, error) {
 
 	// Each uint32 is 4 bytes, so 3 uint32 fields require 12 bytes
 	if len(b) != 12 {
-		return nil, errors.New("invalid length for VfRate")
+		return nil, errors.New("input too short")
 	}
 
 	reader := bytes.NewReader(b)
