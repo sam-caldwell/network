@@ -22,8 +22,18 @@ func DeserializeTcPolice(b []byte) (*TcPolice, error) {
 	msg.Limit = NativeEndian.Uint32(b[8:12])
 	msg.Burst = NativeEndian.Uint32(b[12:16])
 	msg.Mtu = NativeEndian.Uint32(b[16:20])
-	msg.Rate = *DeserializeTcRateSpec(b[20 : 20+SizeOfTcRateSpec])
-	msg.PeakRate = *DeserializeTcRateSpec(b[20+SizeOfTcRateSpec : 20+2*SizeOfTcRateSpec])
+	temp, err := DeserializeTcRateSpec(b[20 : 20+SizeOfTcRateSpec])
+	if err != nil {
+		return nil, err
+	} else {
+		msg.Rate = *temp
+	}
+	temp, err = DeserializeTcRateSpec(b[20+SizeOfTcRateSpec : 20+2*SizeOfTcRateSpec])
+	if err != nil {
+		return nil, err
+	} else {
+		msg.PeakRate = *temp
+	}
 	msg.Refcnt = int32(NativeEndian.Uint32(b[20+2*SizeOfTcRateSpec : 20+2*SizeOfTcRateSpec+4]))
 	msg.Bindcnt = int32(NativeEndian.Uint32(b[20+2*SizeOfTcRateSpec+4 : 20+2*SizeOfTcRateSpec+8]))
 	msg.Capab = NativeEndian.Uint32(b[20+2*SizeOfTcRateSpec+8 : 20+2*SizeOfTcRateSpec+12])
