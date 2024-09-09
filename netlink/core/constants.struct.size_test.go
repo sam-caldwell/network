@@ -44,6 +44,8 @@ func TestConstantsStructureSize(t *testing.T) {
 		{expected: int(unsafe.Sizeof(TcSfqRedStats{})), actual: SizeOfTcSfqRedStats},
 		{expected: int(unsafe.Sizeof(TcSkbEdit{})), actual: SizeOfTcSkbEdit},
 		{expected: int(unsafe.Sizeof(TcTbfQopt{})), actual: SizeOfTcTbfQopt},
+		{expected: 16, actual: SizeOfTcU32Sel},
+		{expected: 16, actual: SizeOfTcU32Key},
 		{expected: int(unsafe.Sizeof(TcTunnelKey{})), actual: SizeOfTcTunnelKey},
 		{expected: int(unsafe.Sizeof(Tcf{})), actual: SizeOfTcf},
 		{expected: int(unsafe.Sizeof(Uint32Bitfield{})), actual: SizeOfUint32Bitfield},
