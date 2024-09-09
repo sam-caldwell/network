@@ -1,7 +1,5 @@
 github.com/sam-caldwell/ansi v1.0.1 h1:v71/1jsoBxgF7q/erUUa54TS0t5a0+bOsea98KTg5Lo=
 github.com/sam-caldwell/ansi v1.0.1/go.mod h1:A3i0CNTSo2VsQybJqyNwb3J6UDWJRZuEbW+3Q2Hs2hg=
-github.com/sam-caldwell/convert v1.0.2 h1:8pU5OXQCSE6Xggo6qHrwrWlIEECGq7LuOmUbzTUz9og=
-github.com/sam-caldwell/convert v1.0.2/go.mod h1:GBlVjg+ZIBlkXJ08uaZTsBYjM50Khv0WJfIbMHWM2y8=
 github.com/sam-caldwell/convert v1.0.3 h1:Il2PEjezQIcDzvlG8++0cqHUTLYaLGwn/hEwXcxzw2U=
 github.com/sam-caldwell/convert v1.0.3/go.mod h1:GBlVjg+ZIBlkXJ08uaZTsBYjM50Khv0WJfIbMHWM2y8=
 github.com/sam-caldwell/endianness v1.0.0 h1:E1m5MxgZVQuZPRD0HuNvk9aKz5taShMvQz5N2TW5u7Y=
@@ -12,5 +10,5 @@ github.com/sam-caldwell/exit v1.0.2 h1:9OSz8+9KE9cqQIQcex2+Egd91LGclfn4RKLr2CU7v
 github.com/sam-caldwell/exit v1.0.2/go.mod h1:gy6m0KCj1RZ+KafgZVahgAxdwVm9pud/6O+lZz0NpFw=
 github.com/sam-caldwell/types v1.0.2 h1:4fDbs1cLIt15/1bULZD3E1DNJqUhfgosQS1gdi4v6IY=
 github.com/sam-caldwell/types v1.0.2/go.mod h1:FEGFiYX1yZlEXpXDcK0PRo4LRWVxT83vxtjUWPIPMKk=
-golang.org/x/sys v0.24.0 h1:Twjiwq9dn6R1fQcyiK+wQyHWfaz/BJB+YIpzU/Cv3Xg=
-golang.org/x/sys v0.24.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
+golang.org/x/sys v0.25.0 h1:r+8e+loiHxRqhXVl6ML1nO3l1+oFoWbnlu2Ehimmi34=
+golang.org/x/sys v0.25.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
