@@ -8,33 +8,6 @@ import (
 // DeserializeTcU32Sel converts a byte slice into a TcU32Sel object.
 // It carefully parses the byte slice by extracting each field manually
 // and handles keys in the Keys array sequentially.
-//
-// Parameters:
-// - b []byte: The byte slice to deserialize.
-//
-// Returns:
-// - *TcU32Sel: A pointer to the deserialized TcU32Sel object.
-// - error: An error if deserialization fails or the byte slice is too short.
-//
-//	type TcU32Sel struct {
-//	   Flags    uint8
-//	   Offshift uint8
-//	   Nkeys    uint8
-//	   Pad      uint8
-//	   Offmask  uint16
-//	   Off      uint16
-//	   Offoff   int16
-//	   Hoff     int16
-//	   Hmask    uint32
-//	   Keys     []TcU32Key
-//	}
-//
-//	type TcU32Key struct {
-//	   Mask    uint32
-//	   Val     uint32
-//	   Off     int32
-//	   OffMask int32
-//	}
 func DeserializeTcU32Sel(b []byte) (*TcU32Sel, error) {
 	if len(b) < SizeOfTcU32Sel {
 		return nil, errors.New("input too short")
