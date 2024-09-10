@@ -19,7 +19,7 @@ func TestGenlMsg(t *testing.T) {
 				t.Fatalf("Unexpected error: %v", err)
 			}
 
-			// Check the fields of the returned Genlmsg
+			// Check the fields of the returned GenericNetlinkMessage
 			if msg.Command != 0x01 {
 				t.Errorf("Expected Command to be 0x01, but got %d", msg.Command)
 			}
