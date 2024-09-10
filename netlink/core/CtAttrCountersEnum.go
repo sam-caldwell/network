@@ -36,3 +36,31 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
 	CtaCountersMax = iota - 1
 )
+
+// FromInt - set rCtAttrCountersEnum value from integer
+func (counter *CtAttrCountersEnum) FromInt(i int) {
+	*counter = CtAttrCountersEnum(i)
+}
+
+// ToInt - return integer value fo rCtAttrCountersEnum
+func (counter *CtAttrCountersEnum) ToInt() int {
+	return int(*counter)
+}
+
+// String - Return string representation of the counter state
+func (counter *CtAttrCountersEnum) String() string {
+	switch *counter {
+	case CtaCountersPackets:
+		return "CTA_COUNTERS_PACKETS"
+	case CtaCountersBytes:
+		return "CTA_COUNTERS_BYTES"
+	case CtaCounters32Packets:
+		return "CTA_COUNTERS32_PACKETS"
+	case CtaCounters32Bytes:
+		return "CTA_COUNTERS32_BYTES"
+	case CtaCountersPad:
+		return "CTA_COUNTERS_PAD"
+	default:
+		panic("unhandled default case")
+	}
+}
