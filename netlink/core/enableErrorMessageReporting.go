@@ -1,5 +1,3 @@
-//go:build linux
-
 package core
 
 // enableErrorMessageReporting is the default error message reporting configuration for the new netlink sockets
