@@ -14,7 +14,8 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumUnspec DevlinkAttrEnum = 0
 
-	// DevlinkAttrEnumBusName - DEVLINK_ATTR_BUS_NAME (string) bus name + dev name together are a handle for devlink entity
+	// DevlinkAttrEnumBusName - DEVLINK_ATTR_BUS_NAME (string) bus name + dev name together are a handle for
+	// devlink entity
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumBusName DevlinkAttrEnum = 1
@@ -84,12 +85,14 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumSbEgressPoolCount DevlinkAttrEnum = 14
 
-	// DevlinkAttrEnumSbIngressTcCount - DEVLINK_ATTR_SB_INGRESS_TC_COUNT (u16) shared buffer ingress traffic class count
+	// DevlinkAttrEnumSbIngressTcCount - DEVLINK_ATTR_SB_INGRESS_TC_COUNT (u16) shared buffer ingress traffic
+	// class count
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumSbIngressTcCount DevlinkAttrEnum = 15
 
-	// DevlinkAttrEnumSbEgressTcCount - DEVLINK_ATTR_SB_EGRESS_TC_COUNT (u16) shared buffer egress traffic class count
+	// DevlinkAttrEnumSbEgressTcCount - DEVLINK_ATTR_SB_EGRESS_TC_COUNT (u16) shared buffer egress traffic
+	// class count
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumSbEgressTcCount DevlinkAttrEnum = 16
@@ -109,7 +112,8 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumSbPoolSize DevlinkAttrEnum = 19
 
-	// DevlinkAttrEnumSbPoolThresholdType - DEVLINK_ATTR_SB_POOL_THRESHOLD_TYPE (u8) shared buffer pool threshold type
+	// DevlinkAttrEnumSbPoolThresholdType - DEVLINK_ATTR_SB_POOL_THRESHOLD_TYPE (u8) shared buffer pool
+	// threshold type
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumSbPoolThresholdType DevlinkAttrEnum = 20
@@ -174,7 +178,8 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumDpipeTableActions DevlinkAttrEnum = 32
 
-	// DevlinkAttrEnumDpipeTableCountersEnabled - DEVLINK_ATTR_DPIPE_TABLE_COUNTERS_ENABLED (u8) dpipe table counters enabled
+	// DevlinkAttrEnumDpipeTableCountersEnabled - DEVLINK_ATTR_DPIPE_TABLE_COUNTERS_ENABLED (u8) dpipe table
+	// counters enabled
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumDpipeTableCountersEnabled DevlinkAttrEnum = 33
@@ -199,7 +204,8 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumDpipeEntryMatchValues DevlinkAttrEnum = 37
 
-	// DevlinkAttrEnumDpipeEntryActionValues - DEVLINK_ATTR_DPIPE_ENTRY_ACTION_VALUES (nested) dpipe entry action values
+	// DevlinkAttrEnumDpipeEntryActionValues - DEVLINK_ATTR_DPIPE_ENTRY_ACTION_VALUES (nested) dpipe entry action
+	// values
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumDpipeEntryActionValues DevlinkAttrEnum = 38
@@ -389,7 +395,8 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumDpipeTableResourceId DevlinkAttrEnum = 75
 
-	// DevlinkAttrEnumDpipeTableResourceUnits - DEVLINK_ATTR_DPIPE_TABLE_RESOURCE_UNITS (u64) dpipe table resource units
+	// DevlinkAttrEnumDpipeTableResourceUnits - DEVLINK_ATTR_DPIPE_TABLE_RESOURCE_UNITS (u64) dpipe table
+	// resource units
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumDpipeTableResourceUnits DevlinkAttrEnum = 76
@@ -594,27 +601,32 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumHealthReporterState DevlinkAttrEnum = 116
 
-	// DevlinkAttrEnumHealthReporterErrCount - DEVLINK_ATTR_HEALTH_REPORTER_ERR_COUNT (u64) health reporter error count
+	// DevlinkAttrEnumHealthReporterErrCount - DEVLINK_ATTR_HEALTH_REPORTER_ERR_COUNT (u64) health reporter error
+	// count
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumHealthReporterErrCount DevlinkAttrEnum = 117
 
-	// DevlinkAttrEnumHealthReporterRecoverCount - DEVLINK_ATTR_HEALTH_REPORTER_RECOVER_COUNT (u64) health reporter recover count
+	// DevlinkAttrEnumHealthReporterRecoverCount - DEVLINK_ATTR_HEALTH_REPORTER_RECOVER_COUNT (u64) health reporter
+	// recover count
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumHealthReporterRecoverCount DevlinkAttrEnum = 118
 
-	// DevlinkAttrEnumHealthReporterDumpTs - DEVLINK_ATTR_HEALTH_REPORTER_DUMP_TS (u64) health reporter dump timestamp
+	// DevlinkAttrEnumHealthReporterDumpTs - DEVLINK_ATTR_HEALTH_REPORTER_DUMP_TS (u64) health reporter dump
+	// timestamp
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumHealthReporterDumpTs DevlinkAttrEnum = 119
 
-	// DevlinkAttrEnumHealthReporterGracefulPeriod - DEVLINK_ATTR_HEALTH_REPORTER_GRACEFUL_PERIOD (u64) health reporter graceful period
+	// DevlinkAttrEnumHealthReporterGracefulPeriod - DEVLINK_ATTR_HEALTH_REPORTER_GRACEFUL_PERIOD (u64) health
+	// reporter graceful period
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumHealthReporterGracefulPeriod DevlinkAttrEnum = 120
 
-	// DevlinkAttrEnumHealthReporterAutoRecover - DEVLINK_ATTR_HEALTH_REPORTER_AUTO_RECOVER (u8) health reporter auto recover
+	// DevlinkAttrEnumHealthReporterAutoRecover - DEVLINK_ATTR_HEALTH_REPORTER_AUTO_RECOVER (u8) health reporter
+	// auto recover
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumHealthReporterAutoRecover DevlinkAttrEnum = 121
@@ -694,7 +706,8 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumReloadFailed DevlinkAttrEnum = 136
 
-	// DevlinkAttrEnumHealthReporterDumpTsNs - DEVLINK_ATTR_HEALTH_REPORTER_DUMP_TS_NS (u64) health reporter dump timestamp in nanoseconds
+	// DevlinkAttrEnumHealthReporterDumpTsNs - DEVLINK_ATTR_HEALTH_REPORTER_DUMP_TS_NS (u64) health reporter dump
+	// timestamp in nanoseconds
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumHealthReporterDumpTsNs DevlinkAttrEnum = 137
@@ -764,12 +777,14 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumPortControllerNumber DevlinkAttrEnum = 150
 
-	// DevlinkAttrEnumFlashUpdateStatusTimeout - DEVLINK_ATTR_FLASH_UPDATE_STATUS_TIMEOUT (u64) flash update status timeout
+	// DevlinkAttrEnumFlashUpdateStatusTimeout - DEVLINK_ATTR_FLASH_UPDATE_STATUS_TIMEOUT (u64) flash update status
+	// timeout
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumFlashUpdateStatusTimeout DevlinkAttrEnum = 151
 
-	// DevlinkAttrEnumFlashUpdateOverwriteMask - DEVLINK_ATTR_FLASH_UPDATE_OVERWRITE_MASK (bitfield32) flash update overwrite mask
+	// DevlinkAttrEnumFlashUpdateOverwriteMask - DEVLINK_ATTR_FLASH_UPDATE_OVERWRITE_MASK (bitfield32) flash update
+	// overwrite mask
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumFlashUpdateOverwriteMask DevlinkAttrEnum = 152
@@ -779,7 +794,8 @@ const (
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumReloadAction DevlinkAttrEnum = 153
 
-	// DevlinkAttrEnumReloadActionsPerformed - DEVLINK_ATTR_RELOAD_ACTIONS_PERFORMED (bitfield32) reload actions performed
+	// DevlinkAttrEnumReloadActionsPerformed - DEVLINK_ATTR_RELOAD_ACTIONS_PERFORMED (bitfield32) reload actions
+	// performed
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 	DevlinkAttrEnumReloadActionsPerformed DevlinkAttrEnum = 154
