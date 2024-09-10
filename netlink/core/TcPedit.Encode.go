@@ -2,6 +2,7 @@ package core
 
 import (
 	"bytes"
+	"github.com/sam-caldwell/convert"
 	"unsafe"
 )
 
@@ -13,7 +14,7 @@ import (
 //	parent - The parent RtAttr to which the encoded `TcPedit` structure will be added.
 func (p *TcPedit) Encode(parent *RtAttr) {
 	// Add the "kind" attribute for the pedit action.
-	parent.AddRtAttr(uint16(TcaActKind), ConvertGoStringToNullTerminated("pedit"))
+	parent.AddRtAttr(uint16(TcaActKind), convert.GoStringToNullTerminated("pedit"))
 
 	// Add the options attribute for the pedit action.
 	actOpts := parent.AddRtAttr(uint16(TcaActOptions), nil)
