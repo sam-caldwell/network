@@ -7,7 +7,7 @@ import (
 	"unsafe"
 )
 
-func TestBridgeVlanInfo_struct(t *testing.T) {
+func TestBridgeVlanInfo(t *testing.T) {
 	t.Run("BridgeVlanInfo struct test", func(t *testing.T) {
 		t.Run("check structure", func(t *testing.T) {
 			_ = BridgeVlanInfo{
