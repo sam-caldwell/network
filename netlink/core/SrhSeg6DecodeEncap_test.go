@@ -34,8 +34,8 @@ func TestDecodeSEG6Encap(t *testing.T) {
 		copy(buf[12:28], ip1)
 		copy(buf[28:44], ip2)
 
-		// Call DecodeSEG6Encap with the buffer
-		mode, segments, err := DecodeSEG6Encap(buf)
+		// Call SrhSeg6DecodeEncap with the buffer
+		mode, segments, err := SrhSeg6DecodeEncap(buf)
 
 		// Check for no errors
 		if err != nil {
@@ -77,8 +77,8 @@ func TestDecodeSEG6Encap(t *testing.T) {
 		buf[9] = 0x00                                  // Flags
 		binary.BigEndian.PutUint16(buf[10:12], 0x0000) // Reserved
 
-		// Call DecodeSEG6Encap with the buffer
-		_, _, err := DecodeSEG6Encap(buf)
+		// Call SrhSeg6DecodeEncap with the buffer
+		_, _, err := SrhSeg6DecodeEncap(buf)
 
 		// Expect an error due to the invalid buffer length
 		if err == nil {

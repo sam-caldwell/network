@@ -5,7 +5,7 @@ import (
 	"net"
 )
 
-// DecodeSEG6Srh - Decodes an IPv6 Segment Routing Header (SRH) from a byte buffer.
+// SrhSeg6Decode - Decodes an IPv6 Segment Routing Header (SRH) from a byte buffer.
 //
 // This function extracts an SRH from a byte slice and parses the segments to return a list of net.IP addresses.
 // SRH is used in segment routing for IPv6 to define a list of waypoints for a packet to travel through.
@@ -16,7 +16,7 @@ import (
 // Returns:
 //   - segments: A slice of net.IP representing the segment list in the SRH.
 //   - error: An error if the buffer length is invalid or malformed.
-func DecodeSEG6Srh(buf []byte) ([]net.IP, error) {
+func SrhSeg6Decode(buf []byte) ([]net.IP, error) {
 	// Parse the IPv6 SRH header from the buffer
 	srh := IPv6SrHdr{
 		nextHdr:      buf[0],
@@ -33,7 +33,7 @@ func DecodeSEG6Srh(buf []byte) ([]net.IP, error) {
 
 	// Ensure the remaining buffer length is a multiple of 16 (for IPv6 segment addresses)
 	if len(buf)%16 != 0 {
-		err := fmt.Errorf("DecodeSEG6Srh: error parsing Segment List (buf len: %d)", len(buf))
+		err := fmt.Errorf("SrhSeg6Decode: error parsing Segment List (buf len: %d)", len(buf))
 		return nil, err
 	}
 

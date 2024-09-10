@@ -6,7 +6,7 @@ import (
 	"net"
 )
 
-// DecodeSEG6Encap - Decodes a Segment Routing Header (SRH) from a byte buffer.
+// SrhSeg6DecodeEncap - Decodes a Segment Routing Header (SRH) from a byte buffer.
 //
 // This function parses the SRH for IPv6 encapsulation, extracting the mode and segments.
 // The segments represent a list of intermediate nodes for the routing path.
@@ -18,7 +18,7 @@ import (
 //   - mode: The mode of encapsulation.
 //   - segments: A list of net.IP segments extracted from the SRH.
 //   - error: Returns an error if the segment list is malformed or invalid.
-func DecodeSEG6Encap(buf []byte) (int, []net.IP, error) {
+func SrhSeg6DecodeEncap(buf []byte) (int, []net.IP, error) {
 
 	// Extract the mode from the first 4 bytes using BigEndian (network byte order)
 	mode := int(binary.BigEndian.Uint32(buf))
@@ -39,7 +39,7 @@ func DecodeSEG6Encap(buf []byte) (int, []net.IP, error) {
 
 	// Ensure the remaining buffer length is a multiple of 16 (for IPv6 segment addresses)
 	if len(buf)%16 != 0 {
-		err := fmt.Errorf("DecodeSEG6Encap: error parsing Segment List (buf len: %d)", len(buf))
+		err := fmt.Errorf("SrhSeg6DecodeEncap: error parsing Segment List (buf len: %d)", len(buf))
 		return mode, nil, err
 	}
 
