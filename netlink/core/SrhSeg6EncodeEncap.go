@@ -5,7 +5,7 @@ import (
 	"net"
 )
 
-// EncodeSEG6Encap - Encodes a Segment Routing Header (SRH) for IPv6 encapsulation.
+// SrhSeg6EncodeEncap - Encodes a Segment Routing Header (SRH) for IPv6 encapsulation.
 //
 // This function encodes the SRH with a given mode and a list of IPv6 segments.
 // The segments represent a set of intermediate nodes the packet should traverse.
@@ -16,11 +16,11 @@ import (
 //   - segments: A list of net.IP representing the routing segments.
 //
 // See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/seg6.h
-func EncodeSEG6Encap(mode int, segments []net.IP) ([]byte, error) {
+func SrhSeg6EncodeEncap(mode int, segments []net.IP) ([]byte, error) {
 	nsegs := len(segments) // Number of segments
 
 	if nsegs == 0 {
-		return nil, errors.New("EncodeSEG6Encap: No Segment in srh")
+		return nil, errors.New("SrhSeg6EncodeEncap: No Segment in srh")
 	}
 
 	// Create a byte slice with initial length 12 (fixed header) and capacity for the segments
