@@ -33,8 +33,50 @@ const (
 	GenlIdCtrl = unix.GENL_ID_CTRL
 )
 
-// constants.struct.size:
-//
+// GTP Tunneling Module
+// See https://docs.kernel.org/networking/gtp.html
+const (
+
+	// GenlGtpVersion -
+	// See https://docs.kernel.org/networking/gtp.html
+	GenlGtpVersion = 0
+
+	// GenlGtpName -
+	// See https://docs.kernel.org/networking/gtp.html
+	GenlGtpName = "gtp"
+)
+
+// Family nlctrl netlink specification
+// See https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+const (
+
+	// GenlCtrlName - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+	GenlCtrlName = "nlctrl"
+
+	// GenlCtrlVersion - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+	GenlCtrlVersion = 2
+
+	// GenlCtrlCmdGetFamily - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+	GenlCtrlCmdGetFamily = 3
+)
+
+// All the following constants are coming from:
+// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
+const (
+
+	// DevlinkGenlName - DEVLINK_GENL_NAME -
+	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
+	DevlinkGenlName = "devlink"
+
+	// DevlinkGenlVersion - DEVLINK_GENL_VERSION -
+	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
+	DevlinkGenlVersion = 1
+
+	// DevlinkGenlMcgrpConfigName - DEVLINK_GENL_MCGRP_CONFIG_NAME -
+	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
+	DevlinkGenlMcgrpConfigName = "config"
+)
+
 // This file defines the structure size constants used elsewhere in the program
 // We do this here to make our use of "unsafe" an exception rather than the norm.
 // This should be the only place where we need unsafe (outside of tests).
