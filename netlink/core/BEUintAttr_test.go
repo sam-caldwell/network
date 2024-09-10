@@ -70,7 +70,7 @@ func TestBEUint16Attr(t *testing.T) {
 
 		for _, tt := range tests {
 			t.Run(tt.name, func(t *testing.T) {
-				got := BEUint32Attr(tt.v)
+				got := BEUintAttr(tt.v)
 				if len(got) != 4 {
 					t.Fatalf("expected length of result to be 4, got %v", len(got))
 				}
@@ -113,7 +113,7 @@ func TestBEUint16Attr(t *testing.T) {
 
 		for _, tt := range tests {
 			t.Run(tt.name, func(t *testing.T) {
-				got := BEUint64Attr(tt.v)
+				got := BEUintAttr(tt.v)
 				if len(got) != 8 {
 					t.Fatalf("expected length of result to be 8, got %v", len(got))
 				}
