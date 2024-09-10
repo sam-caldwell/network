@@ -10,11 +10,14 @@ package core
 // See:
 // - https://github.com/torvalds/linux/blob/master/include/uapi/linux/pkt_cls.h
 // - https://man7.org/linux/man-pages/man8/tc-u32.8.html
+
+type TcU32Enum uint8
+
 const (
 	// TcU32Terminal - TC_U32_TERMINAL - Stop processing further rules once this rule matches.
 	//
 	// See: https://github.com/torvalds/linux/blob/master/include/uapi/linux/pkt_cls.h
-	TcU32Terminal = 1 << iota
+	TcU32Terminal TcU32Enum = 1 << iota
 
 	// TcU32Offset - TC_U32_OFFSET - Allow offsets in the u32 matching process.
 	//
