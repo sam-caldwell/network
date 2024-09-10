@@ -19,9 +19,6 @@ const (
 
 	/* Add new configuration modes above */
 
-	// __devlinkParamCmodeMax - __DEVLINK_PARAM_CMODE_MAX
-	__devlinkParamCmodeMax DevlinkParamCmodeEnum = 3
-
 	// DevlinkParamCmodeMax - DEVLINK_PARAM_CMODE_MAX
-	DevlinkParamCmodeMax DevlinkParamCmodeEnum = __devlinkParamCmodeMax - 1
+	DevlinkParamCmodeMax = iota - 1
 )
