@@ -5,13 +5,6 @@ import (
 	"testing"
 )
 
-// Constants for address families
-const (
-	AfInet   = 2  // IPv4
-	AfInet6  = 10 // IPv6
-	AfUnspec = 0  // Unspecified
-)
-
 func TestGetIPFamily(t *testing.T) {
 	tests := []struct {
 		name     string
