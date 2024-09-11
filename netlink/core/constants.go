@@ -77,15 +77,14 @@ const (
 	DevlinkGenlMcgrpConfigName = "config"
 )
 
+const (
+	ErrInputTooShort = "input too short"
+)
+
 // This file defines the structure size constants used elsewhere in the program
 // We do this here to make our use of "unsafe" an exception rather than the norm.
 // This should be the only place where we need unsafe (outside of tests).
 const (
-	// SizeOfIfAddressMessage     = 0x8 // bytes as derived from unix.SizeOfIfAddressMessage
-	SizeOfIfAddressMessage = int(unsafe.Sizeof(IfAddressMessage{}))
-
-	// SizeOfIfaCacheInfo - 0x16 // bytes as derived from unix.SizeOfIfaCacheInfo
-	SizeOfIfaCacheInfo = int(unsafe.Sizeof(IfaCacheInfo{}))
 
 	// SizeOfBridgeVlanInfo - size of BridgeVlanInfo
 	SizeOfBridgeVlanInfo = int(unsafe.Sizeof(BridgeVlanInfo{}))
@@ -93,8 +92,8 @@ const (
 	// SizeOfCnMsgOp - size of CnMsgOp struct
 	SizeOfCnMsgOp = int(unsafe.Sizeof(CnMsgOp{}))
 
-	// SizeOfGenlMsg - size of Genlmsg struct
-	SizeOfGenlMsg = int(unsafe.Sizeof(Genlmsg{}))
+	// SizeOfGenlMsg - size of GenericNetlinkMessage struct
+	SizeOfGenlMsg = int(unsafe.Sizeof(GenericNetlinkMessage{}))
 
 	// SizeOfNfGenMsg - Track the message sizes for the correct serialization/deserialization
 	SizeOfNfGenMsg = int(unsafe.Sizeof(Nfgenmsg{}))
