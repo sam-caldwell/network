@@ -1,3 +1,5 @@
+//go:build linux
+
 package namespace
 
 // Handle represents a handle to a network namespace in the Linux kernel.
