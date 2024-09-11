@@ -9,7 +9,7 @@ import (
 func (ns *Handle) UniqueId() string {
 
 	if *ns == closedHandle {
-		return "NS(closedHandle)"
+		return "NS(none)"
 	}
 
 	var s unix.Stat_t
