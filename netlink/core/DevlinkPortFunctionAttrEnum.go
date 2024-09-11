@@ -33,5 +33,5 @@ const (
 	*/
 
 	// DevlinkPortFunctionAttrMax - DEVLINK_PORT_FUNCTION_ATTR_MAX
-	DevlinkPortFunctionAttrMax = DevlinkPortFnAttrMaxIoEqs
+	DevlinkPortFunctionAttrMax = iota - 1
 )
