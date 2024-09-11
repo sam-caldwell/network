@@ -6,8 +6,8 @@ import (
 	"path"
 )
 
-// DeleteNamespace deletes a named network namespace
-func DeleteNamespace(name string) error {
+// Delete - deletes a named network namespace from both the in-memory map and filesystem.
+func Delete(name string) error {
 	lock.Lock()
 	defer lock.Unlock()
 
