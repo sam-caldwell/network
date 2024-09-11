@@ -5,17 +5,18 @@ import (
 )
 
 func TestConstants(t *testing.T) {
-
-	if bindMountPath != "/run/netns" {
-		t.Fatal("mismatch")
-	}
-
-	if closedHandle != -1 {
-		t.Fatal("mismatch")
-	}
-
-	if ErrNotImplemented != "not implemented" {
-		t.Fatal("mismatch")
-	}
-
+	t.Run("test with constant values", func(t *testing.T) {
+		testData := map[any]any{
+			bindMountPath:        "/run/netns",
+			processNamespacePath: "/proc/%d/ns/net",
+			threadNamespacePath:  "/proc/%d/task/%d/ns/net",
+			closedHandle:         Handle(-1),
+			ErrNotImplemented:    "not implemented",
+		}
+		for actual, expected := range testData {
+			if actual != expected {
+				t.Fatalf("value mismatch.  actual: %v, expected: %v", actual, expected)
+			}
+		}
+	})
 }
