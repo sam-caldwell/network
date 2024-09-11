@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"golang.org/x/sys/unix"
 	"os"
+	"path"
 	"runtime"
 )
 
@@ -53,6 +54,41 @@ func NewHandle() (Handle, error) {
 	return Opsys.GetFromThread(os.Getpid(), unix.Gettid())
 }
 
+// NewWithName - create new named network namespace and set it as the current namespace, returning its handle.
+func NewWithName(name string) (Handle, error) {
+	if _, err := os.Stat(bindMountPath); os.IsNotExist(err) {
+		err = os.MkdirAll(bindMountPath, 0o755)
+		if err != nil {
+			return None(), err
+		}
+	}
+
+	newNamespace, err := NewHandle()
+	if err != nil {
+		return None(), err
+	}
+
+	namedPath := path.Join(bindMountPath, name)
+
+	f, err := os.OpenFile(namedPath, os.O_CREATE|os.O_EXCL, 0o444)
+	if err != nil {
+		if cerr := newNamespace.Close(); cerr != nil {
+			return None(), fmt.Errorf("error creating namespace: (err:%v, closing err: %v)", err, cerr)
+		}
+		return None(), err
+	}
+	_ = f.Close()
+
+	nsPath := fmt.Sprintf("/proc/%d/task/%d/ns/net", os.Getpid(), unix.Gettid())
+	err = unix.Mount(nsPath, namedPath, "bind", unix.MS_BIND, "")
+	if err != nil {
+		_ = newNamespace.Close()
+		return None(), err
+	}
+
+	return newNamespace, nil
+}
+
 // String - return the file descriptor, its dev and inode, as a string.
 func (ns *Handle) String() string {
 	if *ns == -1 {
@@ -89,7 +125,7 @@ func Set(ns Handle) error {
 // ...and there's the golang love of changing things under us that make wrappers appealing.
 //
 // See https://man7.org/linux/man-pages/man2/setns.2.html
-func SetNamespace(namespace Handle, namespaceType NsTypes) error {
+func SetNamespace(namespace Handle, namespaceType Types) error {
 	return unix.Setns(int(namespace), int(namespaceType))
 }
 
