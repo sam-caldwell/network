@@ -9,14 +9,7 @@ import (
 	"runtime"
 )
 
-// Opsys - a direct interface for querying the operating system for a network namespace.
-var Opsys LinuxNamespaceInterface
-
-// LinuxNamespaceInterface - an empty struct representing the operating system interface for working with
-// network namespaces.
-type LinuxNamespaceInterface struct{}
-
-// Get returns a handle to the current thread's network namespace.
+// OpsysGet returns a handle to the current thread's network namespace.
 // This function retrieves the network namespace associated with the calling thread by getting the process ID (PID)
 // and thread ID (TID). It uses the `GetFromThread` function, which operates based on the Linux kernel's handling
 // of network namespaces at the thread level.
@@ -36,39 +29,39 @@ type LinuxNamespaceInterface struct{}
 // Returns:
 //   - Handle: A handle to the current thread's network namespace.
 //   - error: An error if the handle cannot be retrieved.
-func (ns *LinuxNamespaceInterface) Get() (Handle, error) {
+func OpsysGet() (Handle, error) {
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
 	// os.Getpid() retrieves the current process ID
 	// unix.Gettid() retrieves the current thread ID (since threads in Linux are treated as lightweight processes).
-	return ns.GetFromThread(os.Getpid(), unix.Gettid())
+	return OpsysGetFromThread(os.Getpid(), unix.Gettid())
 }
 
-// GetFromThread - return the network namespace handle for the given process id (pid) and thread id (tid)
-func (ns *LinuxNamespaceInterface) GetFromThread(pid, tid int) (Handle, error) {
-	return ns.GetFromPath(fmt.Sprintf("/proc/%d/task/%d/ns/net", pid, tid))
+// OpsysGetFromThread - return the network namespace handle for the given process id (pid) and thread id (tid)
+func OpsysGetFromThread(pid, tid int) (Handle, error) {
+	return OpsysGetFromPath(fmt.Sprintf("/proc/%d/task/%d/ns/net", pid, tid))
 }
 
-// GetFromPath - return a handle to the network namespace identified by the given path.
-func (ns *LinuxNamespaceInterface) GetFromPath(path string) (Handle, error) {
+// OpsysGetFromPath - return a handle to the network namespace identified by the given path.
+func OpsysGetFromPath(path string) (Handle, error) {
 	fd, err := unix.Open(path, unix.O_RDONLY|unix.O_CLOEXEC, 0)
 	return Handle(fd), err
 }
 
-// GetFromPid - return the network namespace handle for the given pid.
-func (ns *LinuxNamespaceInterface) GetFromPid(pid int) (Handle, error) {
+// OpsysGetFromPid - return the network namespace handle for the given pid.
+func OpsysGetFromPid(pid int) (Handle, error) {
 	const nsPath = "/proc/%d/ns/net"
-	return ns.GetFromPath(fmt.Sprintf(nsPath, pid))
+	return OpsysGetFromPath(fmt.Sprintf(nsPath, pid))
 }
 
-// GetFromName - return a handle to the named network namespace.
-func (ns *LinuxNamespaceInterface) GetFromName(name string) (Handle, error) {
-	return ns.GetFromPath(filepath.Join(bindMountPath, name))
+// OpsysGetFromName - return a handle to the named network namespace.
+func OpsysGetFromName(name string) (Handle, error) {
+	return OpsysGetFromPath(filepath.Join(bindMountPath, name))
 }
 
-// DeleteNamespace deletes a named network namespace
-func (ns *LinuxNamespaceInterface) DeleteNamespace(name string) error {
+// OpsysDeleteNamespace deletes a named network namespace
+func OpsysDeleteNamespace(name string) error {
 	namedPath := path.Join(bindMountPath, name)
 
 	err := unix.Unmount(namedPath, unix.MNT_DETACH)
