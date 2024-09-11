@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/sam-caldwell/ansi v1.0.1 // indirect
 	github.com/sam-caldwell/endianness v1.0.0 // indirect
 	github.com/sam-caldwell/errors v1.0.7 // indirect
