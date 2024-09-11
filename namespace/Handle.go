@@ -19,11 +19,11 @@ import (
 // - Linux Kernel Source (Netlink and Namespaces): https://github.com/torvalds/linux/tree/master/net/core
 //
 // Usage:
-// - A `Handle` can be obtained via functions like `Get()` or `New()`, which retrieve or create a namespace.
+// - A `Handle` can be obtained via functions like `Get()` or `NewHandle()`, which retrieve or create a namespace.
 // - Once a handle is obtained, it can be passed to system calls (e.g., `setns(fd, CLONE_NEWNET)`).
 type Handle int
 
-// New creates a new network namespace using the `unshare` system call.
+// NewHandle - creates a new network namespace using the `unshare` system call.
 // This function isolates the network stack of the calling process by creating a new network namespace
 // and setting it as the current one.
 //
@@ -39,7 +39,7 @@ type Handle int
 // Returns:
 //   - Handle: A handle to the new network namespace.
 //   - error: An error if the system call fails (e.g., insufficient privileges or unsupported kernel).
-func New() (Handle, error) {
+func NewHandle() (Handle, error) {
 
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
@@ -50,7 +50,7 @@ func New() (Handle, error) {
 	}
 
 	// Retrieve and return a handle to the newly created network namespace.
-	return GetFromThread(os.Getpid(), unix.Gettid())
+	return Opsys.GetFromThread(os.Getpid(), unix.Gettid())
 }
 
 // String - return the file descriptor, its dev and inode, as a string.

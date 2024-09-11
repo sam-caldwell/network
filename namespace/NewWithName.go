@@ -18,7 +18,7 @@ func NewWithName(name string) (Handle, error) {
 		}
 	}
 
-	newNamespace, err := New()
+	newNamespace, err := NewHandle()
 	if err != nil {
 		return None(), err
 	}

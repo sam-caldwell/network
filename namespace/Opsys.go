@@ -1,12 +1,19 @@
-//go:build linux
-
 package namespace
 
 import (
+	"fmt"
 	"golang.org/x/sys/unix"
 	"os"
+	"path/filepath"
 	"runtime"
 )
+
+// Opsys - a direct interface for querying the operating system for a network namespace.
+var Opsys LinuxNamespaceInterface
+
+// LinuxNamespaceInterface - an empty struct representing the operating system interface for working with
+// network namespaces.
+type LinuxNamespaceInterface struct{}
 
 // Get returns a handle to the current thread's network namespace.
 // This function retrieves the network namespace associated with the calling thread by getting the process ID (PID)
@@ -28,11 +35,33 @@ import (
 // Returns:
 //   - Handle: A handle to the current thread's network namespace.
 //   - error: An error if the handle cannot be retrieved.
-func Get() (Handle, error) {
+func (ns *LinuxNamespaceInterface) Get() (Handle, error) {
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
 	// os.Getpid() retrieves the current process ID
 	// unix.Gettid() retrieves the current thread ID (since threads in Linux are treated as lightweight processes).
-	return GetFromThread(os.Getpid(), unix.Gettid())
+	return ns.GetFromThread(os.Getpid(), unix.Gettid())
+}
+
+// GetFromThread - return the network namespace handle for the given process id (pid) and thread id (tid)
+func (ns *LinuxNamespaceInterface) GetFromThread(pid, tid int) (Handle, error) {
+	return ns.GetFromPath(fmt.Sprintf("/proc/%d/task/%d/ns/net", pid, tid))
+}
+
+// GetFromPath - return a handle to the network namespace identified by the given path.
+func (ns *LinuxNamespaceInterface) GetFromPath(path string) (Handle, error) {
+	fd, err := unix.Open(path, unix.O_RDONLY|unix.O_CLOEXEC, 0)
+	return Handle(fd), err
+}
+
+// GetFromPid - return the network namespace handle for the given pid.
+func (ns *LinuxNamespaceInterface) GetFromPid(pid int) (Handle, error) {
+	const path = "/proc/%d/ns/net"
+	return ns.GetFromPath(fmt.Sprintf(path, pid))
+}
+
+// GetFromName - return a handle to the named network namespace.
+func (ns *LinuxNamespaceInterface) GetFromName(name string) (Handle, error) {
+	return ns.GetFromPath(filepath.Join(bindMountPath, name))
 }

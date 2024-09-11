@@ -18,7 +18,7 @@ func NewNamespaceTracker() *Tracker {
 
 		current: closedHandle,
 
-		namespaces: make(map[string]Handle),
+		namespaces: make(TrackerMap),
 	}
 
 }

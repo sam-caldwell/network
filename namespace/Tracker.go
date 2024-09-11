@@ -1,8 +1,8 @@
 package namespace
 
 import (
+	"errors"
 	"fmt"
-	"golang.org/x/sys/unix"
 	"runtime"
 	"sync"
 )
@@ -20,14 +20,22 @@ import (
 //   - Network namespace management in the kernel can be found at:
 //     https://github.com/torvalds/linux/blob/master/net/core/net_namespace.c
 type Tracker struct {
-	//
 	sync.Mutex
-	current    Handle            // The currently active namespace handle
-	namespaces map[string]Handle // Map of namespaces and their file descriptors
+	// current - The currently active namespace handle
+	current Id
+	// namespaces - Map of namespaces and their file descriptors
+	namespaces TrackerMap
 }
 
+// Id - Namespace Identifier.  This is an abstract identifier used to represent a network namespace in
+// memory, which is mapped to the underlying linux file descriptor.
+type Id int64
+
+// TrackerMap is a map of namespace Id to the Handle (file descriptor).
+type TrackerMap map[Id]Handle
+
 // CreateNamespace - Creates a new network namespace and adds it to the tracker
-func (nt *Tracker) CreateNamespace(name string) (Handle, error) {
+func (nt *Tracker) CreateNamespace() (Handle, error) {
 
 	// Lock the OS thread to ensure thread consistency
 	runtime.LockOSThread()
@@ -36,73 +44,93 @@ func (nt *Tracker) CreateNamespace(name string) (Handle, error) {
 	nt.Lock()
 	defer nt.Unlock()
 
-	// Create a new namespace using the unshare system call
-	if err := unix.Unshare(unix.CLONE_NEWNET); err != nil {
-		return closedHandle, fmt.Errorf("failed to create namespace: %v", err)
-	}
-
-	// Get the handle for the new namespace
-	handle, err := Get()
-	if err != nil {
-		return closedHandle, fmt.Errorf("failed to get new namespace handle: %v", err)
-	}
-
-	// Store the handle in memory
-	nt.namespaces[name] = handle
-	return handle, nil
+	newHandle, err := NewHandle()
+	return newHandle, err
 }
 
-// SwitchNamespace - Switches to the given namespace, tracking the current one for later restoration
-func (nt *Tracker) SwitchNamespace(name string) (func(), error) {
+// Get - Return the current namespace or error if closed or not found.
+func (nt *Tracker) Get() (h Handle, err error) {
 	nt.Lock()
 	defer nt.Unlock()
 
+	if nt.current == closedHandle {
+		return closedHandle, errors.New("current namespace is closed")
+	}
+	return nt.getByNamespaceIdUnsafe(nt.current)
+}
+
+// GetByNamespaceId - Return the namespace Handle matching the given Id value.
+func (nt *Tracker) GetByNamespaceId(id Id) (h Handle, err error) {
+	nt.Lock()
+	defer nt.Unlock()
+	return nt.getByNamespaceIdUnsafe(id)
+}
+
+// getByNamespaceIdUnsafe - Return the namespace Handle matching the given Id value with no locking. This method is
+// not safe, as it has no locking.  Use the exported GetByNamespaceId() instead unless locking is otherwise handled.
+func (nt *Tracker) getByNamespaceIdUnsafe(id Id) (h Handle, err error) {
+	if ns, found := nt.namespaces[nt.current]; found {
+		return ns, nil
+	}
+	return closedHandle, errors.New("current namespace is closed")
+}
+
+// SwitchNamespace - Switches to the given namespace, tracking the current one for later restoration.
+func (nt *Tracker) SwitchNamespace(ns Id) (func() error, error) {
+
+	previousNsId := nt.current
+
+	rollbackFunc := func() (err error) {
+		nt.Lock()
+		defer nt.Unlock()
+
+		// Get the requested namespace handle
+		if _, exists := nt.namespaces[previousNsId]; !exists {
+			return fmt.Errorf("namespace '%d' not found", ns)
+		}
+
+		// Store the current namespace to allow restoration
+		if previousNsId == closedHandle {
+			return fmt.Errorf("current namespace is closed")
+		}
+		nt.current = previousNsId
+		return nil
+	}
+
 	// Get the requested namespace handle
-	handle, exists := nt.namespaces[name]
-	if !exists {
-		return nil, fmt.Errorf("namespace '%s' not found", name)
+	if _, exists := nt.namespaces[ns]; !exists {
+		return nil, fmt.Errorf("namespace '%d' not found", ns)
 	}
 
 	// Store the current namespace to allow restoration
 	if nt.current == closedHandle {
-		currentNamespace, err := Get()
-		if err != nil {
-			return nil, fmt.Errorf("failed to get current namespace: %v", err)
-		}
-		nt.current = currentNamespace
+		return nil, fmt.Errorf("current namespace is closed")
 	}
+	nt.current = ns
 
-	// Switch to the requested namespace
-	if err := Set(handle); err != nil {
-		return nil, fmt.Errorf("failed to switch to namespace '%s': %v", name, err)
-	}
-
-	// Return a function to restore the previous namespace
-	return func() {
-		nt.Lock()
-		defer nt.Unlock()
-
-		if nt.current != closedHandle {
-			_ = Set(nt.current) // Restore the previous namespace
-			nt.current = closedHandle
-		}
-	}, nil
+	return rollbackFunc, nil
 }
 
 // DeleteNamespace - Removes a namespace from the tracker and closes the handle
-func (nt *Tracker) DeleteNamespace(name string) error {
+func (nt *Tracker) DeleteNamespace(ns Id) error {
+	// Lock the OS thread to ensure thread consistency
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
+
 	nt.Lock()
 	defer nt.Unlock()
 
-	handle, exists := nt.namespaces[name]
-	if !exists {
-		return fmt.Errorf("namespace '%s' not found", name)
+	if _, exists := nt.namespaces[ns]; !exists {
+		return fmt.Errorf("namespace '%d' not found", ns)
 	}
-
+	handle, exists := nt.namespaces[ns]
+	if !exists {
+		return fmt.Errorf("namespace '%d' not found", ns)
+	}
 	// Close the handle and remove it from the tracker
 	if err := handle.Close(); err != nil {
-		return fmt.Errorf("failed to close namespace '%s': %v", name, err)
+		return fmt.Errorf("failed to close namespace '%d': %v", ns, err)
 	}
-	delete(nt.namespaces, name)
+	delete(nt.namespaces, ns)
 	return nil
 }

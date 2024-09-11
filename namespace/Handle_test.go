@@ -21,7 +21,7 @@ func TestHandle_Type(t *testing.T) {
 		_ = Handle(math.MaxInt)
 	})
 
-	t.Run("Test Handle.New() method", func(t *testing.T) {
+	t.Run("Test Handle.NewHandle() method", func(t *testing.T) {
 		const testDockerImage = "network-test:latest"
 
 		t.Run("build container", func(t *testing.T) {
@@ -42,7 +42,7 @@ func TestHandle_Type(t *testing.T) {
 			return len(s) >= len(prefix) && s[:len(prefix)] == prefix
 		}
 		t.Run("handle with valid device and inode", func(t *testing.T) {
-			handle, err := Get() // Assumes Get() provides a valid handle for the current thread's namespace
+			handle, err := Opsys.Get() // Assumes Get() provides a valid handle for the current thread's namespace
 			if err != nil {
 				t.Fatalf("expected no error. got: %v", err)
 			}
@@ -71,7 +71,7 @@ func TestHandle_Type(t *testing.T) {
 			return len(s) >= len(prefix) && s[:len(prefix)] == prefix
 		}
 		t.Run("valid namespace handle", func(t *testing.T) {
-			handle, err := Get() // Assumes Get() provides a valid handle for the current thread's namespace
+			handle, err := Opsys.Get() // Assumes Get() provides a valid handle for the current thread's namespace
 			if err != nil {
 				t.Fatalf("expected no error. got: %v", err)
 			}
@@ -121,7 +121,7 @@ func TestHandle_Type(t *testing.T) {
 
 	t.Run("Test Close() method", func(t *testing.T) {
 		t.Run("close a handle successfully", func(t *testing.T) {
-			handle, err := GetFromPid(os.Getpid())
+			handle, err := Opsys.GetFromPid(os.Getpid())
 			if err != nil {
 				t.Fatalf("expected no error. got: %v", err)
 			}
@@ -134,7 +134,7 @@ func TestHandle_Type(t *testing.T) {
 		})
 
 		t.Run("close an already closed handle", func(t *testing.T) {
-			handle, err := GetFromPid(os.Getpid())
+			handle, err := Opsys.GetFromPid(os.Getpid())
 			if err != nil {
 				t.Fatalf("expected no error. got: %v", err)
 			}
@@ -153,10 +153,10 @@ func TestHandle_Type(t *testing.T) {
 				err              error
 				handle1, handle2 Handle
 			)
-			if handle1, err = GetFromPid(os.Getpid()); err != nil {
+			if handle1, err = Opsys.GetFromPid(os.Getpid()); err != nil {
 				t.Fatalf("expected no error. got: %v", err)
 			}
-			if handle2, err = GetFromPid(os.Getpid()); err != nil {
+			if handle2, err = Opsys.GetFromPid(os.Getpid()); err != nil {
 				t.Fatalf("expected no error. got: %v", err)
 			}
 			if !handle1.Equal(handle2) {
@@ -192,7 +192,7 @@ func TestHandle_Type(t *testing.T) {
 			// Create a temporary directory
 			tmpDir := t.TempDir()
 
-			if handle1, err = GetFromPid(os.Getpid()); err != nil {
+			if handle1, err = Opsys.GetFromPid(os.Getpid()); err != nil {
 				t.Fatalf("expected no error. got: %v", err)
 			}
 			// Create a temporary file to simulate the network namespace file
@@ -201,7 +201,7 @@ func TestHandle_Type(t *testing.T) {
 				t.Fatalf("Failed to create temp file: %v", err)
 			}
 			// Now call GetFromPath
-			handle2, err = GetFromPath(tmpFile)
+			handle2, err = Opsys.GetFromPath(tmpFile)
 			if err != nil {
 				t.Fatalf("Expected no error when opening a valid path. Got: %v", err)
 			}
