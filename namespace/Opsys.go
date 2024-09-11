@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"golang.org/x/sys/unix"
 	"os"
+	"path"
 	"path/filepath"
 	"runtime"
 )
@@ -57,11 +58,23 @@ func (ns *LinuxNamespaceInterface) GetFromPath(path string) (Handle, error) {
 
 // GetFromPid - return the network namespace handle for the given pid.
 func (ns *LinuxNamespaceInterface) GetFromPid(pid int) (Handle, error) {
-	const path = "/proc/%d/ns/net"
-	return ns.GetFromPath(fmt.Sprintf(path, pid))
+	const nsPath = "/proc/%d/ns/net"
+	return ns.GetFromPath(fmt.Sprintf(nsPath, pid))
 }
 
 // GetFromName - return a handle to the named network namespace.
 func (ns *LinuxNamespaceInterface) GetFromName(name string) (Handle, error) {
 	return ns.GetFromPath(filepath.Join(bindMountPath, name))
+}
+
+// DeleteNamespace deletes a named network namespace
+func (ns *LinuxNamespaceInterface) DeleteNamespace(name string) error {
+	namedPath := path.Join(bindMountPath, name)
+
+	err := unix.Unmount(namedPath, unix.MNT_DETACH)
+	if err != nil {
+		return err
+	}
+
+	return os.Remove(namedPath)
 }
