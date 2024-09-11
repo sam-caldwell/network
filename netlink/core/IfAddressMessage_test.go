@@ -183,7 +183,7 @@ func TestIfAddressMessage(t *testing.T) {
 			})
 
 			// Subtest 2: Input too short
-			t.Run("input too short", func(t *testing.T) {
+			t.Run(ErrInputTooShort, func(t *testing.T) {
 				// Prepare a byte slice with insufficient length (only 4 bytes)
 				buf := make([]byte, 4)
 
@@ -196,7 +196,7 @@ func TestIfAddressMessage(t *testing.T) {
 				}
 
 				// Ensure the error message is correct
-				expectedError := "input too short"
+				expectedError := ErrInputTooShort
 				if err.Error() != expectedError {
 					t.Errorf("Expected error message '%s', but got '%s'", expectedError, err.Error())
 				}

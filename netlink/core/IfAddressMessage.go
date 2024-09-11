@@ -80,7 +80,7 @@ func (msg *IfAddressMessage) Deserialize(b []byte) (err error) {
 // DeserializeIfAddressMessage - deserialize the interface address message
 func DeserializeIfAddressMessage(b []byte) (result *IfAddressMessage, err error) {
 	if len(b) < SizeOfIfAddressMessage {
-		return nil, errors.New("input too short")
+		return nil, errors.New(ErrInputTooShort)
 	}
 	result = &IfAddressMessage{
 		unix.IfAddrmsg{
