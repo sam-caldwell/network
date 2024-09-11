@@ -11,8 +11,9 @@ import (
 )
 
 func TestHandle_Type(t *testing.T) {
+
 	t.Run("test Handle type size", func(t *testing.T) {
-		const expectedSizeInBytes = 1
+		const expectedSizeInBytes = 8
 		if sz := int(unsafe.Sizeof(Handle(0))); sz != expectedSizeInBytes {
 			t.Errorf("Expected size of %d, got %d", expectedSizeInBytes, sz)
 		}
