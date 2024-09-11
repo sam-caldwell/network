@@ -24,5 +24,5 @@ var (
 	current Handle
 
 	// namespace - a map of all known namespaces.  This maps the path/filename to the file descriptor.
-	namespaces map[string]Handle = make(map[string]Handle)
+	namespaces = make(map[string]Handle)
 )

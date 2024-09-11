@@ -20,4 +20,7 @@ func TestVariables(t *testing.T) {
 		namespaces["test2"] = Handle(2)
 		delete(namespaces, "test1")
 	})
+	t.Run("current is a Handle", func(t *testing.T) {
+		current = Handle(0)
+	})
 }
