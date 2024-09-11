@@ -5,7 +5,7 @@ const (
 	bindMountPath = "/run/netns"
 
 	//closedHandle - the file handle used when a namespace file descriptor is closed.
-	closedHandle = -1
+	closedHandle = Handle(-1)
 
 	//ErrNotImplemented - an error indicating some functionality is not implemented
 	ErrNotImplemented = "not implemented"
