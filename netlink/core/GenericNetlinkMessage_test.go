@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestGenlMsg(t *testing.T) {
+func TestGenericNetlinkMessage(t *testing.T) {
 	t.Run("deserialize function", func(t *testing.T) {
 		// Subtest 1: Happy path with valid input
 		t.Run("valid input", func(t *testing.T) {
@@ -29,7 +29,7 @@ func TestGenlMsg(t *testing.T) {
 		})
 
 		// Subtest 2: Sad path with input too short
-		t.Run("input too short", func(t *testing.T) {
+		t.Run(ErrInputTooShort, func(t *testing.T) {
 			// Prepare a byte slice with too short length
 			input := []byte{0x01}
 
