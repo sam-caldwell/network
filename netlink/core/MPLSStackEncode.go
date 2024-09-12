@@ -2,8 +2,8 @@ package core
 
 import "encoding/binary"
 
-// EncodeMPLSStack - given a list of MplsLabels, return a serialized byte slice.
-func EncodeMPLSStack(labels ...MplsLabels) []byte {
+// MPLSStackEncode - given a list of MplsLabels, return a serialized byte slice.
+func MPLSStackEncode(labels ...MplsLabels) []byte {
 	b := make([]byte, 4*len(labels))
 	for idx, label := range labels {
 		l := label << MplsLsLabelShift

@@ -2,8 +2,8 @@ package core
 
 import "encoding/binary"
 
-// DecodeMPLSStack - given a byte slice (inputBuffer) return a list of MplsLabels
-func DecodeMPLSStack(inputBuffer []byte) []MplsLabels {
+// MPLSStackDecode - given a byte slice (inputBuffer) return a list of MplsLabels
+func MPLSStackDecode(inputBuffer []byte) []MplsLabels {
 	if len(inputBuffer)%4 != 0 {
 		return nil
 	}
