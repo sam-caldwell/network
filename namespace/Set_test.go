@@ -6,6 +6,7 @@ import (
 )
 
 func TestSet(t *testing.T) {
+
 	const testDockerImage = "network-test:latest"
 
 	t.Run("build container", func(t *testing.T) {
