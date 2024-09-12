@@ -1,13 +1,13 @@
 package core
 
-// CnMsg - cn_msg - represents a connector message.
+// ConnectorMessage - cn_msg - represents a connector message.
 //
 // Structure in the Linux kernel's connector subsystem, used for communication between user space and kernel space.
 // It encapsulates a message with a header (nlmsghdr) and data (cn_msg), allowing for various types of notifications
 // or commands to be sent between the kernel and user space processes.
 //
 // See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
-type CnMsg struct {
+type ConnectorMessage struct {
 
 	// ID - Contains Idx and Val fields to identify the message or its source/destination.
 	//
@@ -24,7 +24,7 @@ type CnMsg struct {
 	// See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
 	Ack uint32
 
-	// Length - Size of the payload that follows the CnMsg header.
+	// Length - Size of the payload that follows the ConnectorMessage header.
 	//
 	// See https://github.com/torvalds/linux/blob/master/drivers/connector/cn_proc.c
 	Length uint16

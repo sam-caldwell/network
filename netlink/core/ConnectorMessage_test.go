@@ -7,7 +7,7 @@ import (
 
 func TestCnMsg_struct(t *testing.T) {
 	t.Run("field check", func(t *testing.T) {
-		_ = CnMsg{
+		_ = ConnectorMessage{
 			ID: CbID{
 				Idx: uint32(0),
 				Val: uint32(0),
@@ -19,7 +19,7 @@ func TestCnMsg_struct(t *testing.T) {
 		}
 	})
 	t.Run("size check", func(t *testing.T) {
-		var o CnMsg
+		var o ConnectorMessage
 		t.Run("size of ID field", func(t *testing.T) {
 			if unsafe.Sizeof(o.ID) != unsafe.Sizeof(CbID{}) {
 				t.Fatalf("ID value size mismatch")
