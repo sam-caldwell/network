@@ -5,7 +5,6 @@ package namespace
 import (
 	"golang.org/x/sys/unix"
 	"os"
-	"runtime"
 )
 
 // Get returns a handle to the current thread's network namespace.
@@ -39,12 +38,12 @@ import (
 //	        |
 //	        +- GetFromPath() : returns file handle and error from current/namespaces map
 func Get() (Handle, error) {
-	runtime.LockOSThread()
-	defer runtime.UnlockOSThread()
+
 	return GetFromThread(
 		// os.Getpid() retrieves the current process ID
 		os.Getpid(),
 		// unix.Gettid() retrieves the current thread ID (since threads in Linux are treated as lightweight processes).
 		unix.Gettid(),
 	)
+
 }
