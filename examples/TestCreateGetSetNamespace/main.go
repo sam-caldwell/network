@@ -7,7 +7,9 @@ import (
 )
 
 func main() {
+
 	log.Println("starting TestCreateGetSetNamespace")
+
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
@@ -17,6 +19,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Printf("original namespace: %d", originalNamespace)
 
 	newNamespace, err := namespace.NewWithName(createdNamespaceName)
 	if err != nil {
@@ -24,7 +27,10 @@ func main() {
 	}
 
 	if originalNamespace.Equal(newNamespace) {
-		log.Fatal("New ns failed")
+		log.Fatalf("New ns failed.  Expected two different namespaces\n"+
+			"           newNamespace: %v\n"+
+			"      originalNamespace: %v",
+			newNamespace, originalNamespace)
 	}
 
 	createdNamespace, err := namespace.GetFromName(createdNamespaceName)
