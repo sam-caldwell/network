@@ -8,13 +8,18 @@ import (
 )
 
 // String - return the file descriptor, its dev and inode, as a string.
-func (ns *Handle) String() string {
-	if *ns == -1 {
+func (h *Handle) String() string {
+
+	if *h == -1 {
 		return "NS(none)"
 	}
+
 	var s unix.Stat_t
-	if err := unix.Fstat(int(*ns), &s); err != nil {
-		return fmt.Sprintf("NS(%d: unknown)", ns)
+
+	if err := unix.Fstat(int(*h), &s); err != nil {
+		return fmt.Sprintf("NS(%d: unknown)", h)
 	}
-	return fmt.Sprintf("NS(%d: %d, %d)", ns, s.Dev, s.Ino)
+
+	return fmt.Sprintf("NS(%d: %d, %d)", h, s.Dev, s.Ino)
+
 }

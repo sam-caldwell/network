@@ -5,9 +5,11 @@ import (
 )
 
 func TestHandle_String(t *testing.T) {
+
 	startsWith := func(s, prefix string) bool {
 		return len(s) >= len(prefix) && s[:len(prefix)] == prefix
 	}
+
 	t.Run("handle with valid device and inode", func(t *testing.T) {
 		handle, err := Get() // Assumes Get() provides a valid handle for the current thread's namespace
 
