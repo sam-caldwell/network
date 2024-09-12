@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
+	"unsafe"
 )
 
 // GenericNetlinkMessage represents the Generic Netlink message header (genlmsghdr) as defined in the Linux kernel.
@@ -37,6 +38,9 @@ type GenericNetlinkMessage struct {
 	// This corresponds to the `version` field in the C structure.
 	Version uint8
 }
+
+// SizeOfGenlMsg - size of GenericNetlinkMessage struct
+const SizeOfGenlMsg = int(unsafe.Sizeof(GenericNetlinkMessage{}))
 
 // Len returns the length of the GenericNetlinkMessage structure in bytes.
 // It calculates the length using the binary.Size function, which ensures safe and portable size calculation.

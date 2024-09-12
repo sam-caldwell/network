@@ -9,12 +9,19 @@ import (
 
 func TestGenericNetlinkMessage(t *testing.T) {
 	t.Run("GenericNetlinkMessage struct", func(t *testing.T) {
+		t.Run("verify SizeOfGenlMsg", func(t *testing.T) {
+			const expectedSizeInBytes = 2
+			if SizeOfGenlMsg != expectedSizeInBytes {
+				t.Fatal("SizeOfGenlMsg size mismatch")
+			}
+		})
 		t.Run("size check", func(t *testing.T) {
 			// Ensure the size of the GenericNetlinkMessage struct matches the expected size (2 bytes)
-			expectedSize := 2 // In C: __u8 cmd (1 byte) + __u8 version (1 byte)
+			const expectedSizeInBytes = 2 // In C: __u8 cmd (1 byte) + __u8 version (1 byte)
 			actualSize := unsafe.Sizeof(GenericNetlinkMessage{})
-			if actualSize != uintptr(expectedSize) {
-				t.Errorf("Expected GenericNetlinkMessage size to be %d bytes, but got %d bytes", expectedSize, actualSize)
+			if actualSize != uintptr(expectedSizeInBytes) {
+				t.Errorf("Expected GenericNetlinkMessage size to be %d bytes, but got %d bytes",
+					expectedSizeInBytes, actualSize)
 			}
 		})
 		t.Run("test the correctness of the GenericNetlinkMessage struct fields", func(t *testing.T) {
@@ -82,13 +89,15 @@ func TestGenericNetlinkMessage(t *testing.T) {
 
 		// Compare the length of serialized bytes
 		if len(serializedBytes) != len(expectedBytes) {
-			t.Errorf("Expected serialized length to be %d, but got %d", len(expectedBytes), len(serializedBytes))
+			t.Errorf("Expected serialized length to be %d, but got %d",
+				len(expectedBytes), len(serializedBytes))
 		}
 
 		// Compare the serialized output with the expected output
 		for i := range serializedBytes {
 			if serializedBytes[i] != expectedBytes[i] {
-				t.Errorf("Byte mismatch at index %d: expected 0x%x, got 0x%x", i, expectedBytes[i], serializedBytes[i])
+				t.Errorf("Byte mismatch at index %d: expected 0x%x, got 0x%x",
+					i, expectedBytes[i], serializedBytes[i])
 			}
 		}
 	})
