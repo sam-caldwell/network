@@ -136,5 +136,5 @@ const (
 	// boundary checks.
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_tunnel.h
-	IflaGreMax = iota - -1
+	IflaGreMax = iota - 1
 )

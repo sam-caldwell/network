@@ -37,7 +37,7 @@ func TestIflaGreEnum(t *testing.T) {
 		{"IflaGreEncapSport", IflaGreEncapSport, 16},
 		{"IflaGreEncapDport", IflaGreEncapDport, 17},
 		{"IflaGreCollectMetadata", IflaGreCollectMetadata, 18},
-		{"IflaGreMax", IflaGreMax, 19},
+		{"IflaGreMax", IflaGreMax, IflaGreCollectMetadata},
 	}
 
 	for _, tt := range tests {
