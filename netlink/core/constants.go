@@ -86,9 +86,6 @@ const (
 // This should be the only place where we need unsafe (outside of tests).
 const (
 
-	// SizeOfBridgeVlanInfo - size of BridgeVlanInfo
-	SizeOfBridgeVlanInfo = int(unsafe.Sizeof(BridgeVlanInfo{}))
-
 	// SizeOfCnMsgOp - size of CnMsgOp struct
 	SizeOfCnMsgOp = int(unsafe.Sizeof(CnMsgOp{}))
 
@@ -131,9 +128,6 @@ const (
 
 	// SizeOfTcHtbGlob - Size of the TcHtbGlob struct, representing global parameters for HTB.
 	SizeOfTcHtbGlob = int(unsafe.Sizeof(TcHtbGlob{}))
-
-	// SizeOfIfInfoMsg -  Size of the IfInfoMsg struct
-	SizeOfIfInfoMsg = int(unsafe.Sizeof(IfInfoMsg{}))
 
 	// SizeOfTcMsg - Size of the TcMsg struct, which is used to configure traffic control (TC) in Linux.
 	SizeOfTcMsg = int(unsafe.Sizeof(TcMsg{}))

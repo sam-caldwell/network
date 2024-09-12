@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"unsafe"
 )
 
 // BridgeVlanInfo represents a VLAN (Virtual Local Area Network) configuration associated with
@@ -34,6 +35,9 @@ type BridgeVlanInfo struct {
 	Flags BridgeVlanInfoFlags // VLAN-specific flags (e.g., untagged, PVID)
 	Vid   VlanIdType          // VLAN ID (range: 1-4094)
 }
+
+// SizeOfBridgeVlanInfo - size of BridgeVlanInfo
+const SizeOfBridgeVlanInfo = int(unsafe.Sizeof(BridgeVlanInfo{}))
 
 // BridgeVlanInfoFlags -
 //
