@@ -1,6 +1,6 @@
 package core
 
-// MplsShifts - Enumerated values for MPLS Label Stack shifts.
+// MplsLabelShifts - Enumerated values for MPLS Label Stack shifts.
 //
 // These values are used to shift bits in MPLS label stack entries for manipulation
 // of the MPLS label, Traffic Class (TC), bottom-of-stack (S) flag, and Time-to-Live (TTL).
