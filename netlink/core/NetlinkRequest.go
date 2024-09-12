@@ -17,5 +17,5 @@ type NetlinkRequest struct {
 	RawData []byte
 
 	// Sockets - Additional flags for the request.
-	Sockets map[int]*SocketHandle
+	Sockets map[IpProtocol]*SocketHandle
 }

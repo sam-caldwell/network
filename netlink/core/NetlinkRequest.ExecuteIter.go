@@ -14,7 +14,7 @@ import (
 //
 //	ExecuteIter holds a lock on the socket until it finishes iteration so the callback must
 //	not call back into the netlink API.
-func (req *NetlinkRequest) ExecuteIter(sockType int, resType uint16, iterFunction func(msg []byte) bool) error {
+func (req *NetlinkRequest) ExecuteIter(sockType IpProtocol, resType uint16, iterFunction func(msg []byte) bool) error {
 	var (
 		s   *NetlinkSocket
 		err error
