@@ -12,5 +12,7 @@ import (
 //
 // See https://man7.org/linux/man-pages/man2/setns.2.html
 func SetNamespace(namespace Handle, namespaceType Types) error {
+
 	return unix.Setns(int(namespace), int(namespaceType))
+
 }
