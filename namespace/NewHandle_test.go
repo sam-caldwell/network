@@ -6,6 +6,7 @@ import (
 )
 
 func TestNewHandle(t *testing.T) {
+
 	const testDockerImage = "network-test:latest"
 
 	t.Run("build container", func(t *testing.T) {
@@ -19,4 +20,5 @@ func TestNewHandle(t *testing.T) {
 			t.Fatal(err)
 		}
 	})
+
 }

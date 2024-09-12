@@ -2,11 +2,9 @@ package namespace
 
 import (
 	"golang.org/x/sys/unix"
-	"os"
-	"runtime"
 )
 
-// NewHandle - creates a new network namespace using the `unshare` system call.
+// New - creates a new network namespace using the `unshare` system call.
 // This function isolates the network stack of the calling process by creating a new network namespace
 // and setting it as the current one.
 //
@@ -22,16 +20,12 @@ import (
 // Returns:
 //   - Handle: A handle to the new network namespace.
 //   - error: An error if the system call fails (e.g., insufficient privileges or unsupported kernel).
-func NewHandle() (Handle, error) {
+func New() (Handle, error) {
 
-	runtime.LockOSThread()
-	defer runtime.UnlockOSThread()
-
-	// Call unshare to create a new network namespace (CLONE_NEWNET isolates the network namespace).
 	if err := unix.Unshare(unix.CLONE_NEWNET); err != nil {
-		return closedHandle, err
+		return -1, err
 	}
 
-	// Retrieve and return a handle to the newly created network namespace.
-	return GetFromThread(os.Getpid(), unix.Gettid())
+	return Get()
+
 }
