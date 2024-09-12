@@ -9,20 +9,20 @@ import (
 // Close - close the NamespaceHandle and reset its file descriptor to -1 (closedHandle).
 //
 // WARNING: DO NOT USE AFTER Close() is called.  Bad things will happen.
-func (ns *Handle) Close() error {
+func (h *Handle) Close() error {
 
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
-	if *ns == closedHandle {
+	if *h == closedHandle {
 		return fmt.Errorf("handle is closed")
 	}
 
-	if err := unix.Close(int(*ns)); err != nil {
+	if err := unix.Close(int(*h)); err != nil {
 		return err
 	}
 
-	*ns = closedHandle
+	*h = closedHandle
 
 	return nil
 
