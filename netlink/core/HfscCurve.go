@@ -1,5 +1,7 @@
 package core
 
+import "encoding/binary"
+
 // Curve - A struct representing a rate curve for shaping traffic in Linux Traffic Control (TC).
 //
 // This structure defines two linear segments of a curve that may be used to control bandwidth shaping in
@@ -56,4 +58,23 @@ func (c *Curve) Set(m1 uint32, d uint32, m2 uint32) {
 	c.m1 = m1
 	c.d = d
 	c.m2 = m2
+}
+
+// DeserializeHfscCurve - Converts a byte slice into a Curve structure.
+//
+// This function reads the first 12 bytes of the input byte slice and deserializes
+// them into the `m1`, `d`, and `m2` fields of the `Curve` struct. It assumes the
+// data is encoded in little-endian byte order.
+//
+// Parameters:
+// - b: The byte slice to deserialize.
+//
+// Returns:
+// - A pointer to a `Curve` struct with the fields populated from the byte slice.
+func DeserializeHfscCurve(b []byte) *Curve {
+	return &Curve{
+		m1: binary.LittleEndian.Uint32(b[0:4]),  // First 4 bytes represent `m1`
+		d:  binary.LittleEndian.Uint32(b[4:8]),  // Next 4 bytes represent `d`
+		m2: binary.LittleEndian.Uint32(b[8:12]), // Final 4 bytes represent `m2`
+	}
 }

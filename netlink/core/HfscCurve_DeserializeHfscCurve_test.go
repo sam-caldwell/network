@@ -29,7 +29,7 @@ func TestDeserializeHfscCurve(t *testing.T) {
 			t.Errorf("Expected m2 to be 300, but got %d", curve.m2)
 		}
 	})
-	t.Run("input too short", func(t *testing.T) {
+	t.Run(ErrInputTooShort, func(t *testing.T) {
 		// Prepare a byte slice with only 8 bytes (instead of 12)
 		buf := make([]byte, 8)
 
