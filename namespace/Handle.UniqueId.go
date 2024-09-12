@@ -6,14 +6,14 @@ import (
 )
 
 // UniqueId return string uniquely identifying the associated namespace
-func (ns *Handle) UniqueId() string {
+func (h *Handle) UniqueId() string {
 
-	if *ns == closedHandle {
+	if *h == closedHandle {
 		return "NS(none)"
 	}
 
 	var s unix.Stat_t
-	if err := unix.Fstat(int(*ns), &s); err != nil {
+	if err := unix.Fstat(int(*h), &s); err != nil {
 		return "NS(unknown)"
 	}
 
