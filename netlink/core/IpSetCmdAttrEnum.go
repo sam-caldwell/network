@@ -103,5 +103,5 @@ const (
 	// IpsetAttrCmdMax - IPSET_ATTR_CMD_MAX - Maximum value of set
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/ipset/ip_set.h
-	IpsetAttrCmdMax = iota - 1
+	IpsetAttrCmdMax = IpsetAttrIndex
 )
