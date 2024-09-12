@@ -11,7 +11,7 @@ import (
 //
 // If currentNamespace is closed, the function derives the current namespace and moves back into it when done.
 // If newNamespace is close, the socket will be opened in the current network namespace.
-func GetNetlinkSocketAt(newNamespace, currentNamespace namespace.Handle, protocol int) (*NetlinkSocket, error) {
+func GetNetlinkSocketAt(newNamespace, currentNamespace namespace.Handle, protocol IpProtocol) (*NetlinkSocket, error) {
 
 	c, err := ExecuteInNetNamespace(newNamespace, currentNamespace)
 
