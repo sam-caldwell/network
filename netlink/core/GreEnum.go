@@ -3,7 +3,8 @@ package core
 // GreEnum - Enumeration for GRE (Generic Routing Encapsulation) flags and fields
 //
 // This enumeration defines various flags and fields related to GRE (Generic Routing Encapsulation).
-// GRE is a tunneling protocol used to encapsulate a wide variety of network layer protocols inside virtual point-to-point connections.
+// GRE is a tunneling protocol used to encapsulate a wide variety of network layer protocols inside virtual
+// point-to-point connections.
 //
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_tunnel.h
 type GreEnum uint16
