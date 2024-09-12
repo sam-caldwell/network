@@ -7,8 +7,8 @@ import (
 
 // TestIflaBridgeEnum tests the size of the IflaBridgeEnum type and the values of its enumerated constants.
 func TestIflaBridgeEnum(t *testing.T) {
-	// Verify the size of the IflaBridgeEnum type is 4 bytes (int)
-	if size := unsafe.Sizeof(IflaBridgeFlags); size != 4 {
+	// Verify the size of the IflaBridgeEnum type is 8 bytes (int)
+	if size := unsafe.Sizeof(IflaBridgeFlags); size != unsafe.Sizeof(int(0)) {
 		t.Errorf("Expected size of IflaBridgeEnum to be 4 bytes, but got %d", size)
 	}
 
