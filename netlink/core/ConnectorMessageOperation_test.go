@@ -7,10 +7,10 @@ import (
 )
 
 func TestCnMsgOp(t *testing.T) {
-	t.Run("CnMsgOp struct", func(t *testing.T) {
-		t.Run("test CnMsgOp fields", func(t *testing.T) {
-			_ = CnMsgOp{
-				CnMsg: CnMsg{
+	t.Run("ConnectorMessageOperation struct", func(t *testing.T) {
+		t.Run("test ConnectorMessageOperation fields", func(t *testing.T) {
+			_ = ConnectorMessageOperation{
+				ConnectorMessage: ConnectorMessage{
 					ID: CbID{
 						Idx: uint32(0),
 						Val: uint32(0),
@@ -20,31 +20,31 @@ func TestCnMsgOp(t *testing.T) {
 					Length: uint16(0),
 					Flags:  uint16(0),
 				},
-				Op: uint32(0),
+				Operation: uint32(0),
 			}
 		})
 		t.Run("size check", func(t *testing.T) {
-			var o CnMsgOp
-			t.Run("Size of CnMsgOp", func(t *testing.T) {
-				if unsafe.Sizeof(o.CnMsg) != unsafe.Sizeof(CnMsg{}) {
-					t.Fatalf("CnMsg size verification")
+			var o ConnectorMessageOperation
+			t.Run("Size of ConnectorMessageOperation", func(t *testing.T) {
+				if unsafe.Sizeof(o.ConnectorMessage) != unsafe.Sizeof(ConnectorMessage{}) {
+					t.Fatalf("ConnectorMessage size verification")
 				}
-				if unsafe.Sizeof(o.Op) != unsafe.Sizeof(uint32(0)) {
-					t.Fatalf("Op size verification")
+				if unsafe.Sizeof(o.Operation) != unsafe.Sizeof(uint32(0)) {
+					t.Fatalf("Operation size verification")
 				}
 			})
 		})
 	})
 	t.Run("test .Len() method", func(t *testing.T) {
-		var o CnMsgOp
-		if o.Len() != int(unsafe.Sizeof(CnMsgOp{})) {
-			t.Fatalf("CnMsgOp.Len() method size mismatch")
+		var o ConnectorMessageOperation
+		if o.Len() != int(unsafe.Sizeof(ConnectorMessageOperation{})) {
+			t.Fatalf("ConnectorMessageOperation.Len() method size mismatch")
 		}
 	})
 	t.Run("test .Serialize() method", func(t *testing.T) {
 		// Test data
-		testMsg := CnMsgOp{
-			CnMsg: CnMsg{
+		testMsg := ConnectorMessageOperation{
+			ConnectorMessage: ConnectorMessage{
 				ID: CbID{
 					Idx: 1,
 					Val: 2,
@@ -54,12 +54,12 @@ func TestCnMsgOp(t *testing.T) {
 				Length: 5,
 				Flags:  6,
 			},
-			Op: 7,
+			Operation: 7,
 		}
 
 		// Expected byte slice (based on the values above)
 		// We will generate it manually using the same approach as the Serialize function
-		expected := make([]byte, SizeOfCnMsgOp)
+		expected := make([]byte, SizeOfConnectorMessageOperation)
 
 		NativeEndian.PutUint32(expected[0:], testMsg.ID.Idx)
 		NativeEndian.PutUint32(expected[4:], testMsg.ID.Val)
@@ -67,7 +67,7 @@ func TestCnMsgOp(t *testing.T) {
 		NativeEndian.PutUint32(expected[12:], testMsg.Ack)
 		NativeEndian.PutUint16(expected[16:], testMsg.Length)
 		NativeEndian.PutUint16(expected[18:], testMsg.Flags)
-		NativeEndian.PutUint32(expected[20:], testMsg.Op)
+		NativeEndian.PutUint32(expected[20:], testMsg.Operation)
 
 		// Call the Serialize function
 		actual, err := testMsg.Serialize()
@@ -91,18 +91,18 @@ func TestCnMsgOp(t *testing.T) {
 
 	t.Run("test Deserialize() method", func(t *testing.T) {
 		// Prepare test data with valid values
-		testData := make([]byte, SizeOfCnMsgOp)
+		testData := make([]byte, SizeOfConnectorMessageOperation)
 		NativeEndian.PutUint32(testData[0:4], 0x01020304)   // ID.Idx
 		NativeEndian.PutUint32(testData[4:8], 0x05060708)   // ID.Val
 		NativeEndian.PutUint32(testData[8:12], 0x11121314)  // Seq
 		NativeEndian.PutUint32(testData[12:16], 0x15161718) // Ack
 		NativeEndian.PutUint16(testData[16:18], 0x1920)     // Length
 		NativeEndian.PutUint16(testData[18:20], 0x2122)     // Flags
-		NativeEndian.PutUint32(testData[20:24], 0x23242526) // Op
+		NativeEndian.PutUint32(testData[20:24], 0x23242526) // Operation
 
 		// Test valid deserialization
 		t.Run("Valid Deserialization", func(t *testing.T) {
-			var msg CnMsgOp
+			var msg ConnectorMessageOperation
 			err := msg.Deserialize(testData)
 			if err != nil {
 				t.Fatalf("Expected no error, got %v", err)
@@ -127,31 +127,31 @@ func TestCnMsgOp(t *testing.T) {
 			if msg.Flags != 0x2122 {
 				t.Errorf("Expected Flags to be 0x2122, got 0x%x", msg.Flags)
 			}
-			if msg.Op != 0x23242526 {
-				t.Errorf("Expected Op to be 0x23242526, got 0x%x", msg.Op)
+			if msg.Operation != 0x23242526 {
+				t.Errorf("Expected Operation to be 0x23242526, got 0x%x", msg.Operation)
 			}
 		})
 
 		// Test deserialization with insufficient data
 		t.Run("Insufficient Data", func(t *testing.T) {
-			shortData := testData[:10] // Shorter than SizeOfCnMsgOp
-			var msg CnMsgOp
+			shortData := testData[:10] // Shorter than SizeOfConnectorMessageOperation
+			var msg ConnectorMessageOperation
 			err := msg.Deserialize(shortData)
 			if err == nil {
 				t.Fatalf("Expected an error due to insufficient data, but got none")
 			}
 			if err.Error() != ErrInputTooShort {
-				t.Errorf("Expected 'data too short to deserialize CnMsgOp', got %v", err)
+				t.Errorf("Expected 'data too short to deserialize ConnectorMessageOperation', got %v", err)
 			}
 		})
 	})
 	t.Run("Test DeserializeCnMsgOp() function", func(t *testing.T) {
-		// Prepare a byte slice that represents a serialized CnMsgOp
-		// The byte slice contains a CnMsg struct followed by the Op field
+		// Prepare a byte slice that represents a serialized ConnectorMessageOperation
+		// The byte slice contains a ConnectorMessage struct followed by the Operation field
 		buf := make([]byte, 24)
 
-		// Fill the byte slice with values corresponding to CnMsgOp
-		// CnMsg: CbID (Idx: 1, Val: 2), Seq: 100, Ack: 200, Length: 16, Flags: 0
+		// Fill the byte slice with values corresponding to ConnectorMessageOperation
+		// ConnectorMessage: CbID (Idx: 1, Val: 2), Seq: 100, Ack: 200, Length: 16, Flags: 0
 		binary.LittleEndian.PutUint32(buf[0:4], 1)     // CbID.Idx
 		binary.LittleEndian.PutUint32(buf[4:8], 2)     // CbID.Val
 		binary.LittleEndian.PutUint32(buf[8:12], 100)  // Seq
@@ -159,8 +159,8 @@ func TestCnMsgOp(t *testing.T) {
 		binary.LittleEndian.PutUint16(buf[16:18], 16)  // Length
 		binary.LittleEndian.PutUint16(buf[18:20], 0)   // Flags
 
-		// Op field
-		binary.LittleEndian.PutUint32(buf[20:24], 500) // Op
+		// Operation field
+		binary.LittleEndian.PutUint32(buf[20:24], 500) // Operation
 
 		// Call DeserializeCnMsgOp with the byte slice
 		cnMsgOp, err := DeserializeCnMsgOp(buf)
@@ -168,7 +168,7 @@ func TestCnMsgOp(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		// Check if the deserialized CnMsgOp struct matches expected values
+		// Check if the deserialized ConnectorMessageOperation struct matches expected values
 		if cnMsgOp.ID.Idx != 1 {
 			t.Errorf("Expected ID.Idx to be 1, but got %d", cnMsgOp.ID.Idx)
 		}
@@ -187,8 +187,8 @@ func TestCnMsgOp(t *testing.T) {
 		if cnMsgOp.Flags != 0 {
 			t.Errorf("Expected Flags to be 0, but got %d", cnMsgOp.Flags)
 		}
-		if cnMsgOp.Op != 500 {
-			t.Errorf("Expected Op to be 500, but got %d", cnMsgOp.Op)
+		if cnMsgOp.Operation != 500 {
+			t.Errorf("Expected Operation to be 500, but got %d", cnMsgOp.Operation)
 		}
 	})
 }
