@@ -16,7 +16,7 @@ func TestConstantsStructureSize(t *testing.T) {
 		{expected: int(unsafe.Sizeof(IfaCacheInfo{})), actual: SizeOfIfaCacheInfo},
 		{expected: int(unsafe.Sizeof(BridgeVlanInfo{})), actual: SizeOfBridgeVlanInfo},
 		{expected: int(unsafe.Sizeof(CnMsgOp{})), actual: SizeOfCnMsgOp},
-		{expected: int(unsafe.Sizeof(Genlmsg{})), actual: SizeOfGenlMsg},
+		{expected: int(unsafe.Sizeof(GenericNetlinkMessage{})), actual: SizeOfGenlMsg},
 		{expected: int(unsafe.Sizeof(Nfgenmsg{})), actual: SizeOfNfGenMsg},
 		{expected: int(unsafe.Sizeof(unix.NlMsghdr{})), actual: SizeOfNlMsgHdr},
 		{expected: int(unsafe.Sizeof(RtNexthop{})), actual: SizeOfRtNextHop},
