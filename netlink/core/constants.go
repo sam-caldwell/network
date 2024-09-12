@@ -86,12 +86,6 @@ const (
 // This should be the only place where we need unsafe (outside of tests).
 const (
 
-	// SizeOfCnMsgOp - size of CnMsgOp struct
-	SizeOfCnMsgOp = int(unsafe.Sizeof(CnMsgOp{}))
-
-	// SizeOfGenlMsg - size of GenericNetlinkMessage struct
-	SizeOfGenlMsg = int(unsafe.Sizeof(GenericNetlinkMessage{}))
-
 	// SizeOfNfGenMsg - Track the message sizes for the correct serialization/deserialization
 	SizeOfNfGenMsg = int(unsafe.Sizeof(Nfgenmsg{}))
 
