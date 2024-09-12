@@ -8,6 +8,7 @@ import (
 )
 
 func TestNewWithName(t *testing.T) {
+
 	const testDockerImage = "network-test:latest"
 
 	t.Run("build container", func(t *testing.T) {
@@ -18,7 +19,8 @@ func TestNewWithName(t *testing.T) {
 
 	t.Run("run test container", func(t *testing.T) {
 		if err := test.RunContainer(testDockerImage, "TestCreateNewNamespaceWithName"); err != nil {
-			t.Fatal(err)
+			t.Fatalf("test container failed: %v", err)
 		}
 	})
+
 }

@@ -5,14 +5,10 @@ import (
 	"golang.org/x/sys/unix"
 	"os"
 	"path"
-	"runtime"
 )
 
 // NewWithName - create new named network namespace and set it as the current namespace, returning its handle.
 func NewWithName(name string) (Handle, error) {
-
-	runtime.LockOSThread()
-	defer runtime.UnlockOSThread()
 
 	if _, err := os.Stat(bindMountPath); os.IsNotExist(err) {
 		err = os.MkdirAll(bindMountPath, 0o755)
@@ -21,7 +17,7 @@ func NewWithName(name string) (Handle, error) {
 		}
 	}
 
-	newNamespace, err := NewHandle()
+	newNamespace, err := New()
 	if err != nil {
 		return None(), err
 	}
@@ -30,19 +26,27 @@ func NewWithName(name string) (Handle, error) {
 
 	f, err := os.OpenFile(namedPath, os.O_CREATE|os.O_EXCL, 0o444)
 	if err != nil {
-		if cerr := newNamespace.Close(); cerr != nil {
-			return None(), fmt.Errorf("error creating namespace: (err:%v, closing err: %v)", err, cerr)
+		cerr := newNamespace.Close()
+		if cerr != nil {
+			return closedHandle, err
 		}
 		return None(), err
 	}
-	_ = f.Close()
+	err = f.Close()
+	if err != nil {
+		return closedHandle, err
+	}
 
-	nsPath := fmt.Sprintf(threadNamespacePath, os.Getpid(), unix.Gettid())
+	nsPath := fmt.Sprintf("/proc/%d/task/%d/ns/net", os.Getpid(), unix.Gettid())
 	err = unix.Mount(nsPath, namedPath, "bind", unix.MS_BIND, "")
 	if err != nil {
-		_ = newNamespace.Close()
+		cerr := newNamespace.Close()
+		if cerr != nil {
+			return closedHandle, err
+		}
 		return None(), err
 	}
 
 	return newNamespace, nil
+
 }
