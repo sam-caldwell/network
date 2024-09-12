@@ -14,6 +14,6 @@ package namespace
 // - Linux Kernel Source (Netlink and Namespaces): https://github.com/torvalds/linux/tree/master/net/core
 //
 // Usage:
-// - A `Handle` can be obtained via functions like `Get()` or `NewHandle()`, which retrieve or create a namespace.
+// - A `Handle` can be obtained via functions like `Get()` or `New()`, which retrieve or create a namespace.
 // - Once a handle is obtained, it can be passed to system calls (e.g., `setns(fd, CLONE_NEWNET)`).
 type Handle int
