@@ -3,10 +3,17 @@ package core
 import (
 	"golang.org/x/sys/unix"
 	"testing"
+	"unsafe"
 )
 
 // TestInterfaceFamily tests the values of InterfaceFamily constants.
 func TestInterface(t *testing.T) {
+	t.Run("test type size", func(t *testing.T) {
+		const expectedSizeInBytes = 1
+		if sz := int(unsafe.Sizeof(InterfaceFamily(0))); sz != expectedSizeInBytes {
+			t.Errorf("got %d; want %d", sz, expectedSizeInBytes)
+		}
+	})
 	t.Run("test enumerated values", func(t *testing.T) {
 		tests := []struct {
 			name     string
