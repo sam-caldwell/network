@@ -5,9 +5,9 @@ import (
 )
 
 // getNetlinkSocket - return the NetlinkSocket struct by reference
-func getNetlinkSocket(protocol int) (*NetlinkSocket, error) {
+func getNetlinkSocket(protocol IpProtocol) (*NetlinkSocket, error) {
 
-	fd, err := unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW|unix.SOCK_CLOEXEC, protocol)
+	fd, err := unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW|unix.SOCK_CLOEXEC, int(protocol))
 
 	if err != nil {
 		return nil, err
