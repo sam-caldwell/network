@@ -64,7 +64,7 @@ func (msg *GenericNetlinkMessage) Serialize() ([]byte, error) {
 // byte slice is of incorrect length.
 func DeserializeGenlMsg(b []byte) (*GenericNetlinkMessage, error) {
 	if len(b) < 2 {
-		return nil, errors.New("byte slice size is too small")
+		return nil, errors.New(ErrInputTooShort)
 	}
 	return &GenericNetlinkMessage{
 		Command: b[0],
