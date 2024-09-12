@@ -40,12 +40,8 @@ type GenericNetlinkMessage struct {
 
 // Len returns the length of the GenericNetlinkMessage structure in bytes.
 // It calculates the length using the binary.Size function, which ensures safe and portable size calculation.
-func (msg *GenericNetlinkMessage) Len() (int, error) {
-	size := binary.Size(*msg)
-	if size < 0 {
-		return 0, errors.New("unable to calculate the size of GenericNetlinkMessage")
-	}
-	return size, nil
+func (msg *GenericNetlinkMessage) Len() int {
+	return binary.Size(*msg)
 }
 
 // Serialize converts the GenericNetlinkMessage structure into a byte slice.

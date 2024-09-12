@@ -1,10 +1,57 @@
 package core
 
 import (
+	"encoding/binary"
 	"testing"
+	"unsafe"
 )
 
 func TestGenericNetlinkMessage(t *testing.T) {
+	t.Run("GenericNetlinkMessage struct", func(t *testing.T) {
+		t.Run("size check", func(t *testing.T) {
+			// Ensure the size of the GenericNetlinkMessage struct matches the expected size (2 bytes)
+			expectedSize := 2 // In C: __u8 cmd (1 byte) + __u8 version (1 byte)
+			actualSize := unsafe.Sizeof(GenericNetlinkMessage{})
+			if actualSize != uintptr(expectedSize) {
+				t.Errorf("Expected GenericNetlinkMessage size to be %d bytes, but got %d bytes", expectedSize, actualSize)
+			}
+		})
+		t.Run("test the correctness of the GenericNetlinkMessage struct fields", func(t *testing.T) {
+			// Create a new GenericNetlinkMessage with specific values
+			msg := GenericNetlinkMessage{
+				Command: 0x10, // Example command value
+				Version: 0x01, // Example version value
+			}
+
+			// Check if the Command field is correctly set
+			if msg.Command != 0x10 {
+				t.Errorf("Expected Command to be 0x10, but got 0x%x", msg.Command)
+			}
+
+			// Check if the Version field is correctly set
+			if msg.Version != 0x01 {
+				t.Errorf("Expected Version to be 0x01, but got 0x%x", msg.Version)
+			}
+		})
+	})
+	t.Run("test Len() method", func(t *testing.T) {
+		// Create an instance of GenericNetlinkMessage with some values
+		msg := &GenericNetlinkMessage{
+			Command: 0x10, // Example command value
+			Version: 0x01, // Example version value
+		}
+
+		// Call Len() to get the length
+		length := msg.Len()
+
+		// Calculate the expected length using binary.Size directly
+		expectedLength := binary.Size(*msg)
+
+		// Check if the calculated length matches the expected length
+		if length != expectedLength {
+			t.Errorf("Expected length to be %d, but got %d", expectedLength, length)
+		}
+	})
 	t.Run("deserialize function", func(t *testing.T) {
 		// Subtest 1: Happy path with valid input
 		t.Run("valid input", func(t *testing.T) {
