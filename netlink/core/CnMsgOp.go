@@ -45,7 +45,7 @@ type CnMsgOp struct {
 func (msg *CnMsgOp) Deserialize(data []byte) error {
 	// Ensure that the byte slice is large enough to hold a CnMsgOp.
 	if len(data) < SizeOfCnMsgOp {
-		return errors.New("input too short")
+		return errors.New(ErrInputTooShort)
 	}
 
 	// Deserialize ID (Idx and Val)

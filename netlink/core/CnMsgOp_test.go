@@ -140,7 +140,7 @@ func TestCnMsgOp(t *testing.T) {
 			if err == nil {
 				t.Fatalf("Expected an error due to insufficient data, but got none")
 			}
-			if err.Error() != "input too short" {
+			if err.Error() != ErrInputTooShort {
 				t.Errorf("Expected 'data too short to deserialize CnMsgOp', got %v", err)
 			}
 		})
