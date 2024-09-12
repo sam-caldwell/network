@@ -9,7 +9,7 @@ func TestMplsLabelStackShiftMask(t *testing.T) {
 	// Subtest for checking the size of the MplsLabelStackShiftMask type
 	t.Run("TestSize", func(t *testing.T) {
 		const expectedSizeInBytes = 4
-		var mask MplsLabelStackShiftMask
+		var mask uint32
 
 		if size := unsafe.Sizeof(mask); size != uintptr(expectedSizeInBytes) {
 			t.Errorf("Expected size %d but got %d", expectedSizeInBytes, size)
@@ -20,8 +20,8 @@ func TestMplsLabelStackShiftMask(t *testing.T) {
 	t.Run("TestValues", func(t *testing.T) {
 		tests := []struct {
 			name     string
-			value    MplsLabelStackShiftMask
-			expected MplsLabelStackShiftMask
+			value    uint32
+			expected uint32
 		}{
 			{"MplsLsLabelMask", MplsLsLabelMask, 0xFFFFF000},
 			{"MplsLsTcMask", MplsLsTcMask, 0x00000E00},

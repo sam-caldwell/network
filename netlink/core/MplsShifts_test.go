@@ -9,7 +9,7 @@ func TestMplsLabels(t *testing.T) {
 	// Subtest for checking the size of the MplsLabels type
 	t.Run("TestSize", func(t *testing.T) {
 		const expectedSizeInBytes = 4
-		var label MplsLabels
+		var label uint32
 
 		if size := unsafe.Sizeof(label); size != uintptr(expectedSizeInBytes) {
 			t.Errorf("Expected size %d but got %d", expectedSizeInBytes, size)
@@ -20,8 +20,8 @@ func TestMplsLabels(t *testing.T) {
 	t.Run("TestValues", func(t *testing.T) {
 		tests := []struct {
 			name     string
-			value    MplsLabels
-			expected MplsLabels
+			value    uint32
+			expected uint32
 		}{
 			{"MplsLsLabelShift", MplsLsLabelShift, 12},
 			{"MplsLsTcShift", MplsLsTcShift, 9},
