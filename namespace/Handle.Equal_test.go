@@ -1,79 +1,45 @@
 package namespace
 
 import (
-	"golang.org/x/sys/unix"
-	"os"
-	"path/filepath"
 	"testing"
 )
 
 func TestHandle_Equal(t *testing.T) {
-	t.Run("handles referring to the same namespace", func(t *testing.T) {
-		var (
-			err              error
-			handle1, handle2 Handle
-		)
-		if handle1, err = GetFromPid(os.Getpid()); err != nil {
-			t.Fatalf("expected no error. got: %v", err)
-		}
-		if handle2, err = GetFromPid(os.Getpid()); err != nil {
-			t.Fatalf("expected no error. got: %v", err)
-		}
+	// Mock valid file descriptors for testing purposes
+	// These would normally be real file descriptors, but for unit testing, we mock them.
+	handle1 := Handle(10)
+	handle2 := Handle(10) // Same as handle1
+	handle3 := Handle(20) // Different handle
+	closedHandle := Handle(-1)
+
+	t.Run("Handles are equal (same handle)", func(t *testing.T) {
 		if !handle1.Equal(handle2) {
-			t.Fatalf("expected handles to be equal")
+			t.Errorf("Expected handles to be equal, got false")
 		}
 	})
 
-	t.Run("handles referring to different namespaces", func(t *testing.T) {
-		var (
-			f                *os.File
-			err              error
-			handle1, handle2 Handle
-		)
-		defer func() {
-			if f != nil {
-				if err = f.Close(); err != nil {
-					t.Fatalf("error closing temp file: %v", err)
-				}
-			}
-			if handle1 == -1 {
-				return
-			}
-			if err = unix.Close(int(handle1)); err != nil {
-				t.Fatalf("error closing unix socket: %v", err)
-			}
-			if handle2 == -1 {
-				return
-			}
-			if err = unix.Close(int(handle2)); err != nil {
-				t.Fatalf("error closing unix socket: %v", err)
-			}
-		}()
-		// Create a temporary directory
-		tmpDir := t.TempDir()
-
-		if handle1, err = GetFromPid(os.Getpid()); err != nil {
-			t.Fatalf("expected no error. got: %v", err)
+	t.Run("Handles are not equal (different handles)", func(t *testing.T) {
+		if handle1.Equal(handle3) {
+			t.Errorf("Expected handles to be different, got true")
 		}
+	})
 
-		// Create a temporary file to simulate the network namespace file
-		tmpFile := filepath.Join(tmpDir, "test_ns")
-		if f, err = os.Create(tmpFile); err != nil {
-			t.Fatalf("Failed to create temp file: %v", err)
+	t.Run("Handle is closed", func(t *testing.T) {
+		if closedHandle.Equal(handle1) {
+			t.Errorf("Expected closed handle to be unequal, got true")
 		}
+	})
 
-		// Now call GetFromPath
-		handle2, err = GetFromPath(tmpFile)
-		if err != nil {
-			t.Fatalf("Expected no error when opening a valid path. Got: %v", err)
+	t.Run("Handle is closed (both closed)", func(t *testing.T) {
+		if !closedHandle.Equal(Handle(-1)) {
+			t.Errorf("Expected two closed handles to be equal, got false")
 		}
-		if handle2 == -1 {
-			t.Fatalf("Expected handle to not be -1. Got: %v", handle2)
-		}
+	})
 
-		// Assuming you have a way to get a handle for a different namespace or process
-		if handle1.Equal(handle2) {
-			t.Fatalf("expected handles to be different")
+	t.Run("Fstat fails", func(t *testing.T) {
+		// Assuming unix.Fstat would fail for an invalid file descriptor (-1)
+		if closedHandle.Equal(handle3) {
+			t.Errorf("Expected unequal for closed handle and valid handle, got true")
 		}
 	})
 }

@@ -14,5 +14,10 @@ func GetFromPath(path string) (Handle, error) {
 		return existingHandle, nil
 	}
 	fd, err := unix.Open(path, unix.O_RDONLY|unix.O_CLOEXEC, 0)
-	return Handle(fd), err
+	newHandle := Handle(fd)
+	if err != nil {
+		return newHandle, err
+	}
+	namespaces[path] = newHandle
+	return newHandle, err
 }
