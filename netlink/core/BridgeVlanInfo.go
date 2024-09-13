@@ -259,7 +259,6 @@ func DeserializeBridgeVlanInfo(b []byte) (*BridgeVlanInfo, error) {
 	if err := checkInputSize(b, SizeOfBridgeVlanInfo, SizeOfBridgeVlanInfo); err != nil {
 		return nil, err
 	}
-	//Ensure that the byte slice is at least the size of the BridgeVlanInfo structure
 
 	// Deserialize the byte slice into a BridgeVlanInfo structure
 	return &BridgeVlanInfo{
