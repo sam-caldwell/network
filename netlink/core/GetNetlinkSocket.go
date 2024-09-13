@@ -4,8 +4,8 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// getNetlinkSocket - return the NetlinkSocket struct by reference
-func getNetlinkSocket(protocol IpProtocol) (*NetlinkSocket, error) {
+// GetNetlinkSocket - return the NetlinkSocket struct by reference
+func GetNetlinkSocket(protocol IpProtocol) (*NetlinkSocket, error) {
 
 	fd, err := unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW|unix.SOCK_CLOEXEC, int(protocol))
 

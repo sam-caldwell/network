@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// TestGetNetlinkSocket tests the getNetlinkSocket function.
+// TestGetNetlinkSocket tests the GetNetlinkSocket function.
 func TestGetNetlinkSocket(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -23,9 +23,9 @@ func TestGetNetlinkSocket(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sock, err := getNetlinkSocket(tt.protocol)
+			sock, err := GetNetlinkSocket(tt.protocol)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("getNetlinkSocket() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("GetNetlinkSocket() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if err == nil && sock == nil {

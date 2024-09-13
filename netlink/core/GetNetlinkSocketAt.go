@@ -21,6 +21,6 @@ func GetNetlinkSocketAt(newNamespace, currentNamespace namespace.Handle, protoco
 
 	defer c()
 
-	return getNetlinkSocket(protocol)
+	return GetNetlinkSocket(protocol)
 
 }
