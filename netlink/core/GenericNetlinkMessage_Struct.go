@@ -1,11 +1,5 @@
 package core
 
-import (
-	"bytes"
-	"encoding/binary"
-	"unsafe"
-)
-
 // GenericNetlinkMessage represents the Generic Netlink message header (genlmsghdr) as defined in the Linux kernel.
 // This header is part of the Generic Netlink protocol, which is an extension of the Netlink socket interface
 // and is used to simplify communication between kernel modules and user-space applications.
@@ -36,44 +30,4 @@ type GenericNetlinkMessage struct {
 	// Version - Interface version for the Generic Netlink message.
 	// This corresponds to the `version` field in the C structure.
 	Version uint8
-}
-
-// SizeOfGenericNetlinkMessage - size of GenericNetlinkMessage struct
-const SizeOfGenericNetlinkMessage = int(unsafe.Sizeof(GenericNetlinkMessage{}))
-
-// Len returns the length of the GenericNetlinkMessage structure in bytes.
-// It calculates the length using the binary.Size function, which ensures safe and portable size calculation.
-func (msg *GenericNetlinkMessage) Len() int {
-	return binary.Size(*msg)
-}
-
-// Serialize converts the GenericNetlinkMessage structure into a byte slice.
-func (msg *GenericNetlinkMessage) Serialize() ([]byte, error) {
-
-	buf := new(bytes.Buffer)
-	if err := binary.Write(buf, NativeEndian, msg.Command); err != nil {
-		return nil, err
-	}
-
-	if err := binary.Write(buf, NativeEndian, msg.Version); err != nil {
-		return nil, err
-	}
-
-	return buf.Bytes(), nil
-
-}
-
-// DeserializeGenericNetlinkMessage - creates a GenericNetlinkMessage structure from a byte slice.  It returns an
-// error if the byte slice is of incorrect length.
-func DeserializeGenericNetlinkMessage(b []byte) (*GenericNetlinkMessage, error) {
-
-	if err := checkInputSize(b, SizeOfGenericNetlinkMessage, SizeOfGenericNetlinkMessage); err != nil {
-		return nil, err
-	}
-
-	return &GenericNetlinkMessage{
-		Command: b[0],
-		Version: b[1],
-	}, nil
-
 }
