@@ -82,8 +82,8 @@ func (msg *IfaCacheInfo) Deserialize(data []byte) error {
 
 // DeserializeIfaCacheInfo converts a byte slice to an IfaCacheInfo struct
 func DeserializeIfaCacheInfo(data []byte) (*IfaCacheInfo, error) {
-	if len(data) < SizeOfIfaCacheInfo {
-		return nil, errors.New("data slice too short")
+	if err := checkInputSize(data, SizeOfIfaCacheInfo, SizeOfIfaCacheInfo); err != nil {
+		return nil, err
 	}
 	var info IfaCacheInfo
 	if err := info.Deserialize(data); err != nil {
