@@ -5,7 +5,6 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
-	"errors"
 	"golang.org/x/sys/unix"
 	"unsafe"
 )
@@ -79,8 +78,8 @@ func (msg *IfAddressMessage) Deserialize(b []byte) (err error) {
 
 // DeserializeIfAddressMessage - deserialize the interface address message
 func DeserializeIfAddressMessage(b []byte) (result *IfAddressMessage, err error) {
-	if len(b) < SizeOfIfAddressMessage {
-		return nil, errors.New(ErrInputTooShort)
+	if err := checkInputSize(b, SizeOfIfAddressMessage, SizeOfIfAddressMessage); err != nil {
+		return nil, err
 	}
 	result = &IfAddressMessage{
 		unix.IfAddrmsg{
