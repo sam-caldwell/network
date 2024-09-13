@@ -1,7 +1,9 @@
 package core
 
 import (
+	"bytes"
 	"errors"
+	"github.com/sam-caldwell/network/test"
 	"golang.org/x/sys/unix"
 	"reflect"
 	"testing"
@@ -23,6 +25,7 @@ func (nr NrDummyStruct) Serialize() ([]byte, error) {
 
 func TestNetlinkRequest(t *testing.T) {
 	t.Run("Test the NetlinkRequest structure", func(t *testing.T) {
+
 		t.Run("size check", func(t *testing.T) {
 			// Expected size of the NetlinkRequest struct
 			const expectedSizeInBytes = unsafe.Sizeof(unix.NlMsghdr{}) +
@@ -34,6 +37,7 @@ func TestNetlinkRequest(t *testing.T) {
 				t.Errorf("Expected size: %d bytes, but got: %d bytes", expectedSizeInBytes, actualSize)
 			}
 		})
+
 		t.Run("field check", func(t *testing.T) {
 			_ = NetlinkRequest{
 				NlMsghdr: unix.NlMsghdr{
@@ -49,6 +53,7 @@ func TestNetlinkRequest(t *testing.T) {
 			}
 		})
 	})
+
 	t.Run("Test the AddData() method", func(t *testing.T) {
 		// Dummy data for testing
 		dummyData1 := NrDummyStruct{
@@ -81,7 +86,64 @@ func TestNetlinkRequest(t *testing.T) {
 		if !reflect.DeepEqual(req.Data[1], dummyData2) {
 			t.Errorf("Expected first element to be %v, got %v", dummyData2, req.Data[1])
 		}
-
 	})
 
+	t.Run("Test AddRawData() method", func(t *testing.T) {
+		// Create a new NetlinkRequest
+		req := NetlinkRequest{}
+
+		// First set of raw data to add
+		rawData1 := []byte{0x01, 0x02, 0x03, 0x04}
+
+		// Add first set of raw data
+		req.AddRawData(rawData1)
+
+		// Check that RawData contains the correct bytes after the first addition
+		if !bytes.Equal(req.RawData, rawData1) {
+			t.Errorf("Expected RawData to be %v, got %v", rawData1, req.RawData)
+		}
+
+		// Second set of raw data to add
+		rawData2 := []byte{0x05, 0x06, 0x07, 0x08}
+
+		// Add second set of raw data
+		req.AddRawData(rawData2)
+
+		// Expected concatenated result
+		expectedRawData := append(rawData1, rawData2...)
+
+		// Check that RawData contains the correct bytes after the second addition
+		if !bytes.Equal(req.RawData, expectedRawData) {
+			t.Errorf("Expected RawData to be %v, got %v", expectedRawData, req.RawData)
+		}
+	})
+
+	t.Run("Test NetlinkRequest.ExecuteIter() method happy path", func(t *testing.T) {
+		t.Skip("disabled")
+		const testDockerImage = "network-test:latest"
+		t.Run("build container", func(t *testing.T) {
+			if err := test.BuildTestContainer(testDockerImage); err != nil {
+				t.Fatalf("container build error: %v", err)
+			}
+		})
+		t.Run("run test container", func(t *testing.T) {
+			if err := test.RunContainer(testDockerImage, "TestNetlinkRequestExecuteFuncHappy"); err != nil {
+				t.Fatalf("test container failed: %v", err)
+			}
+		})
+	})
+	t.Run("Test NetlinkRequest.ExecuteIter() method error scenario", func(t *testing.T) {
+		t.Skip("disabled")
+		const testDockerImage = "network-test:latest"
+		t.Run("build container", func(t *testing.T) {
+			if err := test.BuildTestContainer(testDockerImage); err != nil {
+				t.Fatalf("container build error: %v", err)
+			}
+		})
+		t.Run("run test container", func(t *testing.T) {
+			if err := test.RunContainer(testDockerImage, "TestNetlinkRequestExecuteFuncErrorScenario"); err != nil {
+				t.Fatalf("test container failed: %v", err)
+			}
+		})
+	})
 }

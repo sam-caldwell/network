@@ -3,9 +3,12 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"golang.org/x/sys/unix"
+	"log"
 	"sync/atomic"
+	"time"
 )
 
 // NetlinkRequest - Represents a netlink request message that can be sent via netlink sockets.
@@ -64,7 +67,7 @@ func (req *NetlinkRequest) AddRawData(data []byte) {
 
 // Execute - Execute the request against the given sockType. Returns a list of netlink messages in serialized format,
 // optionally filtered by resType.
-func (req *NetlinkRequest) Execute(sockType IpProtocol, resType uint16) ([][]byte, error) {
+func (req *NetlinkRequest) Execute(sockType int, resType uint16) ([][]byte, error) {
 	var res [][]byte
 	err := req.ExecuteIter(sockType, resType, func(msg []byte) bool {
 		res = append(res, msg)
@@ -82,24 +85,29 @@ func (req *NetlinkRequest) Execute(sockType IpProtocol, resType uint16) ([][]byt
 //
 // Thread safety:
 //
-//	ExecuteIter holds a lock on the socket until it finishes iteration so the callback must
-//	not call back into the netlink API.
-func (req *NetlinkRequest) ExecuteIter(sockType IpProtocol, resType uint16, iterFunction func(msg []byte) bool) error {
+//	ExecuteIter holds lock on socket until it finishes iteration. The callback must	not call back into the netlink API.
+func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunction func(msg []byte) bool) error {
 	var (
 		s   *NetlinkSocket
 		err error
 	)
 
+	// If NetlinkRequest.Socket map not nil, look up the socket type
 	if req.Sockets != nil {
-		if sh, ok := req.Sockets[sockType]; ok {
+		if sh, ok := req.Sockets[IpProtocol(socketType)]; ok {
 			s = sh.Socket
 			req.Seq = atomic.AddUint32(&sh.Seq, 1)
 		}
 	}
-	sharedSocket := s != nil
 
-	if s == nil {
-		s, err = getNetlinkSocket(sockType)
+	sharedSocket := s != nil
+	if sharedSocket {
+		log.Println("sharedSocket: true")
+		s.Lock()
+		defer s.Unlock()
+	} else {
+		log.Println("sharedSocket: false")
+		s, err = GetNetlinkSocket(IpProtocol(socketType))
 		if err != nil {
 			return err
 		}
@@ -117,32 +125,47 @@ func (req *NetlinkRequest) ExecuteIter(sockType IpProtocol, resType uint16, iter
 		}
 
 		defer func() { _ = s.Close() }()
-	} else {
-		s.Lock()
-		defer s.Unlock()
 	}
 
+	log.Println("sending")
 	if err = s.Send(req); err != nil {
 		return err
 	}
-
+	log.Println("send with no error")
 	var pid uint32
 	if pid, err = s.GetPid(); err != nil {
 		return err
 	}
+	log.Printf("pid: %v", pid)
 
-done:
-	for {
+	const maxRetries = 3
+	const baseDelay = 50 * time.Millisecond
+
+	for retries := 0; retries < maxRetries; retries++ {
 		var (
 			from     *unix.SockaddrNetlink
 			messages []NetlinkMessage
 		)
+
 		if messages, from, err = s.Receive(); err != nil {
+			if errors.Is(err, unix.EAGAIN) || errors.Is(err, unix.EWOULDBLOCK) || errors.Is(err, unix.EINTR) {
+				backoff := baseDelay * time.Duration(1<<retries) // Exponential backoff
+				log.Printf("s.Receive() retry (%d/%d) due to: %v. Retrying in %v\n", retries+1, maxRetries, err, backoff)
+				time.Sleep(backoff)
+				continue
+			}
+			log.Printf("s.Receive() error: %v\n", err)
 			return err
 		}
+		log.Printf("s.Receive() success\n"+
+			"  messages: %v\n"+
+			"      from: %v", messages, from)
+
 		if from.Pid != PortIdKernel {
 			return fmt.Errorf("wrong sender portid %d, expected %d", from.Pid, PortIdKernel)
 		}
+
+		// Handle each message
 		for _, m := range messages {
 			if m.Header.Seq != req.Seq {
 				if sharedSocket {
@@ -157,42 +180,15 @@ done:
 				return unix.EINTR
 			}
 			if m.Header.Type == unix.NLMSG_DONE || m.Header.Type == unix.NLMSG_ERROR {
-				// NLMSG_DONE might have no payload, if so assume no error.
+				// NLMSG_DONE might have no payload, assume no error.
 				if m.Header.Type == unix.NLMSG_DONE && len(m.Data) == 0 {
-					break done
+					return nil
 				}
 
 				if errno := int32(NativeEndian.Uint32(m.Data[0:4])); errno == 0 {
-					break done
+					return nil
 				} else {
 					err = unix.Errno(-errno)
-				}
-				unreadData := m.Data[4:]
-				if m.Header.Flags&unix.NLM_F_ACK_TLVS != 0 && len(unreadData) > SizeOfNlMsgHdr {
-					// Skip the echoed request message.
-					var echoReqH *unix.NlMsghdr
-					if echoReqH, err = DeserializeNlMsgHdr(unreadData); err != nil {
-						return err
-					}
-					unreadData = unreadData[nlmAlignOf(int(echoReqH.Len)):]
-
-					// Annotate `err` using nlmsgerr attributes.
-					for len(unreadData) >= SizeOfUnixRtAttr {
-						var attr *unix.RtAttr
-						if attr, err = DeserializeUnixRtAttr(unreadData); err != nil {
-							return err
-						}
-						attrData := unreadData[SizeOfUnixRtAttr:attr.Len]
-
-						switch v := NlmsgerrAttr(attr.Type); v {
-						case NlmsgerrAttrMsg:
-							err = fmt.Errorf("%w: %s", err, unix.ByteSliceToString(attrData))
-						default:
-							// TODO: handle other NLMSGERR_ATTR types
-						}
-
-						unreadData = unreadData[rtaAlignOf(int(attr.Len)):]
-					}
 				}
 
 				return err
@@ -201,18 +197,14 @@ done:
 				continue
 			}
 			if cont := iterFunction(m.Data); !cont {
-				//
-				// switch to the nullExecuteIterFunc() which will allow us to drain the remaining messages from
-				// the kernel without passing them to the real iterFunction().
-				//
 				iterFunction = nullExecuteIterFunc
 			}
 			if m.Header.Flags&unix.NLM_F_MULTI == 0 {
-				break done
+				return nil
 			}
 		}
 	}
-	return nil
+	return fmt.Errorf("max retries reached")
 }
 
 // Serialize outputs a serialized []byte from the NetlinkRequest struct.
