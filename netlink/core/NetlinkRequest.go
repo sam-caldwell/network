@@ -9,6 +9,7 @@ import (
 	"log"
 	"sync/atomic"
 	"time"
+	"unsafe"
 )
 
 // NetlinkRequest - Represents a netlink request message that can be sent via netlink sockets.
@@ -51,6 +52,22 @@ type NetlinkRequest struct {
 	//
 	// Reference: https://man7.org/linux/man-pages/man7/netlink.7.html
 	Sockets map[IpProtocol]*SocketHandle
+}
+
+const SizeOfNetlinkRequest = int(unsafe.Sizeof(NetlinkRequest{}))
+
+// NewNetlinkRequest - Create a new netlink request from proto and flags.
+//
+// Warning: The Len value is inaccurate until the message is serialized.
+func NewNetlinkRequest(proto, flags int) *NetlinkRequest {
+	return &NetlinkRequest{
+		NlMsghdr: unix.NlMsghdr{
+			Len:   uint32(SizeOfNlMsgHdr),
+			Type:  uint16(proto),
+			Flags: unix.NLM_F_REQUEST | uint16(flags),
+			Seq:   atomic.AddUint32(&nextSequenceNumber, 1),
+		},
+	}
 }
 
 // AddData - append the NetlinkRequest data with the given NetlinkRequestData
