@@ -63,9 +63,9 @@ func (msg *GenericNetlinkMessage) Serialize() ([]byte, error) {
 
 }
 
-// DeserializeGenlMsg - creates a GenericNetlinkMessage structure from a byte slice.  It returns an error if the
-// byte slice is of incorrect length.
-func DeserializeGenlMsg(b []byte) (*GenericNetlinkMessage, error) {
+// DeserializeGenericNetlinkMessage - creates a GenericNetlinkMessage structure from a byte slice.  It returns an
+// error if the byte slice is of incorrect length.
+func DeserializeGenericNetlinkMessage(b []byte) (*GenericNetlinkMessage, error) {
 
 	if err := checkInputSize(b, SizeOfGenericNetlinkMessage, SizeOfGenericNetlinkMessage); err != nil {
 		return nil, err
