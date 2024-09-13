@@ -144,7 +144,7 @@ func TestIfaCacheInfo(t *testing.T) {
 			}
 
 			// Ensure the error message is correct
-			expectedError := "data slice too short"
+			expectedError := ErrInputTooShort
 			if err.Error() != expectedError {
 				t.Errorf("Expected error message '%s', but got '%s'", expectedError, err.Error())
 			}
