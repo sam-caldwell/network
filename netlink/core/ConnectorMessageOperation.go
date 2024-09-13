@@ -1,6 +1,7 @@
 package core
 
 import (
+	"encoding/binary"
 	"errors"
 	"unsafe"
 )
@@ -20,6 +21,21 @@ type ConnectorMessageOperation struct {
 
 // SizeOfConnectorMessageOperation - size of ConnectorMessageOperation struct
 const SizeOfConnectorMessageOperation = int(unsafe.Sizeof(ConnectorMessageOperation{}))
+
+// NewConnectorMessageOperation - Create a new connector operation message.
+func NewConnectorMessageOperation(idx, val, op uint32) *ConnectorMessageOperation {
+	var cm ConnectorMessageOperation
+
+	cm.ID.Idx = idx
+	cm.ID.Val = val
+
+	cm.Ack = 0
+	cm.Seq = 1
+	cm.Length = uint16(binary.Size(op))
+	cm.Operation = op
+
+	return &cm
+}
 
 // Deserialize deserializes the byte slice `data` into a ConnectorMessageOperation structure.
 //
