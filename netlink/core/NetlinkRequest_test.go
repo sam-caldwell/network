@@ -25,15 +25,20 @@ func (nr NrDummyStruct) Serialize() ([]byte, error) {
 
 func TestNetlinkRequest(t *testing.T) {
 	t.Run("Test the NetlinkRequest structure", func(t *testing.T) {
+		// Expected size of the NetlinkRequest struct
+		const expectedSizeInBytes = int(unsafe.Sizeof(unix.NlMsghdr{}) +
+			unsafe.Sizeof([]NetlinkRequestData{}) +
+			unsafe.Sizeof([]byte{}) +
+			unsafe.Sizeof(map[IpProtocol]*SocketHandle{}))
 
 		t.Run("size check", func(t *testing.T) {
-			// Expected size of the NetlinkRequest struct
-			const expectedSizeInBytes = unsafe.Sizeof(unix.NlMsghdr{}) +
-				unsafe.Sizeof([]NetlinkRequestData{}) +
-				unsafe.Sizeof([]byte{}) +
-				unsafe.Sizeof(map[IpProtocol]*SocketHandle{})
-
-			if actualSize := unsafe.Sizeof(NetlinkRequest{}); actualSize != expectedSizeInBytes {
+			t.Run("verify SizeOfNetlinkRequest", func(t *testing.T) {
+				if SizeOfNetlinkRequest != expectedSizeInBytes {
+					t.Fatalf("SizeOfNetlinkRequest mismatch. Expected: %d, Actual: %d",
+						expectedSizeInBytes, SizeOfNetlinkRequest)
+				}
+			})
+			if actualSize := int(unsafe.Sizeof(NetlinkRequest{})); actualSize != expectedSizeInBytes {
 				t.Errorf("Expected size: %d bytes, but got: %d bytes", expectedSizeInBytes, actualSize)
 			}
 		})
