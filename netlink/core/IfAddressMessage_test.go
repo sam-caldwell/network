@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"github.com/sam-caldwell/convert"
+	"golang.org/x/sys/unix"
 	"testing"
 	"unsafe"
 )
@@ -48,6 +49,47 @@ func TestIfAddressMessage(t *testing.T) {
 					t.Fatalf("size mismatch.  sz: %d", sz)
 				}
 			})
+		})
+		t.Run("Test IfAddressMessage creation", func(t *testing.T) {
+			// Define test cases with different InterfaceFamily values.
+			testCases := []struct {
+				name   string
+				family InterfaceFamily
+			}{
+				{"IPv4", InterfaceFamily(unix.AF_INET)},
+				{"IPv6", InterfaceFamily(unix.AF_INET6)},
+				{"Unspecified", InterfaceFamily(unix.AF_UNSPEC)},
+				// Add more interface families if needed.
+			}
+
+			for _, tc := range testCases {
+				t.Run(tc.name, func(t *testing.T) {
+					msg := NewIfAddressMessage(tc.family)
+
+					if msg == nil {
+						t.Fatalf("Expected non-nil IfAddressMessage, got nil")
+					}
+
+					// Verify that the Family field is set correctly.
+					if msg.Family != uint8(tc.family) {
+						t.Errorf("Expected Family: %d, got: %d", tc.family, msg.Family)
+					}
+
+					// Verify that other fields are initialized to zero.
+					if msg.Prefixlen != 0 {
+						t.Errorf("Expected Prefixlen: 0, got: %d", msg.Prefixlen)
+					}
+					if msg.Flags != 0 {
+						t.Errorf("Expected Flags: 0, got: %d", msg.Flags)
+					}
+					if msg.Scope != 0 {
+						t.Errorf("Expected Scope: 0, got: %d", msg.Scope)
+					}
+					if msg.Index != 0 {
+						t.Errorf("Expected Index: 0, got: %d", msg.Index)
+					}
+				})
+			}
 		})
 
 		t.Run("len method", func(t *testing.T) {
