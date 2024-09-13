@@ -39,8 +39,8 @@ type GenericNetlinkMessage struct {
 	Version uint8
 }
 
-// SizeOfGenlMsg - size of GenericNetlinkMessage struct
-const SizeOfGenlMsg = int(unsafe.Sizeof(GenericNetlinkMessage{}))
+// SizeOfGenericNetlinkMessage - size of GenericNetlinkMessage struct
+const SizeOfGenericNetlinkMessage = int(unsafe.Sizeof(GenericNetlinkMessage{}))
 
 // Len returns the length of the GenericNetlinkMessage structure in bytes.
 // It calculates the length using the binary.Size function, which ensures safe and portable size calculation.
@@ -67,11 +67,17 @@ func (msg *GenericNetlinkMessage) Serialize() ([]byte, error) {
 // DeserializeGenlMsg - creates a GenericNetlinkMessage structure from a byte slice.  It returns an error if the
 // byte slice is of incorrect length.
 func DeserializeGenlMsg(b []byte) (*GenericNetlinkMessage, error) {
+
+	if err := checkInputSize(b, SizeOfGenericNetlinkMessage, SizeOfGenericNetlinkMessage); err != nil {
+		return nil, err
+	}
 	if len(b) < 2 {
 		return nil, errors.New(ErrInputTooShort)
 	}
+
 	return &GenericNetlinkMessage{
 		Command: b[0],
 		Version: b[1],
 	}, nil
+
 }
