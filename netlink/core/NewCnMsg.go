@@ -3,8 +3,8 @@ package core
 import "encoding/binary"
 
 // NewCnMsg - Create a new connector message.
-func NewCnMsg(idx, val, op uint32) *CnMsgOp {
-	var cm CnMsgOp
+func NewCnMsg(idx, val, op uint32) *ConnectorMessageOperation {
+	var cm ConnectorMessageOperation
 
 	cm.ID.Idx = idx
 	cm.ID.Val = val
@@ -12,7 +12,7 @@ func NewCnMsg(idx, val, op uint32) *CnMsgOp {
 	cm.Ack = 0
 	cm.Seq = 1
 	cm.Length = uint16(binary.Size(op))
-	cm.Op = op
+	cm.Operation = op
 
 	return &cm
 }
