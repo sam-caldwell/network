@@ -87,7 +87,7 @@ func TestInfoMsg(t *testing.T) {
 			}
 
 			// Ensure the error message is correct
-			expectedError := "IfInfoMsg to short"
+			expectedError := ErrInputTooShort
 			if err.Error() != expectedError {
 				t.Errorf("Expected error message '%s', but got '%s'", expectedError, err.Error())
 			}
