@@ -3,7 +3,6 @@ package core
 import (
 	"encoding/binary"
 	"errors"
-	"unsafe"
 )
 
 // ConnectorMessageOperation - represents connector message operation, combining message identification,
@@ -18,9 +17,6 @@ type ConnectorMessageOperation struct {
 	// here we differ from the C header
 	Operation uint32
 }
-
-// SizeOfConnectorMessageOperation - size of ConnectorMessageOperation struct
-const SizeOfConnectorMessageOperation = int(unsafe.Sizeof(ConnectorMessageOperation{}))
 
 // NewConnectorMessageOperation - Create a new connector operation message.
 func NewConnectorMessageOperation(idx, val, op uint32) *ConnectorMessageOperation {
@@ -64,7 +60,7 @@ func NewConnectorMessageOperation(idx, val, op uint32) *ConnectorMessageOperatio
 // ```
 func (msg *ConnectorMessageOperation) Deserialize(data []byte) error {
 	// Ensure that the byte slice is large enough to hold a ConnectorMessageOperation.
-	if len(data) < SizeOfConnectorMessageOperation {
+	if len(data) < ConnectorMessageOperationSize {
 		return errors.New(ErrInputTooShort)
 	}
 
@@ -89,7 +85,7 @@ func (msg *ConnectorMessageOperation) Deserialize(data []byte) error {
 
 // Len - return the size of the ConnectorMessageOperation struct
 func (msg *ConnectorMessageOperation) Len() int {
-	return SizeOfConnectorMessageOperation
+	return ConnectorMessageOperationSize
 }
 
 // Serialize converts the ConnectorMessageOperation struct into a byte slice representation.
@@ -101,7 +97,7 @@ func (msg *ConnectorMessageOperation) Len() int {
 // is properly converted and placed into the byte slice.
 //
 // Return Value:
-//   - A byte slice (`[]byte`) of length `SizeOfConnectorMessageOperation` containing the serialized representation
+//   - A byte slice (`[]byte`) of length `ConnectorMessageOperationSize` containing the serialized representation
 //     of the `ConnectorMessageOperation` struct.
 //
 // Example:
@@ -128,7 +124,7 @@ func (msg *ConnectorMessageOperation) Len() int {
 //   - https://github.com/torvalds/linux/blob/master/include/uapi/linux/netlink.h,
 //     https://github.com/vishvananda/netlink/blob/main/nl/nl_linux.go
 func (msg *ConnectorMessageOperation) Serialize() ([]byte, error) {
-	buf := make([]byte, SizeOfConnectorMessageOperation)
+	buf := make([]byte, ConnectorMessageOperationSize)
 
 	// Serialize CbID (Idx and Val)
 	NativeEndian.PutUint32(buf[0:], msg.ID.Idx)
@@ -146,7 +142,7 @@ func (msg *ConnectorMessageOperation) Serialize() ([]byte, error) {
 
 // DeserializeCnMsgOp - Deserialize []byte into ConnectorMessageOperation
 func DeserializeCnMsgOp(b []byte) (*ConnectorMessageOperation, error) {
-	if err := checkInputSize(b, SizeOfConnectorMessageOperation, SizeOfConnectorMessageOperation); err != nil {
+	if err := checkInputSize(b, ConnectorMessageOperationSize, ConnectorMessageOperationSize); err != nil {
 		return nil, err
 	}
 	var o ConnectorMessageOperation

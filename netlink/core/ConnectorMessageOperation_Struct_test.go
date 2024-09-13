@@ -96,7 +96,7 @@ func TestCnMsgOp(t *testing.T) {
 
 		// Expected byte slice (based on the values above)
 		// We will generate it manually using the same approach as the Serialize function
-		expected := make([]byte, SizeOfConnectorMessageOperation)
+		expected := make([]byte, ConnectorMessageOperationSize)
 
 		NativeEndian.PutUint32(expected[0:], testMsg.ID.Idx)
 		NativeEndian.PutUint32(expected[4:], testMsg.ID.Val)
@@ -128,7 +128,7 @@ func TestCnMsgOp(t *testing.T) {
 
 	t.Run("test Deserialize() method", func(t *testing.T) {
 		// Prepare test data with valid values
-		testData := make([]byte, SizeOfConnectorMessageOperation)
+		testData := make([]byte, ConnectorMessageOperationSize)
 		NativeEndian.PutUint32(testData[0:4], 0x01020304)   // ID.Idx
 		NativeEndian.PutUint32(testData[4:8], 0x05060708)   // ID.Val
 		NativeEndian.PutUint32(testData[8:12], 0x11121314)  // Seq
@@ -171,7 +171,7 @@ func TestCnMsgOp(t *testing.T) {
 
 		// Test deserialization with insufficient data
 		t.Run("Insufficient Data", func(t *testing.T) {
-			shortData := testData[:10] // Shorter than SizeOfConnectorMessageOperation
+			shortData := testData[:10] // Shorter than ConnectorMessageOperationSize
 			var msg ConnectorMessageOperation
 			err := msg.Deserialize(shortData)
 			if err == nil {
