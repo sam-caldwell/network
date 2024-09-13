@@ -1,7 +1,6 @@
 package core
 
 import (
-	"errors"
 	"golang.org/x/sys/unix"
 )
 
@@ -15,11 +14,9 @@ type NetlinkMessage struct {
 }
 
 // DeserializeNetlinkMessage - deserialize a message header and data from a byte slice.
-func DeserializeNetlinkMessage(b []byte) (header *unix.NlMsghdr, remainingData []byte,
-	messageLength int, err error) {
-
-	if len(b) < unix.NLMSG_HDRLEN {
-		return nil, nil, 0, errors.New("input too short")
+func DeserializeNetlinkMessage(b []byte) (header *unix.NlMsghdr, remainingData []byte, messageLength int, err error) {
+	if err := checkInputSize(b, unix.NLMSG_HDRLEN, unix.NLMSG_HDRLEN); err != nil {
+		return nil, nil, 0, err
 	}
 
 	header, err = DeserializeNlMsgHdr(b)
