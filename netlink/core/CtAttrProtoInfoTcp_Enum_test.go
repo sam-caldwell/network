@@ -8,12 +8,12 @@ import (
 func TestCtAttrProtoInfoTcpEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := unsafe.Sizeof(CtAttrProtoInfoTcpEnum(0)); sz != expectedSizeInBytes {
+		if sz := unsafe.Sizeof(CtAttrProtoInfoTcp(0)); sz != expectedSizeInBytes {
 			t.Errorf("Expected size of %d, got %d.", expectedSizeInBytes, sz)
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
-		testData := map[CtAttrProtoInfoTcpEnum]CtAttrProtoInfoTcpEnum{
+		testData := map[CtAttrProtoInfoTcp]CtAttrProtoInfoTcp{
 			0: CtaProtoInfoTcpUnspec,
 			1: CtaProtoInfoTcpState,
 			2: CtaProtoInfoTcpWscaleOriginal,
