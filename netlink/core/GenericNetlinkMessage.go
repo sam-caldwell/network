@@ -3,7 +3,6 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
-	"errors"
 	"unsafe"
 )
 
@@ -70,9 +69,6 @@ func DeserializeGenlMsg(b []byte) (*GenericNetlinkMessage, error) {
 
 	if err := checkInputSize(b, SizeOfGenericNetlinkMessage, SizeOfGenericNetlinkMessage); err != nil {
 		return nil, err
-	}
-	if len(b) < 2 {
-		return nil, errors.New(ErrInputTooShort)
 	}
 
 	return &GenericNetlinkMessage{
