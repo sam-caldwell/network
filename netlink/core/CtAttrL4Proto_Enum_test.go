@@ -5,10 +5,10 @@ import (
 	"unsafe"
 )
 
-func TestCtAttrL4ProtoEnum(t *testing.T) {
+func TestCtAttrL4Proto_Enum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		o := CtAttrL4ProtoEnum(0)
+		o := CtAttrL4Proto(0)
 		if sz := unsafe.Sizeof(o); sz != expectedSizeInBytes {
 			t.Fatalf("size mismatch failed")
 		}
