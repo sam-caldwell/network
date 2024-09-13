@@ -1,67 +1,12 @@
 package core
 
 import (
-	"bytes"
 	"encoding/binary"
 	"golang.org/x/sys/unix"
 	"testing"
-	"unsafe"
 )
 
-func TestIfaCacheInfo(t *testing.T) {
-	//
-	// type IfaCacheinfo struct {
-	//    Prefered uint32
-	//    Valid    uint32
-	//    Cstamp   uint32
-	//    Tstamp   uint32
-	// }
-	//
-	t.Run("test SizeOfIfaCacheInfo constant", func(t *testing.T) {
-		const expectedSizeInBytes = int(unsafe.Sizeof(IfaCacheInfo{}))
-		if SizeOfIfaCacheInfo != int(unsafe.Sizeof(IfaCacheInfo{})) {
-			t.Fatalf("expected SizeOfIfaCacheInfo mismatch")
-		}
-	})
-
-	t.Run("test IfaCacheInfo size", func(t *testing.T) {
-		const expectedSizeInBytes = 16
-		if sz := int(unsafe.Sizeof(IfaCacheInfo{})); sz != expectedSizeInBytes {
-			t.Fatalf("expected IfaCacheInfo size mismatch")
-		}
-	})
-
-	t.Run("test Len() method", func(t *testing.T) {
-		const expectedSizeInBytes = SizeOfIfaCacheInfo
-		var o IfaCacheInfo
-		if sz := o.Len(); sz != expectedSizeInBytes {
-			t.Fatalf("Len() method failed")
-		}
-	})
-
-	t.Run("test Serialize() method", func(t *testing.T) {
-		testInput := IfaCacheInfo{
-			IfaCacheinfo: unix.IfaCacheinfo{
-				Prefered: uint32(01),
-				Valid:    uint32(02),
-				Cstamp:   uint32(03),
-				Tstamp:   uint32(04),
-			},
-		}
-		expected := []byte{
-			0x01, 0x00, 0x00, 0x00,
-			0x02, 0x00, 0x00, 0x00,
-			0x03, 0x00, 0x00, 0x00,
-			0x04, 0x00, 0x00, 0x00,
-		}
-		data, err := testInput.Serialize()
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !bytes.Equal(data, expected) {
-			t.Fatalf("Serialize() method failed")
-		}
-	})
+func TestIfaCacheInfo_Deserialize(t *testing.T) {
 	t.Run("test Deserialize() method", func(t *testing.T) {
 		var actual IfaCacheInfo
 		expected := IfaCacheInfo{
@@ -99,7 +44,7 @@ func TestIfaCacheInfo(t *testing.T) {
 		// Subtest 1: Valid input
 		t.Run("valid input", func(t *testing.T) {
 			// Prepare a byte slice with valid input (16 bytes total)
-			buf := make([]byte, SizeOfIfaCacheInfo)
+			buf := make([]byte, IfaCacheInfoSize)
 
 			// Populate the byte slice with values for IfaCacheInfo fields (using little-endian encoding)
 			binary.LittleEndian.PutUint32(buf[0:4], 100)   // Prefered = 100
