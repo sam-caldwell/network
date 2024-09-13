@@ -28,7 +28,7 @@ const (
 
 	// IpProtoIGMP - IPPROTO_IGMP - represents the Internet Group Management Protocol (IGMP).
 	// See: https://en.wikipedia.org/wiki/Internet_Group_Management_Protocol
-	IpProtoIGMP IpProtocol = 0x02
+	IpProtoIGMP IpProtocol = unix.IPPROTO_IGMP
 
 	// IpProtoGGP - IPPROTO_GGP - represents the Gateway-to-Gateway Protocol (GGP).
 	// See: https://en.wikipedia.org/wiki/Gateway-to-Gateway_Protocol
@@ -36,7 +36,7 @@ const (
 
 	// IpProtoIPv4Encapsulation - IPPROTO_IPIP - represents IPv4 encapsulation within IPv4.
 	// See: https://en.wikipedia.org/wiki/IP_in_IP
-	IpProtoIPv4Encapsulation IpProtocol = 0x04
+	IpProtoIPv4Encapsulation IpProtocol = unix.IPPROTO_IPIP
 
 	// IpProtoST - IPPROTO_ST - represents the Stream Protocol.
 	// See: https://en.wikipedia.org/wiki/Stream_Protocol
@@ -52,7 +52,7 @@ const (
 
 	// IpProtoEGP - IPPROTO_EGP - represents the Exterior Gateway Protocol (EGP).
 	// See: https://en.wikipedia.org/wiki/Exterior_Gateway_Protocol
-	IpProtoEGP IpProtocol = 0x08
+	IpProtoEGP IpProtocol = unix.IPPROTO_EGP
 
 	// IpProtoIGP - IPPROTO_IGP - represents the Interior Gateway Protocol (IGP).
 	// Note: This is an unspecified protocol used within autonomous systems.
