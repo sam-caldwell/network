@@ -1,35 +1,35 @@
 package core
 
-// CtAttrCountersEnum - https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
-type CtAttrCountersEnum uint8
+// CtAttrCounters - https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
+type CtAttrCounters uint8
 
 const (
 	// CtaCountersUnspec - unspecified value placeholder
-	CtaCountersUnspec CtAttrCountersEnum = 0
+	CtaCountersUnspec CtAttrCounters = 0
 	// CtaCountersPackets - CTA_COUNTERS_PACKETS - 64bit counters
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
-	CtaCountersPackets CtAttrCountersEnum = 1
+	CtaCountersPackets CtAttrCounters = 1
 
 	// CtaCountersBytes - CTA_COUNTERS_BYTES - 64bit counters
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
-	CtaCountersBytes CtAttrCountersEnum = 2
+	CtaCountersBytes CtAttrCounters = 2
 
 	// CtaCounters32Packets - CTA_COUNTERS32_PACKETS - old 32bit counters, unused
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
-	CtaCounters32Packets CtAttrCountersEnum = 3
+	CtaCounters32Packets CtAttrCounters = 3
 
 	// CtaCounters32Bytes - CTA_COUNTERS32_BYTES - old 32bit counters, unused
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
-	CtaCounters32Bytes CtAttrCountersEnum = 4
+	CtaCounters32Bytes CtAttrCounters = 4
 
 	// CtaCountersPad - CTA_COUNTERS_PAD
 	//
 	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
-	CtaCountersPad CtAttrCountersEnum = 5
+	CtaCountersPad CtAttrCounters = 5
 
 	// CtaCountersMax - CTA_COUNTERS_MAX
 	//
@@ -38,17 +38,17 @@ const (
 )
 
 // FromInt - set rCtAttrCountersEnum value from integer
-func (counter *CtAttrCountersEnum) FromInt(i int) {
-	*counter = CtAttrCountersEnum(i)
+func (counter *CtAttrCounters) FromInt(i int) {
+	*counter = CtAttrCounters(i)
 }
 
 // ToInt - return integer value fo rCtAttrCountersEnum
-func (counter *CtAttrCountersEnum) ToInt() int {
+func (counter *CtAttrCounters) ToInt() int {
 	return int(*counter)
 }
 
 // String - Return string representation of the counter state
-func (counter *CtAttrCountersEnum) String() string {
+func (counter *CtAttrCounters) String() string {
 	switch *counter {
 	case CtaCountersPackets:
 		return "CTA_COUNTERS_PACKETS"
