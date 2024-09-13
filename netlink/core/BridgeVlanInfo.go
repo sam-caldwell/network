@@ -3,7 +3,6 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
-	"errors"
 	"fmt"
 	"unsafe"
 )
@@ -257,10 +256,10 @@ func (bridge *BridgeVlanInfo) String() string {
 // ```
 func DeserializeBridgeVlanInfo(b []byte) (*BridgeVlanInfo, error) {
 
-	// Ensure that the byte slice is at least the size of the BridgeVlanInfo structure
-	if len(b) < SizeOfBridgeVlanInfo {
-		return nil, errors.New("input byte slice is too short")
+	if err := checkInputSize(b, SizeOfBridgeVlanInfo, SizeOfBridgeVlanInfo); err != nil {
+		return nil, err
 	}
+	//Ensure that the byte slice is at least the size of the BridgeVlanInfo structure
 
 	// Deserialize the byte slice into a BridgeVlanInfo structure
 	return &BridgeVlanInfo{
