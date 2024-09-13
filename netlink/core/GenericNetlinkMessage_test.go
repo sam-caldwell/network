@@ -108,7 +108,7 @@ func TestGenericNetlinkMessage(t *testing.T) {
 			input := []byte{0x01, 0x02}
 
 			// Call DeserializeGenlMsg
-			msg, err := DeserializeGenlMsg(input)
+			msg, err := DeserializeGenericNetlinkMessage(input)
 
 			// Check for no errors
 			if err != nil {
@@ -124,13 +124,12 @@ func TestGenericNetlinkMessage(t *testing.T) {
 			}
 		})
 
-		// Subtest 2: Sad path with input too short
-		t.Run(ErrInputTooShort, func(t *testing.T) {
+		t.Run("Sad path with input too short", func(t *testing.T) {
 			// Prepare a byte slice with too short length
 			input := []byte{0x01}
 
 			// Call DeserializeGenlMsg
-			_, err := DeserializeGenlMsg(input)
+			_, err := DeserializeGenericNetlinkMessage(input)
 
 			// Expect an error due to small byte slice
 			if err == nil {
