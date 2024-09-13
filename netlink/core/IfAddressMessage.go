@@ -32,9 +32,18 @@ type IfAddressMessage struct {
 }
 
 const (
-	// SizeOfIfAddressMessage     = 0x8 // bytes as derived from unix.SizeOfIfAddressMessage
+	// SizeOfIfAddressMessage - bytes as derived from unix.SizeOfIfAddressMessage
 	SizeOfIfAddressMessage = int(unsafe.Sizeof(IfAddressMessage{}))
 )
+
+// NewIfAddressMessage - create, configure and return a new IFAddressMessage object (by reference)
+func NewIfAddressMessage(family InterfaceFamily) *IfAddressMessage {
+	return &IfAddressMessage{
+		IfAddrmsg: unix.IfAddrmsg{
+			Family: uint8(family),
+		},
+	}
+}
 
 // Len - Return the size of the interface address message
 func (msg *IfAddressMessage) Len() int {
