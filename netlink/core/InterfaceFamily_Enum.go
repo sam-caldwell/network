@@ -69,15 +69,3 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/linux/socket.h
 	AfMax = unix.AF_MAX
 )
-
-// Equal - Compare two InterfaceFamily objects and return boolean indicating equivalence.
-func (lhs *InterfaceFamily) Equal(rhs InterfaceFamily) bool {
-
-	return *lhs == rhs
-
-}
-
-// ToUint8 - Convert InterfaceFamily value to uint8
-func (lhs *InterfaceFamily) ToUint8() uint8 {
-	return uint8(*lhs)
-}
