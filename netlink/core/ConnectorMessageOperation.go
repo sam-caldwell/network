@@ -130,6 +130,9 @@ func (msg *ConnectorMessageOperation) Serialize() ([]byte, error) {
 
 // DeserializeCnMsgOp - Deserialize []byte into ConnectorMessageOperation
 func DeserializeCnMsgOp(b []byte) (*ConnectorMessageOperation, error) {
+	if err := checkInputSize(b, SizeOfConnectorMessageOperation, SizeOfConnectorMessageOperation); err != nil {
+		return nil, err
+	}
 	var o ConnectorMessageOperation
 	if err := o.Deserialize(b); err != nil {
 		return nil, err
