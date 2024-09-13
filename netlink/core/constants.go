@@ -92,7 +92,9 @@ const (
 )
 
 const (
+	ErrInputTooLarge = "input too large"
 	ErrInputTooShort = "input too short"
+	ErrNilInput      = "nil input"
 )
 
 // This file defines the structure size constants used elsewhere in the program
