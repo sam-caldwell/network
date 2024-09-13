@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaBareUdpEnum tests the size of the IflaBareUdpEnum type and the values of its enumerated constants.
+// TestIflaBareUdpEnum tests the size of the IflaBareUdp type and the values of its enumerated constants.
 func TestIflaBareUdpEnum(t *testing.T) {
-	// Verify the size of the IflaBareUdpEnum type is 1 byte (uint8)
+	// Verify the size of the IflaBareUdp type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaBareUdpUnspec); size != 1 {
-		t.Errorf("Expected size of IflaBareUdpEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaBareUdp to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaBareUdpEnum
-		want  IflaBareUdpEnum
+		value IflaBareUdp
+		want  IflaBareUdp
 	}{
 		{"IflaBareUdpUnspec", IflaBareUdpUnspec, 0},
 		{"IflaBareUdpPort", IflaBareUdpPort, 1},
