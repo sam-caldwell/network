@@ -3,7 +3,6 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
-	"errors"
 	"fmt"
 	"golang.org/x/sys/unix"
 	"unsafe"
@@ -94,8 +93,8 @@ func (msg *IfInfoMsg) Deserialize(b []byte) (err error) {
 //	   Change uint32
 //	}
 func DeserializeIfInfoMsg(b []byte) (*IfInfoMsg, error) {
-	if len(b) < SizeOfIfInfoMsg {
-		return nil, errors.New("IfInfoMsg to short")
+	if err := checkInputSize(b, SizeOfIfInfoMsg, SizeOfIfInfoMsg); err != nil {
+		return nil, err
 	}
 	result := IfInfoMsg{
 		unix.IfInfomsg{
