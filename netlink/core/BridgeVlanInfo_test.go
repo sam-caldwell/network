@@ -8,6 +8,12 @@ import (
 )
 
 func TestBridgeVlanInfo(t *testing.T) {
+	t.Run("verify SizeOfBridgeVlanInfo", func(t *testing.T) {
+		const expectedSizeInBytes = 4
+		if SizeOfBridgeVlanInfo != expectedSizeInBytes {
+			t.Fatalf("SizeOfBridgeVlanInfo mismatch")
+		}
+	})
 	t.Run("BridgeVlanInfo struct test", func(t *testing.T) {
 		t.Run("check structure", func(t *testing.T) {
 			_ = BridgeVlanInfo{
