@@ -9,9 +9,9 @@ import (
 
 func TestGenericNetlinkMessage(t *testing.T) {
 	t.Run("GenericNetlinkMessage struct", func(t *testing.T) {
-		t.Run("verify SizeOfGenlMsg", func(t *testing.T) {
+		t.Run("verify SizeOfGenericNetlinkMessage", func(t *testing.T) {
 			const expectedSizeInBytes = 2
-			if SizeOfGenlMsg != expectedSizeInBytes {
+			if SizeOfGenericNetlinkMessage != expectedSizeInBytes {
 				t.Fatal("SizeOfGenlMsg size mismatch")
 			}
 		})
