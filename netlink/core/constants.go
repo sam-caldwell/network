@@ -13,12 +13,6 @@ const (
 	LwtBpfMaxHeadroom = 256
 )
 
-const (
-
-	// PortIdKernel - Kernel netlink port Id (nl_pid)
-	PortIdKernel uint32 = 0
-)
-
 // GenlMsg, genetlink constants
 const (
 	// GenlAdminPerm - GENL_ADMIN_PERM - This constant represents the permission required for administrative commands
