@@ -4,7 +4,7 @@ package core
 type NlaPolicy struct {
 
 	// Type - of the attribute (e.g., NLA_U8, NLA_U16)
-	Type NlaTypeEnum
+	Type NlaType
 
 	// Length - of the attribute (if applicable)
 	Len int

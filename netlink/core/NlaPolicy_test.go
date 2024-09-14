@@ -7,7 +7,7 @@ import (
 func TestNlaPolicy(t *testing.T) {
 	t.Run("Test NlaPolicy struct initialization and fields", func(t *testing.T) {
 		// Define sample values for testing
-		expectedType := NlaTypeEnum(1)               // Replace with a valid NlaTypeEnum value
+		expectedType := NlaType(1)                   // Replace with a valid NlaType value
 		expectedLen := 4                             // Example length
 		expectedStrictStartType := IflaGeneveEnum(2) // Replace with a valid IflaGeneveEnum value
 
