@@ -1,13 +1,9 @@
-//go:build linux
-
 package core
 
-import (
-	"encoding/binary"
-)
+import "encoding/binary"
 
-// Serialize - Serialize Nfgenmsg to []byte
-func (msg *Nfgenmsg) Serialize() ([]byte, error) {
+// Serialize - Serialize NfGenMsg to []byte
+func (msg *NfGenMsg) Serialize() ([]byte, error) {
 	buf := make([]byte, NfGenMsgSize)
 
 	// Serialize the NfgenFamily field
