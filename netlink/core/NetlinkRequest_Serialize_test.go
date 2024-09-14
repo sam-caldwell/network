@@ -31,7 +31,7 @@ func TestNetlinkRequest_Serialize(t *testing.T) {
 	}
 
 	// Expected length of the serialized output
-	expectedLength := NetlinkMessageHdrSize + mockData.Len() + len(req.RawData)
+	expectedLength := NetlinkMessageHeaderSize + mockData.Len() + len(req.RawData)
 
 	// Perform serialization
 	serialized, err := req.Serialize()
@@ -69,7 +69,7 @@ func TestNetlinkRequest_Serialize(t *testing.T) {
 
 	// Verify the serialized payload data
 	expectedPayload := append(mockData.data, req.RawData...)
-	actualPayload := serialized[NetlinkMessageHdrSize:]
+	actualPayload := serialized[NetlinkMessageHeaderSize:]
 
 	if !bytes.Equal(expectedPayload, actualPayload) {
 		t.Errorf("Expected payload %v, got %v", expectedPayload, actualPayload)

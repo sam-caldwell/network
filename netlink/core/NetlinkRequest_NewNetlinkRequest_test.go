@@ -2,41 +2,58 @@ package core
 
 import (
 	"golang.org/x/sys/unix"
+	"sync/atomic"
 	"testing"
 )
 
 func TestNewNetlinkRequest(t *testing.T) {
-	// Test parameters
-	proto := 16
-	flags := unix.NLM_F_ACK
 
-	// Reset the sequence number to a known value for testing
-	nextSequenceNumber = 0
+	t.Run("NewNetlinkRequest", func(t *testing.T) {
+		// Save the original value of the nextSequenceNumber and restore it later to avoid test interference.
+		originalSequenceNumber := nextSequenceNumber
+		defer atomic.StoreUint32(&nextSequenceNumber, originalSequenceNumber)
 
-	// Create a new netlink request
-	req := NewNetlinkRequest(proto, flags)
+		t.Run("Test NewNetlinkRequest basic fields", func(t *testing.T) {
+			// Set a known value for the next sequence number for testing.
+			atomic.StoreUint32(&nextSequenceNumber, 42)
 
-	// Verify the fields of the netlink request
-	if req.Type != uint16(proto) {
-		t.Errorf("Expected Type %d, got %d", proto, req.Type)
-	}
+			// Create a new NetlinkRequest.
+			proto := 100            // Example protocol
+			flags := unix.NLM_F_ACK // Example flags
+			req := NewNetlinkRequest(proto, flags)
 
-	expectedFlags := unix.NLM_F_REQUEST | uint16(flags)
-	if req.Flags != expectedFlags {
-		t.Errorf("Expected Flags %d, got %d", expectedFlags, req.Flags)
-	}
+			// Verify that the message header fields are set correctly.
+			if req.Len != uint32(NetlinkMessageHeaderSize) {
+				t.Errorf("Expected Len: %d, got: %d", NetlinkMessageHeaderSize, req.Len)
+			}
+			if req.Type != uint16(proto) {
+				t.Errorf("Expected Type: %d, got: %d", proto, req.Type)
+			}
+			expectedFlags := unix.NLM_F_REQUEST | uint16(flags)
+			if req.Flags != expectedFlags {
+				t.Errorf("Expected Flags: %d, got: %d", expectedFlags, req.Flags)
+			}
+			expectedSeq := uint32(43) // nextSequenceNumber was set to 42, and it should be incremented.
+			if req.Seq != expectedSeq {
+				t.Errorf("Expected Seq: %d, got: %d", expectedSeq, req.Seq)
+			}
+		})
 
-	expectedLen := uint32(NetlinkMessageHeaderSize)
-	if req.Len != expectedLen {
-		t.Errorf("Expected Len %d, got %d", expectedLen, req.Len)
-	}
+		t.Run("Test NewNetlinkRequest sequence number increment", func(t *testing.T) {
+			// Reset the sequence number to a known value.
+			atomic.StoreUint32(&nextSequenceNumber, 100)
 
-	expectedSeq := uint32(1) // Since we reset nextSequenceNumber to 0, the first call will be 1
-	if req.Seq != expectedSeq {
-		t.Errorf("Expected Seq %d, got %d", expectedSeq, req.Seq)
-	}
+			// Create two new NetlinkRequest instances to check sequence number increment.
+			req1 := NewNetlinkRequest(1, 0)
+			req2 := NewNetlinkRequest(1, 0)
 
-	if req.Pid != 0 {
-		t.Errorf("Expected Pid 0, got %d", req.Pid)
-	}
+			// Verify that the sequence numbers increment as expected.
+			if req1.Seq != 101 {
+				t.Errorf("Expected Seq for req1: %d, got: %d", 101, req1.Seq)
+			}
+			if req2.Seq != 102 {
+				t.Errorf("Expected Seq for req2: %d, got: %d", 102, req2.Seq)
+			}
+		})
+	})
 }

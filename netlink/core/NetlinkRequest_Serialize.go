@@ -8,7 +8,7 @@ import (
 // Serialize outputs a serialized []byte from the NetlinkRequest struct.
 func (req *NetlinkRequest) Serialize() (out []byte, err error) {
 	// Calculate the total length of the netlink message.
-	length := NetlinkMessageHdrSize
+	length := NetlinkMessageHeaderSize
 	for _, data := range req.Data {
 		s, err := data.Serialize()
 		if err != nil {
