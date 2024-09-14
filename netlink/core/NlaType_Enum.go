@@ -1,20 +1,20 @@
 package core
 
-// NlaTypeEnum is an enumeration of Netlink attribute types.
+// NlaType is an enumeration of Netlink attribute types.
 //
 // This enumeration defines the different types of attributes that can be used in Netlink messages.
 // Netlink is a communication protocol between the Linux kernel and user-space processes, and these attribute types
 // help define the structure of messages.
 //
 // See https://github.com/torvalds/linux/blob/master/include/net/netlink.h
-type NlaTypeEnum int
+type NlaType int
 
 const (
 	// NlaUnspec - NLA_UNSPEC - Unspecified attribute.
 	// This is a placeholder for an unspecified or unknown attribute type.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/net/netlink.h
-	NlaUnspec NlaTypeEnum = iota
+	NlaUnspec NlaType = iota
 
 	// NlaU8 - NLA_U8 - 8-bit unsigned integer.
 	// This attribute type represents an 8-bit unsigned integer.
