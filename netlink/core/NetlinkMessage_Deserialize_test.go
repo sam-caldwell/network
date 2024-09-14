@@ -3,6 +3,7 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"golang.org/x/sys/unix"
 	"testing"
 )
@@ -37,8 +38,8 @@ func TestDeserializeNetlinkMessage(t *testing.T) {
 		if err == nil {
 			t.Fatalf("expected error.  got none.")
 		}
-		if err.Error() != ErrInputTooLarge {
-			t.Fatalf("Expected error message '%s', but got '%s'", ErrInputTooLarge, err.Error())
+		if !errors.Is(err, unix.EINVAL) {
+			t.Fatalf("Expected error message '%v', but got '%s'", unix.EINVAL, err.Error())
 		}
 		if header != nil {
 			t.Fatalf("Expected header to be nil, got %v", header)
@@ -52,7 +53,7 @@ func TestDeserializeNetlinkMessage(t *testing.T) {
 	})
 
 	t.Run("test with a valid netlink header", func(t *testing.T) {
-		t.Skip("disabled")
+		t.Skip("test disabled until NlMsgHdr_deserialize() is fixed.")
 		netlinkMsg := []byte{
 			// Netlink Header (NlMsghdr)
 			0x1c, 0x1d, 0x1e, 0x1f, // Len: 28 (16-byte header + 12-byte payload)
