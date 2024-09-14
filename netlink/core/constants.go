@@ -95,42 +95,15 @@ const (
 	ErrInputTooLarge = "input too large"
 	ErrInputTooShort = "input too short"
 	ErrNilInput      = "nil input"
+
+	ErrInvalidAttributeLength = "invalid attribute length"
+	ErrTruncatedAttribute     = "truncated attribute"
 )
 
 // This file defines the structure size constants used elsewhere in the program
 // We do this here to make our use of "unsafe" an exception rather than the norm.
 // This should be the only place where we need unsafe (outside of tests).
 const (
-
-	// SizeOfNfGenMsg - Track the message sizes for the correct serialization/deserialization
-	SizeOfNfGenMsg = int(unsafe.Sizeof(Nfgenmsg{}))
-
-	// SizeOfNlMsgHdr - Size of unix.NlMsghdr struct
-	SizeOfNlMsgHdr = int(unsafe.Sizeof(unix.NlMsghdr{}))
-
-	//SizeOfRtAttr - size of the RtAttrWrapper struct
-	SizeOfRtAttr = int(unsafe.Sizeof(RtAttr{}))
-
-	//SizeOfRtGenMsg - Size of the RtGenMsg struct
-	SizeOfRtGenMsg = int(unsafe.Sizeof(RtGenMsg{}))
-
-	// SizeOfRtNextHop - Size of the RtNexthop struct
-	SizeOfRtNextHop = int(unsafe.Sizeof(RtNexthop{}))
-
-	// SizeOfTcNetemRate - Size of the TcNetemRate struct, defining rate options in netem.
-	SizeOfTcNetemRate = int(unsafe.Sizeof(TcNetemRate{}))
-
-	// SizeOfTcActionMsg - Size of the TcActionMsg struct, which represents actions taken on packets in TC.
-	SizeOfTcActionMsg = int(unsafe.Sizeof(TcActionMsg{}))
-
-	// SizeOfTcConnmark - Size of the TcConnmark struct, used for connection marking in TC.
-	SizeOfTcConnmark = int(unsafe.Sizeof(TcConnmark{}))
-
-	// SizeOfTcCsum - Size of the TcCsum struct, representing checksum actions in traffic control.
-	SizeOfTcCsum = int(unsafe.Sizeof(TcCsum{}))
-
-	// SizeOfTcGen - Size of the TcGen struct, representing general traffic control options.
-	SizeOfTcGen = int(unsafe.Sizeof(TcGen{}))
 
 	// SizeOfTcHtbCopt - Size of the TcHtbCopt struct, representing options for hierarchical token bucket (HTB)
 	// classes in TC.
