@@ -26,7 +26,7 @@ func TestNewNetlinkRequest(t *testing.T) {
 		t.Errorf("Expected Flags %d, got %d", expectedFlags, req.Flags)
 	}
 
-	expectedLen := uint32(NetlinkMessageHdrSize)
+	expectedLen := uint32(NetlinkMessageHeaderSize)
 	if req.Len != expectedLen {
 		t.Errorf("Expected Len %d, got %d", expectedLen, req.Len)
 	}
