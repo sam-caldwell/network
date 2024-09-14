@@ -21,7 +21,7 @@ func DeserializeNetlinkMessage(b []byte) (header *unix.NlMsghdr, remainingData [
 
 	}
 
-	header, err = DeserializeNlMsgHdr(b)
+	header, err = DeserializeNetlinkMessageHeader(b)
 	if err != nil {
 
 		return nil, nil, 0, err
