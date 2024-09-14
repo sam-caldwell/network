@@ -6,8 +6,7 @@ import (
 
 // MockNetlinkRequestData - Mock struct implementing NetlinkRequestData for testing purposes.
 type MockNetlinkRequestData struct {
-	length int
-	data   []byte
+	data []byte
 }
 
 // Len - Returns the length of the data.
