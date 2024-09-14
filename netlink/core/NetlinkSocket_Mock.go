@@ -6,7 +6,9 @@ import (
 
 // MockNetlinkSocket for testing purposes
 type MockNetlinkSocket struct {
-	fd int
+	fd    int
+	size  int
+	force bool
 }
 
 // SetExtAck - mock implementation of the SetExtAck method for testing
