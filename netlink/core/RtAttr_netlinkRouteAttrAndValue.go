@@ -20,6 +20,10 @@ func netlinkRouteAttrAndValue(b []byte) (*RtAttr, []byte, int, error) {
 	// Initialize the RtAttr struct
 	var attr RtAttr
 
+	if err := checkInputSize(b, RtAttrSize, RtAttrSize); err != nil {
+		return nil, nil, 0, err
+	}
+
 	// Deserialize the byte slice into the RtAttr struct.
 	// The Deserialize method should be defined to extract the unix.RtAttr fields (Len, Type) from the byte slice.
 	if err := attr.Deserialize(b); err != nil {
