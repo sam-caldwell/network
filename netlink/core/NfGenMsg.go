@@ -2,6 +2,11 @@
 
 package core
 
+import "unsafe"
+
+// NfGenMsgSize - Track the message sizes for the correct serialization/deserialization
+const NfGenMsgSize = int(unsafe.Sizeof(Nfgenmsg{}))
+
 // Nfgenmsg - nfgenmsg - General form of address family dependent message.
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink.h
