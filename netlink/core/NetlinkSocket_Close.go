@@ -18,6 +18,7 @@ import (
 //
 //	An error, if any, encountered while closing the socket.
 func (s *NetlinkSocket) Close() error {
+
 	fd := int(atomic.SwapInt32(&s.fd, -1))
 	return unix.Close(fd)
 }
