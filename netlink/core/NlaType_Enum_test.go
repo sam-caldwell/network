@@ -6,38 +6,39 @@ import (
 
 func TestNlaTypeEnum(t *testing.T) {
 	tests := []struct {
-		name     string
-		expected NlaType
+		name   string
+		actual NlaType
+		expect NlaType
 	}{
-		{"NlaUnspec", NlaUnspec},
-		{"NlaU8", NlaU8},
-		{"NlaU16", NlaU16},
-		{"NlaU32", NlaU32},
-		{"NlaU64", NlaU64},
-		{"NlaString", NlaString},
-		{"NlaFlag", NlaFlag},
-		{"NlaMsecs", NlaMsecs},
-		{"NlaNested", NlaNested},
-		{"NlaNestedArray", NlaNestedArray},
-		{"NlaNulString", NlaNulString},
-		{"NlaBinary", NlaBinary},
-		{"NlaS8", NlaS8},
-		{"NlaS16", NlaS16},
-		{"NlaS32", NlaS32},
-		{"NlaS64", NlaS64},
-		{"NlaBitfield32", NlaBitfield32},
-		{"NlaReject", NlaReject},
-		{"NlaBe16", NlaBe16},
-		{"NlaBe32", NlaBe32},
-		{"NlaSint", NlaSint},
-		{"NlaUint", NlaUint},
-		{"NlaTypeMax", NlaTypeMax},
+		{name: "NlaUnspec", actual: NlaType(0), expect: NlaUnspec},
+		{name: "NlaU8", actual: NlaType(1), expect: NlaU8},
+		{name: "NlaU16", actual: NlaType(2), expect: NlaU16},
+		{name: "NlaU32", actual: NlaType(3), expect: NlaU32},
+		{name: "NlaU64", actual: NlaType(4), expect: NlaU64},
+		{name: "NlaString", actual: NlaType(5), expect: NlaString},
+		{name: "NlaFlag", actual: NlaType(6), expect: NlaFlag},
+		{name: "NlaMsecs", actual: NlaType(7), expect: NlaMsecs},
+		{name: "NlaNested", actual: NlaType(8), expect: NlaNested},
+		{name: "NlaNestedArray", actual: NlaType(9), expect: NlaNestedArray},
+		{name: "NlaNulString", actual: NlaType(10), expect: NlaNulString},
+		{name: "NlaBinary", actual: NlaType(11), expect: NlaBinary},
+		{name: "NlaS8", actual: NlaType(12), expect: NlaS8},
+		{name: "NlaS16", actual: NlaType(13), expect: NlaS16},
+		{name: "NlaS32", actual: NlaType(14), expect: NlaS32},
+		{name: "NlaS64", actual: NlaType(15), expect: NlaS64},
+		{name: "NlaBitfield32", actual: NlaType(16), expect: NlaBitfield32},
+		{name: "NlaReject", actual: NlaType(17), expect: NlaReject},
+		{name: "NlaBe16", actual: NlaType(18), expect: NlaBe16},
+		{name: "NlaBe32", actual: NlaType(19), expect: NlaBe32},
+		{name: "NlaSint", actual: NlaType(20), expect: NlaSint},
+		{name: "NlaUint", actual: NlaType(21), expect: NlaUint},
+		{name: "NlaTypeMax", actual: NlaType(NlaUint), expect: NlaTypeMax},
 	}
 
-	for i, tt := range tests {
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if NlaType(i) != tt.expected {
-				t.Errorf("Expected %s to have value %d, but got %d", tt.name, i, tt.expected)
+			if tt.actual != tt.expect {
+				t.Errorf("Expected %s to have value %d, but got %d", tt.name, tt.actual, tt.expect)
 			}
 		})
 	}
