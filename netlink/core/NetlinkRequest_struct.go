@@ -54,7 +54,7 @@ type NetlinkRequest struct {
 	Sockets map[IpProtocol]*SocketHandle
 }
 
-const SizeOfNetlinkRequest = int(unsafe.Sizeof(NetlinkRequest{}))
+const NetlinkRequestSize = int(unsafe.Sizeof(NetlinkRequest{}))
 
 // NewNetlinkRequest - Create a new netlink request from proto and flags.
 //
@@ -62,7 +62,7 @@ const SizeOfNetlinkRequest = int(unsafe.Sizeof(NetlinkRequest{}))
 func NewNetlinkRequest(proto, flags int) *NetlinkRequest {
 	return &NetlinkRequest{
 		NlMsghdr: unix.NlMsghdr{
-			Len:   uint32(SizeOfNlMsgHdr),
+			Len:   uint32(NetlinkMessageHdrSize),
 			Type:  uint16(proto),
 			Flags: unix.NLM_F_REQUEST | uint16(flags),
 			Seq:   atomic.AddUint32(&nextSequenceNumber, 1),
@@ -227,7 +227,7 @@ func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunct
 // Serialize outputs a serialized []byte from the NetlinkRequest struct.
 func (req *NetlinkRequest) Serialize() (out []byte, err error) {
 	// Calculate the total length of the netlink message.
-	length := SizeOfNlMsgHdr
+	length := NetlinkMessageHdrSize
 	for _, data := range req.Data {
 		s, err := data.Serialize()
 		if err != nil {

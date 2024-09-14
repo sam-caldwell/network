@@ -33,10 +33,10 @@ func TestNetlinkRequest(t *testing.T) {
 			unsafe.Sizeof(map[IpProtocol]*SocketHandle{}))
 
 		t.Run("size check", func(t *testing.T) {
-			t.Run("verify SizeOfNetlinkRequest", func(t *testing.T) {
-				if SizeOfNetlinkRequest != expectedSizeInBytes {
-					t.Fatalf("SizeOfNetlinkRequest mismatch. Expected: %d, Actual: %d",
-						expectedSizeInBytes, SizeOfNetlinkRequest)
+			t.Run("verify NetlinkRequestSize", func(t *testing.T) {
+				if NetlinkRequestSize != expectedSizeInBytes {
+					t.Fatalf("NetlinkRequestSize mismatch. Expected: %d, Actual: %d",
+						expectedSizeInBytes, NetlinkRequestSize)
 				}
 			})
 			if actualSize := int(unsafe.Sizeof(NetlinkRequest{})); actualSize != expectedSizeInBytes {
@@ -75,8 +75,8 @@ func TestNetlinkRequest(t *testing.T) {
 			req := NewNetlinkRequest(proto, flags)
 
 			// Verify that the message header fields are set correctly.
-			if req.Len != uint32(SizeOfNlMsgHdr) {
-				t.Errorf("Expected Len: %d, got: %d", SizeOfNlMsgHdr, req.Len)
+			if req.Len != uint32(NetlinkMessageHdrSize) {
+				t.Errorf("Expected Len: %d, got: %d", NetlinkMessageHdrSize, req.Len)
 			}
 			if req.Type != uint16(proto) {
 				t.Errorf("Expected Type: %d, got: %d", proto, req.Type)
