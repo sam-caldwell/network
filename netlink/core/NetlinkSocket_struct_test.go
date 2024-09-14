@@ -15,7 +15,7 @@ func TestNetlinkSocket_Struct(t *testing.T) {
 	})
 	t.Run("field check", func(t *testing.T) {
 		o := NetlinkSocket{
-			fd:  int32(0),
+			fd:  int(0),
 			lsa: unix.SockaddrNetlink{},
 		}
 		o.Lock()

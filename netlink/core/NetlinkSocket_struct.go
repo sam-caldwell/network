@@ -16,7 +16,7 @@ type NetlinkSocket struct {
 	sync.Mutex
 
 	// fd - File descriptor for the netlink socket.
-	fd int32
+	fd int
 
 	// lsa - Socket address information specific to netlink.
 	lsa unix.SockaddrNetlink
