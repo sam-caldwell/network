@@ -19,14 +19,12 @@ func DeserializeNetlinkMessageHeader(data []byte) (*unix.NlMsghdr, error) {
 		return nil, err
 	}
 
-	var header unix.NlMsghdr
-
-	header.Len = NativeEndian.Uint32(data[0:4])
-	header.Type = NativeEndian.Uint16(data[4:6])
-	header.Flags = NativeEndian.Uint16(data[6:8])
-	header.Seq = NativeEndian.Uint32(data[8:12])
-	header.Pid = NativeEndian.Uint32(data[12:16])
-
-	return &header, nil
+	return &(unix.NlMsghdr{
+		Len:   NativeEndian.Uint32(data[0:4]),
+		Type:  NativeEndian.Uint16(data[4:6]),
+		Flags: NativeEndian.Uint16(data[6:8]),
+		Seq:   NativeEndian.Uint32(data[8:12]),
+		Pid:   NativeEndian.Uint32(data[12:16]),
+	}), nil
 
 }
