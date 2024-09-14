@@ -1,24 +1,30 @@
 package core
 
 import (
-	"golang.org/x/sys/unix"
 	"testing"
 )
 
 func TestDeserializeNetlinkMessageHeader(t *testing.T) {
-	t.Run("valid input", func(t *testing.T) {
-		// Prepare a byte slice with valid input
-		buf := make([]byte, NetlinkMessageHeaderSize)
 
-		// Populate the byte slice with values for NlMsghdr (using little-endian encoding)
-		NativeEndian.PutUint32(buf[0:4], unix.NLMSG_HDRLEN+10) // Len = NLMSG_HDRLEN + 10
-		NativeEndian.PutUint16(buf[4:6], unix.RTM_NEWROUTE)    // Type
-		NativeEndian.PutUint16(buf[6:8], 0x01)                 // Flags
-		NativeEndian.PutUint32(buf[8:12], 1234)                // Seq
-		NativeEndian.PutUint32(buf[12:16], 5678)               // PID
+	t.Run("valid input", func(t *testing.T) {
+		//
+		//	type NlMsghdr struct {
+		//	   Len   uint32
+		//	   Type  uint16
+		//	   Flags uint16
+		//	   Seq   uint32
+		//	   Pid   uint32
+		//	}
+		testData := []byte{
+			0x10, 0x00, 0x00, 0x00, // len
+			0x18, 0x00, //   	  	   type
+			0x01, 0x00, //     		   flags
+			0x34, 0x12, 0x00, 0x00, // seq
+			0x78, 0x56, 0x00, 0x00, // pid
+		}
 
 		// Call DeserializeNetlinkMessageHeader
-		hdr, err := DeserializeNetlinkMessageHeader(buf)
+		header, err := DeserializeNetlinkMessageHeader(testData)
 
 		// Check for no errors
 		if err != nil {
@@ -26,20 +32,20 @@ func TestDeserializeNetlinkMessageHeader(t *testing.T) {
 		}
 
 		// Check the deserialized header values
-		if hdr.Len != unix.NLMSG_HDRLEN+10 {
-			t.Errorf("Expected Len to be %d, but got %d", unix.NLMSG_HDRLEN+10, hdr.Len)
+		if header.Len != 0x10 {
+			t.Errorf("Expected Len to be %d, but got %d", 0x10, header.Len)
 		}
-		if hdr.Type != unix.RTM_NEWROUTE {
-			t.Errorf("Expected Type to be %d, but got %d", unix.RTM_NEWROUTE, hdr.Type)
+		if header.Type != 0x18 {
+			t.Errorf("Expected Type to be %d, but got %d", 0x18, header.Type)
 		}
-		if hdr.Flags != 0x01 {
-			t.Errorf("Expected Flags to be 0x01, but got %d", hdr.Flags)
+		if header.Flags != 0x01 {
+			t.Errorf("Expected Flags to be 0x01, but got %d", header.Flags)
 		}
-		if hdr.Seq != 1234 {
-			t.Errorf("Expected Seq to be 1234, but got %d", hdr.Seq)
+		if header.Seq != 0x1234 {
+			t.Errorf("Expected Seq to be 0x1234, but got %d", header.Seq)
 		}
-		if hdr.Pid != 5678 {
-			t.Errorf("Expected PID to be 5678, but got %d", hdr.Pid)
+		if header.Pid != 0x5678 {
+			t.Errorf("Expected PID to be 0x5678, but got %d", header.Pid)
 		}
 	})
 

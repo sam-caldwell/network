@@ -21,8 +21,7 @@ func DeserializeNetlinkMessage(b []byte) (header *unix.NlMsghdr, remainingData [
 
 	}
 
-	header, err = DeserializeNetlinkMessageHeader(b)
-	if err != nil {
+	if header, err = DeserializeNetlinkMessageHeader(b); err != nil {
 
 		return nil, nil, 0, err
 
@@ -30,8 +29,10 @@ func DeserializeNetlinkMessage(b []byte) (header *unix.NlMsghdr, remainingData [
 
 	messageLength = nlmAlignOf(int(header.Len))
 
-	if int(header.Len) < unix.NLMSG_HDRLEN || messageLength > len(b) {
+	if int(header.Len) < unix.NLMSG_HDRLEN || len(b)%4 != 0 {
+
 		return nil, nil, 0, unix.EINVAL
+
 	}
 
 	return header, b[unix.NLMSG_HDRLEN:], messageLength, err
