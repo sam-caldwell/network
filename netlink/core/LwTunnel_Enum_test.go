@@ -8,7 +8,7 @@ import (
 func TestLwTunnelEnum(t *testing.T) {
 	t.Run("TestSize", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		var tunnelAttr LwTunnelEnum
+		var tunnelAttr LwTunnel
 
 		if size := unsafe.Sizeof(tunnelAttr); size != uintptr(expectedSizeInBytes) {
 			t.Errorf("Expected size %d but got %d", expectedSizeInBytes, size)
@@ -18,8 +18,8 @@ func TestLwTunnelEnum(t *testing.T) {
 	t.Run("TestValues", func(t *testing.T) {
 		tests := []struct {
 			name     string
-			value    LwTunnelEnum
-			expected LwTunnelEnum
+			value    LwTunnel
+			expected LwTunnel
 		}{
 			{"LwtunnelIp6Unspec", LwtunnelIp6Unspec, 0},
 			{"LwtunnelIp6Id", LwtunnelIp6Id, 1},
