@@ -2,7 +2,7 @@
 
 package core
 
-// NetlinkMessageHeaderLength - unix.NLMSG_HDRLEN -
+// NetlinkMessageHeaderLength - NetlinkMessageHeaderLength -
 const NetlinkMessageHeaderLength = 0x10
 
 // DeserializeToList - deserialize []byte into a list of NetlinkMessage objects.

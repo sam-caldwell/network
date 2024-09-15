@@ -4,14 +4,13 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
-	"golang.org/x/sys/unix"
 	"testing"
 )
 
 func TestDeserializeNetlinkMessage(t *testing.T) {
 	t.Run(ErrInputTooShort, func(t *testing.T) {
 
-		buf := make([]byte, unix.NLMSG_HDRLEN-1) // Insufficient length
+		buf := make([]byte, NetlinkMessageHeaderLength-1) // Insufficient length
 		_, _, _, err := DeserializeNetlinkMessage(buf)
 
 		if err == nil {
@@ -40,8 +39,8 @@ func TestDeserializeNetlinkMessage(t *testing.T) {
 		if err == nil {
 			t.Fatalf("expected error.  got none.")
 		}
-		if !errors.Is(err, unix.EINVAL) {
-			t.Fatalf("Expected error message '%v', but got '%s'", unix.EINVAL, err.Error())
+		if !errors.Is(err, EINVAL) {
+			t.Fatalf("Expected error message '%v', but got '%s'", EINVAL, err.Error())
 		}
 		if header != nil {
 			t.Fatalf("Expected header to be nil, got %v", header)
