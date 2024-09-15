@@ -1,3 +1,5 @@
+//go:build linux
+
 package core
 
 import (
@@ -11,34 +13,6 @@ const (
 	// the maximum amount of headroom, in bytes, that can be reserved by a BPF program when it is attached to a
 	// lightweight tunnel for packet processing.
 	LwtBpfMaxHeadroom = 256
-)
-
-// GenlMsg, genetlink constants
-const (
-	// GenlAdminPerm - GENL_ADMIN_PERM - This constant represents the permission required for administrative commands
-	//                 in the Generic Netlink (Genl) framework, ensuring that only privileged users can execute certain
-	//                 commands.
-	GenlAdminPerm = unix.GENL_ADMIN_PERM
-
-	// GenlCmdCapDo - GENL_CMD_CAP_DO - This constant indicates that a Generic Netlink command has the capability to
-	//                perform an action (typically an administrative or control operation).
-	GenlCmdCapDo = unix.GENL_CMD_CAP_DO
-
-	// GenlCmdCapDump - GENL_CMD_CAP_DUMP - This constant signifies that a Generic Netlink command has the capability
-	//                  to dump data, usually for retrieving information in bulk.
-	GenlCmdCapDump = unix.GENL_CMD_CAP_DUMP
-
-	// GenlCmdCapHaspol - GENL_CMD_CAP_HASPOL - This constant specifies that a Generic Netlink command has an
-	//                    associated policy, which defines the expected attributes and constraints for that command.
-	GenlCmdCapHaspol = unix.GENL_CMD_CAP_HASPOL
-
-	// GenlHdrlen - GENL_HDRLEN - This constant defines the length of the Generic Netlink header, which is added to
-	//              all Generic Netlink messages.
-	GenlHdrlen = unix.GENL_HDRLEN
-
-	// GenlIdCtrl - GENL_ID_CTRL - This constant represents the identifier for the Generic Netlink control family,
-	//              which is used to manage and query other Generic Netlink families.
-	GenlIdCtrl = unix.GENL_ID_CTRL
 )
 
 // GTP Tunneling Module
@@ -168,9 +142,6 @@ const (
 
 	// SizeOfUint32Bitfield - The size of a 32-bit bitfield used in various traffic control structs.
 	SizeOfUint32Bitfield = int(unsafe.Sizeof(Uint32Bitfield{}))
-
-	// SizeOfUnixRtAttr - The size of a unix.RtAttr struct
-	SizeOfUnixRtAttr = int(unsafe.Sizeof(unix.RtAttr{}))
 
 	// SizeOfUnixRtMsg - the size of unix.RtMsg struct
 	SizeOfUnixRtMsg = int(unsafe.Sizeof(unix.RtMsg{}))
