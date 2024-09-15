@@ -34,7 +34,7 @@ func (s *NetlinkSocket) Receive() ([]NetlinkMessage, *unix.SockaddrNetlink, erro
 		return nil, nil, errors.New("error (converting to netlink sockaddr)")
 	}
 
-	if numberBytesRecd < unix.NLMSG_HDRLEN {
+	if numberBytesRecd < NetlinkMessageHeaderSize {
 		return nil, nil, errors.New("error (short response from netlink)")
 	}
 
@@ -44,7 +44,7 @@ func (s *NetlinkSocket) Receive() ([]NetlinkMessage, *unix.SockaddrNetlink, erro
 
 	copy(rb2, rb[:msgLength])
 
-	if nl, err = ParseNetlinkMessage(rb2); err != nil {
+	if nl, err = DeserializeToList(rb2); err != nil {
 		return nil, nil, err
 	}
 
