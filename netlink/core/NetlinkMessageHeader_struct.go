@@ -1,6 +1,6 @@
 package core
 
-// NlMsghdr represents the Netlink message header used in Netlink communication between
+// NetlinkMessageHeader represents the Netlink message header used in Netlink communication between
 // user space and the Linux kernel.
 //
 // In Netlink communication, each message starts with a header that contains metadata about
@@ -50,7 +50,7 @@ package core
 // )
 //
 //	func createNetlinkMessage(msgType uint16, flags uint16, seq uint32, payload []byte) ([]byte, error) {
-//	    nlHeader := NlMsghdr{
+//	    nlHeader := NetlinkMessageHeader{
 //	        Len:   uint32(NlmsgHdrLen + len(payload)),
 //	        Type:  msgType,
 //	        Flags: flags,
@@ -86,7 +86,7 @@ package core
 // **References for Serialization:**
 // - Netlink message alignment: https://man7.org/linux/man-pages/man7/netlink.7.html
 // - Host byte order in Netlink: https://stackoverflow.com/questions/15190228/netlink-message-header-byte-order
-type NlMsghdr struct {
+type NetlinkMessageHeader struct {
 	// Len is the total length of the Netlink message, including the header and payload.
 	// It corresponds to the `nlmsg_len` field in the kernel's `struct nlmsghdr`.
 	Len uint32

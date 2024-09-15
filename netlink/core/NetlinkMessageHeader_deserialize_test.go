@@ -8,7 +8,7 @@ func TestDeserializeNetlinkMessageHeader(t *testing.T) {
 
 	t.Run("valid input", func(t *testing.T) {
 		//
-		//	type NlMsghdr struct {
+		//	type NetlinkMessageHeader struct {
 		//	   Len   uint32
 		//	   Type  uint16
 		//	   Flags uint16

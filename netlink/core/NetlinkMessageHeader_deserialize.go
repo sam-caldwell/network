@@ -1,21 +1,21 @@
 package core
 
-// DeserializeNetlinkMessageHeader deserializes a byte slice into a NlMsghdr structure using native endian.
+// DeserializeNetlinkMessageHeader deserializes a byte slice into a NetlinkMessageHeader structure using native endian.
 //
-//	type NlMsghdr struct {
+//	type NetlinkMessageHeader struct {
 //	   Len   uint32
 //	   Type  uint16
 //	   Flags uint16
 //	   Seq   uint32
 //	   Pid   uint32
 //	}
-func DeserializeNetlinkMessageHeader(data []byte) (*NlMsghdr, error) {
+func DeserializeNetlinkMessageHeader(data []byte) (*NetlinkMessageHeader, error) {
 
 	if err := checkInputSize(data, NetlinkMessageHeaderSize, disableSizeCheck); err != nil {
 		return nil, err
 	}
 
-	return &(NlMsghdr{
+	return &(NetlinkMessageHeader{
 		Len:   NativeEndian.Uint32(data[0:4]),
 		Type:  NativeEndian.Uint16(data[4:6]),
 		Flags: NativeEndian.Uint16(data[6:8]),
