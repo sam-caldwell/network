@@ -5,11 +5,11 @@ import (
 	"fmt"
 )
 
-// Deserialize parses a byte slice representing a Netlink attribute and returns an Attribute instance.
+// Deserialize - parse byte slice representing a Netlink attribute and returns an Attribute instance.
 // It expects the byte slice to be in Netlink TLV (Type-Length-Value) format, including any padding.
-func Deserialize(data []byte) (*Attribute, error) {
+func (attr *Attribute) Deserialize(data []byte) error {
 	if len(data) < 4 {
-		return nil, fmt.Errorf("data too short to contain an attribute header")
+		return fmt.Errorf("data too short to contain an attribute header")
 	}
 
 	// Read the attribute length and type from the first 4 bytes
@@ -18,7 +18,7 @@ func Deserialize(data []byte) (*Attribute, error) {
 
 	// Validate the length
 	if nlaLen < 4 || int(nlaLen) > len(data) {
-		return nil, fmt.Errorf("invalid attribute length: %d", nlaLen)
+		return fmt.Errorf("invalid attribute length: %d", nlaLen)
 	}
 
 	// Extract the Value, excluding the padding
@@ -26,10 +26,16 @@ func Deserialize(data []byte) (*Attribute, error) {
 	value := make([]byte, valueLen)
 	copy(value, data[4:4+valueLen])
 
-	attr := &Attribute{
-		Type:  NlaFlags(nlaType),
-		Value: value,
-	}
+	attr.Type = NlaFlags(nlaType)
+	attr.Value = value
 
-	return attr, nil
+	return nil
+}
+
+// DeserializeAttribute - parse byte slice representing a Netlink attribute and returns an Attribute instance.
+// It expects the byte slice to be in Netlink TLV (Type-Length-Value) format, including any padding.
+func DeserializeAttribute(data []byte) (*Attribute, error) {
+	attr := Attribute{}
+	err := attr.Deserialize(data)
+	return &attr, err
 }

@@ -104,28 +104,58 @@ func TestAttributeDeserialize(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			attr, err := Deserialize(tt.data)
-			if tt.expectError {
-				if err == nil {
-					t.Errorf("Expected error but got none")
+	t.Run("Test deserialize method", func(t *testing.T) {
+		for _, tt := range tests {
+			var attr Attribute
+			t.Run(tt.name, func(t *testing.T) {
+				err := attr.Deserialize(tt.data)
+				if tt.expectError {
+					if err == nil {
+						t.Errorf("Expected error but got none")
+					}
+					return
+				} else if err != nil {
+					t.Errorf("Deserialize() returned unexpected error: %v", err)
+					return
 				}
-				return
-			} else if err != nil {
-				t.Errorf("Deserialize() returned unexpected error: %v", err)
-				return
-			}
 
-			// Compare the Type
-			if attr.Type != tt.expected.Type {
-				t.Errorf("Type mismatch. Expected: %v, Got: %v", tt.expected.Type, attr.Type)
-			}
+				// Compare the Type
+				if attr.Type != tt.expected.Type {
+					t.Errorf("Type mismatch. Expected: %v, Got: %v", tt.expected.Type, attr.Type)
+				}
 
-			// Compare the Value
-			if !bytes.Equal(attr.Value, tt.expected.Value) {
-				t.Errorf("Value mismatch.\nExpected: %v\nGot:      %v", tt.expected.Value, attr.Value)
-			}
-		})
-	}
+				// Compare the Value
+				if !bytes.Equal(attr.Value, tt.expected.Value) {
+					t.Errorf("Value mismatch.\nExpected: %v\nGot:      %v", tt.expected.Value, attr.Value)
+				}
+			})
+		}
+	})
+	t.Run("test deserialize function", func(t *testing.T) {
+		for _, tt := range tests {
+			t.Run(tt.name, func(t *testing.T) {
+				attr, err := DeserializeAttribute(tt.data)
+				if tt.expectError {
+					if err == nil {
+						t.Errorf("Expected error but got none")
+					}
+					return
+				} else if err != nil {
+					t.Errorf("Deserialize() returned unexpected error: %v", err)
+					return
+				}
+
+				// Compare the Type
+				if attr.Type != tt.expected.Type {
+					t.Errorf("Type mismatch. Expected: %v, Got: %v", tt.expected.Type, attr.Type)
+				}
+
+				// Compare the Value
+				if !bytes.Equal(attr.Value, tt.expected.Value) {
+					t.Errorf("Value mismatch.\nExpected: %v\nGot:      %v", tt.expected.Value, attr.Value)
+				}
+			})
+		}
+	})
+
 }
