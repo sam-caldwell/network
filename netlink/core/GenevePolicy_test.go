@@ -11,7 +11,7 @@ import (
 func TestGenevePolicy(t *testing.T) {
 	tests := []struct {
 		index         IflaGeneveEnum
-		expectedType  NlaTypeEnum
+		expectedType  NlaType
 		expectedLen   int
 		expectedStart IflaGeneveEnum // For StrictStartType
 	}{
