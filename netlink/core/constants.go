@@ -7,23 +7,6 @@ import (
 	"unsafe"
 )
 
-const (
-	// LwtBpfMaxHeadroom - LWT_BPF_MAX_HEADROOM - constant in the Linux kernel's networking subsystem, specifically
-	// in the context of Lightweight Tunnels (LWT) and BPF (Berkeley Packet Filter) programs. This constant defines
-	// the maximum amount of headroom, in bytes, that can be reserved by a BPF program when it is attached to a
-	// lightweight tunnel for packet processing.
-	LwtBpfMaxHeadroom = 256
-)
-
-const (
-	ErrInputTooLarge = "input too large"
-	ErrInputTooShort = "input too short"
-	ErrNilInput      = "nil input"
-
-	ErrInvalidAttributeLength = "invalid attribute length"
-	ErrTruncatedAttribute     = "truncated attribute"
-)
-
 // This file defines the structure size constants used elsewhere in the program
 // We do this here to make our use of "unsafe" an exception rather than the norm.
 // This should be the only place where we need unsafe (outside of tests).
