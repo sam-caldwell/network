@@ -1,77 +1,79 @@
 package core
 
+import "errors"
+
 // Error - return string for Errors
 func (err Errors) Error() string {
-	switch err {
-	case E2BIG:
+	switch {
+	case errors.Is(err, E2BIG):
 		return "E2BIG"
-	case EACCES:
+	case errors.Is(err, EACCES):
 		return "EACCES"
-	case EAGAIN:
+	case errors.Is(err, EAGAIN):
 		return "EAGAIN"
-	case EBADF:
+	case errors.Is(err, EBADF):
 		return "EBADF"
-	case EBUSY:
+	case errors.Is(err, EBUSY):
 		return "EBUSY"
-	case ECHILD:
+	case errors.Is(err, ECHILD):
 		return "ECHILD"
-	case EDOM:
+	case errors.Is(err, EDOM):
 		return "EDOM"
-	case EEXIST:
+	case errors.Is(err, EEXIST):
 		return "EEXIST"
-	case EFAULT:
+	case errors.Is(err, EFAULT):
 		return "EFAULT"
-	case EFBIG:
+	case errors.Is(err, EFBIG):
 		return "EFBIG"
-	case EINTR:
+	case errors.Is(err, EINTR):
 		return "EINTR"
-	case EINVAL:
+	case errors.Is(err, EINVAL):
 		return "EINVAL"
-	case EIO:
+	case errors.Is(err, EIO):
 		return "EIO"
-	case EISDIR:
+	case errors.Is(err, EISDIR):
 		return "EISDIR"
-	case EMFILE:
+	case errors.Is(err, EMFILE):
 		return "EMFILE"
-	case EMLINK:
+	case errors.Is(err, EMLINK):
 		return "EMLINK"
-	case ENFILE:
+	case errors.Is(err, ENFILE):
 		return "ENFILE"
-	case ENODEV:
+	case errors.Is(err, ENODEV):
 		return "ENODEV"
-	case ENOENT:
+	case errors.Is(err, ENOENT):
 		return "ENOENT"
-	case ENOEXEC:
+	case errors.Is(err, ENOEXEC):
 		return "ENOEXEC"
-	case ENOMEM:
+	case errors.Is(err, ENOMEM):
 		return "ENOMEM"
-	case ENOSPC:
+	case errors.Is(err, ENOSPC):
 		return "ENOSPC"
-	case ENOTBLK:
+	case errors.Is(err, ENOTBLK):
 		return "ENOTBLK"
-	case ENOTDIR:
+	case errors.Is(err, ENOTDIR):
 		return "ENOTDIR"
-	case ENOTTY:
+	case errors.Is(err, ENOTTY):
 		return "ENOTTY"
-	case ENXIO:
+	case errors.Is(err, ENXIO):
 		return "ENXIO"
-	case EPERM:
+	case errors.Is(err, EPERM):
 		return "EPERM"
-	case EPIPE:
+	case errors.Is(err, EPIPE):
 		return "EPIPE"
-	case ERANGE:
+	case errors.Is(err, ERANGE):
 		return "ERANGE"
-	case EROFS:
+	case errors.Is(err, EROFS):
 		return "EROFS"
-	case ESPIPE:
+	case errors.Is(err, ESPIPE):
 		return "ESPIPE"
-	case ESRCH:
+	case errors.Is(err, ESRCH):
 		return "ESRCH"
-	case ETXTBSY:
+	case errors.Is(err, ETXTBSY):
 		return "ETXTBSY"
-	//case EWOULDBLOCK:
+		//case EWOULDBLOCK:
 	//	return "EWOULDBLOCK"
-	case EXDEV:
+	case errors.Is(err, EXDEV):
 		return "EXDEV"
 	default:
 		return "invalid error"
