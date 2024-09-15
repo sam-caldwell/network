@@ -16,6 +16,21 @@ func TestAttributeSerialize(t *testing.T) {
 			name: "Attribute without padding",
 			attr: &Attribute{
 				Type:  NlaFNested,
+				Value: []byte{}, // 4 bytes
+			},
+			expected: []byte{
+				// Length (nlaLen = 4 header + 4 value = 8), little-endian
+				0x04, 0x00,
+				// Type (NLA_F_NESTED = 0x8000), little-endian
+				0x00, 0x80,
+				// Empty Value
+			},
+			expectError: false,
+		},
+		{
+			name: "Attribute without padding",
+			attr: &Attribute{
+				Type:  NlaFNested,
 				Value: []byte{0x01, 0x02, 0x03, 0x04}, // 4 bytes
 			},
 			expected: []byte{
