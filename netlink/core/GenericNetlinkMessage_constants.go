@@ -27,3 +27,30 @@ const (
 	//              which is used to manage and query other Generic Netlink families.
 	GenlIdCtrl = 0x10 // unix.GENL_ID_CTRL
 )
+
+// GTP Tunneling Module
+// See https://docs.kernel.org/networking/gtp.html
+const (
+
+	// GenlGtpVersion -
+	// See https://docs.kernel.org/networking/gtp.html
+	GenlGtpVersion = 0
+
+	// GenlGtpName -
+	// See https://docs.kernel.org/networking/gtp.html
+	GenlGtpName = "gtp"
+)
+
+// Family nlctrl netlink specification
+// See https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+const (
+
+	// GenlCtrlName - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+	GenlCtrlName = "nlctrl"
+
+	// GenlCtrlVersion - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+	GenlCtrlVersion = 2
+
+	// GenlCtrlCmdGetFamily - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
+	GenlCtrlCmdGetFamily = 3
+)

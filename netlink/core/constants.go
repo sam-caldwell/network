@@ -15,33 +15,6 @@ const (
 	LwtBpfMaxHeadroom = 256
 )
 
-// GTP Tunneling Module
-// See https://docs.kernel.org/networking/gtp.html
-const (
-
-	// GenlGtpVersion -
-	// See https://docs.kernel.org/networking/gtp.html
-	GenlGtpVersion = 0
-
-	// GenlGtpName -
-	// See https://docs.kernel.org/networking/gtp.html
-	GenlGtpName = "gtp"
-)
-
-// Family nlctrl netlink specification
-// See https://docs.kernel.org/networking/netlink_spec/nlctrl.html
-const (
-
-	// GenlCtrlName - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
-	GenlCtrlName = "nlctrl"
-
-	// GenlCtrlVersion - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
-	GenlCtrlVersion = 2
-
-	// GenlCtrlCmdGetFamily - https://docs.kernel.org/networking/netlink_spec/nlctrl.html
-	GenlCtrlCmdGetFamily = 3
-)
-
 // All the following constants are coming from:
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
 const (
