@@ -3,7 +3,6 @@ package core
 import (
 	"bytes"
 	"encoding/binary"
-	"golang.org/x/sys/unix"
 	"testing"
 )
 
@@ -20,7 +19,7 @@ func TestNetlinkRequest_Serialize(t *testing.T) {
 
 	// Create a NetlinkRequest with mock data
 	req := &NetlinkRequest{
-		NlMsghdr: unix.NlMsghdr{
+		NetlinkMessageHeader: NetlinkMessageHeader{
 			Type:  uint16(16),
 			Flags: uint16(0),
 			Seq:   uint32(1),
@@ -46,7 +45,7 @@ func TestNetlinkRequest_Serialize(t *testing.T) {
 
 	// Verify the serialized header
 	buf := bytes.NewReader(serialized)
-	var header unix.NlMsghdr
+	var header NetlinkMessageHeader
 	if err := binary.Read(buf, NativeEndian, &header); err != nil {
 		t.Fatalf("Error reading serialized header: %v", err)
 	}
