@@ -157,5 +157,47 @@ func TestAttributeDeserialize(t *testing.T) {
 			})
 		}
 	})
-
+	t.Run("serialize-deserialize agreement", func(t *testing.T) {
+		test := []struct {
+			name string
+			attr *Attribute
+		}{
+			{
+				name: "",
+				attr: &Attribute{
+					Type:  NlaFNested,
+					Value: []byte{0x01, 0x02, 0x03, 0x04},
+				},
+			},
+			{
+				name: "",
+				attr: &Attribute{
+					Type: NlaFNested,
+					Value: []byte{
+						0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+						0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
+					},
+				},
+			},
+		}
+		var (
+			err        error
+			serialized []byte
+		)
+		for _, tt := range test {
+			if serialized, err = tt.attr.Serialize(); err != nil {
+				t.Fatal(err)
+			}
+			var attr Attribute
+			if err = attr.Deserialize(serialized); err != nil {
+				t.Fatal(err)
+			}
+			if attr.Type != tt.attr.Type {
+				t.Fatalf("Type mismatch. Expected: %v, Got: %v", tt.attr.Type, attr.Type)
+			}
+			if !bytes.Equal(attr.Value, tt.attr.Value) {
+				t.Fatalf("Value mismatch. Expected: %v, Got: %v", tt.attr.Value, attr.Value)
+			}
+		}
+	})
 }
