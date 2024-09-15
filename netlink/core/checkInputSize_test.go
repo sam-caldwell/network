@@ -17,10 +17,15 @@ func TestCheckInputSize(t *testing.T) {
 		{"", nil, 0, 2},
 		{"", errors.New(ErrInputTooShort), 1, 2},
 		{"test", errors.New(ErrInputTooLarge), 1, 2},
-		{[]byte(""), nil, 0, 2},
-		{[]byte(nil), errors.New(ErrNilInput), 10, 12},
-		{[]byte(""), errors.New(ErrInputTooShort), 1, 2},
 		{[]byte("test"), errors.New(ErrInputTooLarge), 1, 2},
+		{[]byte(""), nil, 0, 2},
+		{[]byte(""), nil, disableSizeCheck, 2},
+		{[]byte(""), errors.New(ErrInputTooShort), 1, 2},
+		{[]byte(nil), errors.New(ErrNilInput), 10, 12},
+		{[]byte(nil), errors.New(ErrNilInput), disableSizeCheck, 12},
+		{[]byte(nil), errors.New(ErrNilInput), 12, disableSizeCheck},
+		{[]byte(nil), errors.New(ErrNilInput), disableSizeCheck, disableSizeCheck},
+		{[]byte("test"), nil, disableSizeCheck, disableSizeCheck},
 	}
 
 	for lineNo, test := range testData {
@@ -54,11 +59,15 @@ func TestCheckInputSize(t *testing.T) {
 
 			if test.minSize > 0 && err != nil {
 				if err.Error() != test.err.Error() {
-					t.Fatalf("Expected error %v, got %v", test.err.Error(), err)
+					if err.Error() != test.err.Error() {
+						t.Fatalf("Expected error %v, got %v", test.err.Error(), err)
+					}
 				}
 			}
 			if test.minSize <= 0 && err != nil {
-				t.Error(err)
+				if err.Error() != test.err.Error() {
+					t.Fatalf("Expected error %v, got %v", test.err.Error(), err)
+				}
 			}
 		})
 	}
