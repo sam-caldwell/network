@@ -1,10 +1,6 @@
 package core
 
-import (
-	"golang.org/x/sys/unix"
-)
-
-// DeserializeNetlinkMessageHeader deserializes a byte slice into a unix.NlMsghdr structure using native endian.
+// DeserializeNetlinkMessageHeader deserializes a byte slice into a NlMsghdr structure using native endian.
 //
 //	type NlMsghdr struct {
 //	   Len   uint32
@@ -13,13 +9,13 @@ import (
 //	   Seq   uint32
 //	   Pid   uint32
 //	}
-func DeserializeNetlinkMessageHeader(data []byte) (*unix.NlMsghdr, error) {
+func DeserializeNetlinkMessageHeader(data []byte) (*NlMsghdr, error) {
 
 	if err := checkInputSize(data, NetlinkMessageHeaderSize, disableSizeCheck); err != nil {
 		return nil, err
 	}
 
-	return &(unix.NlMsghdr{
+	return &(NlMsghdr{
 		Len:   NativeEndian.Uint32(data[0:4]),
 		Type:  NativeEndian.Uint16(data[4:6]),
 		Flags: NativeEndian.Uint16(data[6:8]),

@@ -1,9 +1,12 @@
 package core
 
 import (
-	"golang.org/x/sys/unix"
 	"unsafe"
 )
 
-// NetlinkMessageHeaderSize - Size of unix.NlMsghdr struct
-const NetlinkMessageHeaderSize = int(unsafe.Sizeof(unix.NlMsghdr{}))
+// NetlinkMessageHeaderSize - Size of NlMsghdr struct
+const NetlinkMessageHeaderSize = int(unsafe.Sizeof(NlMsghdr{}))
+
+const (
+	NlMsghdrSize = int(unsafe.Sizeof(NlMsghdr{}))
+)
