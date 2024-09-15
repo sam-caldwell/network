@@ -2,30 +2,37 @@
 
 package core
 
-// NetlinkMessageHeaderLength - NetlinkMessageHeaderLength -
-const NetlinkMessageHeaderLength = 0x10
+import (
+	"errors"
+)
 
 // DeserializeToList - deserialize []byte into a list of NetlinkMessage objects.
 func DeserializeToList(b []byte) ([]NetlinkMessage, error) {
 
-	var messages []NetlinkMessage
+	var (
+		messages []NetlinkMessage
+	)
 
-	for len(b) >= NetlinkMessageHeaderLength {
-
-		header, dataBuffer, dataLength, err := DeserializeNetlinkMessage(b)
-
-		if err != nil {
-			return nil, err
-		}
-
-		m := NetlinkMessage{Header: *header, Data: dataBuffer[:int(header.Len)-NetlinkMessageHeaderLength]}
-
-		messages = append(messages, m)
-
-		b = b[dataLength:]
-
+	if len(b) < NetlinkMessageHeaderSize {
+		return []NetlinkMessage{}, errors.New(ErrInputTooShort)
 	}
 
+	for len(b) >= NetlinkMessageHeaderSize {
+		var (
+			err        error
+			header     *NlMsghdr
+			dataBuffer []byte
+			dataLength int
+		)
+		if header, dataBuffer, dataLength, err = DeserializeNetlinkMessage(b[dataLength:]); err != nil {
+			return nil, err
+		}
+		m := NetlinkMessage{
+			Header: *header,
+			Data:   dataBuffer[:int(header.Len)-NetlinkMessageHeaderSize],
+		}
+		messages = append(messages, m)
+		b = b[dataLength:]
+	}
 	return messages, nil
-
 }

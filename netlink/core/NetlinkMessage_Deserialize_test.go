@@ -10,7 +10,7 @@ import (
 func TestDeserializeNetlinkMessage(t *testing.T) {
 	t.Run(ErrInputTooShort, func(t *testing.T) {
 
-		buf := make([]byte, NetlinkMessageHeaderLength-1) // Insufficient length
+		buf := make([]byte, NetlinkMessageHeaderSize-1) // Insufficient length
 		_, _, _, err := DeserializeNetlinkMessage(buf)
 
 		if err == nil {
