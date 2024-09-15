@@ -15,23 +15,6 @@ const (
 	LwtBpfMaxHeadroom = 256
 )
 
-// All the following constants are coming from:
-// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
-const (
-
-	// DevlinkGenlName - DEVLINK_GENL_NAME -
-	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
-	DevlinkGenlName = "devlink"
-
-	// DevlinkGenlVersion - DEVLINK_GENL_VERSION -
-	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
-	DevlinkGenlVersion = 1
-
-	// DevlinkGenlMcgrpConfigName - DEVLINK_GENL_MCGRP_CONFIG_NAME -
-	// https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
-	DevlinkGenlMcgrpConfigName = "config"
-)
-
 const (
 	ErrInputTooLarge = "input too large"
 	ErrInputTooShort = "input too short"
@@ -116,7 +99,8 @@ const (
 	// SizeOfUint32Bitfield - The size of a 32-bit bitfield used in various traffic control structs.
 	SizeOfUint32Bitfield = int(unsafe.Sizeof(Uint32Bitfield{}))
 
-	// SizeOfUnixRtMsg - the size of unix.RtMsg struct
+	// SizeOfUnixRtMsg - the size of unix.RtMsg struct.
+	// https://pkg.go.dev/golang.org/x/sys/unix#RtMsg
 	SizeOfUnixRtMsg = int(unsafe.Sizeof(unix.RtMsg{}))
 
 	// SizeOfVfGUID - Size of VfGUID struct
