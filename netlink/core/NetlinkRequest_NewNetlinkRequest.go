@@ -1,7 +1,6 @@
 package core
 
 import (
-	"golang.org/x/sys/unix"
 	"sync/atomic"
 )
 
@@ -10,10 +9,10 @@ import (
 // Warning: The Len value is inaccurate until the message is serialized.
 func NewNetlinkRequest(proto, flags int) *NetlinkRequest {
 	return &NetlinkRequest{
-		NlMsghdr: unix.NlMsghdr{
+		NlMsghdr: NlMsghdr{
 			Len:   uint32(NetlinkMessageHeaderSize),
 			Type:  uint16(proto),
-			Flags: unix.NLM_F_REQUEST | uint16(flags),
+			Flags: NlmFRequest | uint16(flags),
 			Seq:   atomic.AddUint32(&nextSequenceNumber, 1),
 		},
 	}

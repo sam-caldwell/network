@@ -29,7 +29,7 @@ func TestNewNetlinkRequest(t *testing.T) {
 			if req.Type != uint16(proto) {
 				t.Errorf("Expected Type: %d, got: %d", proto, req.Type)
 			}
-			expectedFlags := unix.NLM_F_REQUEST | uint16(flags)
+			expectedFlags := NlmFRequest | uint16(flags)
 			if req.Flags != expectedFlags {
 				t.Errorf("Expected Flags: %d, got: %d", expectedFlags, req.Flags)
 			}
