@@ -3,5 +3,5 @@ package core
 import "unsafe"
 
 const (
-	BpfNetlinkPolicyEnumSize = unsafe.Sizeof(BpfNetlinkPolicyEnum(0))
+	BpfNetlinkPolicySize = unsafe.Sizeof(BpfNetlinkPolicy(0))
 )

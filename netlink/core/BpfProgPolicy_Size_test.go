@@ -4,9 +4,9 @@ import (
 	"testing"
 )
 
-func TestBpfNetlinkPolicySize(t *testing.T) {
+func TestBpfProgPolicySize(t *testing.T) {
 	const expectedSizeInBytes = 1
-	if BpfNetlinkPolicySize != expectedSizeInBytes {
+	if BpfProgPolicySize != expectedSizeInBytes {
 		t.Fatal("size is wrong")
 	}
 }
