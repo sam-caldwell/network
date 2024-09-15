@@ -1,7 +1,6 @@
 package core
 
 import (
-	"golang.org/x/sys/unix"
 	"testing"
 	"unsafe"
 )
@@ -9,7 +8,7 @@ import (
 func TestNetlinkMessageStructure(t *testing.T) {
 	t.Run("TestSize", func(t *testing.T) {
 		// Calculate the expected size of the NetlinkMessage
-		expectedSize := unsafe.Sizeof(unix.NlMsghdr{}) + unsafe.Sizeof([]byte{})
+		expectedSize := unsafe.Sizeof(NlMsghdr{}) + unsafe.Sizeof([]byte{})
 		actualSize := unsafe.Sizeof(NetlinkMessage{})
 
 		if actualSize != expectedSize {
@@ -20,10 +19,10 @@ func TestNetlinkMessageStructure(t *testing.T) {
 	t.Run("TestStructure", func(t *testing.T) {
 		// Create a NetlinkMessage with sample data
 		msg := NetlinkMessage{
-			Header: unix.NlMsghdr{
+			Header: NlMsghdr{
 				Len:   16,
-				Type:  unix.RTM_NEWLINK,
-				Flags: unix.NLM_F_REQUEST,
+				Type:  RtmNewLink,
+				Flags: NlmFRequest,
 				Seq:   12345,
 				Pid:   54321,
 			},
@@ -34,10 +33,10 @@ func TestNetlinkMessageStructure(t *testing.T) {
 		if msg.Header.Len != 16 {
 			t.Errorf("Expected Header.Len to be 16 but got %d", msg.Header.Len)
 		}
-		if msg.Header.Type != unix.RTM_NEWLINK {
+		if msg.Header.Type != RtmNewLink {
 			t.Errorf("Expected Header.Type to be RTM_NEWLINK but got %d", msg.Header.Type)
 		}
-		if msg.Header.Flags != unix.NLM_F_REQUEST {
+		if msg.Header.Flags != NlmFRequest {
 			t.Errorf("Expected Header.Flags to be NLM_F_REQUEST but got %d", msg.Header.Flags)
 		}
 		if msg.Header.Seq != 12345 {
