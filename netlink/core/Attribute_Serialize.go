@@ -7,6 +7,12 @@ import (
 
 // Serialize encodes the Attribute into a byte slice following the Netlink TLV (Type-Length-Value) format.
 // It includes the attribute header (Type and Length), the Value, and any necessary padding to align to 4 bytes.
+//
+// Output Format:
+//
+//		0     2     4          n
+//	 |--|--|--|--|----------|
+//	 | Len | Type| Value... |
 func (attr *Attribute) Serialize() ([]byte, error) {
 	valueLen := len(attr.Value)
 	nlaLen := 4 + valueLen // 4 bytes for the header (Type and Length)
