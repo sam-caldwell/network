@@ -16,27 +16,27 @@ func TestGetIpsetFlags(t *testing.T) {
 		{
 			name:     "IpsetCmdCreate",
 			cmd:      IpsetCmdCreate,
-			expected: unix.NLM_F_REQUEST | unix.NLM_F_ACK | unix.NLM_F_CREATE,
+			expected: NlmFRequest | unix.NLM_F_ACK | unix.NLM_F_CREATE,
 		},
 		{
 			name:     "IpsetCmdDestroy",
 			cmd:      IpsetCmdDestroy,
-			expected: unix.NLM_F_REQUEST | unix.NLM_F_ACK,
+			expected: NlmFRequest | unix.NLM_F_ACK,
 		},
 		{
 			name:     "IpsetCmdList",
 			cmd:      IpsetCmdList,
-			expected: unix.NLM_F_REQUEST | unix.NLM_F_ACK | unix.NLM_F_ROOT | unix.NLM_F_MATCH | unix.NLM_F_DUMP,
+			expected: NlmFRequest | unix.NLM_F_ACK | unix.NLM_F_ROOT | unix.NLM_F_MATCH | unix.NLM_F_DUMP,
 		},
 		{
 			name:     "IpsetCmdAdd",
 			cmd:      IpsetCmdAdd,
-			expected: unix.NLM_F_REQUEST | unix.NLM_F_ACK,
+			expected: NlmFRequest | unix.NLM_F_ACK,
 		},
 		{
 			name:     "IpsetCmdHeader",
 			cmd:      IpsetCmdHeader,
-			expected: unix.NLM_F_REQUEST,
+			expected: NlmFRequest,
 		},
 		{
 			name:     "Unknown Command",
