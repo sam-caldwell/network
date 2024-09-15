@@ -1,12 +1,8 @@
 package core
 
-import (
-	"golang.org/x/sys/unix"
-)
-
 // NetlinkRequest - Represents a netlink request message that can be sent via netlink sockets.
 //
-// This structure is used to build and send netlink messages to the kernel. It wraps the netlink message header (NlMsghdr)
+// This structure is used to build and send netlink messages to the kernel. It wraps the netlink message header (NetlinkMessageHeader)
 // and includes the data payload (Data), raw data (RawData), and associated socket handles (Sockets).
 //
 // References:
@@ -14,12 +10,12 @@ import (
 // - Netlink man page: https://man7.org/linux/man-pages/man7/netlink.7.html
 type NetlinkRequest struct {
 
-	// NlMsghdr - Represents the netlink message header (struct nlmsghdr).
+	// NetlinkMessageHeader - Represents the netlink message header (struct nlmsghdr).
 	//
 	// This header defines the type, flags, sequence number, and PID for the message.
 	//
 	// Reference: https://github.com/torvalds/linux/blob/master/include/uapi/linux/netlink.h#L101-L114
-	unix.NlMsghdr
+	NetlinkMessageHeader
 
 	// Data - The payload data to include in the message.
 	//

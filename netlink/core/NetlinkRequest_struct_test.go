@@ -1,7 +1,6 @@
 package core
 
 import (
-	"golang.org/x/sys/unix"
 	"testing"
 	"unsafe"
 )
@@ -9,7 +8,7 @@ import (
 func TestNetlinkRequest(t *testing.T) {
 	t.Run("Test the NetlinkRequest structure", func(t *testing.T) {
 		// Expected size of the NetlinkRequest struct
-		const expectedSizeInBytes = int(unsafe.Sizeof(unix.NlMsghdr{}) +
+		const expectedSizeInBytes = int(unsafe.Sizeof(NetlinkMessageHeader{}) +
 			unsafe.Sizeof([]NetlinkRequestData{}) +
 			unsafe.Sizeof([]byte{}) +
 			unsafe.Sizeof(map[IpProtocol]*SocketHandle{}))
@@ -28,7 +27,7 @@ func TestNetlinkRequest(t *testing.T) {
 
 		t.Run("field check", func(t *testing.T) {
 			_ = NetlinkRequest{
-				NlMsghdr: unix.NlMsghdr{
+				NetlinkMessageHeader: NetlinkMessageHeader{
 					Len:   uint32(0),
 					Type:  uint16(0),
 					Flags: uint16(0),
