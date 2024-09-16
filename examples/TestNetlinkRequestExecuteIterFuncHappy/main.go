@@ -11,8 +11,8 @@ func main() {
 	req := &core.NetlinkRequest{
 		NetlinkMessageHeader: core.NetlinkMessageHeader{
 			Seq:   12345,
-			Type:  unix.RTM_GETLINK,                     // Request for network link information
-			Flags: unix.NLM_F_DUMP | unix.NLM_F_REQUEST, // Flags indicating a dump request
+			Type:  core.RtmGetLink,                  // Request for network link information
+			Flags: core.NlmFDump | core.NlmFRequest, // Flags indicating a dump request
 		},
 	}
 
@@ -20,7 +20,7 @@ func main() {
 	// Create an IfInfomsgData
 	ifmsgData := &core.IfInfoMsg{
 		IfInfomsg: unix.IfInfomsg{
-			Family: unix.AF_UNSPEC, // Address family
+			Family: core.AfUnspec, // Address family
 		},
 	}
 
@@ -28,7 +28,7 @@ func main() {
 	req.Data = append(req.Data, *ifmsgData)
 
 	// Set the length of the netlink message
-	req.NetlinkMessageHeader.Len = uint32(unix.NLMSG_HDRLEN + len(req.Data))
+	req.NetlinkMessageHeader.Len = uint32(core.NetlinkMessageHeaderSize + len(req.Data))
 
 	// Proceed with the rest of the code
 	log.Println("Calling GetNetlinkSocket() for pre-flight")

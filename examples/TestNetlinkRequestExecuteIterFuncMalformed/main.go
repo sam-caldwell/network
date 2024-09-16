@@ -29,7 +29,7 @@ func main() {
 	req.Data = append(req.Data, *ifmsgData)
 
 	// Set the length of the netlink message deliberately incorrect
-	req.NetlinkMessageHeader.Len = 10 // Intentionally incorrect length
+	req.NetlinkMessageHeader.Len = 1 // Intentionally incorrect length
 
 	// Proceed with the rest of the code
 	log.Println("Calling GetNetlinkSocket() for pre-flight")

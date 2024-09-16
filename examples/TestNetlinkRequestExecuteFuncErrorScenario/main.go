@@ -9,7 +9,7 @@ import (
 
 func main() {
 	req := &core.NetlinkRequest{
-		NlMsghdr: unix.NlMsghdr{
+		NetlinkMessageHeader: unix.NlMsghdr{
 			Seq: 12345,
 		},
 	}
