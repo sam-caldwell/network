@@ -8,14 +8,14 @@ import (
 func TestCtAttrTypeEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := unsafe.Sizeof(CtAttrTypeEnum(0)); sz != expectedSizeInBytes {
+		if sz := unsafe.Sizeof(CtAttrType(0)); sz != expectedSizeInBytes {
 			t.Fatalf("size check failed.  actual: %d, expected: %d", sz, expectedSizeInBytes)
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
 		type TestData struct {
-			actual   CtAttrTypeEnum
-			expected CtAttrTypeEnum
+			actual   CtAttrType
+			expected CtAttrType
 		}
 		testData := []TestData{
 			{actual: 0, expected: CtaUnspec},
