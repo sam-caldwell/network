@@ -1,6 +1,6 @@
 package core
 
-// DevlinkPortFnOpstateEnum - devlink_port_fn_opstate - indicates operational state of the function
+// DevlinkPortFnOpstate - devlink_port_fn_opstate - indicates operational state of the function
 //
 // @DEVLINK_PORT_FN_OPSTATE_ATTACHED: Driver is attached to the function.
 //
@@ -12,12 +12,12 @@ package core
 //	It is safe to delete the port.
 //
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/devlink.h
-type DevlinkPortFnOpstateEnum uint8
+type DevlinkPortFnOpstate uint8
 
 const (
 	// DevlinkPortFnOpstateDetached - DEVLINK_PORT_FN_OPSTATE_DETACHED
-	DevlinkPortFnOpstateDetached DevlinkPortFnOpstateEnum = 0
+	DevlinkPortFnOpstateDetached DevlinkPortFnOpstate = 0
 
 	// DevlinkPortFnOpstateAttached - DEVLINK_PORT_FN_OPSTATE_ATTACHED
-	DevlinkPortFnOpstateAttached DevlinkPortFnOpstateEnum = 1
+	DevlinkPortFnOpstateAttached DevlinkPortFnOpstate = 1
 )

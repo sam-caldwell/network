@@ -8,14 +8,14 @@ import (
 func TestDevlinkPortFlavourEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := int(unsafe.Sizeof(DevlinkParamTypeEnum(0))); sz != expectedSizeInBytes {
+		if sz := int(unsafe.Sizeof(DevlinkParamType(0))); sz != expectedSizeInBytes {
 			t.Fatal("size check failed")
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
 		type TestData struct {
-			actual DevlinkPortFlavourEnum
-			expect DevlinkPortFlavourEnum
+			actual DevlinkPortFlavour
+			expect DevlinkPortFlavour
 		}
 		testData := []TestData{
 			{actual: DevlinkPortFlavourPhysical, expect: 0},

@@ -5,23 +5,20 @@ import (
 	"unsafe"
 )
 
-func TestDevlinkPortTypeEnum(t *testing.T) {
+func TestDevlinkResourceUnitEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := int(unsafe.Sizeof(DevlinkPortTypeEnum(0))); sz != expectedSizeInBytes {
+		if sz := int(unsafe.Sizeof(DevlinkResourceUnit(0))); sz != expectedSizeInBytes {
 			t.Fatal("size check failed")
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
 		type TestData struct {
-			actual DevlinkPortTypeEnum
-			expect DevlinkPortTypeEnum
+			actual DevlinkResourceUnit
+			expect DevlinkResourceUnit
 		}
 		testData := []TestData{
-			{actual: DevlinkPortTypeNotset, expect: 0},
-			{actual: DevlinkPortTypeAuto, expect: 1},
-			{actual: DevlinkPortTypeEth, expect: 2},
-			{actual: DevlinkPortTypeIb, expect: 3},
+			{actual: DevlinkResourceUnitEntry, expect: 0},
 		}
 		for _, v := range testData {
 			if v.actual != v.expect {
