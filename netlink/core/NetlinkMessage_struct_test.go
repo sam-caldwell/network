@@ -8,7 +8,7 @@ import (
 func TestNetlinkMessageStructure(t *testing.T) {
 	t.Run("TestSize", func(t *testing.T) {
 		// Calculate the expected size of the NetlinkMessage
-		expectedSize := unsafe.Sizeof(NlMsghdr{}) + unsafe.Sizeof([]byte{})
+		expectedSize := unsafe.Sizeof(NetlinkMessageHeader{}) + unsafe.Sizeof([]byte{})
 		actualSize := unsafe.Sizeof(NetlinkMessage{})
 
 		if actualSize != expectedSize {
@@ -19,7 +19,7 @@ func TestNetlinkMessageStructure(t *testing.T) {
 	t.Run("TestStructure", func(t *testing.T) {
 		// Create a NetlinkMessage with sample data
 		msg := NetlinkMessage{
-			Header: NlMsghdr{
+			Header: NetlinkMessageHeader{
 				Len:   16,
 				Type:  RtmNewLink,
 				Flags: NlmFRequest,
