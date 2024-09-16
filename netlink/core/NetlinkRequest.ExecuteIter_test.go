@@ -34,11 +34,12 @@ func TestNetlinkRequestExecuteIter(t *testing.T) {
 		})
 
 		t.Run("run test container", func(t *testing.T) {
-			err := test.RunContainer(testDockerImage, "TestNetlinkRequestExecuteIterFuncErrorScenario")
+			err := test.RunContainer(testDockerImage, "TestNetlinkRequestExecuteIterFuncMalformed")
 			if err != nil {
 				t.Fatalf("test container failed: %v", err)
 			}
 		})
 
 	})
+
 }
