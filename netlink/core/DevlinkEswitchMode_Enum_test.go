@@ -8,14 +8,14 @@ import (
 func TestDevlinkEswitchModeEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := int(unsafe.Sizeof(DevlinkEswitchModeEnum(0))); sz != expectedSizeInBytes {
+		if sz := int(unsafe.Sizeof(DevlinkEswitchMode(0))); sz != expectedSizeInBytes {
 			t.Fatal("size check failed")
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
 		type TestData struct {
-			actual DevlinkEswitchModeEnum
-			expect DevlinkEswitchModeEnum
+			actual DevlinkEswitchMode
+			expect DevlinkEswitchMode
 		}
 		testData := []TestData{
 			{actual: DevlinkEswitchModeLegacy, expect: 0},
