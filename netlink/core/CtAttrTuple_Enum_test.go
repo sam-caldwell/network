@@ -8,14 +8,14 @@ import (
 func TestCtAttrTupleEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := unsafe.Sizeof(CtAttrTupleEnum(0)); sz != expectedSizeInBytes {
+		if sz := unsafe.Sizeof(CtAttrTuple(0)); sz != expectedSizeInBytes {
 			t.Fatal("size check failed")
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
 		type TestData struct {
-			actual   CtAttrTupleEnum
-			expected CtAttrTupleEnum
+			actual   CtAttrTuple
+			expected CtAttrTuple
 		}
 		testData := []TestData{
 			{actual: 0, expected: CtaTupleUnspec},

@@ -8,14 +8,14 @@ import (
 func TestDevlinkAttrEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := int(unsafe.Sizeof(DevlinkAttrEnum(0))); sz != expectedSizeInBytes {
+		if sz := int(unsafe.Sizeof(DevlinkAttr(0))); sz != expectedSizeInBytes {
 			t.Fatal("size mismatch")
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
 		type TestData struct {
-			actual DevlinkAttrEnum
-			expect DevlinkAttrEnum
+			actual DevlinkAttr
+			expect DevlinkAttr
 		}
 		testData := []TestData{
 			{actual: DevlinkAttrEnumUnspec, expect: 0},
