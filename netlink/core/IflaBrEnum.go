@@ -260,5 +260,5 @@ const (
 	// IflaBrMax - IFLA_BR_MAX - The maximum value for bridge attributes, used for validation purposes.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaBrMax = IflaBrMcastMldVersion
+	IflaBrMax = iota - 1
 )
