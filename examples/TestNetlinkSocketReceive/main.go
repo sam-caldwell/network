@@ -41,11 +41,11 @@ func main() {
 
 	// Serialize the message
 	msgBytes := make([]byte, msg.Header.Len)
-	binary.LittleEndian.PutUint32(msgBytes[0:4], msg.Header.Len)
-	binary.LittleEndian.PutUint16(msgBytes[4:6], msg.Header.Type)
-	binary.LittleEndian.PutUint16(msgBytes[6:8], msg.Header.Flags)
-	binary.LittleEndian.PutUint32(msgBytes[8:12], msg.Header.Seq)
-	binary.LittleEndian.PutUint32(msgBytes[12:16], msg.Header.Pid)
+	binary.NativeEndian.PutUint32(msgBytes[0:4], msg.Header.Len)
+	binary.NativeEndian.PutUint16(msgBytes[4:6], msg.Header.Type)
+	binary.NativeEndian.PutUint16(msgBytes[6:8], msg.Header.Flags)
+	binary.NativeEndian.PutUint32(msgBytes[8:12], msg.Header.Seq)
+	binary.NativeEndian.PutUint32(msgBytes[12:16], msg.Header.Pid)
 	// No data payload
 
 	// Send the message to ourselves
