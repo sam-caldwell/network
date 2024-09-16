@@ -1,6 +1,6 @@
 package core
 
-// IflaGeneveEnum - Enumeration for Geneve Tunnel Attributes
+// IflaGeneve - Enumeration for Geneve Tunnel Attributes
 //
 // GENEVE: Generic Network Virtualization Encapsulation
 // https://github.com/torvalds/linux/blob/master/drivers/net/geneve.c
@@ -8,12 +8,12 @@ package core
 // This enumeration defines the various attributes used for configuring Geneve tunnels in Linux.
 // Geneve is a flexible tunneling protocol used for network virtualization.
 
-type IflaGeneveEnum uint8
+type IflaGeneve uint8
 
 const (
 	// IflaGeneveUnspec - IFLA_GENEVE_UNSPEC - Unspecified attribute.
 	// This is a placeholder for an unspecified or unknown attribute in the Geneve tunnel configuration.
-	IflaGeneveUnspec IflaGeneveEnum = iota
+	IflaGeneveUnspec IflaGeneve = iota
 
 	// IflaGeneveId - IFLA_GENEVE_ID - Geneve Tunnel ID.
 	// This attribute specifies the Geneve tunnel ID, a 32-bit identifier for the tunnel.

@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaCanEnum tests the size of the IflaCanEnum type and the values of its enumerated constants.
+// TestIflaCanEnum tests the size of the IflaCan_Enum type and the values of its enumerated constants.
 func TestIflaCanEnum(t *testing.T) {
-	// Verify the size of the IflaCanEnum type is 1 byte (uint8)
+	// Verify the size of the IflaCan_Enum type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaCanUnspec); size != 1 {
-		t.Errorf("Expected size of IflaCanEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaCan_Enum to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaCanEnum
-		want  IflaCanEnum
+		value IflaCan_Enum
+		want  IflaCan_Enum
 	}{
 		{"IflaCanUnspec", IflaCanUnspec, 0},
 		{"IflaCanBittiming", IflaCanBittiming, 1},

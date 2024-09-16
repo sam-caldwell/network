@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaGreEnum tests the size of the IflaGreEnum type and the values of its enumerated constants.
+// TestIflaGreEnum tests the size of the IflaGre type and the values of its enumerated constants.
 func TestIflaGreEnum(t *testing.T) {
-	// Verify the size of the IflaGreEnum type is 1 byte (uint8)
+	// Verify the size of the IflaGre type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaGreUnspec); size != 1 {
-		t.Errorf("Expected size of IflaGreEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaGre to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaGreEnum
-		want  IflaGreEnum
+		value IflaGre
+		want  IflaGre
 	}{
 		{"IflaGreUnspec", IflaGreUnspec, 0},
 		{"IflaGreLink", IflaGreLink, 1},

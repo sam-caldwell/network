@@ -1,6 +1,6 @@
 package core
 
-// IflaBondAdInfoAttr - Enumeration for 802.3ad bonding information attributes
+// IflaBondAdInfo - Enumeration for 802.3ad bonding information attributes
 //
 // This enumeration defines attributes related to the 802.3ad (LACP) bonding information,
 // used to query or set parameters for link aggregation in Linux.

@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIfLaExtMaskEnum tests the size of the IfLaExtMaskEnum type and the values of its enumerated constants.
+// TestIfLaExtMaskEnum tests the size of the IfLaExtMask type and the values of its enumerated constants.
 func TestIfLaExtMaskEnum(t *testing.T) {
-	// Verify the size of the IfLaExtMaskEnum type is 1 byte (uint8)
+	// Verify the size of the IfLaExtMask type is 1 byte (uint8)
 	if size := unsafe.Sizeof(RtextFilterVf); size != 1 {
-		t.Errorf("Expected size of IfLaExtMaskEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IfLaExtMask to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IfLaExtMaskEnum
-		want  IfLaExtMaskEnum
+		value IfLaExtMask
+		want  IfLaExtMask
 	}{
 		{"RtextFilterVf", RtextFilterVf, 1},
 		{"RtextFilterBrVlan", RtextFilterBrVlan, 2},

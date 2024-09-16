@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaGtpEnum tests the size of the IflaGtpEnum type and the values of its enumerated constants.
+// TestIflaGtpEnum tests the size of the IflaGtp type and the values of its enumerated constants.
 func TestIflaGtpEnum(t *testing.T) {
-	// Verify the size of the IflaGtpEnum type is 1 byte (uint8)
+	// Verify the size of the IflaGtp type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaGtpUnspec); size != 1 {
-		t.Errorf("Expected size of IflaGtpEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaGtp to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaGtpEnum
-		want  IflaGtpEnum
+		value IflaGtp
+		want  IflaGtp
 	}{
 		{"IflaGtpUnspec", IflaGtpUnspec, 0},
 		{"IflaGtpFd0", IflaGtpFd0, 1},

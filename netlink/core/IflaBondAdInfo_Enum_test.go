@@ -15,8 +15,8 @@ func TestIflaBondAdInfoEnum(t *testing.T) {
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaBondAdInfoAttr
-		want  IflaBondAdInfoAttr
+		value IflaBondAdInfo
+		want  IflaBondAdInfo
 	}{
 		{"IflaBondAdInfoUnspec", IflaBondAdInfoUnspec, 0},
 		{"IflaBondAdInfoAggregator", IflaBondAdInfoAggregator, 1},

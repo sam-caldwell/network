@@ -1,18 +1,18 @@
 package core
 
-// IflaGtpEnum - Enumeration for GTP (GPRS Tunneling Protocol) interface attributes.
+// IflaGtp - Enumeration for GTP (GPRS Tunneling Protocol) interface attributes.
 //
 // These attributes are used to configure and retrieve settings for GTP interfaces in the Linux kernel.
 // GTP is primarily used in mobile networks for transmitting data over GPRS, LTE, and 5G.
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-type IflaGtpEnum uint8
+type IflaGtp uint8
 
 const (
 	// IflaGtpUnspec - IFLA_GTP_UNSPEC - Unspecified attribute, used as a placeholder.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaGtpUnspec IflaGtpEnum = iota
+	IflaGtpUnspec IflaGtp = iota
 
 	// IflaGtpFd0 - IFLA_GTP_FD0 - Specifies the file descriptor for the GTP-U socket (GTPv1-U).
 	//
