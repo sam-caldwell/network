@@ -7,8 +7,6 @@ import (
 
 func TestNetlinkRequestExecuteIter(t *testing.T) {
 
-	t.Skip("disabled")
-
 	const testDockerImage = "network-test:latest"
 
 	t.Run("Test NetlinkRequest.ExecuteIter() method happy path", func(t *testing.T) {

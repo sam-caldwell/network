@@ -5,7 +5,7 @@ import (
 )
 
 // GetIpsetFlags - return the int version of the IpSet Flags
-func GetIpsetFlags(cmd IpSetCmdEnum) int {
+func GetIpsetFlags(cmd IpSetCmd) int {
 
 	switch cmd {
 

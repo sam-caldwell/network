@@ -10,7 +10,7 @@ import (
 func TestGetIpsetFlags(t *testing.T) {
 	tests := []struct {
 		name     string
-		cmd      IpSetCmdEnum
+		cmd      IpSetCmd
 		expected int
 	}{
 		{
@@ -40,7 +40,7 @@ func TestGetIpsetFlags(t *testing.T) {
 		},
 		{
 			name:     "Unknown Command",
-			cmd:      IpSetCmdEnum(255), // Invalid command
+			cmd:      IpSetCmd(255), // Invalid command
 			expected: 0,
 		},
 	}
