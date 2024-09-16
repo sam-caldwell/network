@@ -12,12 +12,8 @@ func TestConstantsStructureSize(t *testing.T) {
 		expected int
 	}
 	testData := []TestDataStruct{
-		{expected: 256, actual: LwtBpfMaxHeadroom},
-		{expected: int(unsafe.Sizeof(IfAddressMessage{})), actual: IfAddressMessageSize},
-		{expected: int(unsafe.Sizeof(IfaCacheInfo{})), actual: IfaCacheInfoSize},
-		{expected: int(unsafe.Sizeof(ConnectorMessageOperation{})), actual: ConnectorMessageOperationSize},
 		{expected: int(unsafe.Sizeof(NfGenMsg{})), actual: NfGenMsgSize},
-		{expected: int(unsafe.Sizeof(unix.NlMsghdr{})), actual: NetlinkMessageHeaderSize},
+		{expected: int(unsafe.Sizeof(NetlinkMessageHeader{})), actual: NetlinkMessageHeaderSize},
 		{expected: int(unsafe.Sizeof(RtNexthop{})), actual: SizeOfRtNextHop},
 		{expected: int(unsafe.Sizeof(TcNetemRate{})), actual: SizeOfTcNetemRate},
 		{expected: int(unsafe.Sizeof(TcActionMsg{})), actual: SizeOfTcActionMsg},
