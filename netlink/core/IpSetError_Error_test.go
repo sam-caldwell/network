@@ -1,6 +1,9 @@
 package core
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestIpSetError_Error(t *testing.T) {
 	tests := []struct {
