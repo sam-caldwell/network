@@ -6,21 +6,34 @@ import (
 	"golang.org/x/sys/unix"
 	"log"
 	"sync/atomic"
+	"syscall"
 	"time"
 )
 
-// ExecuteIter - execute the request against the given sockType. Calls the provided callback func once for each
-// netlink message. If the callback returns false, it is not called again, but the remaining messages are
-// consumed/discarded.
-//
-// Thread safety:
-//
-//	ExecuteIter holds lock on socket until it finishes iteration. The callback must	not call back into the netlink API.
-func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunction func(msg []byte) bool) error {
+// ExecuteIter - Execute the request against the given sockType.
+func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunction IteratorFunctionPtr) error {
 	var (
-		s   *NetlinkSocket
-		err error
+		err             error
+		s               *NetlinkSocket
+		SocketTimeoutTv = unix.Timeval{
+			Sec:  5,
+			Usec: 0,
+		}
 	)
+
+	// Helper function to check for temporary errors
+	isTemporaryError := func(err error) bool {
+		if err == nil {
+			return false
+		}
+		var errno syscall.Errno
+		if errors.As(err, &errno) {
+			if errno == syscall.EAGAIN || errno == syscall.EWOULDBLOCK || errno == syscall.EINTR {
+				return true
+			}
+		}
+		return false
+	}
 
 	// If NetlinkRequest.Socket map not nil, look up the socket type
 	if req.Sockets != nil {
@@ -72,21 +85,48 @@ func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunct
 	const baseDelay = 50 * time.Millisecond
 
 	for retries := 0; retries < maxRetries; retries++ {
+		// Prepare file descriptor set
+		var readFds unix.FdSet
+		fd := s.GetFd()
+		fdSet(fd, &readFds)
+
+		// Set timeout
+		timeout := &unix.Timeval{Sec: 5, Usec: 0} // Set a 5-second timeout
+
+		// Call select()
+		ret, err := unix.Select(int(fd+1), &readFds, nil, nil, timeout)
+		if err != nil {
+			log.Printf("select() error: %v\n", err)
+			if isTemporaryError(err) {
+				backoff := baseDelay * time.Duration(1<<retries) // Exponential backoff
+				log.Printf("Retrying select() (%d/%d) in %v\n", retries+1, maxRetries, backoff)
+				time.Sleep(backoff)
+				continue
+			}
+			return err
+		}
+
+		if ret == 0 {
+			log.Printf("select() timed out, no data available\n")
+			continue // Timeout occurred, retry if possible
+		}
+
 		var (
 			from     *unix.SockaddrNetlink
 			messages []NetlinkMessage
 		)
 
 		if messages, from, err = s.Receive(); err != nil {
-			if errors.Is(err, EAGAIN) || errors.Is(err, EWOULDBLOCK) || errors.Is(err, EINTR) {
+			log.Printf("s.Receive() error: %v\n", err)
+			if isTemporaryError(err) {
 				backoff := baseDelay * time.Duration(1<<retries) // Exponential backoff
-				log.Printf("s.Receive() retry (%d/%d) due to: %v. Retrying in %v\n", retries+1, maxRetries, err, backoff)
+				log.Printf("Retrying receive (%d/%d) in %v\n", retries+1, maxRetries, backoff)
 				time.Sleep(backoff)
 				continue
 			}
-			log.Printf("s.Receive() error: %v\n", err)
 			return err
 		}
+
 		log.Printf("s.Receive() success\n"+
 			"  messages: %v\n"+
 			"      from: %v", messages, from)
@@ -135,4 +175,9 @@ func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunct
 		}
 	}
 	return fmt.Errorf("max retries reached")
+}
+
+// Helper function to set the file descriptor in the FdSet
+func fdSet(fd int, set *unix.FdSet) {
+	set.Bits[fd/64] |= 1 << (uint(fd) % 64)
 }
