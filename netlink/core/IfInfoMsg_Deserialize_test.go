@@ -16,10 +16,10 @@ func TestInfoMsgDeserialize(t *testing.T) {
 			// Populate the byte slice with values for IfInfomsg fields (using little-endian encoding)
 			buf[0] = 0x02 // Family
 			// Skip byte 1
-			binary.LittleEndian.PutUint16(buf[2:4], 0x01)  // Type = 1
-			binary.LittleEndian.PutUint32(buf[4:8], 100)   // Index = 100
-			binary.LittleEndian.PutUint32(buf[8:12], 200)  // Flags = 200
-			binary.LittleEndian.PutUint32(buf[12:16], 300) // Change = 300
+			binary.NativeEndian.PutUint16(buf[2:4], 0x01)  // Type = 1
+			binary.NativeEndian.PutUint32(buf[4:8], 100)   // Index = 100
+			binary.NativeEndian.PutUint32(buf[8:12], 200)  // Flags = 200
+			binary.NativeEndian.PutUint32(buf[12:16], 300) // Change = 300
 
 			// Call DeserializeIfInfoMsg
 			msg, err := DeserializeIfInfoMsg(buf)
