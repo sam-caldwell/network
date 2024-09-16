@@ -89,25 +89,25 @@ package core
 type NetlinkMessageHeader struct {
 	// Len is the total length of the Netlink message, including the header and payload.
 	// It corresponds to the `nlmsg_len` field in the kernel's `struct nlmsghdr`.
-	Len uint32
+	Len uint32 `json:"len"`
 
 	// Type is the message type, indicating the nature of the message content.
 	// It corresponds to the `nlmsg_type` field.
 	// Standard types are defined in `<linux/netlink.h>`, and protocol-specific types start from `NLMSG_MIN_TYPE`.
-	Type uint16
+	Type uint16 `json:"type"`
 
 	// Flags are additional flags that modify the behavior of the message.
 	// It corresponds to the `nlmsg_flags` field.
 	// Flags can be standard (e.g., `NLM_F_REQUEST`, `NLM_F_ACK`) or protocol-specific.
-	Flags uint16
+	Flags uint16 `json:"flags"`
 
 	// Seq is the sequence number of the message, used to match requests and responses.
 	// It corresponds to the `nlmsg_seq` field.
 	// Applications should maintain their own sequence number counter.
-	Seq uint32
+	Seq uint32 `json:"seq"`
 
 	// Pid is the port ID of the sending process.
 	// It corresponds to the `nlmsg_pid` field.
 	// For user-space processes, this is typically set to the process's PID.
-	Pid uint32
+	Pid uint32 `json:"pid"`
 }
