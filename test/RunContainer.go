@@ -22,7 +22,6 @@ func RunContainer(imageName, testName string) error {
 		"--cap-add=CAP_MKNOD",
 		"--cap-add=CAP_FOWNER",
 		"--privileged",
-		"--network host",
 		"-v", GetCurrentWorkingDirectory() + ":/opt",
 		imageName,
 		"/usr/local/go/bin/go", "run", fmt.Sprintf("examples/%s/main.go", testName),
