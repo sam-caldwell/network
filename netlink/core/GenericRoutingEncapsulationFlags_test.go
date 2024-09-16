@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestGreEnum tests the size of the GreEnum type and the values of its enumerated constants.
-func TestGreEnum(t *testing.T) {
-	// Verify the size of the GreEnum type is 2 bytes (uint16)
+// TestGenericRoutingEncapsulationFlags tests the size of the GenericRoutingEncapsulationFlags type and the values of its enumerated constants.
+func TestGenericRoutingEncapsulationFlags(t *testing.T) {
+	// Verify the size of the GenericRoutingEncapsulationFlags type is 2 bytes (uint16)
 	if size := unsafe.Sizeof(GreCsum); size != 2 {
-		t.Errorf("Expected size of GreEnum to be 2 bytes, but got %d", size)
+		t.Errorf("Expected size of GenericRoutingEncapsulationFlags to be 2 bytes, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value GreEnum
-		want  GreEnum
+		value GenericRoutingEncapsulationFlags
+		want  GenericRoutingEncapsulationFlags
 	}{
 		{"GreCsum", GreCsum, 0x8000},
 		{"GreRouting", GreRouting, 0x4000},
