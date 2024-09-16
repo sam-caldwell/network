@@ -23,7 +23,7 @@ type NetlinkRequest struct {
 	// information such as network device attributes, routing information, etc.
 	//
 	// Reference: https://github.com/torvalds/linux/blob/master/include/uapi/linux/netlink.h#L85
-	Data []NetlinkRequestData
+	Data []NetlinkRequestData `json:"data"`
 
 	// RawData - A byte slice representing raw data that can be added to the message.
 	//
@@ -31,7 +31,7 @@ type NetlinkRequest struct {
 	// message structures, giving flexibility for custom implementations.
 	//
 	// Reference: https://github.com/torvalds/linux/blob/master/include/uapi/linux/netlink.h#L85
-	RawData []byte
+	RawData []byte `json:"rawData"`
 
 	// Sockets - A map of IP protocol to socket handles.
 	//
@@ -39,5 +39,5 @@ type NetlinkRequest struct {
 	// handles used for communication. Socket handles facilitate interactions with the kernel over netlink.
 	//
 	// Reference: https://man7.org/linux/man-pages/man7/netlink.7.html
-	Sockets map[IpProtocol]*SocketHandle
+	Sockets map[IpProtocol]*SocketHandle `json:"sockets"`
 }
