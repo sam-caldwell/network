@@ -5,19 +5,19 @@ import (
 	"unsafe"
 )
 
-// TestGenericNetlinkControlAttributesEnum tests the size of the GenericNetlinkControlAttributesEnum type
+// TestGenericNetlinkControlAttributesEnum tests the size of the GenericNetlinkControlAttributes type
 // and the values of its enumerated constants.
 func TestGenericNetlinkControlAttributesEnum(t *testing.T) {
-	// Verify the size of the GenericNetlinkControlAttributesEnum type is 1 byte (uint8)
+	// Verify the size of the GenericNetlinkControlAttributes type is 1 byte (uint8)
 	if size := unsafe.Sizeof(GenericNetlinkControlAttributesUnspec); size != 1 {
-		t.Errorf("Expected size of GenericNetlinkControlAttributesEnum to be 1 byte, got %d", size)
+		t.Errorf("Expected size of GenericNetlinkControlAttributes to be 1 byte, got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value GenericNetlinkControlAttributesEnum
-		want  GenericNetlinkControlAttributesEnum
+		value GenericNetlinkControlAttributes
+		want  GenericNetlinkControlAttributes
 	}{
 		{"GenericNetlinkControlAttributesUnspec", GenericNetlinkControlAttributesUnspec, 0},
 		{"GenericNetlinkControlAttributeFamilyId", GenericNetlinkControlAttributeFamilyId, 1},
