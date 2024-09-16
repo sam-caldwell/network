@@ -5,19 +5,19 @@ import (
 	"unsafe"
 )
 
-// TestGenlGtpAttributeEnum tests the size of the GenlGtpAttributeEnum type
+// TestGenlGtpAttributeEnum tests the size of the GenlGtpAttribute type
 // and the values of its enumerated constants.
 func TestGenlGtpAttributeEnum(t *testing.T) {
-	// Verify the size of the GenlGtpAttributeEnum type is 1 byte (uint8)
+	// Verify the size of the GenlGtpAttribute type is 1 byte (uint8)
 	if size := unsafe.Sizeof(GenlGtpAttrUnspec); size != 1 {
-		t.Errorf("Expected size of GenlGtpAttributeEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of GenlGtpAttribute to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value GenlGtpAttributeEnum
-		want  GenlGtpAttributeEnum
+		value GenlGtpAttribute
+		want  GenlGtpAttribute
 	}{
 		{"GenlGtpAttrUnspec", GenlGtpAttrUnspec, 0},
 		{"GenlGtpAttrLink", GenlGtpAttrLink, 1},
