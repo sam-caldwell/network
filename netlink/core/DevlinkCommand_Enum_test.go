@@ -6,17 +6,17 @@ import (
 )
 
 func TestDevlinkCommandEnum(t *testing.T) {
-	// Test size of DevlinkCommandEnum
-	expectedSize := 1 // DevlinkCommandEnum is based on uint8, which is 1 byte
+	// Test size of DevlinkCommand
+	expectedSize := 1 // DevlinkCommand is based on uint8, which is 1 byte
 	actualSize := unsafe.Sizeof(DevlinkCmdUnspec)
 	if actualSize != uintptr(expectedSize) {
-		t.Errorf("Expected size of DevlinkCommandEnum: %d, got: %d", expectedSize, actualSize)
+		t.Errorf("Expected size of DevlinkCommand: %d, got: %d", expectedSize, actualSize)
 	}
 
-	// Test correct values for DevlinkCommandEnum constants
+	// Test correct values for DevlinkCommand constants
 	tests := []struct {
 		name     string
-		cmd      DevlinkCommandEnum
+		cmd      DevlinkCommand
 		expected uint8
 	}{
 		{"DevlinkCmdUnspec", DevlinkCmdUnspec, 0},
@@ -108,7 +108,7 @@ func TestDevlinkCommandEnum(t *testing.T) {
 
 	// Iterate over the test cases and check the values
 	for _, tt := range tests {
-		if tt.cmd != DevlinkCommandEnum(tt.expected) {
+		if tt.cmd != DevlinkCommand(tt.expected) {
 			t.Errorf("Expected %s to have value %d, but got %d", tt.name, tt.expected, tt.cmd)
 		}
 	}
