@@ -55,7 +55,7 @@ func TestDeserializeNetlinkMessage(t *testing.T) {
 
 	t.Run("test with a valid netlink header", func(t *testing.T) {
 		netlinkMsg := []byte{
-			// Netlink Header (NlMsghdr)
+			// Netlink Header (NetlinkMessageHeader)
 			0x1c, 0x1d, 0x1e, 0x1f, // Len: 28 (16-byte header + 12-byte payload)
 			0x01, 0x00, // Type: 1 (NLMSG_NOOP, for example)
 			0x01, 0x00, // Flags: 1 (NLM_F_REQUEST)

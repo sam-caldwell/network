@@ -3,7 +3,7 @@ package core
 // DeserializeNetlinkMessage deserializes a Netlink message header and data from a byte slice.
 //
 // This function parses a Netlink message from the provided byte slice `b`. It extracts the Netlink
-// message header (`NlMsghdr`) and returns the remaining data, the aligned message length, and any
+// message header (`NetlinkMessageHeader`) and returns the remaining data, the aligned message length, and any
 // error encountered during the process.
 //
 // **Function Workflow:**
@@ -39,7 +39,7 @@ package core
 //
 // **Returns:**
 //
-// - `header *NlMsghdr`:
+// - `header *NetlinkMessageHeader`:
 //   - Pointer to the deserialized Netlink message header.
 //
 // - `remainingData []byte`:
@@ -101,7 +101,7 @@ package core
 // - Other errors may be returned from `checkInputSize` or `DeserializeNetlinkMessageHeader`.
 //
 // **Function Definition:**
-func DeserializeNetlinkMessage(b []byte) (header *NlMsghdr, remainingData []byte, messageLength int, err error) {
+func DeserializeNetlinkMessage(b []byte) (header *NetlinkMessageHeader, remainingData []byte, messageLength int, err error) {
 
 	// Step 1: Check if the input data is at least the size of the Netlink message header.
 	if err = checkInputSize(b, NetlinkMessageHeaderSize, disableSizeCheck); err != nil {

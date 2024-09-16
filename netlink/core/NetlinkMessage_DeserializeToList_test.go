@@ -29,7 +29,7 @@ func TestDeserializeToList(t *testing.T) {
 	t.Run("test with a set of happy-path messages", func(t *testing.T) {
 		actualData := []byte{
 			// Message 0:
-			// Netlink Header (NlMsghdr)
+			// Netlink Header (NetlinkMessageHeader)
 			0x1C, 0x00, 0x00, 0x00, // Len: 28
 			0x01, 0x00, // Type: 1
 			0x01, 0x00, // Flags: 1
@@ -41,7 +41,7 @@ func TestDeserializeToList(t *testing.T) {
 			0x55, 0x66, 0x77, 0x88,
 
 			// Message 1:
-			// Netlink Header (NlMsghdr)
+			// Netlink Header (NetlinkMessageHeader)
 			0x1C, 0x00, 0x00, 0x00, // Len: 28
 			0x01, 0x00, // Type: 1
 			0x01, 0x00, // Flags: 1
@@ -53,7 +53,7 @@ func TestDeserializeToList(t *testing.T) {
 			0x55, 0x66, 0x77, 0x88,
 
 			// Message 2:
-			// Netlink Header (NlMsghdr)
+			// Netlink Header (NetlinkMessageHeader)
 			0x1C, 0x00, 0x00, 0x00, // Len: 28
 			0x01, 0x00, // Type: 1
 			0x01, 0x00, // Flags: 1
@@ -67,7 +67,7 @@ func TestDeserializeToList(t *testing.T) {
 
 		expected := []NetlinkMessage{
 			{
-				Header: NlMsghdr{
+				Header: NetlinkMessageHeader{
 					Len:   28,
 					Type:  0x01,
 					Flags: 0x01,
@@ -81,7 +81,7 @@ func TestDeserializeToList(t *testing.T) {
 				},
 			},
 			{
-				Header: NlMsghdr{
+				Header: NetlinkMessageHeader{
 					Len:   28,
 					Type:  0x01,
 					Flags: 0x01,
@@ -95,7 +95,7 @@ func TestDeserializeToList(t *testing.T) {
 				},
 			},
 			{
-				Header: NlMsghdr{
+				Header: NetlinkMessageHeader{
 					Len:   28,
 					Type:  0x01,
 					Flags: 0x01,

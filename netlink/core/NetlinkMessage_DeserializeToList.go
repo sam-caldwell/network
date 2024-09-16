@@ -20,7 +20,7 @@ func DeserializeToList(b []byte) ([]NetlinkMessage, error) {
 	for len(b) >= NetlinkMessageHeaderSize {
 		var (
 			err        error
-			header     *NlMsghdr
+			header     *NetlinkMessageHeader
 			dataBuffer []byte
 			dataLength int
 		)
