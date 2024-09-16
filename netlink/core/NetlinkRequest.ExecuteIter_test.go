@@ -25,7 +25,7 @@ func TestNetlinkRequestExecuteIter(t *testing.T) {
 
 	})
 
-	t.Run("Test NetlinkRequest.ExecuteIter() method error scenario", func(t *testing.T) {
+	t.Run("Test NetlinkRequest.ExecuteIter() method malformed payload (negative index)", func(t *testing.T) {
 
 		t.Run("build container", func(t *testing.T) {
 			if err := test.BuildTestContainer(testDockerImage); err != nil {
