@@ -78,7 +78,7 @@ func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunct
 		)
 
 		if messages, from, err = s.Receive(); err != nil {
-			if errors.Is(err, unix.EAGAIN) || errors.Is(err, unix.EWOULDBLOCK) || errors.Is(err, unix.EINTR) {
+			if errors.Is(err, EAGAIN) || errors.Is(err, EWOULDBLOCK) || errors.Is(err, EINTR) {
 				backoff := baseDelay * time.Duration(1<<retries) // Exponential backoff
 				log.Printf("s.Receive() retry (%d/%d) due to: %v. Retrying in %v\n", retries+1, maxRetries, err, backoff)
 				time.Sleep(backoff)
@@ -91,8 +91,8 @@ func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunct
 			"  messages: %v\n"+
 			"      from: %v", messages, from)
 
-		if from.Pid != PortIdKernel {
-			return fmt.Errorf("wrong sender portid %d, expected %d", from.Pid, PortIdKernel)
+		if from.Pid != NetlinkPortId {
+			return fmt.Errorf("wrong sender portid %d, expected %d", from.Pid, NetlinkPortId)
 		}
 
 		// Handle each message
@@ -106,19 +106,19 @@ func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunct
 			if m.Header.Pid != pid {
 				continue
 			}
-			if m.Header.Flags&unix.NLM_F_DUMP_INTR != 0 {
-				return unix.EINTR
+			if m.Header.Flags&NlmFDumpIntr != 0 {
+				return EINTR
 			}
-			if m.Header.Type == unix.NLMSG_DONE || m.Header.Type == unix.NLMSG_ERROR {
+			if m.Header.Type == NlmsgDone || m.Header.Type == NlmsgError {
 				// NLMSG_DONE might have no payload, assume no error.
-				if m.Header.Type == unix.NLMSG_DONE && len(m.Data) == 0 {
+				if m.Header.Type == NlmsgDone && len(m.Data) == 0 {
 					return nil
 				}
 
 				if errno := int32(NativeEndian.Uint32(m.Data[0:4])); errno == 0 {
 					return nil
 				} else {
-					err = unix.Errno(-errno)
+					err = Errors(-errno)
 				}
 
 				return err
@@ -129,7 +129,7 @@ func (req *NetlinkRequest) ExecuteIter(socketType int, resType uint16, iterFunct
 			if cont := iterFunction(m.Data); !cont {
 				iterFunction = nullExecuteIterFunc
 			}
-			if m.Header.Flags&unix.NLM_F_MULTI == 0 {
+			if m.Header.Flags&NlmFMulti == 0 {
 				return nil
 			}
 		}
