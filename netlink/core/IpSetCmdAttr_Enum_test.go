@@ -5,10 +5,10 @@ import (
 	"unsafe"
 )
 
-// TestIpSetCmdAttrEnumValues tests that the IpSetCmdAttrEnum constants have the correct values.
+// TestIpSetCmdAttrEnumValues tests that the IpSetCmdAttr constants have the correct values.
 func TestIpSetCmdAttrEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
-		var attr IpSetCmdAttrEnum
+		var attr IpSetCmdAttr
 		expectedSize := 1 // uint8 should be 1 byte
 
 		if size := unsafe.Sizeof(attr); size != uintptr(expectedSize) {
@@ -18,8 +18,8 @@ func TestIpSetCmdAttrEnum(t *testing.T) {
 	t.Run("value check", func(t *testing.T) {
 		tests := []struct {
 			name     string
-			value    IpSetCmdAttrEnum
-			expected IpSetCmdAttrEnum
+			value    IpSetCmdAttr
+			expected IpSetCmdAttr
 		}{
 			{"IpsetAttrUnspec", IpsetAttrUnspec, 0},
 			{"IpsetAttrProtocol", IpsetAttrProtocol, 1},

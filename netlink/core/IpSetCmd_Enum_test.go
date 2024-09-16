@@ -8,7 +8,7 @@ import (
 func TestIpSetCmdEnum(t *testing.T) {
 	t.Run("TestSize", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		var cmd IpSetCmdEnum
+		var cmd IpSetCmd
 
 		if size := unsafe.Sizeof(cmd); size != uintptr(expectedSizeInBytes) {
 			t.Errorf("Expected size %d but got %d", expectedSizeInBytes, size)
@@ -18,8 +18,8 @@ func TestIpSetCmdEnum(t *testing.T) {
 	t.Run("TestValues", func(t *testing.T) {
 		tests := []struct {
 			name     string
-			value    IpSetCmdEnum
-			expected IpSetCmdEnum
+			value    IpSetCmd
+			expected IpSetCmd
 		}{
 			{"IpsetCmdProtocol", IpsetCmdProtocol, 1},
 			{"IpsetCmdCreate", IpsetCmdCreate, 2},

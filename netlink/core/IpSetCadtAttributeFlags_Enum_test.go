@@ -8,30 +8,30 @@ import (
 func TestIpSetCadtAttributeFlagsEnum(t *testing.T) {
 	t.Run("size check", func(t *testing.T) {
 		const expectedSizeInBytes = 1
-		if sz := int(unsafe.Sizeof(IpSetCadtAttributeFlagsEnum(0))); sz != expectedSizeInBytes {
+		if sz := int(unsafe.Sizeof(IpSetCadtAttributeFlags(0))); sz != expectedSizeInBytes {
 			t.Fatal("size mismatch")
 		}
 	})
 	t.Run("value check", func(t *testing.T) {
 		tests := []struct {
 			name     string
-			value    IpSetCadtAttributeFlagsEnum
-			expected IpSetCadtAttributeFlagsEnum
+			value    IpSetCadtAttributeFlags
+			expected IpSetCadtAttributeFlags
 		}{
 			{"IpsetFlagBitBefore", IpsetFlagBitBefore, 0},
-			{"IpsetFlagBefore", IpSetCadtAttributeFlagsEnum(IpsetFlagBefore), 1},
+			{"IpsetFlagBefore", IpSetCadtAttributeFlags(IpsetFlagBefore), 1},
 			{"IpsetFlagBitPhysdev", IpsetFlagBitPhysdev, 1},
-			{"IpsetFlagPhysdev", IpSetCadtAttributeFlagsEnum(IpsetFlagPhysdev), 1 << 1},
+			{"IpsetFlagPhysdev", IpSetCadtAttributeFlags(IpsetFlagPhysdev), 1 << 1},
 			{"IpsetFlagBitNomatch", IpsetFlagBitNomatch, 2},
-			{"IpsetFlagNomatch", IpSetCadtAttributeFlagsEnum(IpsetFlagNomatch), 1 << 2},
+			{"IpsetFlagNomatch", IpSetCadtAttributeFlags(IpsetFlagNomatch), 1 << 2},
 			{"IpsetFlagBitWithCounters", IpsetFlagBitWithCounters, 3},
-			{"IpsetFlagWithCounters", IpSetCadtAttributeFlagsEnum(IpsetFlagWithCounters), 1 << 3},
+			{"IpsetFlagWithCounters", IpSetCadtAttributeFlags(IpsetFlagWithCounters), 1 << 3},
 			{"IpsetFlagBitWithComment", IpsetFlagBitWithComment, 4},
-			{"IpsetFlagWithComment", IpSetCadtAttributeFlagsEnum(IpsetFlagWithComment), 1 << 4},
+			{"IpsetFlagWithComment", IpSetCadtAttributeFlags(IpsetFlagWithComment), 1 << 4},
 			{"IpsetFlagBitWithForceadd", IpsetFlagBitWithForceadd, 5},
-			{"IpsetFlagWithForceadd", IpSetCadtAttributeFlagsEnum(IpsetFlagWithForceadd), 1 << 5},
+			{"IpsetFlagWithForceadd", IpSetCadtAttributeFlags(IpsetFlagWithForceadd), 1 << 5},
 			{"IpsetFlagBitWithSkbinfo", IpsetFlagBitWithSkbinfo, 6},
-			{"IpsetFlagWithSkbinfo", IpSetCadtAttributeFlagsEnum(IpsetFlagWithSkbinfo), 1 << 6},
+			{"IpsetFlagWithSkbinfo", IpSetCadtAttributeFlags(IpsetFlagWithSkbinfo), 1 << 6},
 			{"IpsetFlagCadtMax", IpsetFlagCadtMax, 15},
 		}
 
