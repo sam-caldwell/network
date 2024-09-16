@@ -47,10 +47,10 @@ func TestIfaCacheInfo_Deserialize(t *testing.T) {
 			buf := make([]byte, IfaCacheInfoSize)
 
 			// Populate the byte slice with values for IfaCacheInfo fields (using little-endian encoding)
-			binary.LittleEndian.PutUint32(buf[0:4], 100)   // Prefered = 100
-			binary.LittleEndian.PutUint32(buf[4:8], 200)   // Valid = 200
-			binary.LittleEndian.PutUint32(buf[8:12], 300)  // Cstamp = 300
-			binary.LittleEndian.PutUint32(buf[12:16], 400) // Tstamp = 400
+			binary.NativeEndian.PutUint32(buf[0:4], 100)   // Prefered = 100
+			binary.NativeEndian.PutUint32(buf[4:8], 200)   // Valid = 200
+			binary.NativeEndian.PutUint32(buf[8:12], 300)  // Cstamp = 300
+			binary.NativeEndian.PutUint32(buf[12:16], 400) // Tstamp = 400
 
 			// Call DeserializeIfaCacheInfo
 			info, err := DeserializeIfaCacheInfo(buf)
