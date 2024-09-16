@@ -8,12 +8,9 @@ import (
 )
 
 func main() {
-	var (
-		fd  int
-		err error
-	)
 	// Create a netlink socket
-	if fd, err = unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW, unix.NETLINK_GENERIC); err != nil {
+	fd, err := unix.Socket(unix.AF_NETLINK, unix.SOCK_RAW, unix.NETLINK_GENERIC)
+	if err != nil {
 		log.Fatalf("Failed to create netlink socket: %v", err)
 	}
 	defer func() { _ = unix.Close(fd) }()
