@@ -15,8 +15,8 @@ import "encoding/binary"
 // - A pointer to a `Curve` struct with the fields populated from the byte slice.
 func DeserializeHfscCurve(b []byte) *Curve {
 	return &Curve{
-		m1: binary.LittleEndian.Uint32(b[0:4]),  // First 4 bytes represent `m1`
-		d:  binary.LittleEndian.Uint32(b[4:8]),  // Next 4 bytes represent `d`
-		m2: binary.LittleEndian.Uint32(b[8:12]), // Final 4 bytes represent `m2`
+		m1: binary.NativeEndian.Uint32(b[0:4]),  // First 4 bytes represent `m1`
+		d:  binary.NativeEndian.Uint32(b[4:8]),  // Next 4 bytes represent `d`
+		m2: binary.NativeEndian.Uint32(b[8:12]), // Final 4 bytes represent `m2`
 	}
 }

@@ -11,9 +11,9 @@ func TestHfscCurveDeserialize(t *testing.T) {
 		buf := make([]byte, 12)
 
 		// Populate the byte slice with values for m1, d, and m2 (using little-endian encoding)
-		binary.LittleEndian.PutUint32(buf[0:4], 100)  // m1 = 100
-		binary.LittleEndian.PutUint32(buf[4:8], 200)  // d = 200
-		binary.LittleEndian.PutUint32(buf[8:12], 300) // m2 = 300
+		binary.NativeEndian.PutUint32(buf[0:4], 100)  // m1 = 100
+		binary.NativeEndian.PutUint32(buf[4:8], 200)  // d = 200
+		binary.NativeEndian.PutUint32(buf[8:12], 300) // m2 = 300
 
 		// Call DeserializeHfscCurve
 		curve := DeserializeHfscCurve(buf)
@@ -34,8 +34,8 @@ func TestHfscCurveDeserialize(t *testing.T) {
 		buf := make([]byte, 8)
 
 		// Populate the byte slice
-		binary.LittleEndian.PutUint32(buf[0:4], 100) // m1 = 100
-		binary.LittleEndian.PutUint32(buf[4:8], 200) // d = 200
+		binary.NativeEndian.PutUint32(buf[0:4], 100) // m1 = 100
+		binary.NativeEndian.PutUint32(buf[4:8], 200) // d = 200
 
 		// Expect a panic when trying to access beyond the buffer's length
 		defer func() {
