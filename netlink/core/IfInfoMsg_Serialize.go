@@ -6,7 +6,7 @@ import (
 )
 
 // Serialize - Serialize the IfInfoMsg structure into a byte slice in a safe way.
-func (msg *IfInfoMsg) Serialize() ([]byte, error) {
+func (msg IfInfoMsg) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 
 	// Write each field to the buffer in the correct order and format
