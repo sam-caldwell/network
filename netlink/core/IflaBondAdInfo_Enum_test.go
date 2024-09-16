@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaBondAdInfoEnum tests the size of the IflaBondAdInfoEnum type and the values of its enumerated constants.
+// TestIflaBondAdInfoEnum tests the size of the IflaBondAdInfoAttr type and the values of its enumerated constants.
 func TestIflaBondAdInfoEnum(t *testing.T) {
-	// Verify the size of the IflaBondAdInfoEnum type is 1 byte (uint8)
+	// Verify the size of the IflaBondAdInfoAttr type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaBondAdInfoUnspec); size != 1 {
-		t.Errorf("Expected size of IflaBondAdInfoEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaBondAdInfoAttr to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaBondAdInfoEnum
-		want  IflaBondAdInfoEnum
+		value IflaBondAdInfoAttr
+		want  IflaBondAdInfoAttr
 	}{
 		{"IflaBondAdInfoUnspec", IflaBondAdInfoUnspec, 0},
 		{"IflaBondAdInfoAggregator", IflaBondAdInfoAggregator, 1},

@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaBondEnum tests the size of the IflaBondEnum type and the values of its enumerated constants.
+// TestIflaBondEnum tests the size of the IflaBondAttribute type and the values of its enumerated constants.
 func TestIflaBondEnum(t *testing.T) {
-	// Verify the size of the IflaBondEnum type is 1 byte (uint8)
+	// Verify the size of the IflaBondAttribute type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaBondUnspec); size != 1 {
-		t.Errorf("Expected size of IflaBondEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaBondAttribute to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaBondEnum
-		want  IflaBondEnum
+		value IflaBondAttribute
+		want  IflaBondAttribute
 	}{
 		{"IflaBondUnspec", IflaBondUnspec, 0},
 		{"IflaBondMode", IflaBondMode, 1},
@@ -41,7 +41,7 @@ func TestIflaBondEnum(t *testing.T) {
 		{"IflaBondPacketsPerSlave", IflaBondPacketsPerSlave, 20},
 		{"IflaBondAdLacpRate", IflaBondAdLacpRate, 21},
 		{"IflaBondAdSelect", IflaBondAdSelect, 22},
-		{"IflaBondAdInfo", IflaBondAdInfo, 23},
+		{"IflaBondAdInfoAttr", IflaBondAdInfoAttr, 23},
 		{"IflaBondAdActorSysPrio", IflaBondAdActorSysPrio, 24},
 		{"IflaBondAdUserPortKey", IflaBondAdUserPortKey, 25},
 		{"IflaBondAdActorSystem", IflaBondAdActorSystem, 26},
