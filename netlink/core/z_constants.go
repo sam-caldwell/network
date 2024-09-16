@@ -73,12 +73,6 @@ const (
 	// SizeOfTcf - Size of the Tcf struct, representing a filter in traffic control.
 	SizeOfTcf = int(unsafe.Sizeof(Tcf{}))
 
-	// SizeOfTcU32Sel - golang will calculate the wrong size if you use unsafe.SizeOf
-	SizeOfTcU32Sel = 16
-
-	// SizeOfTcU32Key - golang will calculate the wrong size if you use unsafe.SizeOf
-	SizeOfTcU32Key = 16
-
 	// SizeOfUint32Bitfield - The size of a 32-bit bitfield used in various traffic control structs.
 	SizeOfUint32Bitfield = int(unsafe.Sizeof(Uint32Bitfield{}))
 

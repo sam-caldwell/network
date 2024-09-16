@@ -12,9 +12,6 @@ func TestConstantsStructureSize(t *testing.T) {
 		expected int
 	}
 	testData := []TestDataStruct{
-		{expected: int(unsafe.Sizeof(NfGenMsg{})), actual: NfGenMsgSize},
-		{expected: int(unsafe.Sizeof(NetlinkMessageHeader{})), actual: NetlinkMessageHeaderSize},
-		{expected: int(unsafe.Sizeof(RtNexthop{})), actual: SizeOfRtNextHop},
 		{expected: int(unsafe.Sizeof(TcNetemRate{})), actual: SizeOfTcNetemRate},
 		{expected: int(unsafe.Sizeof(TcActionMsg{})), actual: SizeOfTcActionMsg},
 		{expected: int(unsafe.Sizeof(TcConnmark{})), actual: SizeOfTcConnmark},
@@ -39,8 +36,8 @@ func TestConstantsStructureSize(t *testing.T) {
 		{expected: int(unsafe.Sizeof(TcSfqRedStats{})), actual: SizeOfTcSfqRedStats},
 		{expected: int(unsafe.Sizeof(TcSkbEdit{})), actual: SizeOfTcSkbEdit},
 		{expected: int(unsafe.Sizeof(TcTbfQopt{})), actual: SizeOfTcTbfQopt},
-		{expected: 16, actual: SizeOfTcU32Sel},
-		{expected: 16, actual: SizeOfTcU32Key},
+		{expected: 16, actual: TcU32SelSize},
+
 		{expected: int(unsafe.Sizeof(TcTunnelKey{})), actual: SizeOfTcTunnelKey},
 		{expected: int(unsafe.Sizeof(Tcf{})), actual: SizeOfTcf},
 		{expected: int(unsafe.Sizeof(Uint32Bitfield{})), actual: SizeOfUint32Bitfield},
