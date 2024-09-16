@@ -2,7 +2,7 @@ package core
 
 import (
 	"bytes"
-	"github.com/sam-caldwell/convert"
+	"encoding/binary"
 	"testing"
 )
 
@@ -18,7 +18,7 @@ func TestIfAddressMessage_Serialize(t *testing.T) {
 		testData.Prefixlen = uint8(0x10)
 		testData.Flags = uint8(0x11)
 		testData.Scope = uint8(0x12)
-		testData.Index = convert.BytesToUint32([4]byte{0x23, 0x22, 0x21, 0x20})
+		testData.Index = binary.NativeEndian.Uint32([]byte{0x23, 0x22, 0x21, 0x20})
 	})
 	t.Run("setup expectedData", func(t *testing.T) {
 		expectedData = []byte{
@@ -26,7 +26,7 @@ func TestIfAddressMessage_Serialize(t *testing.T) {
 			0x10,
 			0x11,
 			0x12,
-			0x20, 0x21, 0x22, 0x23,
+			0x23, 0x22, 0x21, 0x20,
 		}
 	})
 	t.Run("run serialize method", func(t *testing.T) {

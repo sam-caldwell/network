@@ -29,7 +29,7 @@ func TestDeserializeIfAddress(t *testing.T) {
 			expectedData.Prefixlen = uint8(0x10)
 			expectedData.Flags = uint8(0x11)
 			expectedData.Scope = uint8(0x12)
-			expectedData.Index = convert.BytesToUint32([4]byte{0x23, 0x22, 0x21, 0x20})
+			expectedData.Index = convert.BytesToUint32([4]byte{0x20, 0x21, 0x22, 0x23})
 		})
 		t.Run("run deserialize method", func(t *testing.T) {
 			if err := testData.Deserialize(actualData); err != nil {
@@ -50,7 +50,7 @@ func TestDeserializeIfAddress(t *testing.T) {
 				t.Fatalf("Scope mismatch")
 			}
 			if testData.Index != expectedData.Index {
-				t.Fatalf("Index mismatch")
+				t.Fatalf("Index mismatch. lhs:%v, rhs:%v", expectedData.Index, testData.Index)
 			}
 		})
 	})
