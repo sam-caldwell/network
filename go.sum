@@ -1,7 +1,7 @@
 github.com/sam-caldwell/ansi v1.0.1 h1:v71/1jsoBxgF7q/erUUa54TS0t5a0+bOsea98KTg5Lo=
 github.com/sam-caldwell/ansi v1.0.1/go.mod h1:A3i0CNTSo2VsQybJqyNwb3J6UDWJRZuEbW+3Q2Hs2hg=
-github.com/sam-caldwell/convert v1.0.5 h1:c9uitcbWh87uBsWL74zJMqw7vJ9yOPmmVzU5gm33qTE=
-github.com/sam-caldwell/convert v1.0.5/go.mod h1:GBlVjg+ZIBlkXJ08uaZTsBYjM50Khv0WJfIbMHWM2y8=
+github.com/sam-caldwell/convert v1.0.6 h1:m9dZu4wKm4fN3Tu7jTAkrhYr6UD9c+FNoqjMgOZxkh8=
+github.com/sam-caldwell/convert v1.0.6/go.mod h1:GBlVjg+ZIBlkXJ08uaZTsBYjM50Khv0WJfIbMHWM2y8=
 github.com/sam-caldwell/endianness v1.0.0 h1:E1m5MxgZVQuZPRD0HuNvk9aKz5taShMvQz5N2TW5u7Y=
 github.com/sam-caldwell/endianness v1.0.0/go.mod h1:gJwJ1cfo85/sYPrz0Aa02pHJZT74nO7+D3d6wLo56BE=
 github.com/sam-caldwell/errors v1.0.7 h1:jWw9ZLTaHxKWNYyPZpTuBA2WCAZ9OrLVp3VOQVmLb+I=
