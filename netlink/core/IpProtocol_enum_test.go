@@ -181,7 +181,4 @@ func TestIpProtocol(t *testing.T) {
 			}
 		}
 	})
-	t.Run("test Serialize() method", func(t *testing.T) {
-
-	})
 }
