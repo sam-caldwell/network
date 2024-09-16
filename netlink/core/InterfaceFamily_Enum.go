@@ -34,7 +34,7 @@ const (
 	// See https://github.com/torvalds/linux/blob/master/include/linux/socket.h
 	AfIpx = unix.AF_IPX
 
-	// AfAppleTalk - AF_APPLETALK - Appletalk DDP
+	// AfAppleTalk - AfAppletalk - Appletalk DDP
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/linux/socket.h
 	AfAppleTalk = unix.AF_APPLETALK
@@ -68,4 +68,54 @@ const (
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/linux/socket.h
 	AfMax = unix.AF_MAX
+
+	//AfNetlink - AF_NETLINK - a protocol family in the Linux kernel used for communication between the kernel and
+	//  user-space processes. It facilitates a messaging system that allows user-space applications to interact with
+	//  the kernel, primarily for networking-related tasks.
+	//
+	// Purpose of AF_NETLINK
+	//   - Kernel-User Space Communication:
+	//  	Provides a socket-based interface for processes to communicate with the kernel, allowing the exchange
+	//      of information related to networking, routing, and other kernel subsystems.
+	//
+	//   - Networking Configuration:
+	//  	AF_NETLINK is extensively used for configuring and managing network interfaces, routing tables, firewall
+	// 		rules, and other network-related settings. For example, utilities like iproute2 use AF_NETLINK to
+	//		communicate with the kernel for configuring network parameters.
+	//
+	//	 - Asynchronous Messaging:
+	//		It supports asynchronous message exchange, meaning messages can be sent and received without blocking,
+	//		making it suitable for monitoring and reacting to changes in kernel state.
+	//
+	// Common Netlink Protocols
+	// - NETLINK_ROUTE: Used for networking-related operations, such as managing routing tables and network interfaces.
+	// - NETLINK_INET_DIAG: Provides socket monitoring and diagnostics.
+	// - NETLINK_NETFILTER: Used for packet filtering and NAT (Network Address Translation) configurations.
+	//
+	// Example Use Cases
+	//  - Network Interface Management: Applications can use AF_NETLINK to add or remove network interfaces, set IP addresses, and configure interface parameters.
+	//  - Routing Table Management: Modify or query routing tables in the kernel.
+	//  - Firewall Configuration: Set up or modify firewall rules using tools like iptables or nftables.
+	//
+	// See https://github.com/torvalds/linux/blob/master/include/linux/socket.h
+	AfNetlink = 0x10
 )
+
+func (i InterfaceFamily) Int() int {
+	return int(i)
+}
+func (i InterfaceFamily) Uint() uint {
+	return uint(i)
+}
+func (i InterfaceFamily) Uint8() uint8 {
+	return uint8(i)
+}
+func (i InterfaceFamily) Uint16() uint16 {
+	return uint16(i)
+}
+func (i InterfaceFamily) Uint32() uint32 {
+	return uint32(i)
+}
+func (i InterfaceFamily) Uint64() uint64 {
+	return uint64(i)
+}
