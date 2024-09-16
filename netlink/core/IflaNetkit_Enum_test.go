@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaNetkitEnum tests the size of the IflaNetkitEnum type and the values of its enumerated constants.
+// TestIflaNetkitEnum tests the size of the IflaNetkit type and the values of its enumerated constants.
 func TestIflaNetkitEnum(t *testing.T) {
-	// Verify that the size of the IflaNetkitEnum type is 1 byte (uint8)
+	// Verify that the size of the IflaNetkit type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaNetkitUnspec); size != 1 {
-		t.Errorf("Expected size of IflaNetkitEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaNetkit to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaNetkitEnum
-		want  IflaNetkitEnum
+		value IflaNetkit
+		want  IflaNetkit
 	}{
 		{"IflaNetkitUnspec", IflaNetkitUnspec, 0},
 		{"IflaNetkitPeerInfo", IflaNetkitPeerInfo, 1},

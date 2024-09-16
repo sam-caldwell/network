@@ -1,19 +1,19 @@
 package core
 
-// IflaIpOverInfinibandEnum - Enumeration for IP-over-InfiniBand (IpOIb) interface attributes.
+// IflaIpOverInfiniband - Enumeration for IP-over-InfiniBand (IpOIb) interface attributes.
 //
 // These attributes are used to configure and manage IP-over-InfiniBand (IpOIb) interfaces in the Linux kernel.
 // IpOverInfiniband is a network protocol that allows IP traffic to be sent over InfiniBand networks.
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-type IflaIpOverInfinibandEnum uint8
+type IflaIpOverInfiniband uint8
 
 const (
 	// IflaIpOverInfinibandUnspec - IFLA_IpOverInfiniband_UNSPEC - Unspecified attribute, used as a placeholder
 	// for unknown or default values.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaIpOverInfinibandUnspec IflaIpOverInfinibandEnum = iota
+	IflaIpOverInfinibandUnspec IflaIpOverInfiniband = iota
 
 	// IflaIpOverInfinibandPkey - IFLA_IpOverInfiniband_PKEY - Specifies the Partition Key (PKEY) for the
 	// IpOverInfiniband interface.

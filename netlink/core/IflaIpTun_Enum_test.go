@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaIpTunEnum tests the size of the IflaIpTunEnum type and the values of its enumerated constants.
+// TestIflaIpTunEnum tests the size of the IflaIpTun type and the values of its enumerated constants.
 func TestIflaIpTunEnum(t *testing.T) {
-	// Verify that the size of the IflaIpTunEnum type is 1 byte (uint8)
+	// Verify that the size of the IflaIpTun type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaIptunUnspec); size != 1 {
-		t.Errorf("Expected size of IflaIpTunEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaIpTun to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaIpTunEnum
-		want  IflaIpTunEnum
+		value IflaIpTun
+		want  IflaIpTun
 	}{
 		{"IflaIptunUnspec", IflaIptunUnspec, 0},
 		{"IflaIptunLink", IflaIptunLink, 1},

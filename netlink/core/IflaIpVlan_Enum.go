@@ -1,12 +1,12 @@
 package core
 
-// IflaIpVlanEnum - Enumeration for IP VLAN attributes
+// IflaIpVlan - Enumeration for IP VLAN attributes
 //
 // This enumeration defines various attributes related to IP VLANs in Linux.
 // IP VLANs allow the configuration of virtual LANs based on IP addressing.
 //
 // See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-type IflaIpVlanEnum uint8
+type IflaIpVlan uint8
 
 const (
 
@@ -15,14 +15,14 @@ const (
 	// It represents an undefined or unused attribute within the context of IP VLANs.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaVfInfoUnspec IflaIpVlanEnum = 0
+	IflaVfInfoUnspec IflaIpVlan = 0
 
 	// IflaVfInfo - IFLA_VF_INFO -
 	// This attribute represents information related to a Virtual Function (VF) in the context of IP VLANs.
 	// It is used to query or configure specific VF-related settings for IP VLANs.
 	//
 	// See https://github.com/torvalds/linux/blob/master/include/uapi/linux/if_link.h
-	IflaVfInfo IflaIpVlanEnum = 1
+	IflaVfInfo IflaIpVlan = 1
 
 	// IflaVfInfoMax - IFLA_VF_INFO_MAX -
 	// This constant represents the maximum valid value for IP VLAN attributes.

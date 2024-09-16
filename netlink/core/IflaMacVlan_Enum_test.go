@@ -5,18 +5,18 @@ import (
 	"unsafe"
 )
 
-// TestIflaMacVlanEnum tests the size of the IflaMacVlanEnum type and the values of its enumerated constants.
+// TestIflaMacVlanEnum tests the size of the IflaMacVlan type and the values of its enumerated constants.
 func TestIflaMacVlanEnum(t *testing.T) {
-	// Verify that the size of the IflaMacVlanEnum type is 1 byte (uint8)
+	// Verify that the size of the IflaMacVlan type is 1 byte (uint8)
 	if size := unsafe.Sizeof(IflaMacvlanUnspec); size != 1 {
-		t.Errorf("Expected size of IflaMacVlanEnum to be 1 byte, but got %d", size)
+		t.Errorf("Expected size of IflaMacVlan to be 1 byte, but got %d", size)
 	}
 
 	// Test the values of the constants
 	tests := []struct {
 		name  string
-		value IflaMacVlanEnum
-		want  IflaMacVlanEnum
+		value IflaMacVlan
+		want  IflaMacVlan
 	}{
 		{"IflaMacvlanUnspec", IflaMacvlanUnspec, 0},
 		{"IflaMacvlanMode", IflaMacvlanMode, 1},
