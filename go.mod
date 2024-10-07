@@ -4,7 +4,7 @@ go 1.22.6
 
 require (
 	github.com/sam-caldwell/convert v1.0.6
-	golang.org/x/sys v0.25.0
+	golang.org/x/sys v0.26.0
 )
 
 require (
