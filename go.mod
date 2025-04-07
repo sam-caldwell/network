@@ -1,11 +1,11 @@
 module github.com/sam-caldwell/network
 
 go 1.22.6
-toolchain go1.23.7
+toolchain go1.24.1
 
 require (
 	github.com/sam-caldwell/convert v1.0.6
-	golang.org/x/sys v0.31.0
+	golang.org/x/sys v0.32.0
 )
 
 require (
