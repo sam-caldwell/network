@@ -10,5 +10,5 @@ github.com/sam-caldwell/exit v1.0.3 h1:ibQc6nvE81OZdhxRVwC76451ybRG3f7xC0mrTnzhd
 github.com/sam-caldwell/exit v1.0.3/go.mod h1:gy6m0KCj1RZ+KafgZVahgAxdwVm9pud/6O+lZz0NpFw=
 github.com/sam-caldwell/types v1.0.2 h1:4fDbs1cLIt15/1bULZD3E1DNJqUhfgosQS1gdi4v6IY=
 github.com/sam-caldwell/types v1.0.2/go.mod h1:FEGFiYX1yZlEXpXDcK0PRo4LRWVxT83vxtjUWPIPMKk=
-golang.org/x/sys v0.33.0 h1:q3i8TbbEz+JRD9ywIRlyRAQbM0qF7hu24q3teo2hbuw=
-golang.org/x/sys v0.33.0/go.mod h1:BJP2sWEmIv4KK5OTEluFJCKSidICx8ciO85XgH3Ak8k=
+golang.org/x/sys v0.38.0 h1:3yZWxaJjBmCWXqhN1qh02AkOnCQ1poK6oF+a7xWL6Gc=
+golang.org/x/sys v0.38.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
